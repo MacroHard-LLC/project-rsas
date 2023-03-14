@@ -118,13 +118,13 @@
                 <div class="form-outline pb-2">
                     <label for="rfid" class="input-title">RFID Number</label>
                     <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="rfid" pattern="[0-9]+" required>
-                </div>-->
+                </div>
             </div>
 
-            <!--If advisor-->
+            [If advisor]
             <div class="no-display" id="ifAdvisor">
                 <hr>
-                <!--Name-->
+                [Name]
                 <div class="row my-3">
                     <div class="col-6 col-md-4 input-field">
                         <label for="first" class="input-title">First Name</label>
@@ -141,7 +141,7 @@
                         <input type="text" class="form-control form-control-sm" placeholder="Ex. Rizal" name="last" maxlength="20" pattern="[a-zA-Z\s]+" required>
                     </div> 
                 </div>
-                <!--Gender-->
+                [Gender]
                 <div class="input-title pb-2">Gender</div>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="male" value="M">
@@ -150,7 +150,7 @@
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="female" value="F">
                     <label class="form-check-label" for="female">Female</label>
-                  </div>
+                  </div>-->
             </div>
             <div class="form-group pt-3 float-end">
                 <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
