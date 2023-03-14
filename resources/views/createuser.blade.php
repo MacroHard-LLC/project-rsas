@@ -144,11 +144,11 @@
                 <!--Gender-->
                 <div class="input-title pb-2">Gender</div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="male">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="male" value="M">
                     <label class="form-check-label" for="male">Male</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="female">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="female" value="F">
                     <label class="form-check-label" for="female">Female</label>
                   </div>
             </div>
