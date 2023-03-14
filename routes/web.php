@@ -19,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[CreateUser::class,'CreateUserIndex']);
 Route::post('dataInsert',[CreateUser::class, 'DataInsert']);
 
+// Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
