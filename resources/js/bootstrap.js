@@ -1,4 +1,5 @@
-import 'bootstrap';
+// import loadash from 'lodash'
+// window._ = loadash
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
