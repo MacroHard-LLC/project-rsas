@@ -1,0 +1,46 @@
+
+.navbar-custom {
+    background-color: #98C1D9;
+    font-family: 'Source Sans Pro',Arial, Helvetica, sans-serif;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+}
+
+.icon-white {
+    color:white;
+}
+
+a.nav-link{
+    letter-spacing: 0.25rem;
+}
+
+.input-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+}
+
+.input-field {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+}
+
+.no-display{
+    display:none;
+}
+
+.submit-reminder{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-style: italic;
+    color: red;
+}
+
+.create {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+}
