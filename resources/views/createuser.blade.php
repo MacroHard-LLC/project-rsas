@@ -54,14 +54,14 @@
             <div class="col-md-6 input-field">
                 <div class="form-outline">
                 <label for="user_id" class="input-title">User ID</label>
-                <input type="text" class="form-control form-control-sm" placeholder="20XXXXXX" name="user_id" minlength="9" maxlength="9" pattern="[0-9]+" required>
+                <input type="text" class="form-control form-control-sm" placeholder="20XXXXXX" name="user_id" minlength="9" maxlength="9" pattern="[0-9]+">
                 <div class="valid-feedback">Looks good!</div>
                 </div>
             </div>
 
             <div class="col-md-6 input-field">
                     <label for="user_pswrd" class="input-title">User Password</label>
-                    <input type="password" class="form-control form-control-sm" placeholder="XXXX" name="user_pswrd" maxlength="20" required>
+                    <input type="password" class="form-control form-control-sm" placeholder="XXXX" name="user_pswrd" maxlength="20">
                     <div class="valid-feedback">Looks good!</div>
             </div> 
         </div>
@@ -89,17 +89,17 @@
                 <div class="row my-3">
                     <div class="col-6 col-md-4 input-field">
                         <label for="first" class="input-title">First Name</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Ex. Jose" name="first" maxlength="20" pattern="[a-zA-Z\s]+" required>
+                        <input type="text" class="form-control form-control-sm" placeholder="Ex. Jose" name="first" maxlength="20" pattern="[a-zA-Z\s]+"  >
                     </div>
         
                     <div class="col-6 col-md-4 input-field">
                             <label for="middle" class="input-title">Middle Name</label>
-                            <input type="text" class="form-control form-control-sm" placeholder="Ex. Protacio" name="middle" maxlength="20" pattern="[a-zA-Z\s]+" required>
+                            <input type="text" class="form-control form-control-sm" placeholder="Ex. Protacio" name="middle" maxlength="20" pattern="[a-zA-Z\s]+"  >
                     </div> 
 
                     <div class="col-6 col-md-4 input-field">
                         <label for="last" class="input-title">Last Name</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Ex. Rizal" name="last" maxlength="20" pattern="[a-zA-Z\s]+" required>
+                        <input type="text" class="form-control form-control-sm" placeholder="Ex. Rizal" name="last" maxlength="20" pattern="[a-zA-Z\s]+"  >
                     </div> 
                 </div>
 
@@ -117,40 +117,40 @@
                 <!--RFID
                 <div class="form-outline pb-2">
                     <label for="rfid" class="input-title">RFID Number</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="rfid" pattern="[0-9]+" required>
-                </div>
+                    <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="rfid" pattern="[0-9]+"  >
+                </div>-->
             </div>
 
-            [If advisor]
+            <!--If advisor-->
             <div class="no-display" id="ifAdvisor">
                 <hr>
-                [Name]
+                <!--Name-->
                 <div class="row my-3">
                     <div class="col-6 col-md-4 input-field">
                         <label for="first" class="input-title">First Name</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Ex. Jose" name="first" maxlength="20" pattern="[a-zA-Z\s]+" required>
+                        <input type="text" class="form-control form-control-sm" placeholder="Ex. Jose" name="first" maxlength="20" pattern="[a-zA-Z\s]+"  >
                     </div>
         
                     <div class="col-6 col-md-4 input-field">
                             <label for="middle" class="input-title">Middle Name</label>
-                            <input type="text" class="form-control form-control-sm" placeholder="Ex. Protacio" name="middle" maxlength="20" pattern="[a-zA-Z\s]+" required>
+                            <input type="text" class="form-control form-control-sm" placeholder="Ex. Protacio" name="middle" maxlength="20" pattern="[a-zA-Z\s]+"  >
                     </div> 
 
                     <div class="col-6 col-md-4 input-field">
                         <label for="last" class="input-title">Last Name</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Ex. Rizal" name="last" maxlength="20" pattern="[a-zA-Z\s]+" required>
+                        <input type="text" class="form-control form-control-sm" placeholder="Ex. Rizal" name="last" maxlength="20" pattern="[a-zA-Z\s]+"  >
                     </div> 
                 </div>
-                [Gender]
+                <!--Gender-->
                 <div class="input-title pb-2">Gender</div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="male" value="M">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="M">
                     <label class="form-check-label" for="male">Male</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="female" value="F">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="F">
                     <label class="form-check-label" for="female">Female</label>
-                  </div>-->
+                  </div>
             </div>
             <div class="form-group pt-3 float-end">
                 <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
