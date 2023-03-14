@@ -8,11 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Logsheet extends Authenticatable
 {
-    protected $table = 'user';
-    protected $primaryKey = 'id';
-    protected $allowedFields = ['id', 'password', 'fname', 'mname', 'lname', 'sex', 'is_enrolled', 'grade_level'];
+    protected $table = 'logsheet';
+    protected $primaryKey = 'log_number';
+    protected $allowedFields = ['time', 'user_id', 'machine_id', 'room'];
 
     // use HasApiTokens, HasFactory, Notifiable;
 
