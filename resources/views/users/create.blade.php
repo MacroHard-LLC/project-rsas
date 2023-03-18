@@ -72,7 +72,7 @@
                     <div class="form-outline pb-2 no-display" id="rfid">
                         <hr>
                         <label for="rfid" class="input-title">RFID Number</label>
-                        <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="rfid" pattern="[0-9]+"  >
+                        <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="rfid" pattern="[0-9]+" id='rfid_value'>
                     </div> --}}
                 </div>
 

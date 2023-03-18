@@ -1,19 +1,3 @@
-// function userCheck() {
-//     if (document.getElementById('studentCheck').checked) {
-//         document.getElementById('ifStudent').style.display = 'block';
-//     }
-//     else {
-//     	document.getElementById('ifStudent').style.display = 'none';
-//       }
-
-//     if (document.getElementById('advisorCheck').checked){
-//     		document.getElementById('ifAdvisor').style.display = 'block';
-//     }
-//     else {
-//     	document.getElementById('ifAdvisor').style.display = 'none';
-//       }
-// }
-
 const studentCheck = document.querySelector('#studentCheck');
 const adviserCheck = document.querySelector('#adviserCheck');
 const adminCheck = document.querySelector('#adminCheck');
@@ -24,13 +8,25 @@ adminCheck.addEventListener('change', userCheck);
 
 function userCheck() {
   if (document.getElementById("adminCheck").checked) {
-    document.getElementById("student_or_adviser").style.display = "none";
-    // document.getElementById("student").style.display = "block";
+    var container = document.getElementById("student_or_adviser")
+    container.style.display = "none";
+
+    // clear input values
+    var inputs = container.getElementsByTagName('input');
+        for (var index = 0; index < inputs.length; ++index) {
+            if(inputs[index].type =="text")
+            inputs[index].value = '';
+            else
+            inputs[index].checked = false;
+        }
+
   } else if (document.getElementById("studentCheck").checked) {
     document.getElementById("student_or_adviser").style.display = "block";
-    document.getElementById("rfid").style.display = "block";
+    // document.getElementById("rfid").style.display = "block";
+
   } else {
     document.getElementById("student_or_adviser").style.display = "block";
-    document.getElementById("rfid").style.display = "none";
+    // document.getElementById("rfid").style.display = "none";
+    // document.getElementById("rfid_value").value = '';
   }
 }
