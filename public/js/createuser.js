@@ -11,7 +11,7 @@ function userCheck() {
     var container = document.getElementById("student_or_adviser")
     container.style.display = "none";
 
-    // clear input values
+    // Clear input values
     var inputs = container.getElementsByTagName('input');
         for (var index = 0; index < inputs.length; ++index) {
             if(inputs[index].type =="text")
