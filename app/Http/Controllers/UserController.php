@@ -23,11 +23,23 @@ class UserController extends Controller
             'id' => 'required',
             'password' => 'required',
             'role' => 'required',
-            'first' => 'required',
-            'middle' => 'required',
-            'last' => 'required',
-            'gender' => 'required',
+            'first' => 'required_unless:role,0',
+            'middle' => 'required_unless:role,0',
+            'last' => 'required_unless:role,0',
+            'gender' => 'required_unless:role,0',
         ]);
+
+        // $user = new User();
+        // $user->id = $request->id;
+        // $user->password = $request->password;
+        // $user->role = $request->role;
+        // $user->first = $request->first;
+        // $user->middle = $request->middle;
+        // $user->last = $request->last;
+        // $user->gender = $request->gender;
+
+        // save new user
+        // $user->save();
 
         // Hash Password
         // $formFields['password'] = bcrypt($formFields['password']);
