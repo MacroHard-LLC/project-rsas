@@ -17,7 +17,7 @@
         <div class="container-fluid">
             <div class="navbar-brand">
                 <i class="fa-solid fa-circle-plus icon-white"></i>
-                Create New User
+                RFID Attendance System
             </div>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
