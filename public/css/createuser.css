@@ -53,3 +53,15 @@ a.nav-link{
     text-transform: uppercase;
     letter-spacing: 0.05rem;
 }
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    opacity: 0.3; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    opacity: 0.3;
+}
+
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    opacity: 0.3;
+}

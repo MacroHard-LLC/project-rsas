@@ -9,7 +9,7 @@ adminCheck.addEventListener('change', userCheck);
 function userCheck() {
   if (document.getElementById("adminCheck").checked) {
     var container = document.getElementById("student_or_adviser")
-    container.style.display = "none";
+    container.style.display = "block";
 
     // Clear input values
     var inputs = container.getElementsByTagName('input');

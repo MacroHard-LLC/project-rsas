@@ -8,22 +8,26 @@
 
             <div class="modal-body">
                 {{-- <form action="/users" method="POST" enctype="multipart/form-data" class="needs-validation"> --}}
-                <form method="POST" action="/users">
+                <form method="POST" action="/users" class="was-validated">
                     @csrf
                     <fieldset>
                         <div class="row my-3">
                             <div class="col-md-6 input-field">
                                 <div class="form-outline">
                                     <label for="id" class="input-title">User ID</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="20XXXXXX" name="id" minlength="9" maxlength="9" pattern="[0-9]+">
-                                    <div class="valid-feedback">Looks good!</div>
+                                    <input type="text" class="form-control form-control-sm" placeholder="20XXXXXX" name="id" minlength="9" maxlength="9" pattern="[0-9]+" required="">
+                                    <div class="invalid-feedback">
+                                        Enter valid user id.
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="col-md-6 input-field">
                                 <label for="password" class="input-title">User Password</label>
-                                <input type="password" class="form-control form-control-sm" placeholder="XXXX" name="password" maxlength="20">
-                                <div class="valid-feedback">Looks good!</div>
+                                <input type="password" class="form-control form-control-sm" placeholder="XXXX" name="password" minlength="1" maxlength="20" required="">
+                                <div class="invalid-feedback">
+                                    Enter a password.
+                                </div>
                             </div>
                         </div>
 
@@ -31,17 +35,18 @@
                         <div class="container pt-2 input-field">
                             <div class="input-title pb-2">User Role</div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" onclick="userCheck()" name="role" id="studentCheck" value="1">
+                                <input class="form-check-input" type="radio" onclick="userCheck()" name="role" id="studentCheck" value="1" required="">
                                 <label class="form-check-label" for="studentCheck">Student</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" onclick="userCheck()" name="role" id="adviserCheck" value="2">
+                                <input class="form-check-input" type="radio" onclick="userCheck()" name="role" id="adviserCheck" value="2" required="">
                                 <label class="form-check-label" for="adviserCheck">Adviser</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" onclick="userCheck()" name="role" id="adminCheck" value="0">
+                                <input class="form-check-input" type="radio" onclick="userCheck()" name="role" id="adminCheck" value="0" required="">
                                 <label class="form-check-label" for="adminCheck">Administrator</label>
                             </div>
+                            
 
                         <!--If student or adviser-->
                         <div class="no-display" id="student_or_adviser">
@@ -50,28 +55,28 @@
                             <div class="row my-3">
                                 <div class="col-6 col-md-4 input-field">
                                     <label for="first" class="input-title">First Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Jose" name="first" maxlength="20" pattern="[a-zA-Z\s]+">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Jose" name="first" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" required="">
                                 </div>
 
                                 <div class="col-6 col-md-4 input-field">
                                     <label for="middle" class="input-title">Middle Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Protacio" name="middle" maxlength="20" pattern="[a-zA-Z\s]+">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Protacio" name="middle" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" required="">
                                 </div>
 
                                 <div class="col-6 col-md-4 input-field">
                                     <label for="last" class="input-title">Last Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Rizal" name="last" maxlength="20" pattern="[a-zA-Z\s]+">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Rizal" name="last" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" required="">
                                 </div>
                             </div>
 
                             <!--Gender-->
                             <div class="input-title pb-2">Gender</div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="male" value="M">
+                                <input class="form-check-input" type="radio" name="gender" id="male" value="M" required="">
                                 <label class="form-check-label" for="male">Male</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="female" value="F">
+                                <input class="form-check-input" type="radio" name="gender" id="female" value="F" required="">
                                 <label class="form-check-label" for="female">Female</label>
                             </div>
 
@@ -87,6 +92,7 @@
                             <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
                             <button class="btn btn-primary create" type="submit"><i class="fa-solid fa-square-plus icon-white"></i>Create</button>
                         </div>
+                    </div>
                     </fieldset>
                 </form>
             </div>
