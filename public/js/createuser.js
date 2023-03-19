@@ -12,13 +12,13 @@ function userCheck() {
     container.style.display = "block";
 
     // Clear input values
-    var inputs = container.getElementsByTagName('input');
+    /*var inputs = container.getElementsByTagName('input');
         for (var index = 0; index < inputs.length; ++index) {
             if(inputs[index].type =="text")
             inputs[index].value = '';
             else
             inputs[index].checked = false;
-        }
+        }*/
 
   } else if (document.getElementById("studentCheck").checked) {
     document.getElementById("student_or_adviser").style.display = "block";
