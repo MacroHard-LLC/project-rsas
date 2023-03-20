@@ -5,6 +5,8 @@ use App\Http\Controllers\CreateSubject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Middleware\CheckSubjectIdValid;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +23,8 @@ Route::get('/',[CreateUser::class,'CreateUserIndex']);
 Route::post('dataInsert',[CreateUser::class, 'DataInsert']);
 
 Route::get('/createsub',[CreateSubject::class,'CreateSubjectIndex']);
-Route::post('dataInsert',[CreateSubject::class, 'DataInsert']);
+//Route::post('/dataInsert', 'CreateSubject@DataInsert')->middleware('check-method');
+Route::post('dataInsert',[CreateSubject::class, 'DataInsert'])->middleware(CheckSubjectIdValid::class);
 
 Auth::routes();
 

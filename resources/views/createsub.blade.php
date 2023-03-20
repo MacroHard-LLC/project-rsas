@@ -47,14 +47,14 @@
     
     <!--FORM -->
     <div class="container pt-5">
-    <form action="dataInsert" method="post" enctype="multipart/form-data" class="needs-validation">
+    <form action="dataInsert" method="post" enctype="multipart/form-data" class="was-validated">
         @csrf
       <fieldset>
         <div class="row my-3 gy-4">
             <div class="col-md-6 input-field">
                 <div class="form-outline">
                 <label for="subj_id" class="input-title">Subject ID</label>
-                <input type="text" class="form-control form-control-sm" placeholder="Input a N-M digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
+                <input type="text" class="form-control form-control-sm is-invalid" placeholder="Input a 5 digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
                 <div class="valid-feedback">Looks good!</div>
                 </div>
             </div>
@@ -75,6 +75,10 @@
                   <option value="3">Dept ID 3</option>
                   <option value="4">Dept ID 4</option>
                 </select>
+                <div class="invalid-feedback">
+                  Please provide a valid Department ID
+
+                </div>
               </div>
             </div>
 

@@ -32,6 +32,12 @@ class CreateSubject extends Controller
         $time_start = $request->input('time_start');
         $time_end = $request->input('time_end');
 
+        /*if (Subject_table::where('id', $id)->exists()) {
+            echo '<script type="text/javascript">
+                window.onload = function () { alert("Subject ID Already Exists"); } 
+                </script>';
+        } else {*/
+
         $isInsertSuccess = Subject_table::insert([
                                             'grade_level'=>$grade_level,
                                             'instructor_id'=>$instructor_id,
@@ -40,14 +46,14 @@ class CreateSubject extends Controller
                                             'room'=>$room,                                            
                                             'year_start'=>date("Y/m/d"),
                                             'year_end'=>date("Y/m/d"),
-                                            'added_on'=>date("Y/m/d"),
+                                            'added_on'=>now(),
                                             'added_by'=>0,
-                                            'updated_on'=>NULL,
+                                            'updated_on'=>now(),
                                             'updated_by'=>NULL,
                                             'is_deleted'=>0
                                         ]);
 
-        $isMachineSuccess = Machine_table::insert([
+        /*$isMachineSuccess = Machine_table::insert([
                                             'room'=>$room,
                                             # need to increment id
                                             'id'=>1,
@@ -57,17 +63,18 @@ class CreateSubject extends Controller
                                             'updated_on'=>NULL,
                                             'updated_by'=>NULL,
                                             'is_deleted'=>0
-        ]);
+        ]);*/
 
         $isSchedSuccess = Schedule_table::insert([
+
                                             'subject_id' => $id,
                                             'grade_level'=> $grade_level,
                                             'day'=>"MON",
                                             'time_start'=>$time_start,
                                             'time_end'=>$time_end,
-                                            'added_on'=>date("Y/m/d"),
+                                            'added_on'=>now(),
                                             'added_by'=>0,
-                                            'updated_on'=>NULL,
+                                            'updated_on'=>now(),
                                             'updated_by'=>NULL,
                                             'is_deleted'=>0
         ]);
@@ -76,6 +83,6 @@ class CreateSubject extends Controller
         
         if($isInsertSuccess && $isSchedSuccess && $isUserSuccess) echo '<h1>Create Subject Success</h1>';
         else echo '<h1>Create Subject FAILED </h1>';
-
+    //}
     }
 }
