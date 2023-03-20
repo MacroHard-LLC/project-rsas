@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Create New User</title>
+  <title>Create New Subject</title>
   {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/47cd24d297.js" crossorigin="anonymous"></script> --}}
@@ -68,7 +68,7 @@
             <div class="col-md-6 input-field">
               <div class="form-outline">
               <label for="dept_id" class="input-title">Department ID</label>   
-                <select class="form-control form-select">
+                <select class="form-control form-select" name="dept_id">
                   <option>Choose Department ID</option>
                   <option value="1">Dept ID 1</option>
                   <option value="2">Dept ID 2</option>
@@ -79,26 +79,26 @@
             </div>
 
           <div class="col-md-6 input-field">
-                  <label for="subj_name" class="input-title">Scheduled Days</label>
-                  <input type="text" class="form-control form-control-sm" placeholder="Ex. Monday, Tuesday" id="timepicker" required>
+                  <label for="sched_days" class="input-title">Scheduled Days</label>
+                  <input type="text" class="form-control form-control-sm" placeholder="Ex. Monday, Tuesday" name="sched_days" id="timepicker" required>
                   <div class="valid-feedback">Looks good!</div>
           </div>
           
           <div class="form-outline w-25 input-field">
-                  <label for="subj_name" class="input-title">Time Start</label>
-                  <input type="text" class="form-control form-control-sm" placeholder="00:00 XM" id="timepicker" required>
+                  <label for="time_start" class="input-title">Time Start</label>
+                  <input type="text" class="form-control form-control-sm" placeholder="00:00 XM" name="time_start" maxlength="50" id="timepicker" required>
                   <div class="valid-feedback">Looks good!</div>
           </div>
 
           <div class="form-outline w-25 input-field">
-                  <label for="subj_name" class="input-title">Time End</label>
-                  <input type="text" class="form-control form-control-sm" placeholder="00:00 XM" name="subj_name" maxlength="50" required>
+                  <label for="time_end" class="input-title">Time End</label>
+                  <input type="text" class="form-control form-control-sm" placeholder="00:00 XM" name="time_end" maxlength="50" required>
                   <div class="valid-feedback">Looks good!</div>
           </div>
 
           <div class="col-md-6 w-50 input-field">
-                  <label for="subj_name" class="input-title">Assigned Room</label>
-                  <input type="text" class="form-control form-control-sm" placeholder="Ex. RM 143, Arts and Sciences Building" name="subj_name" maxlength="50" required>
+                  <label for="assign_room" class="input-title">Assigned Room</label>
+                  <input type="text" class="form-control form-control-sm" placeholder="Ex. RM 143, Arts and Sciences Building" name="assign_room" maxlength="50" required>
                   <div class="valid-feedback">Looks good!</div>
           </div>
 

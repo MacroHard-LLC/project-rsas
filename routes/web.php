@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CreateUser;
+use App\Http\Controllers\CreateSubject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[CreateUser::class,'CreateUserIndex']);
 Route::post('dataInsert',[CreateUser::class, 'DataInsert']);
+
+Route::get('/createsub',[CreateSubject::class,'CreateSubjectIndex']);
+Route::post('dataInsert',[CreateSubject::class, 'DataInsert']);
 
 Auth::routes();
 
