@@ -28,10 +28,10 @@ use App\Models\User;
 
 // show users
 // supposed to be '/users', but '/' will do for now
-Route::get('/', [UserController::class, 'index']);
+Route::get('/', [UserController::class, 'index'])->name('home');
 
 // show create user form
 Route::get('/users/create', [UserController::class, 'create']);
 
 // create new user
-Route::post('/users', [UserController::class, 'store']);
+Route::post('/users', [UserController::class, 'store'])->name('register');

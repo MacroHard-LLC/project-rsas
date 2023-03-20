@@ -20,13 +20,13 @@ class UserController extends Controller
 
     public function store(Request $request) {
         $formFields = $request->validate([
-            'id' => 'required',
-            'password' => 'required',
+            'id' => ['required','unique:user,id','integer','digits:9'],
+            'password' => ['required','min:1','max:20'],
             'role' => 'required',
-            'first' => 'required_unless:role,0',
-            'middle' => 'required_unless:role,0',
-            'last' => 'required_unless:role,0',
-            'gender' => 'required_unless:role,0',
+            'first' => ['required','min:1','max:20','alpha:ascii'],
+            'middle' => ['required','min:1','max:20','alpha:ascii'],
+            'last' => ['required','min:1','max:20','alpha:ascii'],
+            'gender' => 'required',
         ]);
 
         // Hash Password

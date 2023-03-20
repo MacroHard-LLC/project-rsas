@@ -7,26 +7,25 @@
             </div>
 
             <div class="modal-body">
-                {{-- <form action="/users" method="POST" enctype="multipart/form-data" class="needs-validation"> --}}
-                <form method="POST" action="/users" class="was-validated">
+                <form method="POST" action="/users" id="registerForm" class="needs-validation" novalidate>
                     @csrf
                     <fieldset>
                         <div class="row my-3">
                             <div class="col-md-6 input-field">
                                 <div class="form-outline">
                                     <label for="id" class="input-title">User ID</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="20XXXXXX" name="id" minlength="9" maxlength="9" pattern="[0-9]+" required="">
-                                    <div class="invalid-feedback">
-                                        Enter valid user id.
+                                    <input type="text" class="form-control form-control-sm" placeholder="20XXXXXX" name="id" minlength="9" maxlength="9" aria-describedby="idError" required autofocus>
+                                    <div class="is-invalid" role="alert" id="idError">
+                                        <strong></strong>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-6 input-field">
                                 <label for="password" class="input-title">User Password</label>
-                                <input type="password" class="form-control form-control-sm" placeholder="XXXX" name="password" minlength="1" maxlength="20" required="">
-                                <div class="invalid-feedback">
-                                    Enter a password.
+                                <input type="password" class="form-control form-control-sm" placeholder="XXXX" name="password" minlength="1" maxlength="20" aria-describedby="passwordError" required>
+                                <div class="is-invalid" role="alert" id="passwordError">
+                                    <strong></strong>
                                 </div>
                             </div>
                         </div>
@@ -35,18 +34,21 @@
                         <div class="container pt-2 input-field">
                             <div class="input-title pb-2">User Role</div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" onclick="userCheck()" name="role" id="studentCheck" value="1" required="">
+                                <input class="form-check-input" type="radio" onclick="userCheck()" name="role" id="studentCheck" value="1" required>
                                 <label class="form-check-label" for="studentCheck">Student</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" onclick="userCheck()" name="role" id="adviserCheck" value="2" required="">
+                                <input class="form-check-input" type="radio" onclick="userCheck()" name="role" id="adviserCheck" value="2" required>
                                 <label class="form-check-label" for="adviserCheck">Adviser</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" onclick="userCheck()" name="role" id="adminCheck" value="0" required="">
+                                <input class="form-check-input" type="radio" onclick="userCheck()" name="role" id="adminCheck" value="0" required>
                                 <label class="form-check-label" for="adminCheck">Administrator</label>
                             </div>
-                            
+                            <div class="is-invalid" role="alert" id="roleError">
+                                <strong></strong>
+                            </div>
+
 
                         <!--If student or adviser-->
                         <div class="no-display" id="student_or_adviser">
@@ -55,17 +57,26 @@
                             <div class="row my-3">
                                 <div class="col-6 col-md-4 input-field">
                                     <label for="first" class="input-title">First Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Jose" name="first" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" required="">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Jose" name="first" minlength="1" maxlength="20" aria-describedby="firstError" required>
+                                    <div class="is-invalid" role="alert" id="firstError">
+                                        <strong></strong>
+                                    </div>
                                 </div>
 
                                 <div class="col-6 col-md-4 input-field">
                                     <label for="middle" class="input-title">Middle Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Protacio" name="middle" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" required="">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Protacio" name="middle" minlength="1" maxlength="20" aria-describedby="middleError" required>
+                                    <div class="is-invalid" role="alert" id="middleError">
+                                        <strong></strong>
+                                    </div>
                                 </div>
 
                                 <div class="col-6 col-md-4 input-field">
                                     <label for="last" class="input-title">Last Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Rizal" name="last" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" required="">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Rizal" name="last" minlength="1" maxlength="20" aria-describedby="lastError" required>
+                                    <div class="is-invalid" role="alert" id="lastError">
+                                        <strong></strong>
+                                    </div>
                                 </div>
                             </div>
 
@@ -78,6 +89,9 @@
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="gender" id="female" value="F" required="">
                                 <label class="form-check-label" for="female">Female</label>
+                            </div>
+                            <div class="is-invalid" role="alert" id="genderError">
+                                <strong></strong>
                             </div>
 
                             {{-- If student (RFID)
@@ -102,3 +116,37 @@
 
 </div>
 
+@section('scripts')
+@parent
+
+<script>
+$(function () {
+    $('#registerForm').submit(function (e) {
+        e.preventDefault();
+        let formData = $(this).serializeArray();
+        $(".invalid-feedback").children("strong").text("");
+        $("#registerForm input").removeClass("is-invalid");
+        $.ajax({
+            method: "POST",
+            headers: {
+                Accept: "application/json"
+            },
+            url: "{{ route('register') }}",
+            data: formData,
+            success: () => window.location.assign("{{ route('home') }}"),
+            error: (response) => {
+                if(response.status === 422) {
+                    let errors = response.responseJSON.errors;
+                    Object.keys(errors).forEach(function (key) {
+                        $("#" + key + "Input").addClass("is-invalid");
+                        $("#" + key + "Error").children("strong").text(errors[key][0]);
+                    });
+                } else {
+                    window.location.reload();
+                }
+            }
+        })
+    });
+})
+</script>
+@endsection
