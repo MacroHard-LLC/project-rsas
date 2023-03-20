@@ -124,7 +124,7 @@ $(function () {
     $('#registerForm').submit(function (e) {
         e.preventDefault();
         let formData = $(this).serializeArray();
-        $(".invalid-feedback").children("strong").text("");
+        $(".is-invalid").children("strong").text("");
         $("#registerForm input").removeClass("is-invalid");
         $.ajax({
             method: "POST",
