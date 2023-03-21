@@ -54,6 +54,14 @@ a.nav-link{
     letter-spacing: 0.05rem;
 }
 
+.is-invalid{
+    font-family: 'Source Sans Pro', sans-serif;
+    color: red;
+    font-style: italic;
+    font-size: small;
+    border-color: #AAAAAA;
+}
+
 .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     opacity: 0.3; /* Firefox */
 }

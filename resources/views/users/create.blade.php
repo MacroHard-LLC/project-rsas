@@ -14,7 +14,7 @@
                             <div class="col-md-6 input-field">
                                 <div class="form-outline">
                                     <label for="id" class="input-title">User ID</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="20XXXXXX" name="id" minlength="9" maxlength="9" aria-describedby="idError" required autofocus>
+                                    <input type="text" class="form-control form-control-sm" placeholder="20XXXXXX" name="id" id="idInput" minlength="9" maxlength="9" aria-describedby="idError" required autofocus>
                                     <div class="is-invalid" role="alert" id="idError">
                                         <strong></strong>
                                     </div>
@@ -23,7 +23,7 @@
 
                             <div class="col-md-6 input-field">
                                 <label for="password" class="input-title">User Password</label>
-                                <input type="password" class="form-control form-control-sm" placeholder="XXXX" name="password" minlength="1" maxlength="20" aria-describedby="passwordError" required>
+                                <input type="password" class="form-control form-control-sm" placeholder="XXXX" name="password" id="passwordInput" minlength="1" maxlength="20" aria-describedby="passwordError" required>
                                 <div class="is-invalid" role="alert" id="passwordError">
                                     <strong></strong>
                                 </div>
@@ -57,7 +57,7 @@
                             <div class="row my-3">
                                 <div class="col-6 col-md-4 input-field">
                                     <label for="first" class="input-title">First Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Jose" name="first" minlength="1" maxlength="20" aria-describedby="firstError" required>
+                                    <input type="text" class="form-control form-control-sm invalid-border" placeholder="Ex. Jose" name="first" id="firstInput" minlength="1" maxlength="20" aria-describedby="firstError" required>
                                     <div class="is-invalid" role="alert" id="firstError">
                                         <strong></strong>
                                     </div>
@@ -65,7 +65,7 @@
 
                                 <div class="col-6 col-md-4 input-field">
                                     <label for="middle" class="input-title">Middle Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Protacio" name="middle" minlength="1" maxlength="20" aria-describedby="middleError" required>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Protacio" name="middle" id="middleInput" minlength="1" maxlength="20" aria-describedby="middleError" required>
                                     <div class="is-invalid" role="alert" id="middleError">
                                         <strong></strong>
                                     </div>
@@ -73,7 +73,7 @@
 
                                 <div class="col-6 col-md-4 input-field">
                                     <label for="last" class="input-title">Last Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Rizal" name="last" minlength="1" maxlength="20" aria-describedby="lastError" required>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Rizal" name="last" id="lastInput" minlength="1" maxlength="20" aria-describedby="lastError" required>
                                     <div class="is-invalid" role="alert" id="lastError">
                                         <strong></strong>
                                     </div>
