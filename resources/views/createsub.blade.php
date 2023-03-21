@@ -47,13 +47,14 @@
     
     <!--FORM -->
     <div class="container pt-5">
-      <form class="needs-validation">
+      <form action="dataInsert" method="post" enctype="multipart/form-data" class="was-validated">
+        @csrf
         <fieldset>
           <div class="row my-3 gy-4">
               <div class="col-md-6 input-field">
                   <div class="form-outline">
                   <label for="subj_id" class="input-title">Subject ID</label>
-                  <input type="text" class="form-control form-control-sm" placeholder="Input a N-M digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
+                  <input type="text" class="form-control form-control-sm" placeholder="Input a N-M digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-9]+" required>
                   <div class="valid-feedback">Looks good!</div>
                   </div>
               </div>
@@ -64,10 +65,10 @@
                       <div class="valid-feedback">Looks good!</div>
               </div>
   
-              <div class="col-md-6 input-field">
+              <div class="col-md-6 input-field"> 
                 <div class="form-outline">
                 <label for="dept_id" class="input-title">Department ID</label>   
-                  <select class="form-control form-select ">
+                  <select name="dept_id" class="form-control form-select ">
                     <option>Choose Department ID</option>
                     <option value="1">Dept ID 1</option>
                     <option value="2">Dept ID 2</option>
@@ -79,7 +80,7 @@
               
               <div class="col-md-6 input-field form-outline">
                 <label for="sched_days" class="input-title">Scheduled Days</label>
-                <select id="multiple" class="js-states form-control" multiple>
+                <select id="multiple" name="sched_days" class="js-states form-control" multiple>
                   <option value="MON">Monday</option>
                   <option value="TUE">Tuesday</option>
                   <option value="WED">Wednesday</option>
@@ -92,31 +93,31 @@
             
             <div class="form-outline w-25 input-field">
                     <label for="time_st" class="input-title">Time Start</label>
-                    <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" id="timepicker" required>
+                    <input type="time" name="time_st" class="form-control form-control-sm" placeholder="00:00 XM" id="timepicker" required>
                     <div class="valid-feedback">Looks good!</div>
             </div>
   
             <div class="form-outline w-25 input-field">
                     <label for="time_end" class="input-title">Time End</label>
-                    <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="subj_name" maxlength="50" required>
+                    <input type="time" name="time_end" class="form-control form-control-sm" placeholder="00:00 XM" maxlength="50" required>
                     <div class="valid-feedback">Looks good!</div>
             </div>
   
             <div class="col-md-6 w-50 input-field">
                     <label for="as_room" class="input-title">Assigned Room</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Ex. RM 143, Arts and Sciences Building" name="subj_name" maxlength="50" required>
+                    <input type="text" name="as_room" class="form-control form-control-sm" placeholder="Ex. RM 143, Arts and Sciences Building" maxlength="50" required>
                     <div class="valid-feedback">Looks good!</div>
             </div>
   
             <div class="form-outline w-25 input-field">
-                    <label for="time_st" class="input-title">Year Start</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="00:00 XM" id="timepicker" required>
+                    <label for="year_st" class="input-title">Year Start</label>
+                    <input type="text" name="year_st" class="form-control form-control-sm" placeholder="00:00 XM" id="timepicker" required>
                     <div class="valid-feedback">Looks good!</div>
             </div>
   
             <div class="form-outline w-25 input-field">
-                    <label for="time_end" class="input-title">Year End</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="00:00 XM" name="subj_name" maxlength="50" required>
+                    <label for="year_end" class="input-title">Year End</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="00:00 XM" name="year_end" maxlength="50" required>
                     <div class="valid-feedback">Looks good!</div>
             </div>
   
@@ -137,7 +138,6 @@
       
     </fieldset>
       </form>
-  
       <!-- jQuery -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <!-- Select2 -->

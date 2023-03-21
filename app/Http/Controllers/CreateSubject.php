@@ -26,11 +26,13 @@ class CreateSubject extends Controller
         #dept_id is missing
         #$dept_id = $request->input('dept_id');
         #db is not string :adiksayo:
-        $room = $request->input('assign_room');
+        $room = $request->input('as_room');
 
-        $day = $request->input('sched_days');
-        $time_start = $request->input('time_start');
+        //$sched_days = $request->input('sched_days');
+        $time_start = $request->input('time_st');
         $time_end = $request->input('time_end');
+        $year_start = $request->input('year_st');
+        $year_end = $request->input('year_end');
 
         /*if (Subject_table::where('id', $id)->exists()) {
             echo '<script type="text/javascript">
@@ -44,8 +46,8 @@ class CreateSubject extends Controller
                                             'id'=>$id,
                                             'name'=>$name,
                                             'room'=>$room,                                            
-                                            'year_start'=>date("Y/m/d"),
-                                            'year_end'=>date("Y/m/d"),
+                                            'year_start'=>now(),
+                                            'year_end'=>now(),
                                             'added_on'=>now(),
                                             'added_by'=>0,
                                             'updated_on'=>now(),
@@ -53,23 +55,22 @@ class CreateSubject extends Controller
                                             'is_deleted'=>0
                                         ]);
 
-        /*$isMachineSuccess = Machine_table::insert([
+        $isMachineSuccess = Machine_table::insert([
                                             'room'=>$room,
-                                            # need to increment id
-                                            'id'=>1,
                                             'status'=>0,
-                                            'added_on'=>date("Y/m/d"),
+                                            'added_on'=>now(),
                                             'added_by'=>0,
                                             'updated_on'=>NULL,
                                             'updated_by'=>NULL,
                                             'is_deleted'=>0
-        ]);*/
+        ]);
 
         $isSchedSuccess = Schedule_table::insert([
 
                                             'subject_id' => $id,
                                             'grade_level'=> $grade_level,
-                                            'day'=>"MON",
+                                            //'day'=>$sched_days,
+                                            'day'=>'MON',
                                             'time_start'=>$time_start,
                                             'time_end'=>$time_end,
                                             'added_on'=>now(),
@@ -81,7 +82,7 @@ class CreateSubject extends Controller
 
         $isUserSuccess = User_table::where('id','=',$instructor_id);
         
-        if($isInsertSuccess && $isSchedSuccess && $isUserSuccess) echo '<h1>Create Subject Success</h1>';
+        if($isInsertSuccess && $isSchedSuccess) echo '<h1>Create Subject Success</h1>';
         else echo '<h1>Create Subject FAILED </h1>';
     //}
     }

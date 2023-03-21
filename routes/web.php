@@ -23,7 +23,6 @@ Route::get('/',[CreateUser::class,'CreateUserIndex']);
 Route::post('dataInsert',[CreateUser::class, 'DataInsert']);
 
 Route::get('/createsub',[CreateSubject::class,'CreateSubjectIndex']);
-//Route::post('/dataInsert', 'CreateSubject@DataInsert')->middleware('check-method');
 Route::post('dataInsert',[CreateSubject::class, 'DataInsert'])->middleware(CheckSubjectIdValid::class);
 
 Auth::routes();
