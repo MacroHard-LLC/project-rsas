@@ -55,12 +55,17 @@ a.nav-link{
 }
 
 .is-invalid{
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Oswald', sans-serif;
     color: red;
     font-style: italic;
     font-size: small;
-    border-color: #AAAAAA;
 }
+
+.is-invalid strong{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+
 
 .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     opacity: 0.3; /* Firefox */
