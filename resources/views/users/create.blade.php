@@ -138,7 +138,7 @@ $(function () {
                 if(response.status === 422) {
                     let errors = response.responseJSON.errors;
                     Object.keys(errors).forEach(function (key) {
-                        $("#" + key + "Input").addClass("is-invalid");
+                        $("#" + key + "Input").addClass("is-invalid invalid-border");
                         $("#" + key + "Error").children("strong").text(errors[key][0]);
                     });
                 } else {
