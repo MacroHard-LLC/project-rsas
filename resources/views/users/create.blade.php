@@ -125,7 +125,7 @@ $(function () {
         e.preventDefault();
         let formData = $(this).serializeArray();
         $(".is-invalid").children("strong").text("");
-        $("#registerForm input").removeClass("is-invalid");
+        $("#registerForm input").removeClass("is-invalid invalid-border");
         $.ajax({
             method: "POST",
             headers: {
