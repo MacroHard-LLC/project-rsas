@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\CreateUser;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +16,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[CreateUser::class,'CreateUserIndex']);
-Route::post('dataInsert',[CreateUser::class, 'DataInsert']);
+// Common Resource Routes:
+// index - Show all [something]
+// show - Show single [something]
+// create - Show form to create new [something]
+// store - Store new [something]
+// edit - Show form to edit [something]
+// update - Update [something]
+// destroy - Delete [something]
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// show users
+// supposed to be '/users', but '/' will do for now
+Route::get('/', [UserController::class, 'index'])->name('home');
 
-Auth::routes();
+// show create user form
+Route::get('/users/create', [UserController::class, 'create']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// create new user
+Route::post('/users', [UserController::class, 'store'])->name('register');

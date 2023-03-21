@@ -53,3 +53,28 @@ a.nav-link{
     text-transform: uppercase;
     letter-spacing: 0.05rem;
 }
+
+.is-invalid{
+    font-family: 'Oswald', sans-serif;
+    color: red;
+    font-style: italic;
+    font-size: small;
+}
+
+.is-invalid strong{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    opacity: 0.3; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    opacity: 0.3;
+}
+
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    opacity: 0.3;
+}
