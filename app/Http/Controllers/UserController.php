@@ -23,9 +23,9 @@ class UserController extends Controller
             'id' => ['required','unique:user,id','integer','digits:9'],
             'password' => ['required','min:1','max:20'],
             'role' => 'required',
-            'first' => ['required','min:1','max:20','alpha:ascii'],
-            'middle' => ['required','min:1','max:20','alpha:ascii'],
-            'last' => ['required','min:1','max:20','alpha:ascii'],
+            'first' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'middle' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'last' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
             'gender' => 'required',
         ]);
 

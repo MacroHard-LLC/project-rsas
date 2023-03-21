@@ -51,7 +51,8 @@
 
 
                         <!--If student or adviser-->
-                        <div class="no-display" id="student_or_adviser">
+                        {{-- <div class="no-display" id="student_or_adviser"> --}}
+                        <div id="student_or_adviser">
                             <hr>
                             <!--Name-->
                             <div class="row my-3">
