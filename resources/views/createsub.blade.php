@@ -47,83 +47,107 @@
     
     <!--FORM -->
     <div class="container pt-5">
-    <form action="dataInsert" method="post" enctype="multipart/form-data" class="was-validated">
-        @csrf
-      <fieldset>
-        <div class="row my-3 gy-4">
-            <div class="col-md-6 input-field">
+      <form class="needs-validation">
+        <fieldset>
+          <div class="row my-3 gy-4">
+              <div class="col-md-6 input-field">
+                  <div class="form-outline">
+                  <label for="subj_id" class="input-title">Subject ID</label>
+                  <input type="text" class="form-control form-control-sm" placeholder="Input a N-M digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
+                  <div class="valid-feedback">Looks good!</div>
+                  </div>
+              </div>
+  
+              <div class="col-md-6 input-field">
+                      <label for="subj_name" class="input-title">Subject Name</label>
+                      <input type="text" class="form-control form-control-sm" placeholder="Ex. Introduction to Computer Science" name="subj_name" maxlength="50" required>
+                      <div class="valid-feedback">Looks good!</div>
+              </div>
+  
+              <div class="col-md-6 input-field">
                 <div class="form-outline">
-                <label for="subj_id" class="input-title">Subject ID</label>
-                <input type="text" class="form-control form-control-sm is-invalid" placeholder="Input a 5 digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
-                <div class="valid-feedback">Looks good!</div>
-                </div>
-            </div>
-
-            <div class="col-md-6 input-field">
-                    <label for="subj_name" class="input-title">Subject Name</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Introduction to Computer Science" name="subj_name" maxlength="50" required>
-                    <div class="valid-feedback">Looks good!</div>
-            </div>
-
-            <div class="col-md-6 input-field">
-              <div class="form-outline">
-              <label for="dept_id" class="input-title">Department ID</label>   
-                <select class="form-control form-select" name="dept_id">
-                  <option>Choose Department ID</option>
-                  <option value="1">Dept ID 1</option>
-                  <option value="2">Dept ID 2</option>
-                  <option value="3">Dept ID 3</option>
-                  <option value="4">Dept ID 4</option>
-                </select>
-                <div class="invalid-feedback">
-                  Please provide a valid Department ID
-
+                <label for="dept_id" class="input-title">Department ID</label>   
+                  <select class="form-control form-select ">
+                    <option>Choose Department ID</option>
+                    <option value="1">Dept ID 1</option>
+                    <option value="2">Dept ID 2</option>
+                    <option value="3">Dept ID 3</option>
+                    <option value="4">Dept ID 4</option>
+                  </select>
                 </div>
               </div>
-            </div>
-
-          <div class="col-md-6 input-field">
-                  <label for="sched_days" class="input-title">Scheduled Days</label>
-                  <input type="text" class="form-control form-control-sm" placeholder="Ex. Monday, Tuesday" name="sched_days" id="timepicker" required>
-                  <div class="valid-feedback">Looks good!</div>
-          </div>
-          
-          <div class="form-outline w-25 input-field">
-                  <label for="time_start" class="input-title">Time Start</label>
-                  <input type="text" class="form-control form-control-sm" placeholder="00:00 XM" name="time_start" maxlength="50" id="timepicker" required>
-                  <div class="valid-feedback">Looks good!</div>
-          </div>
-
-          <div class="form-outline w-25 input-field">
-                  <label for="time_end" class="input-title">Time End</label>
-                  <input type="text" class="form-control form-control-sm" placeholder="00:00 XM" name="time_end" maxlength="50" required>
-                  <div class="valid-feedback">Looks good!</div>
-          </div>
-
-          <div class="col-md-6 w-50 input-field">
-                  <label for="assign_room" class="input-title">Assigned Room</label>
-                  <input type="text" class="form-control form-control-sm" placeholder="Ex. RM 143, Arts and Sciences Building" name="assign_room" maxlength="50" required>
-                  <div class="valid-feedback">Looks good!</div>
-          </div>
-
-        </div>
-
-        <div class="form-group pt-3 float-end">
-          <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
-          <button class="btn btn-primary create" type="submit"><i class="fa-solid fa-square-plus icon-white"></i>  Create</button>
-        </div>
-
-    </div>
-
-    
+              
+              <div class="col-md-6 input-field form-outline">
+                <label for="sched_days" class="input-title">Scheduled Days</label>
+                <select id="multiple" class="js-states form-control" multiple>
+                  <option value="MON">Monday</option>
+                  <option value="TUE">Tuesday</option>
+                  <option value="WED">Wednesday</option>
+                  <option value="THU">Thursday</option>
+                  <option value="FRI">Friday</option>
+                </select>
+              </div>
+  
+              
             
-    </div>
-    </div>
-
-    
-  </fieldset>
-    </form>
-
-    
-
-</body>
+            <div class="form-outline w-25 input-field">
+                    <label for="time_st" class="input-title">Time Start</label>
+                    <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" id="timepicker" required>
+                    <div class="valid-feedback">Looks good!</div>
+            </div>
+  
+            <div class="form-outline w-25 input-field">
+                    <label for="time_end" class="input-title">Time End</label>
+                    <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="subj_name" maxlength="50" required>
+                    <div class="valid-feedback">Looks good!</div>
+            </div>
+  
+            <div class="col-md-6 w-50 input-field">
+                    <label for="as_room" class="input-title">Assigned Room</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Ex. RM 143, Arts and Sciences Building" name="subj_name" maxlength="50" required>
+                    <div class="valid-feedback">Looks good!</div>
+            </div>
+  
+            <div class="form-outline w-25 input-field">
+                    <label for="time_st" class="input-title">Year Start</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="00:00 XM" id="timepicker" required>
+                    <div class="valid-feedback">Looks good!</div>
+            </div>
+  
+            <div class="form-outline w-25 input-field">
+                    <label for="time_end" class="input-title">Year End</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="00:00 XM" name="subj_name" maxlength="50" required>
+                    <div class="valid-feedback">Looks good!</div>
+            </div>
+  
+          </div>
+  
+          <div class="form-group pt-3 float-end">
+            <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
+            <button class="btn btn-primary create" type="submit"><i class="fa-solid fa-square-plus icon-white"></i>  Create</button>
+          </div>
+  
+      </div>
+  
+      
+              
+      </div>
+      </div>
+  
+      
+    </fieldset>
+      </form>
+  
+      <!-- jQuery -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <!-- Select2 -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+      <script>
+        $("#multiple").select2({
+            placeholder: " Select scheduled days",
+            allowClear: true
+        });
+      </script>
+  
+  </body>
+  </html> 
