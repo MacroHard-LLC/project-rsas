@@ -126,7 +126,7 @@ $(function () {
         e.preventDefault();
         let formData = $(this).serializeArray();
         $(".is-invalid").children("strong").text("");
-        $("#registerForm input").removeClass("is-invalid invalid-border");
+        $("#registerForm input").removeClass("is-invalid");
         $.ajax({
             method: "POST",
             headers: {
@@ -139,7 +139,7 @@ $(function () {
                 if(response.status === 422) {
                     let errors = response.responseJSON.errors;
                     Object.keys(errors).forEach(function (key) {
-                        $("#" + key + "Input").addClass("is-invalid invalid-border");
+                        $("#" + key + "Input").addClass("is-invalid");
                         $("#" + key + "Error").children("strong").text(errors[key][0]);
                     });
                 } else {
