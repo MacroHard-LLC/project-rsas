@@ -10,6 +10,7 @@
   @vite(['resources/js/app.js'])
   <link rel="stylesheet" href="{{ asset('css/createsub.css') }}">
   <script src="https://kit.fontawesome.com/47cd24d297.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
 </head>
 
 <body>
