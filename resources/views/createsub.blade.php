@@ -48,7 +48,7 @@
     
     <!--FORM -->
     <div class="container pt-5">
-      <form action="dataInsert" method="post" enctype="multipart/form-data" class="was-validated">
+      <form action="dataInsert" method="post" enctype="multipart/form-data" class="was-validated" novalidate id="subject_form">
         @csrf
         <fieldset>
           <div class="row my-3 gy-4">
@@ -68,13 +68,18 @@
   
               <div class="col-md-6 input-field"> 
                 <div class="form-outline">
-                <label for="dept_id" class="input-title">Department ID</label>   
-                  <select name="dept_id" class="form-control form-select ">
-                    <option>Choose Department ID</option>
-                    <option value="1">Dept ID 1</option>
-                    <option value="2">Dept ID 2</option>
-                    <option value="3">Dept ID 3</option>
-                    <option value="4">Dept ID 4</option>
+                <label for="dept_id" class="input-title">Grade Level</label>   
+                  <select name="grade_level" class="form-control form-select ">
+                    <option value="1">Level 1</option>
+                    <option value="2">Level 2</option>
+                    <option value="3">Level 3</option>
+                    <option value="4">Level 4</option>
+                    <option value="5">Level 5</option>
+                    <option value="6">Level 6</option>
+                    <option value="7">Level 7</option>
+                    <option value="8">Level 8</option>
+                    <option value="9">Level 9</option>
+                    <option value="10">Level 10</option>
                   </select>
                 </div>
               </div>
@@ -126,7 +131,7 @@
   
           <div class="form-group pt-3 float-end">
             <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
-            <button class="btn btn-primary create" type="submit"><i class="fa-solid fa-square-plus icon-white"></i>  Create</button>
+            <button class="btn btn-primary create" type="submit" id="submit_button"><i class="fa-solid fa-square-plus icon-white"></i>  Create</button>
           </div>
   
       </div>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 
 use App\Models\Subject_table; 
@@ -14,12 +16,13 @@ class CreateSubject extends Controller
     function CreateSubjectIndex(){
         return view('createsub');
     }
-    
+
+
     function DataInsert(Request $request){
         #grade_level need input
-        $grade_level = 2;
+        $grade_level = $request->input('grade_level');
         #instructor need input
-        $instructor_id = 0;
+        $instructor_id = 0; #temporary
 
         $id = $request->input('subj_id');
         $name = $request->input('subj_name');
@@ -31,8 +34,8 @@ class CreateSubject extends Controller
         //$sched_days = $request->input('sched_days');
         $time_start = $request->input('time_st');
         $time_end = $request->input('time_end');
-        $year_start = $request->input('year_st');
-        $year_end = $request->input('year_end');
+        $year_start = Carbon::createFromDate($request->input('year_st'), 1, 1);
+        $year_end = Carbon::createFromDate($request->input('year_end'), 1, 1);
 
         /*if (Subject_table::where('id', $id)->exists()) {
             echo '<script type="text/javascript">
@@ -46,8 +49,8 @@ class CreateSubject extends Controller
                                             'id'=>$id,
                                             'name'=>$name,
                                             'room'=>$room,                                            
-                                            'year_start'=>now(),
-                                            'year_end'=>now(),
+                                            'year_start'=>$year_start->format('Y-m-d'),
+                                            'year_end'=>$year_end->format('Y-m-d'),
                                             'added_on'=>now(),
                                             'added_by'=>0,
                                             'updated_on'=>now(),
@@ -80,7 +83,7 @@ class CreateSubject extends Controller
                                             'is_deleted'=>0
         ]);
 
-        $isUserSuccess = User_table::where('id','=',$instructor_id);
+        #$isUserSuccess = User_table::where('id','=',$instructor_id);
         
         if($isInsertSuccess && $isSchedSuccess) echo '<h1>Create Subject Success</h1>';
         else echo '<h1>Create Subject FAILED </h1>';
