@@ -2,8 +2,8 @@
     <div class="modal-dialog">
         <div class='modal-content'>
             <div class='modal-header'>
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Create New User</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="registerModalLabel"><i class="fa-solid fa-circle"></i> CREATE NEW USER</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body">
@@ -105,7 +105,7 @@
 
                         <div class="form-group pt-3 float-end">
                             <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
-                            <button class="btn btn-primary create" type="submit"><i class="fa-solid fa-square-plus icon-white"></i>Create</button>
+                            <button class="btn btn-primary create" type="submit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                         </div>
                     </div>
                     </fieldset>

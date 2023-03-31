@@ -8,6 +8,11 @@
     src: url('/fonts/SourceSansPro-Regular.ttf');
 }
 
+@font-face{
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins-Regular.ttf');
+}
+
 .navbar-custom {
     background-color: #98C1D9;
     font-family: 'Source Sans Pro',Arial, Helvetica, sans-serif;
@@ -77,4 +82,25 @@ a.nav-link{
 
 .form-control::-ms-input-placeholder { /* Microsoft Edge */
     opacity: 0.3;
+}
+
+.form-control{
+    border-radius: 82px !important;
+}
+
+button.btn, button.btn:hover, button.btn:active,
+button.btn:active:focus{
+    font-family: 'Poppins';
+    background-color: #3d5a80;
+    font-weight: 700;
+}
+
+.modal-header{
+    background-color:#98C1D9;
+}
+
+#registerModalLabel{
+    font-family: 'Poppins';
+    font-weight: 700;
+    color: white;
 }
