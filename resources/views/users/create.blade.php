@@ -40,15 +40,15 @@
                         <div class="container pt-2 input-field">
                             <div class="input-title pb-2">User Role</div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" onclick="userCheck()" name="role" id="studentCheck" value="1" required>
+                                <input class="form-check-input" type="radio" name="role" id="studentCheck" value="1" required>
                                 <label class="form-check-label" for="studentCheck">Student</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" onclick="userCheck()" name="role" id="adviserCheck" value="2" required>
+                                <input class="form-check-input" type="radio" name="role" id="adviserCheck" value="2" required>
                                 <label class="form-check-label" for="adviserCheck">Adviser</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" onclick="userCheck()" name="role" id="adminCheck" value="0" required>
+                                <input class="form-check-input" type="radio" name="role" id="adminCheck" value="0" required>
                                 <label class="form-check-label" for="adminCheck">Administrator</label>
                             </div>
                             <div class="invalid-feedback">
@@ -102,11 +102,11 @@
                             <!--Gender-->
                             <div class="input-title pb-2">Gender</div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="genderInput" value="M" required>
+                                <input class="form-check-input" type="radio" name="gender" id="maleInput" value="M" required>
                                 <label class="form-check-label" for="male">Male</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="genderInput" value="F" required>
+                                <input class="form-check-input" type="radio" name="gender" id="femaleInput" value="F" required>
                                 <label class="form-check-label" for="female">Female</label>
                             </div>
                             <div class="invalid-feedback">
@@ -159,7 +159,11 @@
                     if(response.status === 422) {
                         let errors = response.responseJSON.errors;
                         Object.keys(errors).forEach(function (key) {
-                            $("#" + key + "Input").addClass("is-invalid");
+                            if (key == "role" || key == "gender"){
+                                $("." + key).addClass("is-invalid");
+                            } else {
+                                $("#" + key + "Input").addClass("is-invalid");
+                            }
                             $("#" + key + "Error").children("strong").text(errors[key][0]);
                         });
                         document.getElementById("client-text").style.display = "none";
@@ -169,6 +173,6 @@
                 }
             })
         });
-    })
+    });
 </script>
 @endsection

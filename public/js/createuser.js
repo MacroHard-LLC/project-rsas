@@ -33,20 +33,24 @@
 
 window.addEventListener('load', function() {
     let currForm1 = document.getElementById('registerForm');
-    // Validate on input:
-    currForm1.querySelectorAll('.form-control').forEach(input => {
-    input.addEventListener(('input'), () => {
-        $("#" + input.getAttribute("name") + "Error").children("strong").text("");
-        if (input.checkValidity()) {
-            input.classList.remove('is-invalid')
-            input.classList.add('is-valid');
-        } else {
-            document.getElementById("client-text").style.display = "block";
-            input.classList.remove('is-valid');
-            input.classList.add('is-invalid');
-        }
-        var is_valid = $('.form-control').length === $('.form-control.is-valid').length;
-        $("#submitBtn").attr("disabled", !is_valid);
-    });
-  });
+    ['input','change'].forEach(evt =>
+        currForm1.querySelectorAll(".form-control, .form-check-input").forEach(input => {
+            input.addEventListener(evt, () => {
+                $("#" + input.getAttribute("name") + "Error").children("strong").text("");
+                if (input.type != "radio"){
+                    if (input.checkValidity()) {
+                        input.classList.remove('is-invalid')
+                        input.classList.add('is-valid');
+                    } else {
+                        document.getElementById("client-text").style.display = "block";
+                        input.classList.remove('is-valid');
+                        input.classList.add('is-invalid');
+                    }
+                }
+                var radios_selected = ($('input[type="radio"]:checked').length > 1);
+                var is_valid = $('.form-control').length === $('.form-control.is-valid').length && radios_selected;
+                $("#submitBtn").attr("disabled", !is_valid);
+            })
+        })
+    );
 });
