@@ -6,8 +6,6 @@
   <title>RFID-Based School Attendance System</title>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   @vite(['resources/js/app.js'])
-  <link rel="stylesheet" href="{{ asset('css/createuser.css') }}">
-  {{-- <script src="{{ asset('js/createuser.js') }}"></script> --}}
   <script src="https://kit.fontawesome.com/47cd24d297.js" crossorigin="anonymous"></script>
 </head>
 
