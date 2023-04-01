@@ -140,7 +140,7 @@
 
 @section('scripts')
 <script src="{{ asset('js/createuser.js') }}"></script>
-<script>
+<script type="text/javascript">
     $(function () {
         $('#registerForm').submit(function (e) {
             e.preventDefault();
