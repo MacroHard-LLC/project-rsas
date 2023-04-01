@@ -1,12 +1,12 @@
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class='modal-content'>
             <div class='modal-header'>
                 <h1 class="modal-title fs-5" id="registerModalLabel"><i class="fa-solid fa-circle"></i> CREATE NEW USER</h1>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body">
+            <div class="modal-body px-5">
                 <form method="POST" action="/users" id="registerForm" class="needs-validation" novalidate>
                     @csrf
                     <fieldset>
