@@ -15,24 +15,26 @@
                                 <div class="form-outline">
                                     <label for="id" class="input-title">User ID</label>
                                     <input type="text" class="form-control form-control-sm" placeholder="20XXXXXX" name="id" id="idInput" minlength="9" maxlength="9" pattern="[0-9]+" aria-describedby="idError" required autofocus>
-                                    <div class="invalid-feedback">
+                                    <div class="is-invalid" id="idError">
                                         <span id="client-text">Edit this yza</span>
-                                    </div>
-                                    <div class="is-invalid" role="alert" id="idError">
                                         <strong></strong>
                                     </div>
+                                    {{-- <div class="is-invalid" role="alert" id="idError">
+                                        <strong></strong>
+                                    </div> --}}
                                 </div>
                             </div>
 
                             <div class="col-md-6 input-field">
                                 <label for="password" class="input-title">User Password</label>
                                 <input type="password" class="form-control form-control-sm" placeholder="XXXX" name="password" id="passwordInput" minlength="1" maxlength="20" aria-describedby="passwordError" required>
-                                <div class="invalid-feedback">
+                                <div class="is-invalid" id="passwordError">
                                     <span id="client-text">Edit this yza</span>
-                                </div>
-                                <div class="is-invalid" role="alert" id="passwordError">
                                     <strong></strong>
                                 </div>
+                                {{-- <div class="is-invalid" role="alert" id="passwordError">
+                                    <strong></strong>
+                                </div> --}}
                             </div>
                         </div>
 
@@ -51,12 +53,13 @@
                                 <input class="form-check-input" type="radio" name="role" id="adminCheck" value="0" required>
                                 <label class="form-check-label" for="adminCheck">Administrator</label>
                             </div>
-                            <div class="invalid-feedback">
+                            <div class="is-invalid" id="roleError">
                                 <span id="client-text">Edit this yza</span>
-                            </div>
-                            <div class="is-invalid" role="alert" id="roleError">
                                 <strong></strong>
                             </div>
+                            {{-- <div class="is-invalid" role="alert" id="roleError">
+                                <strong></strong>
+                            </div> --}}
 
 
                         <!--If student or adviser-->
@@ -68,34 +71,38 @@
                                 <div class="col-6 col-md-4 input-field">
                                     <label for="first" class="input-title">First Name</label>
                                     <input type="text" class="form-control form-control-sm invalid-border" placeholder="Ex. Jose" name="first" id="firstInput" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" aria-describedby="firstError" required>
-                                    <div class="invalid-feedback">
+                                    <div class="is-invalid" id="firstError">
                                         <span id="client-text">Edit this yza</span>
-                                    </div>
-                                    <div class="is-invalid" role="alert" id="firstError">
                                         <strong></strong>
                                     </div>
+                                    {{-- <div class="is-invalid" role="alert" id="firstError">
+                                        <strong></strong>
+                                    </div> --}}
                                 </div>
 
                                 <div class="col-6 col-md-4 input-field">
                                     <label for="middle" class="input-title">Middle Name</label>
                                     <input type="text" class="form-control form-control-sm" placeholder="Ex. Protacio" name="middle" id="middleInput" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" aria-describedby="middleError" required>
-                                    <div class="invalid-feedback">
+                                    <div class="is-invalid" id="middleError">
                                         <span id="client-text">Edit this yza</span>
-                                    </div>
-                                    <div class="is-invalid" role="alert" id="middleError">
                                         <strong></strong>
                                     </div>
+                                    {{-- <div class="is-invalid" role="alert" id="middleError">
+                                        <strong></strong>
+                                    </div> --}}
                                 </div>
 
                                 <div class="col-6 col-md-4 input-field">
                                     <label for="last" class="input-title">Last Name</label>
                                     <input type="text" class="form-control form-control-sm" placeholder="Ex. Rizal" name="last" id="lastInput" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" aria-describedby="lastError" required>
-                                    <div class="invalid-feedback">
+                                    <div class="is-invalid" id="lastError">
                                         <span id="client-text">Edit this yza</span>
-                                    </div>
-                                    <div class="is-invalid" role="alert" id="lastError">
                                         <strong></strong>
                                     </div>
+                                    {{-- <div class="is-invalid" role="alert" id="lastError">
+                                        <span id="client-text">Edit this yza</span>
+                                        <strong></strong>
+                                    </div> --}}
                                 </div>
                             </div>
 
@@ -109,10 +116,12 @@
                                 <input class="form-check-input" type="radio" name="gender" id="femaleInput" value="F" required>
                                 <label class="form-check-label" for="female">Female</label>
                             </div>
-                            <div class="invalid-feedback">
+                            {{-- <div class="invalid-feedback" id="genderError">
                                 <span id="client-text">Edit this yza</span>
-                            </div>
+                                <strong></strong>
+                            </div> --}}
                             <div class="is-invalid" role="alert" id="genderError">
+                                <span id="client-text">Edit this yza</span>
                                 <strong></strong>
                             </div>
 
@@ -139,7 +148,7 @@
 </div>
 
 @section('scripts')
-<script src="{{ asset('js/createuser.js') }}"></script>
+<script src="{{ asset('js/createUser.js') }}"></script>
 <script type="text/javascript">
     $(function () {
         $('#registerForm').submit(function (e) {
@@ -160,13 +169,16 @@
                         let errors = response.responseJSON.errors;
                         Object.keys(errors).forEach(function (key) {
                             if (key == "role" || key == "gender"){
-                                $("." + key).addClass("is-invalid");
+                                $(name=key).addClass("is-invalid");
+                                console.log("key is " + key);
                             } else {
                                 $("#" + key + "Input").addClass("is-invalid");
                             }
                             $("#" + key + "Error").children("strong").text(errors[key][0]);
+                            console.log(key);
                         });
-                        document.getElementById("client-text").style.display = "none";
+                        $(".is-invalid").children("span").hide();
+                        console.log(errors);
                     } else {
                         window.location.reload();
                     }

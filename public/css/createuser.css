@@ -49,7 +49,7 @@ a.nav-link{
 .submit-reminder{
     font-family: 'Source Sans Pro', sans-serif;
     font-style: italic;
-    color: red;
+    color: #EE6C4D;
 }
 
 .create {
@@ -59,18 +59,12 @@ a.nav-link{
     letter-spacing: 0.05rem;
 }
 
-.is-invalid{
-    font-family: 'Oswald', sans-serif;
+.is-invalid span, .is-invalid strong{
+    font-family: 'Source Sans Pro', sans-serif;
     color: red;
     font-style: italic;
     font-size: small;
 }
-
-.is-invalid strong{
-    font-family: 'Source Sans Pro', sans-serif;
-}
-
-
 
 .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     opacity: 0.3; /* Firefox */
