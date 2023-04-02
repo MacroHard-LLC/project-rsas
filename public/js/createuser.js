@@ -32,6 +32,7 @@
 // }
 
 window.addEventListener('load', function() {
+    document.getElementById("submission").style.visibility = "hidden";
     let currForm1 = document.getElementById('registerForm');
     ['input','change'].forEach(evt =>
         currForm1.querySelectorAll(".form-control, .form-check-input").forEach(input => {
@@ -49,7 +50,11 @@ window.addEventListener('load', function() {
                 }
                 var radios_selected = ($('input[type="radio"]:checked').length > 1);
                 var is_valid = $('.form-control').length === $('.form-control.is-valid').length && radios_selected;
-                $("#submitBtn").attr("disabled", !is_valid);
+                if (is_valid){
+                    document.getElementById("submission").style.visibility = "visible";
+                } else {
+                    document.getElementById("submission").style.visibility = "hidden";
+                }
             })
         })
     );

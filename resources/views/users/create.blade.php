@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body px-5">
+            <div class="modal-body mx-5" id="modalBody">
                 <form method="POST" action="/users" id="registerForm" class="needs-validation" novalidate>
                     @csrf
                     <fieldset>
@@ -124,9 +124,9 @@
                             </div> --}}
                         </div>
 
-                        <div class="form-group pt-3 float-end">
+                        <div class="form-group pt-3 float-end" id="submission">
                             <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
-                            <button id="submitBtn" class="btn btn-primary create" type="submit" disabled><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
+                            <button class="btn btn-primary create" type="submit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                         </div>
                     </div>
                     </fieldset>
