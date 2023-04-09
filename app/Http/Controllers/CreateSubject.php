@@ -14,7 +14,7 @@ use App\Models\Machine_table;
 class CreateSubject extends Controller
 {
     function CreateSubjectIndex(){
-        return view('createsub');
+        return view('newsub');
     }
 
 
