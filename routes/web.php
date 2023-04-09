@@ -35,6 +35,10 @@ Route::post('dataInsert',[CreateSubject::class, 'DataInsert'])->middleware(Check
 
 Auth::routes();
 
+// create subject
+Route::get('/subjects/create',[CreateSubject::class, 'CreateSubjectForm']);
+Route::post('/subjects', [CreateSubject::class, 'DataInsert'])->name('register_sub');
+
 // show users
 // supposed to be '/users', but '/' will do for now
 Route::get('/', [UserController::class, 'index'])->name('home');
