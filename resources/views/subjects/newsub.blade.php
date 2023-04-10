@@ -42,7 +42,7 @@
                                     <option value="9">Level 9</option>
                                     <option value="10">Level 10</option>
                                 </select>
-                                <div class="is-invalid" role="alert" id="idError">
+                                <div class="is-invalid" role="alert" id="gradeError" name="gradeError">
                                     <strong></strong>
                                 </div>
                             </div>
@@ -224,6 +224,33 @@ else{
     $('#roomError.is-invalid').css('visibility','visible');
 };
 });
+
+$('#sub_id').keyup(function() {
+  if ($(this).val().length === 5) {
+    console.log($(this).val());
+    $.ajax({
+      method: "POST",
+      headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            Accept: "application/json"
+      },
+      url: "{{ route('check_id') }}",
+      data: { input_data: $(this).val() },
+      success: function(data) {
+        console.log(data);
+        if (data.exists) {
+            console.log($('#idError.is-invalid'));
+            $('#idError.is-invalid').css('visibility','visible');
+          $('#idError.is-invalid').html('<strong>Subject Already Exists</strong>');
+        } 
+      }
+    });
+  } 
+  else{
+    $('#idError.is-invalid').html('<strong>Check if Subject ID is all integers</strong>');
+  }
+});
+
 </script>
 
 {{--<script> 

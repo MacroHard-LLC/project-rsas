@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Models\Subject_table; 
-use App\Models\User_table;
+use App\Models\User;
 use App\Models\Schedule_table; 
 use App\Models\Machine_table;   
 
@@ -21,6 +21,17 @@ class CreateSubject extends Controller
 
     function CreateSubjectForm(){
         return view('subjects.create');
+    }
+
+    function CheckSubIdExist(Request $request){
+        $incoming_id = $request->input_data;
+        $isUserSuccess = Subject_table::where('id','=',$incoming_id)->first();
+        if ($isUserSuccess){
+            return response()->json(['exists' => true]);
+        }
+        else{
+            return response()->json(['exists' => false]);
+        }
     }
 
 

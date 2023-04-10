@@ -38,6 +38,7 @@ Auth::routes();
 // create subject
 Route::get('/subjects/create',[CreateSubject::class, 'CreateSubjectForm']);
 Route::post('/subjects', [CreateSubject::class, 'DataInsert'])->name('register_sub');
+Route::post('/subjects-check', [CreateSubject::class, 'CheckSubIdExist'])->name('check_id');
 
 // show users
 // supposed to be '/users', but '/' will do for now
