@@ -35,12 +35,12 @@
                                     <option value="2">Level 2</option>
                                     <option value="3">Level 3</option>
                                     <option value="4">Level 4</option>
-                                    <option value="1">Level 5</option>
-                                    <option value="2">Level 6</option>
-                                    <option value="3">Level 7</option>
-                                    <option value="4">Level 8</option>
-                                    <option value="1">Level 9</option>
-                                    <option value="2">Level 10</option>
+                                    <option value="5">Level 5</option>
+                                    <option value="6">Level 6</option>
+                                    <option value="7">Level 7</option>
+                                    <option value="8">Level 8</option>
+                                    <option value="9">Level 9</option>
+                                    <option value="10">Level 10</option>
                                 </select>
                                 <div class="is-invalid" role="alert" id="idError">
                                     <strong></strong>
@@ -87,7 +87,7 @@
                 
                             <div class="form-outline w-25 input-field">
                                     <label for="year_st" class="input-title">Year Start</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="20XX"  name="year_st" id="year_st" required>
+                                    <input type="text" class="form-control form-control-sm" placeholder="20XX"  name="year_st" id="year_st" required maxlength="4">
                                     <div class="is-invalid" role="alert" id="yearError">
                                         <strong></strong>
                                     </div>
@@ -95,7 +95,7 @@
                 
                             <div class="form-outline w-25 input-field">
                                     <label for="year_end" class="input-title">Year End</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="20XX"  name="year_end" id="year_end" required>
+                                    <input type="text" class="form-control form-control-sm" placeholder="20XX"  name="year_end" id="year_end" required maxlength="4">
                                     <div class="is-invalid" role="alert" id="yearError">
                                         <strong></strong>
                                     </div>

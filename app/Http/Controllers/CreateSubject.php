@@ -33,11 +33,12 @@ class CreateSubject extends Controller
             // days
             'time_st' => ['required'],
             'time_end' => ['required'],
-            'as_room' => ['required','min:1','max:50','regex:/^[a-zA-Z\s]*$/'],
+            'as_room' => ['required','min:1','max:50'],
             'year_st' => ['required'],
             'year_end' => ['required'],
         ]);
         
+
         
         $subject = new Subject_table;
         $subject->grade_level = $formFields['grade_level'];
