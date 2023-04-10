@@ -103,7 +103,7 @@
 
                         <div class="form-group pt-3 float-end">
                             <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
-                            <button class="btn btn-primary create" type="submit"><i class="fa-solid fa-square-plus icon-white"></i>Create</button>
+                            <button class="btn btn-primary create" type="submit" id="sbmt_btn" disabled><i class="fa-solid fa-square-plus icon-white"></i>Create</button>
                         </div>
                     </div>
                     </fieldset>
@@ -145,9 +145,17 @@ $(function () {
                 } 
             }
         })
-        console.log(formData);
+        
     });
 })
+$('#sub_id,#sub_name,#time_st,#time_end,#as_room,#year_st,#year_end').on('keypress keyup keydown', function () { 
+  if ($('#sub_id').val() != "" && $('#sub_name').val() != "" && $('#time_st').val() != "" && $('#time_end').val() != "" && $('#as_room').val() != "" && $('#year_st').val() != "" && $('#year_end').val() != "")  { 
+    $('#sbmt_btn').prop('disabled', false); 
+  } 
+  else {   
+    $('#sbmt_btn').prop('disabled', true); 
+  } 
+});
 </script>
 
 {{--<script> 
