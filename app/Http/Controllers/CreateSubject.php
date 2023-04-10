@@ -31,12 +31,13 @@ class CreateSubject extends Controller
             'sub_name' => ['required','min:1','max:50'],
             'grade_level' => 'required',
             // days
-            'time_st' => 'required',
-            'time_end' => 'required',
+            'time_st' => ['required'],
+            'time_end' => ['required'],
             'as_room' => ['required','min:1','max:50','regex:/^[a-zA-Z\s]*$/'],
-            'year_st' => 'required',
-            'year_end' => 'required',
+            'year_st' => ['required'],
+            'year_end' => ['required'],
         ]);
+        
         
         $subject = new Subject_table;
         $subject->grade_level = $formFields['grade_level'];
@@ -45,7 +46,6 @@ class CreateSubject extends Controller
         $subject->instructor_id = 0;
         $subject->room = $formFields['as_room'];
         $subject->year_start = new DateTime($formFields['year_st'].'-01-01');
-        $date = DateTime::createFromFormat('Y-12-31', $formFields['year_end']);
         $subject->year_end = new DateTime($formFields['year_end'].'-12-31');
         $subject->added_on = now();
         $subject->added_by = 0;
@@ -53,75 +53,35 @@ class CreateSubject extends Controller
         $subject->updated_by = 0;
         $subject->is_deleted = 0;
         $subject->save();
-        /*
-        #grade_level need input
-        $grade_level = $request->input('grade_level');
-        #instructor need input
-        $instructor_id = 0; #temporary
 
-        $id = $request->input('subj_id');
-        $name = $request->input('subj_name');
-        #dept_id is missing
-        #$dept_id = $request->input('dept_id');
-        #db is not string :adiksayo:
-        $room = $request->input('as_room');
+        $machine = new Machine_table;
+        $machine->room = $formFields['as_room'];
+        $machine->status = 0;
+        $machine->added_on = now();
+        $machine->added_by = 0;
+        $machine->updated_on = now();
+        $machine->updated_by = 0;
+        $machine->is_deleted = 0;
+        $machine->save();
 
-        //$sched_days = $request->input('sched_days');
-        $time_start = $request->input('time_st');
-        $time_end = $request->input('time_end');
-        $year_start = Carbon::createFromDate($request->input('year_st'), 1, 1);
-        $year_end = Carbon::createFromDate($request->input('year_end'), 1, 1);
-
-        /*if (Subject_table::where('id', $id)->exists()) {
-            echo '<script type="text/javascript">
-                window.onload = function () { alert("Subject ID Already Exists"); } 
-                </script>';
-        } else {
-
-        $isInsertSuccess = Subject_table::insert([
-                                            'grade_level'=>$grade_level,
-                                            'instructor_id'=>$instructor_id,
-                                            'id'=>$id,
-                                            'name'=>$name,
-                                            'room'=>$room,                                            
-                                            'year_start'=>$year_start->format('Y-m-d'),
-                                            'year_end'=>$year_end->format('Y-m-d'),
-                                            'added_on'=>now(),
-                                            'added_by'=>0,
-                                            'updated_on'=>now(),
-                                            'updated_by'=>NULL,
-                                            'is_deleted'=>0
-                                        ]);
-
-        $isMachineSuccess = Machine_table::insert([
-                                            'room'=>$room,
-                                            'status'=>0,
-                                            'added_on'=>now(),
-                                            'added_by'=>0,
-                                            'updated_on'=>NULL,
-                                            'updated_by'=>NULL,
-                                            'is_deleted'=>0
-        ]);
-
-        $isSchedSuccess = Schedule_table::insert([
-
-                                            'subject_id' => $id,
-                                            'grade_level'=> $grade_level,
-                                            //'day'=>$sched_days,
-                                            'day'=>'MON',
-                                            'time_start'=>$time_start,
-                                            'time_end'=>$time_end,
-                                            'added_on'=>now(),
-                                            'added_by'=>0,
-                                            'updated_on'=>now(),
-                                            'updated_by'=>NULL,
-                                            'is_deleted'=>0
-        ]);
+        $sched = new Schedule_table;
+        $sched->subject_id = $formFields['sub_id'];
+        $sched->grade_level = $formFields['grade_level'];
+        // $sched->days = $formFields['days'];
+        $sched->day = 'WED';
+        $sched->time_start = $formFields['time_st'];
+        $sched->time_end = $formFields['time_end'];
+        $sched->added_on = now();
+        $sched->added_by = 0;
+        $sched->updated_on = now();
+        $sched->updated_by = 0;
+        $sched->is_deleted = 0;
+        $sched->save();
 
         #$isUserSuccess = User_table::where('id','=',$instructor_id);
         
-        if($isInsertSuccess && $isSchedSuccess) echo '<h1>Create Subject Success</h1>';
-        else echo '<h1>Create Subject FAILED </h1>';*/
+        // if($isInsertSuccess && $isSchedSuccess) echo '<h1>Create Subject Success</h1>';
+       // else echo '<h1>Create Subject FAILED </h1>';*/
     //}
         echo('user sucess');
     }

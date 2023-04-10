@@ -9,5 +9,7 @@ class Machine_table extends Model
 {
     public $table = 'machine';
     public $primaryKey = 'id';
-    public $timestamps = TRUE;
+    // timestamps is FALSE as to defer the Laravel's need for
+    // UPDATED_AT where we already have updated_on in our database
+    public $timestamps = FALSE;
 }

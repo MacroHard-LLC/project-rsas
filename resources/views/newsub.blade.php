@@ -21,7 +21,7 @@
                             </div>
 
                             <div class="col-md-6 input-field">
-                                <label for="subj_name" class="input-title">Subject Name</label>
+                                <label for="sub_name" class="input-title">Subject Name</label>
                                 <input type="text" class="form-control form-control-sm" placeholder="Ex. Introduction to Computer Science" name="sub_name" id="sub_name" minlength="1" maxlength="50" aria-describedby="nameError" required>
                                 <div class="is-invalid" role="alert" id="nameError">
                                     <strong></strong>
@@ -29,12 +29,18 @@
                             </div>
 
                             <div class="col-md-6 input-field"> 
-                                <label for="grade_level" class="input-title">Department ID</label>   
+                                <label for="grade_level" class="input-title">Grade Level</label>   
                                 <select name="grade_level" class="form-control form-select" placeholder="Choose Department ID" id="grade_level" required>
-                                    <option value="1">Dept ID 1</option>
-                                    <option value="2">Dept ID 2</option>
-                                    <option value="3">Dept ID 3</option>
-                                    <option value="4">Dept ID 4</option>
+                                    <option value="1">Level 1</option>
+                                    <option value="2">Level 2</option>
+                                    <option value="3">Level 3</option>
+                                    <option value="4">Level 4</option>
+                                    <option value="1">Level 5</option>
+                                    <option value="2">Level 6</option>
+                                    <option value="3">Level 7</option>
+                                    <option value="4">Level 8</option>
+                                    <option value="1">Level 9</option>
+                                    <option value="2">Level 10</option>
                                 </select>
                                 <div class="is-invalid" role="alert" id="idError">
                                     <strong></strong>
@@ -65,7 +71,7 @@
               
                             <div class="form-outline w-25 input-field">
                                     <label for="time_end" class="input-title">Time End</label>
-                                    <input type="time" name="time_end" class="form-control form-control-sm" placeholder="00:00 XM" name="time_end" id="timeendInput" maxlength="50" required>
+                                    <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="time_end" id="time_end" maxlength="50" required>
                                     <div class="is-invalid" role="alert" id="timeError">
                                         <strong></strong>
                                     </div>
@@ -81,7 +87,7 @@
                 
                             <div class="form-outline w-25 input-field">
                                     <label for="year_st" class="input-title">Year Start</label>
-                                    <input type="text" name="year_st" class="form-control form-control-sm" placeholder="20XX"  name="year_st" id="year_st" required>
+                                    <input type="text" class="form-control form-control-sm" placeholder="20XX"  name="year_st" id="year_st" required>
                                     <div class="is-invalid" role="alert" id="yearError">
                                         <strong></strong>
                                     </div>
