@@ -28,7 +28,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 input-field"> 
+                            <div class="col-md-6 w-50 input-field"> 
                                 <label for="grade_level" class="input-title">Grade Level</label>   
                                 <select name="grade_level" class="form-control form-select" placeholder="Choose Department ID" id="grade_level" required>
                                     <option value="1">Level 1</option>
@@ -47,20 +47,6 @@
                                 </div>
                             </div>
 
-                            {{---<div class="col-md-6 input-field">
-                                <label for="sched_days" class="input-title">Scheduled Days</label>
-                                <select id="multiple" name="sched_days" class="js-states form-control" placeholder="Select Scheduled Days"  name="sched_days" id="daysInput" multiple required>
-                                  <option value="MON">Monday</option>
-                                  <option value="TUE">Tuesday</option>
-                                  <option value="WED">Wednesday</option>
-                                  <option value="THU">Thursday</option>
-                                  <option value="FRI">Friday</option>
-                                </select>
-                                <div class="is-invalid" role="alert" id="dayError">
-                                    <strong></strong>
-                                </div>
-                            </div>--}}
-                            
                             <div class="form-outline w-25 input-field">
                                 <label for="time_st" class="input-title">Time Start</label>
                                 <input type="time" name="time_st" class="form-control form-control-sm" placeholder="00:00 XM" id="time_st" required>
@@ -101,10 +87,39 @@
                                     </div>
                                 </div>
 
+                            <div class="container pt-2 input-field">
+                                <div class="input-title pb-2">Scheduled Days</div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="MondayCheck" value="monday">
+                                        <label class="form-check-label" for="MondayCheck">Monday</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="TuesdayCheck" value="tuesday">
+                                        <label class="form-check-label" for="TuesdayCheck">Tuesday</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="WednesdayCheck" value="wednesday">
+                                        <label class="form-check-label" for="WednesdayCheck">Wednesday</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="ThursdayCheck" value="thursday">
+                                        <label class="form-check-label" for="ThursdayCheck">Thursday</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="FridayCheck" value="friday">
+                                        <label class="form-check-label" for="FridayCheck">Friday</label>
+                                    </div>
+                                </div>
+                            </div>
+
                         <div class="form-group pt-3 float-end">
                             <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
                             <button class="btn btn-primary create" type="submit" id="sbmt_btn" disabled><i class="fa-solid fa-square-plus icon-white"></i>Create</button>
                         </div>
+
+
+
                     </div>
                     </fieldset>
                 </form>
