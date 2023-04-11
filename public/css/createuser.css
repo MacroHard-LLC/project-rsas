@@ -14,13 +14,13 @@
 }
 
 .card{
-    width: auto;
-    margin: 0.25rem 3em;
     justify-content: center;
+    margin: 0.25rem 2em;
+    padding: 0.75rem;
 }
 
 .create{
-    padding-right: 3rem;
+    padding: 0.25rem 11rem;
 }
 
 .table-title{
@@ -110,7 +110,7 @@ a.nav-link{
     border-radius: 82px !important;
 }
 
-button.btn, button.btn:hover, button.btn:active,
+a.btn, button.btn, button.btn:hover, button.btn:active,
 button.btn:active:focus{
     font-family: 'Poppins';
     background-color: #3d5a80;
@@ -118,12 +118,16 @@ button.btn:active:focus{
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.07rem;
-    padding: 0.2rem 0.6rem 0.2rem 0.6rem;
+    padding: 0.2rem 0.6rem;
 }
 
 .btn{
     font-family: 'Poppins';
     background-color: #3d5a80;
+}
+
+.btn-secondary{
+    background-color: dimgrey;
 }
 
 .modal-header{

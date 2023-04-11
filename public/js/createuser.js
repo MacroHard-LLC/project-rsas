@@ -75,3 +75,29 @@ function showClientError(input){
         }
     }
 }
+
+function tableFilter(){
+  var $table = $('#userTable')
+  var $all_btn = $('#all')
+  var $std_btn = $('#student')
+  var $adv_btn = $('#adviser')
+  var $admn_btn = $('#admin')
+
+  $(function() {
+    $all_btn.click(function () {
+      $table.bootstrapTable('filterBy', {
+        role: [0, 1, 2]
+      })
+    })
+
+    $customButton.click(function () {
+      $table.bootstrapTable('filterBy', {
+        id: 4
+      }, {
+        'filterAlgorithm': (row, filters) => {
+          return row.id % filters.id === 0
+        }
+      })
+    })
+  })
+}

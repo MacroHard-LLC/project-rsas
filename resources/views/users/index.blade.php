@@ -12,12 +12,23 @@
         <h2>USER LIST</h2> 
 </div>
 
-<div class="d-flex justify-content-md-end create">
-    <a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#registerModal">Create User</a>
+<div class="container-fluid">
+    <div class="row d-flex create">
+    <div class=" col justify-content-md-end">
+        <button id="all" class="btn btn-secondary">ALL</button>
+        <button id="student" class="btn btn-secondary">STUDENT</button>
+        <button id="adviser" class="btn btn-secondary">ADVISER</button>
+        <button id="admin" class="btn btn-secondary">ADMIN</button>
+    </div>
+
+    <div class="d-flex col justify-content-md-end">
+        <a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#registerModal"><i class="fa-solid fa-user-plus"></i> new user</a>
+    </div>
+    </div>
 </div>
 
-<div class="card">
-        <table class="table table-striped table-hover">
+<div class="container-fluid d-flex card w-75 justify-content-md-center">
+        <table class="table table-striped table-hover" id="userTable" data-toggle="table" data-toolbar="#toolbar">
             <tr>
                 <th data-align="right"></th>
                 <th>User ID</th>
@@ -34,7 +45,15 @@
                 <tr>
                     <td><i class="fa-solid fa-circle icon-baby-blue"></td>
                     <td>{{$row['id']}}</td>
-                    <td>{{$row['role']}}</td>
+
+                    @if($row['role'] == "0")
+                        <td>Administrator</td>
+                    @elseif($row['role'] == "1")
+                        <td>Student</td>
+                    @elseif($row['role'] == "2")
+                        <td>Adviser</td>
+                    @endif
+
                     <td>{{$row['last']}}</td>
                     <td>{{$row['first']}}</td>
                     <td>{{$row['middle']}}</td>
