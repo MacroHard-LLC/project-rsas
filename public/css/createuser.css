@@ -14,8 +14,26 @@
 }
 
 .card{
-    width: 80rem;
-    margin: 3rem;
+    width: auto;
+    margin: 0.25rem 3em;
+    justify-content: center;
+}
+
+.create{
+    padding-right: 3rem;
+}
+
+.table-title{
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    justify-content: center;
+}
+
+
+
+th{
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
 }
 
 .navbar-custom {
@@ -33,8 +51,12 @@
     color:white;
 }
 
-.icon-blue{
+.icon-baby-blue{
     color:#98C1D9;
+}
+
+.icon-dark-blue{
+    color:#3D5A80;
 }
 
 a.nav-link{
@@ -97,6 +119,11 @@ button.btn:active:focus{
     text-transform: uppercase;
     letter-spacing: 0.07rem;
     padding: 0.2rem 0.6rem 0.2rem 0.6rem;
+}
+
+.btn{
+    font-family: 'Poppins';
+    background-color: #3d5a80;
 }
 
 .modal-header{

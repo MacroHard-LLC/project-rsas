@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>RSAS</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RFID-Based School Attendance System</title>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  @vite(['resources/js/app.js'])
+  <script src="https://kit.fontawesome.com/47cd24d297.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
+
     <!--NAVBAR-->
     <nav class="navbar navbar-expand-sm navbar-custom navbar-dark">
         <div class="container-fluid">
@@ -22,7 +26,7 @@
                 <ul class="navbar-nav">
                   <li class="nav-item">
                     <a class="nav-link" href="#" title="View Account"><i class="fa-solid fa-user icon-white"> John Doe</i></a>
-                  </li>  
+                  </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"></a>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -35,9 +39,12 @@
                 </ul>
               </div>
         </div>
-      </nav>
-    
-      @yield('content')
-    
+    </nav>
+
+   
+    @yield('content')
+
+
 </body>
+
 </html>
