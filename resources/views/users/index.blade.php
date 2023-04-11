@@ -69,7 +69,9 @@
 				</tr>
 			@endif
         </table>
-
+        <div>
+            {{ $users->links() }}
+        </div>
 </div>
 
 @endsection
