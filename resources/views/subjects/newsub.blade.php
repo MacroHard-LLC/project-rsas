@@ -181,17 +181,7 @@ $('#sub_id,#sub_name,#time_st,#time_end,#as_room,#year_st,#year_end').on('keypre
     $('#sbmt_btn').prop('disabled', true); 
   } 
 
-// validation for subject id
-if ($('#sub_id').val().length == 0){
-    $('#idError.is-invalid').css('visibility','hidden');
-}
-else if (!$('#sub_id').val().match('^[0-9]{5}$')){
-    
-    $('#idError.is-invalid').css('visibility','visible');
-}
-else{
-    $('#idError.is-invalid').css('visibility','hidden');
-}
+
 // validation for subject name
 if ($('#sub_name').val().length == 0){
     $('#nameError.is-invalid').css('visibility','hidden');
@@ -249,7 +239,8 @@ else{
 };
 });
 
-$('#sub_id').keyup(function() {
+$('#sub_id').on('keyup', function () {
+    $('#idError.is-invalid').html('<strong>Check if Subject ID is all integers</strong>');
   if ($(this).val().length === 5) {
     console.log($(this).val());
     $.ajax({
@@ -261,9 +252,7 @@ $('#sub_id').keyup(function() {
       url: "{{ route('check_id') }}",
       data: { input_data: $(this).val() },
       success: function(data) {
-        console.log(data);
         if (data.exists) {
-            console.log($('#idError.is-invalid'));
             $('#idError.is-invalid').css('visibility','visible');
           $('#idError.is-invalid').html('<strong>Subject Already Exists</strong>');
         } 
@@ -271,17 +260,20 @@ $('#sub_id').keyup(function() {
     });
   } 
   else{
-    $('#idError.is-invalid').html('<strong>Check if Subject ID is all integers</strong>');
+    
+    // validation for subject id
+    if ($('#sub_id').val().length == 0){
+        $('#idError.is-invalid').css('visibility','hidden');
+    }
+    else if (!$('#sub_id').val().match('^[0-9]{5}$')){
+        
+        $('#idError.is-invalid').css('visibility','visible');
+    }
+    else{
+        $('#idError.is-invalid').css('visibility','hidden');
+    }
   }
 });
 
 </script>
-
-{{--<script> 
-    $("#multiple").select2({
-        placeholder: " Select scheduled days",
-        allowClear: true
-    });
-</script>--}}
-
 @endsection
