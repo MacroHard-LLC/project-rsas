@@ -187,11 +187,11 @@ $('#MondayCheck,#TuesdayCheck,#WednesdayCheck,#ThursdayCheck,#FridayCheck,#sub_i
 
 
 // validation for subject name
-console.log($('#sub_name').val());
 if ($('#sub_name').val().length == 0){
     $('#nameError.is-invalid').css('visibility','hidden');
 }
-else if (!$('#sub_name').val().match('^[0-9a-zA-Z_\s,]{0,50}$')) {
+else if (!$('#sub_name').val().match('^[0-9a-zA-Z_ ]{0,50}$')) {
+    console.log('hooter');
     $('#nameError.is-invalid').css('visibility','visible');
     $('#sbmt_btn').prop('disabled', true); 
 }
@@ -258,7 +258,7 @@ $('#MondayCheck,#TuesdayCheck,#WednesdayCheck,#ThursdayCheck,#FridayCheck').on('
 
 $('#as_room').on('keypress keyup keydown', function () {
     // validation for time end
-if ($('#as_room').val().length == 0 || $('#as_room').val().match('^[0-9a-zA-Z_\s,]{0,50}$')){
+if ($('#as_room').val().length == 0 || $('#as_room').val().match('^[0-9a-zA-Z_ ]{0,50}$')){
     $('#roomError.is-invalid').css('visibility','hidden');
 }
 else{
