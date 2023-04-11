@@ -91,23 +91,23 @@
                                 <div class="input-title pb-2">Scheduled Days</div>
                                 <div class="d-flex justify-content-between">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="MondayCheck" value="monday">
+                                        <input class="form-check-input" type="checkbox" id="MondayCheck" value="MON">
                                         <label class="form-check-label" for="MondayCheck">Monday</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="TuesdayCheck" value="tuesday">
+                                        <input class="form-check-input" type="checkbox" id="TuesdayCheck" value="TUE">
                                         <label class="form-check-label" for="TuesdayCheck">Tuesday</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="WednesdayCheck" value="wednesday">
+                                        <input class="form-check-input" type="checkbox" id="WednesdayCheck" value="WED">
                                         <label class="form-check-label" for="WednesdayCheck">Wednesday</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="ThursdayCheck" value="thursday">
+                                        <input class="form-check-input" type="checkbox" id="ThursdayCheck" value="THU">
                                         <label class="form-check-label" for="ThursdayCheck">Thursday</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="FridayCheck" value="friday">
+                                        <input class="form-check-input" type="checkbox" id="FridayCheck" value="FRI">
                                         <label class="form-check-label" for="FridayCheck">Friday</label>
                                     </div>
                                 </div>
@@ -140,6 +140,15 @@ $(function () {
     $('#registerSubForm').submit(function (e) {
         e.preventDefault();
         let formData = $(this).serializeArray();
+        console.log(formData);
+
+        let selectedDays = [];
+
+        // Iterate over checked checkboxes and add their values to the selectedDays array
+        $("input[type='checkbox']:checked").each(function() {
+            selectedDays.push($(this).val());
+        });
+        formData.push({name: 'days', value: selectedDays});
         $(".is-invalid").children("strong").text("");
         $("#registerSubForm input").removeClass("is-invalid");
         $.ajax({

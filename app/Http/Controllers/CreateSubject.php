@@ -41,7 +41,7 @@ class CreateSubject extends Controller
             'sub_id' => ['required','unique:subject,id','integer','digits:5'],
             'sub_name' => ['required','min:1','max:50','regex:/^[0-9a-zA-Z\s]*$/'],
             'grade_level' => 'required',
-            // days
+            'days' => 'required',
             'time_st' => ['required'],
             'time_end' => ['required'],
             'as_room' => ['required','min:1','max:50','regex:/^[0-9a-zA-Z\s]*$/'],
@@ -79,8 +79,7 @@ class CreateSubject extends Controller
         $sched = new Schedule_table;
         $sched->subject_id = $formFields['sub_id'];
         $sched->grade_level = $formFields['grade_level'];
-        // $sched->days = $formFields['days'];
-        $sched->day = 'WED';
+        $sched->day = $formFields['days'];
         $sched->time_start = $formFields['time_st'];
         $sched->time_end = $formFields['time_end'];
         $sched->added_on = now();
