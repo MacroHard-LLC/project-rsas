@@ -172,9 +172,10 @@ $(function () {
         
     });
 })
+
 // disable the button if inputs are not present
-$('#sub_id,#sub_name,#time_st,#time_end,#as_room,#year_st,#year_end').on('keypress keyup keydown', function () { 
-  if ($('#sub_id').val() != "" && $('#sub_name').val() != "" && $('#time_st').val() != "" && $('#time_end').val() != "" && $('#as_room').val() != "" && $('#year_st').val() != "" && $('#year_end').val() != "")  { 
+$('#MondayCheck,#TuesdayCheck,#WednesdayCheck,#ThursdayCheck,#FridayCheck,#sub_id,#sub_name,#time_st,#time_end,#as_room,#year_st,#year_end').on('keypress keyup keydown click', function () { 
+  if ($('#sub_id').val() != "" && $('#sub_name').val() != "" && $('#time_st').val() != "" && $('#time_end').val() != "" && $('#as_room').val() != "" && $('#year_st').val() != "" && $('#year_end').val() != "" && ($('#MondayCheck').is(':checked') || $('#TuesdayCheck').is(':checked') || $('#WednesdayCheck').is(':checked') || $('#ThursdayCheck').is(':checked') || $('#FridayCheck').is(':checked')))  { 
     $('#sbmt_btn').prop('disabled', false); 
   } 
   else {   
@@ -255,7 +256,10 @@ $('#sub_id').on('keyup', function () {
         if (data.exists) {
             $('#idError.is-invalid').css('visibility','visible');
           $('#idError.is-invalid').html('<strong>Subject Already Exists</strong>');
-        } 
+        }
+        else{
+            $('#idError.is-invalid').css('visibility','hidden');
+        }
       }
     });
   } 
