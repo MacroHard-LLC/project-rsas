@@ -1,3 +1,4 @@
+
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class='modal-content'>
@@ -116,6 +117,7 @@
     </div>
 
 </div>
+
 
 @section('scripts')
 <script src="{{ asset('js/createUser.js') }}"></script>

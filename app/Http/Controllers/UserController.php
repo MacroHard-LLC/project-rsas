@@ -10,7 +10,9 @@ class UserController extends Controller
 {
     // Show all users
     public function index() {
-        return view('users.index');
+        
+        $users = User::all()->toArray();
+        return view('users.index', compact('users')); 
     }
 
     // Show create user form

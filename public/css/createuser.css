@@ -13,6 +13,11 @@
     src: url('/fonts/Poppins-Regular.ttf');
 }
 
+.card{
+    width: 80rem;
+    margin: 3rem;
+}
+
 .navbar-custom {
     background-color: #98C1D9;
     font-family: 'Source Sans Pro',Arial, Helvetica, sans-serif;
@@ -26,6 +31,10 @@
 
 .icon-white {
     color:white;
+}
+
+.icon-blue{
+    color:#98C1D9;
 }
 
 a.nav-link{
@@ -99,3 +108,5 @@ button.btn:active:focus{
     font-weight: 700;
     color: white;
 }
+
+
