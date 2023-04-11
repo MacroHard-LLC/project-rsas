@@ -6,19 +6,19 @@
     @section('content')
     @include('users.create')
     @yield('scripts')
-    
+
 <br>
 <div class="container-fluid d-flex table-title">
-        <h2>USER LIST</h2> 
+        <h2>USER LIST</h2>
 </div>
 
 <div class="container-fluid">
     <div class="row d-flex create">
     <div class=" col justify-content-md-end">
-        <button id="all" class="btn btn-secondary">ALL</button>
-        <button id="student" class="btn btn-secondary">STUDENT</button>
-        <button id="adviser" class="btn btn-secondary">ADVISER</button>
-        <button id="admin" class="btn btn-secondary">ADMIN</button>
+        <a href="/" class="btn btn-primary" role="button">ALL</a>
+        <a href="/?role=student" class="btn btn-primary" role="button">STUDENT</a>
+        <a href="/?role=adviser" class="btn btn-primary" role="button">ADVISER</a>
+        <a href="/?role=admin" class="btn btn-primary" role="button">ADMIN</a>
     </div>
 
     <div class="d-flex col justify-content-md-end">
@@ -62,7 +62,7 @@
 
                 </tr>
                 @endforeach
-            
+
             @else
 				<tr>
 					<td colspan="5" class="text-center">No Data Found</td>
