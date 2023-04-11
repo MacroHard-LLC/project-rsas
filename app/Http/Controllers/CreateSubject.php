@@ -39,12 +39,12 @@ class CreateSubject extends Controller
         // copied from UserController
         $formFields = $request->validate([
             'sub_id' => ['required','unique:subject,id','integer','digits:5'],
-            'sub_name' => ['required','min:1','max:50','regex:/^[0-9a-zA-Z\s]*$/'],
+            'sub_name' => ['required','min:1','max:50','regex:/^[0-9a-zA-Z_ ,.]*$/'],
             'grade_level' => 'required',
             'days' => 'required',
             'time_st' => ['required'],
             'time_end' => ['required'],
-            'as_room' => ['required','min:1','max:50','regex:/^[0-9a-zA-Z\s]*$/'],
+            'as_room' => ['required','min:1','max:50','regex:/^[0-9a-zA-Z_ ,.]*$/'],
             'year_st' => ['required'],
             'year_end' => ['required'],
         ]);
