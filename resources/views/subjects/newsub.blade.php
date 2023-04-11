@@ -65,7 +65,7 @@
                 
                             <div class="col-md-6 w-50 input-field">
                                     <label for="as_room" class="input-title">Assigned Room</label>
-                                    <input type="text" name="as_room" class="form-control form-control-sm" placeholder="Ex. RM 143, Arts and Sciences Building" id="as_room" maxlength="50" required>
+                                    <input type="text" name="as_room" class="form-control form-control-sm" placeholder="Ex. RM 143, Arts and Sciences Building" id="as_room" maxlength="20" required>
                                     <div class="is-invalid" role="alert" id="roomError" name="roomError" style="visibility:hidden">
                                         <strong>Check if Subject Name is a legal string</strong>
                                     </div>

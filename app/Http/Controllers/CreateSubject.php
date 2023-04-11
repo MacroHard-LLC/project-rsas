@@ -44,7 +44,7 @@ class CreateSubject extends Controller
             'days' => 'required',
             'time_st' => ['required'],
             'time_end' => ['required'],
-            'as_room' => ['required','min:1','max:50','regex:/^[0-9a-zA-Z_ ,.]*$/'],
+            'as_room' => ['required','min:1','max:20','regex:/^[0-9a-zA-Z_ ,.]*$/'],
             'year_st' => ['required'],
             'year_end' => ['required'],
         ]);
