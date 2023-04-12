@@ -13,23 +13,11 @@
     src: url('/fonts/Poppins-Regular.ttf');
 }
 
-.card{
-    justify-content: center;
-    margin: 0.25rem 2em;
-    padding: 0.75rem;
-}
-
-.create{
-    padding: 0.25rem 11rem;
-}
-
 .table-title{
     font-family: 'Oswald', sans-serif;
     font-weight: 600;
     justify-content: center;
 }
-
-
 
 th{
     font-family: 'Oswald', sans-serif;
@@ -136,8 +124,6 @@ button.btn:active:focus{
     background-color: #3d5a80;
 }
 
-
-
 .modal-header{
     background-color:#98C1D9;
 }
@@ -148,4 +134,18 @@ button.btn:active:focus{
     color: white;
 }
 
+.pagination > li > a,
+.pagination > li > span{
+    color: #3D5A80 !important;
+}
 
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus
+.pagination > .active > span:hover{
+    background-color: #3D5A80;
+    border-color: #3D5A80;
+    color: white !important;
+}

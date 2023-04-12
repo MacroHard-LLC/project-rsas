@@ -9,25 +9,24 @@
 
 <br>
 <div class="container-fluid d-flex table-title">
-        <h2>USER LIST</h2>
+    <h2>USER LIST</h2>
 </div>
 
-<div class="container-fluid">
-    <div class="row d-flex create">
-    <div class=" col justify-content-md-end">
-        <a href="/" class="btn btn-secondary" role="button">ALL</a>
-        <a href="/?role=student" class="btn btn-secondary" role="button">STUDENT</a>
-        <a href="/?role=adviser" class="btn btn-secondary" role="button">ADVISER</a>
-        <a href="/?role=admin" class="btn btn-secondary" role="button">ADMIN</a>
+<div class="container w-100">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 justify-content-md-end">
+            <a href="/" class="btn btn-secondary" role="button">ALL</a>
+            <a href="/?role=student" class="btn btn-secondary" role="button">STUDENT</a>
+            <a href="/?role=adviser" class="btn btn-secondary" role="button">ADVISER</a>
+            <a href="/?role=admin" class="btn btn-secondary" role="button">ADMIN</a>
+        </div>
+
+        <div class="d-flex col justify-content-md-end">
+            <a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#registerModal"><i class="fa-solid fa-user-plus"></i> new user</a>
+        </div>
     </div>
 
-    <div class="d-flex col justify-content-md-end">
-        <a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#registerModal"><i class="fa-solid fa-user-plus"></i> new user</a>
-    </div>
-    </div>
-</div>
-
-<div class="container card w-75 justify-content-md-center">
+    <div class="border rounded p-3 align-items-center my-2">
         <table class="table table-striped table-hover" id="userTable" data-toggle="table" data-toolbar="#toolbar">
             <tr>
                 <th data-align="right"></th>
@@ -69,9 +68,12 @@
 				</tr>
 			@endif
         </table>
-        <div>
-            {{ $users->links() }}
-        </div>
+    </div>
+
+    <div>
+        {{ $users->links() }}
+    </div>
+
 </div>
 
 @endsection
