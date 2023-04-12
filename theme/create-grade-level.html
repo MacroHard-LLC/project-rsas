@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;600&family=Source+Sans+Pro:ital,wght@0,300;0,600;0,700;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="C:\xampp\htdocs\project-rsas\public\css\createsub.css">
   <link href="C:\xampp\htdocs\project-rsas\public\css\select2.min.css" rel="stylesheet">
+
  
 
 <body>
@@ -52,76 +53,73 @@
     <form class="needs-validation">
       <fieldset>
         <div class="row my-3 gy-4">
-            <div class="col-md-6 input-field">
+            <div class="col-md-3 input-field">
                 <div class="form-outline">
-                <label for="subj_id" class="input-title">Subject ID</label>
-                <input type="text" class="form-control form-control-sm" placeholder="Input a N-M digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
-                <div class="valid-feedback">Looks good!</div>
+                    <label for="subj_id" class="input-title">Section Name</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="BARBZ" name="subj_id" required>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 input-field"> 
+                <label for="grade_level" class="input-title">Grade Level</label>   
+                <select name="grade_level" class="form-control form-select" placeholder="Choose Department ID" id="grade_level" required>
+                    <option value="1">Level 1</option>
+                    <option value="2">Level 2</option>
+                    <option value="3">Level 3</option>
+                    <option value="4">Level 4</option>
+                    <option value="5">Level 5</option>
+                    <option value="6">Level 6</option>
+                    <option value="7">Level 7</option>
+                    <option value="8">Level 8</option>
+                    <option value="9">Level 9</option>
+                    <option value="10">Level 10</option>
+                </select>
+                <div class="is-invalid" role="alert" id="gradeError" name="gradeError">
+                    <strong></strong>
+                </div>
+            </div>
+
+            <div class="col-md-3 input-field">
+                <div class="form-outline">
+                    <label for="subj_id" class="input-title">Section ID</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+            </div>
+
+            <div class="col-md-3 input-field">
+                <div class="form-outline">
+                    <label for="subj_id" class="input-title">Adviser ID</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
+                    <div class="valid-feedback">Looks good!</div>
+                </div>
+            </div>
+            
+            <div class="col-md-5 input-field">
+                <div class="form-outline">
+                    <label for="subj_id" class="input-title">Student ID</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
+                    <div class="valid-feedback">Looks good!</div>
                 </div>
             </div>
 
             <div class="col-md-6 input-field">
-                    <label for="subj_name" class="input-title">Subject Name</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Introduction to Computer Science" name="subj_name" maxlength="50" required>
+                <div class="form-outline">
+                    <label for="subj_id" class="input-title">Student Name</label>
+                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
                     <div class="valid-feedback">Looks good!</div>
+                </div>
             </div>
 
-            <div class="col-md-6 input-field">
-              <div class="form-outline">
-              <label for="dept_id" class="input-title">Department ID</label>   
-                <select class="form-control form-select ">
-                  <option>Choose Department ID</option>
-                  <option value="1">Dept ID 1</option>
-                  <option value="2">Dept ID 2</option>
-                  <option value="3">Dept ID 3</option>
-                  <option value="4">Dept ID 4</option>
-                </select>
-              </div>
+            <div class="col-md-1 input-field">
+                <div class="form-group pt-3 float-end">
+                    <button class="btn btn-primary create" type=""><i class="fa-solid fa-user-plus"></i>  Add</button>
+                </div>
             </div>
-            
-            <div class="col-md-6 w-50 input-field">
-                <label for="as_room" class="input-title">Assigned Room</label>
-                <input type="text" class="form-control form-control-sm" placeholder="Ex. RM 143, Arts and Sciences Building" name="subj_name" maxlength="50" required>
-                <div class="valid-feedback">Looks good!</div>
-            </div>
-          
-            <div class="col-md-6 input-field form-outline">
-              <label for="sched_days" class="input-title">Scheduled Days</label>
-              <select id="multiple" class="js-states form-control" multiple>
-                <option value="MON">Monday</option>
-                <option value="TUE">Tuesday</option>
-                <option value="WED">Wednesday</option>
-                <option value="THU">Thursday</option>
-                <option value="FRI">Friday</option>
-                <option value="SAT">Saturday</option>
-              </select>
-            </div>
-            
-          <div class="form-outline w-25 input-field">
-                  <label for="time_st" class="input-title">Time Start</label>
-                  <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" id="timepicker" required>
-                  <div class="valid-feedback">Looks good!</div>
-          </div>
 
-          <div class="form-outline w-25 input-field">
-                  <label for="time_end" class="input-title">Time End</label>
-                  <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="subj_name" id="timepicker" required>
-                  <div class="valid-feedback">Looks good!</div>
-          </div>
+            <hr>
 
-          <div class="col-md-6 w-50 input-field"></div>
-
-          <div class="form-outline w-25 input-field">
-                  <label for="yr_st" class="input-title">Year Start</label>
-                  <input type="number" min="1900" max="2099" class="form-control form-control-sm" placeholder="" required>
-                  <div class="valid-feedback">Looks good!</div>
-          </div>
-
-          <div class="form-outline w-25 input-field">
-                  <label for="yr_end" class="input-title">Year End</label>
-                  <input type="number" min="1900" max="2099" class="form-control form-control-sm" placeholder="" required>
-                  <div class="valid-feedback">Looks good!</div>
-          </div>
 
         </div>
 
