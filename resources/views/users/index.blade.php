@@ -15,10 +15,10 @@
 <div class="container w-100">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 justify-content-md-end">
-            <a href="/" class="btn btn-secondary" role="button">ALL</a>
-            <a href="/?role=student" class="btn btn-secondary" role="button">STUDENT</a>
-            <a href="/?role=adviser" class="btn btn-secondary" role="button">ADVISER</a>
-            <a href="/?role=admin" class="btn btn-secondary" role="button">ADMIN</a>
+            <a href="/users" class="btn btn-secondary" role="button">ALL</a>
+            <a href="/users/?role=student" class="btn btn-secondary" role="button">STUDENT</a>
+            <a href="/users/?role=adviser" class="btn btn-secondary" role="button">ADVISER</a>
+            <a href="/users/?role=admin" class="btn btn-secondary" role="button">ADMIN</a>
         </div>
 
         <div class="d-flex col justify-content-md-end">
