@@ -1,32 +1,103 @@
-const studentCheck = document.querySelector('#studentCheck');
-const adviserCheck = document.querySelector('#adviserCheck');
-const adminCheck = document.querySelector('#adminCheck');
+// const studentCheck = document.querySelector('#studentCheck');
+// const adviserCheck = document.querySelector('#adviserCheck');
+// const adminCheck = document.querySelector('#adminCheck');
 
-studentCheck.addEventListener('change', userCheck);
-adviserCheck.addEventListener('change', userCheck);
-adminCheck.addEventListener('change', userCheck);
+// studentCheck.addEventListener('change', userCheck);
+// adviserCheck.addEventListener('change', userCheck);
+// adminCheck.addEventListener('change', userCheck);
 
-function userCheck() {
-  if (document.getElementById("adminCheck").checked) {
-    var container = document.getElementById("student_or_adviser")
-    container.style.display = "block";
+// function userCheck() {
+//   if (document.getElementById("adminCheck").checked) {
+//     var container = document.getElementById("student_or_adviser")
+//     container.style.display = "block";
 
-    // Clear input values
-    /*var inputs = container.getElementsByTagName('input');
-        for (var index = 0; index < inputs.length; ++index) {
-            if(inputs[index].type =="text")
-            inputs[index].value = '';
-            else
-            inputs[index].checked = false;
-        }*/
+//     // Clear input values
+//     /*var inputs = container.getElementsByTagName('input');
+//         for (var index = 0; index < inputs.length; ++index) {
+//             if(inputs[index].type =="text")
+//             inputs[index].value = '';
+//             else
+//             inputs[index].checked = false;
+//         }*/
 
-  } else if (document.getElementById("studentCheck").checked) {
-    document.getElementById("student_or_adviser").style.display = "block";
-    // document.getElementById("rfid").style.display = "block";
+//   } else if (document.getElementById("studentCheck").checked) {
+//     document.getElementById("student_or_adviser").style.display = "block";
+//     // document.getElementById("rfid").style.display = "block";
 
-  } else {
-    document.getElementById("student_or_adviser").style.display = "block";
-    // document.getElementById("rfid").style.display = "none";
-    // document.getElementById("rfid_value").value = '';
-  }
+//   } else {
+//     document.getElementById("student_or_adviser").style.display = "block";
+//     // document.getElementById("rfid").style.display = "none";
+//     // document.getElementById("rfid_value").value = '';
+//   }
+// }
+
+window.addEventListener('load', function() {
+    document.getElementById("submission").style.visibility = "hidden";
+    let createUserForm = document.getElementById('registerForm');
+    ['input','change'].forEach(evt =>
+        createUserForm.querySelectorAll(".form-control, .form-check-input").forEach(input => {
+            input.addEventListener(evt, () => {
+                $("#" + input.getAttribute("name") + "Error").children("span").text("");
+                if (input.type != "radio"){
+                    if (input.checkValidity()) {
+                        input.classList.remove('is-invalid');
+                        input.classList.add('is-valid');
+                    } else {
+                        input.classList.remove('is-valid');
+                        input.classList.add('is-invalid');
+                        showClientError(input);
+                    }
+                }
+                var radios_selected = ($('input[type="radio"]:checked').length > 1);
+                var is_valid = $('.form-control').length === $('.form-control.is-valid').length && radios_selected;
+                if (is_valid){
+                    document.getElementById("submission").style.visibility = "visible";
+                } else {
+                    document.getElementById("submission").style.visibility = "hidden";
+                }
+            })
+        })
+    );
+});
+
+function showClientError(input){
+    var input_name = input.getAttribute("name");
+    if (input_name == "id"){
+        if (input.validity.patternMismatch){
+            $("#" + input.getAttribute("name") + "Error").children("span").text("User ID must be an integer.");
+        } else if (input.validity.tooShort){
+            $("#" + input.getAttribute("name") + "Error").children("span").text("User ID must be 9 digits.");
+        }
+    } else if (input_name == "first" || input_name == "middle" || input_name == "last"){
+        if (input.validity.patternMismatch){
+            input_name = input_name.charAt(0).toUpperCase() + input_name.slice(1);
+            $("#" + input.getAttribute("name") + "Error").children("span").text(input_name + " name must only be alphabetic characters.");
+        }
+    }
+}
+
+function tableFilter(){
+  var $table = $('#userTable')
+  var $all_btn = $('#all')
+  var $std_btn = $('#student')
+  var $adv_btn = $('#adviser')
+  var $admn_btn = $('#admin')
+
+  $(function() {
+    $all_btn.click(function () {
+      $table.bootstrapTable('filterBy', {
+        role: [0, 1, 2]
+      })
+    })
+
+    $customButton.click(function () {
+      $table.bootstrapTable('filterBy', {
+        id: 4
+      }, {
+        'filterAlgorithm': (row, filters) => {
+          return row.id % filters.id === 0
+        }
+      })
+    })
+  })
 }

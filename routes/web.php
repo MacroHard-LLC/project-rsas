@@ -42,7 +42,7 @@ Route::post('/subjects-check', [CreateSubject::class, 'CheckSubIdExist'])->name(
 
 // show users
 // supposed to be '/users', but '/' will do for now
-Route::get('/', [UserController::class, 'index'])->name('home');
+Route::get('/users', [UserController::class, 'index'])->name('home');
 
 // show create user form
 Route::get('/users/create', [UserController::class, 'create']);

@@ -8,6 +8,22 @@
     src: url('/fonts/SourceSansPro-Regular.ttf');
 }
 
+@font-face{
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins-Regular.ttf');
+}
+
+.table-title{
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    justify-content: center;
+}
+
+th{
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+}
+
 .navbar-custom {
     background-color: #98C1D9;
     font-family: 'Source Sans Pro',Arial, Helvetica, sans-serif;
@@ -21,6 +37,14 @@
 
 .icon-white {
     color:white;
+}
+
+.icon-baby-blue{
+    color:#98C1D9;
+}
+
+.icon-dark-blue{
+    color:#3D5A80;
 }
 
 a.nav-link{
@@ -44,28 +68,19 @@ a.nav-link{
 .submit-reminder{
     font-family: 'Source Sans Pro', sans-serif;
     font-style: italic;
-    color: red;
-}
-
-.create {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05rem;
-}
-
-.is-invalid{
-    font-family: 'Oswald', sans-serif;
-    color: red;
-    font-style: italic;
+    color: #EE6C4D;
     font-size: small;
 }
 
-.is-invalid strong{
+.is-invalid span{
     font-family: 'Source Sans Pro', sans-serif;
+    color: red;
+    font-style: italic;
+    font-size: small;
+    display: block;
+    line-height: 1rem;
+    margin-top: 0.5rem;
 }
-
-
 
 .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     opacity: 0.3; /* Firefox */
@@ -77,4 +92,60 @@ a.nav-link{
 
 .form-control::-ms-input-placeholder { /* Microsoft Edge */
     opacity: 0.3;
+}
+
+.form-control{
+    border-radius: 82px !important;
+}
+
+a.btn-secondary{
+    font-family: 'Poppins';
+    background-color: #6e7682;
+    border-color: #6e7682;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07rem;
+    padding: 0.2rem 0.6rem;
+}
+
+a.btn-primary, button.btn, button.btn:hover, button.btn:active,
+button.btn:active:focus{
+    font-family: 'Poppins';
+    background-color: #3d5a80;
+    border-color: #3d5a80;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07rem;
+    padding: 0.2rem 0.6rem;
+}
+
+.btn{
+    font-family: 'Poppins';
+    background-color: #3d5a80;
+}
+
+.modal-header{
+    background-color:#98C1D9;
+}
+
+#registerModalLabel{
+    font-family: 'Poppins';
+    font-weight: 700;
+    color: white;
+}
+
+.pagination > li > a,
+.pagination > li > span{
+    color: #3D5A80 !important;
+}
+
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus
+.pagination > .active > span:hover{
+    background-color: #3D5A80;
+    border-color: #3D5A80;
+    color: white !important;
 }
