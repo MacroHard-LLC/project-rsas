@@ -57,7 +57,7 @@
                     <td>{{$row['first']}}</td>
                     <td>{{$row['middle']}}</td>
                     <td>{{$row['gender']}}</td>
-                    <td><i class="fa-regular fa-pen-to-square icon-dark-blue"></i>&emsp;<i class="fa-solid fa-trash-can icon-dark-blue"></i></td>
+                    <td><a href="/users" class="btn btn-primary" role="button"><i class="fa-regular fa-pen-to-square icon-white"></i></a>&emsp; <a href="/users" class="btn btn-primary" role="button"><i class="fa-solid fa-trash-can icon-white"></i></a></td>
 
                 </tr>
                 @endforeach
