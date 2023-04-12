@@ -5,6 +5,7 @@
     @extends('master')
     @section('content')
     @include('users.create')
+    @include('users.edit')
     @yield('scripts')
 
 <br>
@@ -57,7 +58,7 @@
                     <td>{{$row['first']}}</td>
                     <td>{{$row['middle']}}</td>
                     <td>{{$row['gender']}}</td>
-                    <td><a href="/users" class="btn btn-primary" role="button"><i class="fa-regular fa-pen-to-square icon-white"></i></a>&emsp; <a href="/users" class="btn btn-primary" role="button"><i class="fa-solid fa-trash-can icon-white"></i></a></td>
+                    <td><a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fa-regular fa-pen-to-square icon-white"></i></a> &emsp; <a href="/users" class="btn btn-primary" role="button"><i class="fa-solid fa-trash-can icon-white"></i></a></td>
 
                 </tr>
                 @endforeach
