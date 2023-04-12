@@ -1,8 +1,13 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\CreateUser;
+use App\Http\Controllers\CreateSubject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Middleware\CheckSubjectIdValid;
+
+use App\Http\Controllers\UserController;
 use App\Models\User;
 
 /*
@@ -25,6 +30,15 @@ use App\Models\User;
 // update - Update [something]
 // destroy - Delete [something]
 
+Route::get('/createsub',[CreateSubject::class,'CreateSubjectIndex']);
+Route::post('dataInsert',[CreateSubject::class, 'DataInsert'])->middleware(CheckSubjectIdValid::class);
+
+Auth::routes();
+
+// create subject
+Route::get('/subjects/create',[CreateSubject::class, 'CreateSubjectForm']);
+Route::post('/subjects', [CreateSubject::class, 'DataInsert'])->name('register_sub');
+Route::post('/subjects-check', [CreateSubject::class, 'CheckSubIdExist'])->name('check_id');
 
 // show users
 // supposed to be '/users', but '/' will do for now
