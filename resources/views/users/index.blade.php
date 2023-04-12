@@ -15,10 +15,10 @@
 <div class="container-fluid">
     <div class="row d-flex create">
     <div class=" col justify-content-md-end">
-        <a href="/" class="btn btn-primary" role="button">ALL</a>
-        <a href="/?role=student" class="btn btn-primary" role="button">STUDENT</a>
-        <a href="/?role=adviser" class="btn btn-primary" role="button">ADVISER</a>
-        <a href="/?role=admin" class="btn btn-primary" role="button">ADMIN</a>
+        <a href="/" class="btn btn-secondary" role="button">ALL</a>
+        <a href="/?role=student" class="btn btn-secondary" role="button">STUDENT</a>
+        <a href="/?role=adviser" class="btn btn-secondary" role="button">ADVISER</a>
+        <a href="/?role=admin" class="btn btn-secondary" role="button">ADMIN</a>
     </div>
 
     <div class="d-flex col justify-content-md-end">
