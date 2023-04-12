@@ -12,6 +12,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;600&family=Source+Sans+Pro:ital,wght@0,300;0,600;0,700;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="C:\xampp\htdocs\project-rsas\public\css\createsub.css">
   <link href="C:\xampp\htdocs\project-rsas\public\css\select2.min.css" rel="stylesheet">
+  <link href="C:\xampp\htdocs\project-rsas\public\css\creategrlvl.css" rel="stylesheet">
+
 
  
 
@@ -99,7 +101,7 @@
             <div class="col-md-5 input-field">
                 <div class="form-outline">
                     <label for="subj_id" class="input-title">Student ID</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
+                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" id="studid" minlength="5" maxlength="9" pattern="[0-5]+" required>
                     <div class="valid-feedback">Looks good!</div>
                 </div>
             </div>
@@ -107,7 +109,7 @@
             <div class="col-md-6 input-field">
                 <div class="form-outline">
                     <label for="subj_id" class="input-title">Student Name</label>
-                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
+                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" id="studname" required>
                     <div class="valid-feedback">Looks good!</div>
                 </div>
             </div>
@@ -119,6 +121,31 @@
             </div>
 
             <hr>
+
+            <div class="container">
+                <label for="fname">FIRST NAME</label>
+                <input type="text" name="fname" id="fname">
+                <label for="lname">LAST NAME</label>
+                <input type="text" name="lname" id="lname">
+                <label for="email">EMAIL</label>
+                <input type="text" name="email" id="email">
+                <label for="age">AGE</label>
+                <input type="text" name="age" id="age">
+                <input type="button" name="button" id="btn" value="Add" onclick="AddRow()">
+        
+        
+            </div>
+        
+                <table id="show">
+        
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Age</th>
+                        </tr>
+        
+                </table>
 
 
         </div>
@@ -149,6 +176,36 @@
           allowClear: true
       });
     </script>
+    <script>
+
+		var list1 = [];
+		var list2 = [];
+
+
+		var n = 1;
+		var x = 0;
+
+		function AddRow(){
+
+			var AddRown = document.getElementById('show');
+			var NewRow = AddRown.insertRow(n);
+
+			list1[x] = document.getElementById("studid").value;
+			list2[x] = document.getElementById("studname").value;
+
+			var cel1 = NewRow.insertCell(0);
+			var cel2 = NewRow.insertCell(1);
+
+
+			cel1.innerHTML = list1[x];
+			cel2.innerHTML = list2[x];
+
+
+			n++;
+			x++;
+		}
+
+	</script>
 
 </body>
 </html> 
