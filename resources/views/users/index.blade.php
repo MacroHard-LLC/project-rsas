@@ -27,7 +27,7 @@
     </div>
 </div>
 
-<div class="container-fluid d-flex card w-75 justify-content-md-center">
+<div class="container card w-75 justify-content-md-center">
         <table class="table table-striped table-hover" id="userTable" data-toggle="table" data-toolbar="#toolbar">
             <tr>
                 <th data-align="right"></th>
