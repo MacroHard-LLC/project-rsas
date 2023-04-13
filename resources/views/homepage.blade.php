@@ -3,6 +3,10 @@
 @extends('master')
 @section('content')
 
+{{-- Modular Pages--}}
+@include('users.create')
+@include('subjects.newsub')
+
       <br><br><br>
     
       <div class="container pt-5">
@@ -13,7 +17,10 @@
             <h4 class = "subtitle">What would you like to do today?</h2>
 
             <br><br><br><br>
-            
+{{--
+    <a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#registerModal">Create User</a>
+    <a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#registerSubModal">Create Subject</a>
+    --}}
 
               <div class="container">
                 <div class="row justify-content-center">
@@ -33,6 +40,7 @@
                       <div class="row">
                         <div class="col-md-4">
                           <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">Create User</button>
+                          {{--<a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#registerModal">Create User</a>--}}
                         </div>
                         <div class="col-md-4">
                           <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">Create Section</button>

@@ -20,7 +20,7 @@ class CreateSubject extends Controller
     }
 
     function CreateSubjectForm(){
-        return view('subjects.create');
+        return view('subjects.newsub');
     }
 
     function CheckSubIdExist(Request $request){
