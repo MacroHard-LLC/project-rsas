@@ -34,14 +34,16 @@
                       </div>
                       <div class="row">
                         <div class="col-md-4">
-                          <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">Create User</button>
+                          <button class="btn btn-primary create btn-create" type="button">
+                            <a data-bs-toggle="modal" data-bs-target="#registerModal">Create User</a></button>
                           {{--<a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#registerModal">Create User</a>--}}
                         </div>
                         <div class="col-md-4">
                           <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">Create Section</button>
                         </div>
                         <div class="col-md-4">
-                          <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">Create Subject</button>
+                          <button class="btn btn-primary create btn-create" type="button">
+                            <a data-bs-toggle="modal" data-bs-target="#registerSubModal">Create Subject</a></button>
                         </div>
                       </div>
                     </div>
