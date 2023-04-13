@@ -129,5 +129,19 @@ button.btn:active:focus{
 }
 
 .btn-create {
-    width: 100%;
+    width: 70%;
+    height: 110%;
+    padding-bottom: 20px;
   }
+
+  .col-md-4 {
+    flex: 0 0 20rem;
+    width: 300px;
+}
+
+.row {
+    justify-content: center;
+}
+
+
+  
