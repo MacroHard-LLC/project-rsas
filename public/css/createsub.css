@@ -69,29 +69,3 @@ a.nav-link{
     appearance: menulist!important;
 }
 
-.homepage {
-    text-align:center;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    padding-top: 2000;
-}
-
-.subtitle {
-    text-align:center;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-weight: 600;
-    padding-top: 2000;
-}
-
-.buttons {
-    float: center;
-}
-
-.inline {
-    display: inline;
-}
-
-.btn-create {
-    width: 100%;
-  }
-  
