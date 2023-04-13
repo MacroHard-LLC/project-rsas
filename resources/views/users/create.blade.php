@@ -126,6 +126,10 @@
         $('#registerForm').submit(function (e) {
             e.preventDefault();
             let formData = $(this).serializeArray();
+            jQuery.each(formData, function(i, field ) {
+                if (field.name == "userid")
+                    field.name = field.name.replace("userid", "id")
+            });
             $(".is-invalid").children("span").text("");
             $("#registerForm input").removeClass("is-invalid");
             $.ajax({
@@ -145,7 +149,12 @@
                             } else {
                                 $("#" + key + "Input").addClass("is-invalid");
                             }
-                            $("#" + key + "Error").children("span").text(errors[key][0]);
+
+                            if (key == "id"){
+                                $("#user" + key + "Error").children("span").text(errors[key][0]);
+                            } else {
+                                $("#" + key + "Error").children("span").text(errors[key][0]);
+                            }
                         });
                     } else {
                         window.location.reload();
