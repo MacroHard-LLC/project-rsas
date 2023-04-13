@@ -2,7 +2,6 @@
     @extends('master')
     @section('content')
     @include('users.create')
-    @yield('scripts')
 
 <br>
 <div class="container-fluid d-flex table-title">

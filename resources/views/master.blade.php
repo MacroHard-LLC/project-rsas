@@ -41,8 +41,9 @@
         </div>
     </nav>
 
-   
+
     @yield('content')
+    @yield('scripts')
 
 
 </body>

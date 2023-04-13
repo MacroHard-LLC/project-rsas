@@ -49,7 +49,9 @@ window.addEventListener('load', function() {
                     }
                 }
                 var radios_selected = ($('input[type="radio"]:checked').length > 1);
-                var is_valid = $('.form-control').length === $('.form-control.is-valid').length && radios_selected;
+                var form_control = $("#registerForm").children().find('.form-control')
+                var valid_form_control = $("#registerForm").children().find('.form-control.is-valid')
+                var is_valid = form_control.length === valid_form_control.length && radios_selected;
                 if (is_valid){
                     document.getElementById("submission").style.visibility = "visible";
                 } else {
