@@ -15,8 +15,8 @@
                             <div class="col-md-6 input-field">
                                 <div class="form-outline">
                                     <label for="id" class="input-title">User ID</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="20XXXXXX" name="id" id="idInput" minlength="9" maxlength="9" pattern="[0-9]+" aria-describedby="idError" required autofocus>
-                                    <div class="is-invalid" id="idError">
+                                    <input type="text" class="form-control form-control-sm" placeholder="20XXXXXX" name="userid" id="idInput" minlength="9" maxlength="9" pattern="[0-9]+" aria-describedby="useridError" required autofocus>
+                                    <div class="is-invalid" id="useridError">
                                         <span></span>
                                     </div>
                                 </div>

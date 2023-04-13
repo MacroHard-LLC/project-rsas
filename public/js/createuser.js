@@ -64,7 +64,7 @@ window.addEventListener('load', function() {
 
 function showClientError(input){
     var input_name = input.getAttribute("name");
-    if (input_name == "id"){
+    if (input_name == "userid"){
         if (input.validity.patternMismatch){
             $("#" + input.getAttribute("name") + "Error").children("span").text("User ID must be an integer.");
         } else if (input.validity.tooShort){
