@@ -28,8 +28,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 w-50 input-field"> 
-                                <label for="grade_level" class="input-title">Grade Level</label>   
+                            <div class="col-md-6 w-50 input-field">
+                                <label for="grade_level" class="input-title">Grade Level</label>
                                 <select name="grade_level" class="form-control form-select" placeholder="Choose Department ID" id="grade_level" required>
                                     <option value="1">Level 1</option>
                                     <option value="2">Level 2</option>
@@ -54,7 +54,7 @@
                                     <strong>Input the correct time format</strong>
                                 </div>
                             </div>
-              
+
                             <div class="form-outline w-25 input-field">
                                     <label for="time_end" class="input-title">Time End</label>
                                     <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="time_end" id="time_end" maxlength="50" required>
@@ -62,7 +62,7 @@
                                         <strong>Input the correct time format</strong>
                                     </div>
                                 </div>
-                
+
                             <div class="col-md-6 w-50 input-field">
                                     <label for="as_room" class="input-title">Assigned Room</label>
                                     <input type="text" name="as_room" class="form-control form-control-sm" placeholder="Ex. RM 143, Arts and Sciences Building" id="as_room" maxlength="20" required>
@@ -70,7 +70,7 @@
                                         <strong>Check if Subject Name is a legal string</strong>
                                     </div>
                                 </div>
-                
+
                             <div class="form-outline w-25 input-field">
                                     <label for="year_st" class="input-title">Year Start</label>
                                     <input type="text" class="form-control form-control-sm" placeholder="20XX"  name="year_st" id="year_st" required maxlength="4">
@@ -78,7 +78,7 @@
                                         <strong>Input a valid year</strong>
                                     </div>
                                 </div>
-                
+
                             <div class="form-outline w-25 input-field">
                                     <label for="year_end" class="input-title">Year End</label>
                                     <input type="text" class="form-control form-control-sm" placeholder="20XX"  name="year_end" id="year_end" required maxlength="4">
@@ -169,21 +169,21 @@ $(function () {
                         $("#" + key + "Input").addClass("is-invalid");
                         $("#" + key + "Error").children("strong").text(errors[key][0]);
                     });
-                } 
+                }
             }
         })
-        
+
     });
 })
 
 // disable the button if inputs are not present
-$('#MondayCheck,#TuesdayCheck,#WednesdayCheck,#ThursdayCheck,#FridayCheck,#sub_id,#sub_name,#time_st,#time_end,#as_room,#year_st,#year_end').on('keypress keyup keydown click', function () { 
-  if ( $('#sub_id').val().match('^[0-9]{5}$') && $('#sub_id').val().length === 5 && $('#sub_id').val() != "" && $('#sub_name').val() != "" && $('#time_st').val() != "" && $('#time_end').val() != "" && $('#as_room').val() != "" && $('#year_st').val() != "" && $('#year_end').val() != "" && ($('#MondayCheck').is(':checked') || $('#TuesdayCheck').is(':checked') || $('#WednesdayCheck').is(':checked') || $('#ThursdayCheck').is(':checked') || $('#FridayCheck').is(':checked')))  { 
-    $('#sbmt_btn').prop('disabled', false); 
-  } 
-  else {   
-    $('#sbmt_btn').prop('disabled', true); 
-  } 
+$('#MondayCheck,#TuesdayCheck,#WednesdayCheck,#ThursdayCheck,#FridayCheck,#sub_id,#sub_name,#time_st,#time_end,#as_room,#year_st,#year_end').on('keypress keyup keydown click', function () {
+  if ( $('#sub_id').val().match('^[0-9]{5}$') && $('#sub_id').val().length === 5 && $('#sub_id').val() != "" && $('#sub_name').val() != "" && $('#time_st').val() != "" && $('#time_end').val() != "" && $('#as_room').val() != "" && $('#year_st').val() != "" && $('#year_end').val() != "" && ($('#MondayCheck').is(':checked') || $('#TuesdayCheck').is(':checked') || $('#WednesdayCheck').is(':checked') || $('#ThursdayCheck').is(':checked') || $('#FridayCheck').is(':checked')))  {
+    $('#sbmt_btn').prop('disabled', false);
+  }
+  else {
+    $('#sbmt_btn').prop('disabled', true);
+  }
 
 
 // validation for subject name
@@ -193,7 +193,7 @@ if ($('#sub_name').val().length == 0){
 else if (!$('#sub_name').val().match('^[0-9a-zA-Z_ ,.]{0,50}$')) {
     console.log('hooter');
     $('#nameError.is-invalid').css('visibility','visible');
-    $('#sbmt_btn').prop('disabled', true); 
+    $('#sbmt_btn').prop('disabled', true);
 }
 else{
     $('#nameError.is-invalid').css('visibility','hidden');
@@ -204,7 +204,7 @@ if ($('#year_st').val().length == 0 || $('#year_st').val().match('^[0-9]{4}$')){
 }
 else{
     $('#yearStartError.is-invalid').css('visibility','visible');
-    $('#sbmt_btn').prop('disabled', true); 
+    $('#sbmt_btn').prop('disabled', true);
 };
 // validation for year end
 if ($('#year_end').val().length == 0 || $('#year_end').val().match('^[0-9]{4}$')){
@@ -212,7 +212,7 @@ if ($('#year_end').val().length == 0 || $('#year_end').val().match('^[0-9]{4}$')
 }
 else{
     $('#yearEndError.is-invalid').css('visibility','visible');
-    $('#sbmt_btn').prop('disabled', true); 
+    $('#sbmt_btn').prop('disabled', true);
 };
 
 });
@@ -221,7 +221,7 @@ $('#time_st').on('keypress keyup keydown', function () {
     // validation for time start
 if ($('#time_st').val().length == 0){
     $('#timeStartError.is-invalid').css('visibility','visible');
-    $('#sbmt_btn').prop('disabled', true); 
+    $('#sbmt_btn').prop('disabled', true);
 }
 else{
     $('#timeStartError.is-invalid').css('visibility','hidden');
@@ -232,7 +232,7 @@ $('#time_end').on('keypress keyup keydown', function () {
     // validation for time end
 if ($('#time_end').val().length == 0){
     $('#timeEndError.is-invalid').css('visibility','visible');
-    $('#sbmt_btn').prop('disabled', true); 
+    $('#sbmt_btn').prop('disabled', true);
 }
 else{
     $('#timeEndError.is-invalid').css('visibility','hidden');
@@ -246,14 +246,14 @@ $('#MondayCheck,#TuesdayCheck,#WednesdayCheck,#ThursdayCheck,#FridayCheck').on('
     // Iterate over checked checkboxes and add their values to the selectedDays array
     $("input[type='checkbox']:checked").each(function() {
         selectedDays.push($(this).val());
-    }); 
+    });
     if (selectedDays.length === 0){
         $('#daysError.is-invalid').css('visibility','visible');
-        $('#sbmt_btn').prop('disabled', true); 
+        $('#sbmt_btn').prop('disabled', true);
     }
     else{
         $('#daysError.is-invalid').css('visibility','hidden');
-    };  
+    };
 });
 
 $('#as_room').on('keypress keyup keydown', function () {
@@ -263,7 +263,7 @@ if ($('#as_room').val().length == 0 || $('#as_room').val().match('^[0-9a-zA-Z_ ,
 }
 else{
     $('#roomError.is-invalid').css('visibility','visible');
-    $('#sbmt_btn').prop('disabled', true); 
+    $('#sbmt_btn').prop('disabled', true);
 };
 });
 
@@ -283,13 +283,13 @@ $('#sub_id').on('keyup', function () {
         if (data.exists && $('#sub_id').val().match('^[0-9]{5}$')) {
             $('#idError.is-invalid').css('visibility','visible');
           $('#idError.is-invalid').html('<strong>Subject Already Exists</strong>');
-          $('#sbmt_btn').prop('disabled', true); 
+          $('#sbmt_btn').prop('disabled', true);
         }
         else if (!$('#sub_id').val().match('^[0-9]{5}$'))
         {
             $('#idError.is-invalid').html('<strong>Check if Subject ID is all integers</strong>');
             $('#idError.is-invalid').css('visibility','visible');
-            $('#sbmt_btn').prop('disabled', true); 
+            $('#sbmt_btn').prop('disabled', true);
         }
         else
         {
@@ -297,14 +297,14 @@ $('#sub_id').on('keyup', function () {
         }
       }
     });
-  } 
+  }
   else{
     // validation for subject id
     if ($('#sub_id').val().length == 0){
         $('#idError.is-invalid').css('visibility','hidden');
     }
     else if (!$('#sub_id').val().match('^[0-9]{5}$')){
-        $('#sbmt_btn').prop('disabled', true); 
+        $('#sbmt_btn').prop('disabled', true);
         $('#idError.is-invalid').css('visibility','visible');
     }
     else{

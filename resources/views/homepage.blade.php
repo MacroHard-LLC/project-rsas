@@ -4,8 +4,8 @@
 @section('content')
 
 {{-- Modular Pages--}}
-@include('users.create')
 @include('subjects.newsub')
+@include('users.create')
 
 <div class="vertical-center">
     <div class="container-fluid">
