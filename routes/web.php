@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CreateUser;
 use App\Http\Controllers\CreateSubject;
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,12 @@ Auth::routes();
 Route::get('/subjects/create',[CreateSubject::class, 'CreateSubjectForm']);
 Route::post('/subjects', [CreateSubject::class, 'DataInsert'])->name('register_sub');
 Route::post('/subjects-check', [CreateSubject::class, 'CheckSubIdExist'])->name('check_id');
+
+// goes to the homepage
+// remember that this needs to have an input added later so that we will know what 
+// kind of user access this
+Route::get('/home', [HomeController::class, 'Homepage']);
+
 
 // show users
 // supposed to be '/users', but '/' will do for now
