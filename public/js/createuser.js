@@ -49,7 +49,9 @@ window.addEventListener('load', function() {
                     }
                 }
                 var radios_selected = ($('input[type="radio"]:checked').length > 1);
-                var is_valid = $('.form-control').length === $('.form-control.is-valid').length && radios_selected;
+                var form_control = $("#registerForm").children().find('.form-control')
+                var valid_form_control = $("#registerForm").children().find('.form-control.is-valid')
+                var is_valid = form_control.length === valid_form_control.length && radios_selected;
                 if (is_valid){
                     document.getElementById("submission").style.visibility = "visible";
                 } else {
@@ -62,7 +64,7 @@ window.addEventListener('load', function() {
 
 function showClientError(input){
     var input_name = input.getAttribute("name");
-    if (input_name == "id"){
+    if (input_name == "userid"){
         if (input.validity.patternMismatch){
             $("#" + input.getAttribute("name") + "Error").children("span").text("User ID must be an integer.");
         } else if (input.validity.tooShort){
@@ -74,30 +76,4 @@ function showClientError(input){
             $("#" + input.getAttribute("name") + "Error").children("span").text(input_name + " name must only be alphabetic characters.");
         }
     }
-}
-
-function tableFilter(){
-  var $table = $('#userTable')
-  var $all_btn = $('#all')
-  var $std_btn = $('#student')
-  var $adv_btn = $('#adviser')
-  var $admn_btn = $('#admin')
-
-  $(function() {
-    $all_btn.click(function () {
-      $table.bootstrapTable('filterBy', {
-        role: [0, 1, 2]
-      })
-    })
-
-    $customButton.click(function () {
-      $table.bootstrapTable('filterBy', {
-        id: 4
-      }, {
-        'filterAlgorithm': (row, filters) => {
-          return row.id % filters.id === 0
-        }
-      })
-    })
-  })
 }

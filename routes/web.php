@@ -34,22 +34,18 @@ use App\Models\User;
 Route::get('/createsub',[CreateSubject::class,'CreateSubjectIndex']);
 Route::post('dataInsert',[CreateSubject::class, 'DataInsert'])->middleware(CheckSubjectIdValid::class);
 
-Auth::routes();
-
 // create subject
 Route::get('/subjects/create',[CreateSubject::class, 'CreateSubjectForm']);
 Route::post('/subjects', [CreateSubject::class, 'DataInsert'])->name('register_sub');
 Route::post('/subjects-check', [CreateSubject::class, 'CheckSubIdExist'])->name('check_id');
 
 // goes to the homepage
-// remember that this needs to have an input added later so that we will know what 
+// remember that this needs to have an input added later so that we will know what
 // kind of user access this
 Route::get('/home', [HomeController::class, 'Homepage']);
 
-
 // show users
-// supposed to be '/users', but '/' will do for now
-Route::get('/users', [UserController::class, 'index'])->name('home');
+Route::get('/users', [UserController::class, 'index']);
 
 // show create user form
 Route::get('/users/create', [UserController::class, 'create']);
