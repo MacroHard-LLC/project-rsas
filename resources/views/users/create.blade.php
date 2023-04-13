@@ -139,22 +139,20 @@
                 },
                 url: "{{ route('register') }}",
                 data: formData,
-                success: () => window.location.assign("{{ route('home') }}"),
+                success: () => window.location.assign(window.location.href),
                 error: (response) => {
                     if(response.status === 422) {
                         let errors = response.responseJSON.errors;
                         Object.keys(errors).forEach(function (key) {
-                            if (key == "role" || key == "gender"){
+                            if (key == "role" || key == "gender")
                                 $(name=key).addClass("is-invalid");
-                            } else {
+                            else
                                 $("#" + key + "Input").addClass("is-invalid");
-                            }
 
-                            if (key == "id"){
+                            if (key == "id")
                                 $("#user" + key + "Error").children("span").text(errors[key][0]);
-                            } else {
+                            else
                                 $("#" + key + "Error").children("span").text(errors[key][0]);
-                            }
                         });
                     } else {
                         window.location.reload();
