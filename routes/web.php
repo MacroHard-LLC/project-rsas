@@ -3,6 +3,7 @@
 use App\Http\Controllers\CreateUser;
 use App\Http\Controllers\CreateSubject;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SectionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,9 @@ Auth::routes();
 Route::get('/subjects/create',[CreateSubject::class, 'CreateSubjectForm']);
 Route::post('/subjects', [CreateSubject::class, 'DataInsert'])->name('register_sub');
 Route::post('/subjects-check', [CreateSubject::class, 'CheckSubIdExist'])->name('check_id');
+
+// create section
+Route::get('/section/create',[SectionController::class, 'CreateSection']);
 
 // goes to the homepage
 // remember that this needs to have an input added later so that we will know what 
