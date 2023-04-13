@@ -1,23 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Create Grade Level</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://kit.fontawesome.com/47cd24d297.js" crossorigin="anonymous"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;600&family=Source+Sans+Pro:ital,wght@0,300;0,600;0,700;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="C:\xampp\htdocs\project-rsas\public\css\createsub.css">
-  <!--<link href="C:\xampp\htdocs\project-rsas\public\css\select2.min.css" rel="stylesheet">-->
-  <link href="C:\xampp\htdocs\project-rsas\public\css\creategrlvl.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="{{ asset('css/creategrlvl.css') }}">
 
-
-
- 
+@extends('master')
+@section('content')
 
 <body>
 
