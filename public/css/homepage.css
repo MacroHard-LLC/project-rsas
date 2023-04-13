@@ -24,11 +24,18 @@
     letter-spacing: 0.15rem;
 }
 
-.homepage {
-    justify-content: center;
-    margin-top: 10rem;
-    margin-bottom: 0rem;
+.home-headings {
     font-family: 'Poppins';
+}
+
+.home-headings > h1 {
+    font-weight: 700;
+}
+
+.vertical-center {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
 }
 
 
@@ -124,4 +131,3 @@ button.btn:active:focus{
 .btn-create {
     width: 100%;
   }
-  
