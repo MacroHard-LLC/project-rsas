@@ -1,0 +1,147 @@
+@font-face {
+    font-family: 'Oswald';
+    src: url('/fonts/Oswald-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('/fonts/SourceSansPro-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins-Regular.ttf');
+}
+
+.navbar-custom {
+    background-color: #98C1D9;
+    font-family: 'Source Sans Pro',Arial, Helvetica, sans-serif;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+}
+
+.home-headings {
+    font-family: 'Poppins';
+}
+
+.home-headings > h1 {
+    font-weight: 700;
+}
+
+.vertical-center {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+
+.options{
+    margin: 5rem;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    justify-content: center;
+}
+
+
+.icon-white {
+    color:white;
+}
+
+a.nav-link{
+    letter-spacing: 0.25rem;
+}
+
+.input-title {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+}
+
+.input-field {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+}
+
+.no-display{
+    display:none;
+}
+
+.submit-reminder{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-style: italic;
+    color: red;
+}
+
+.create {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 600;
+
+    letter-spacing: 0.05rem;
+    font-family: 'Poppins', serif;
+    background-color: #3d5a80;
+}
+
+a.btn-primary, button.btn, button.btn:hover, button.btn:active,
+button.btn:active:focus{
+    background-color: #3d5a80;
+    border-color: #3d5a80;
+    font-weight: 700;
+    font-size: large;
+    letter-spacing: 0.1rem;
+    padding: 0.2rem 0.6rem;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -webkit-appearance: menulist!important;
+    -moz-appearance: menulist!important;
+    -ms-appearance: menulist!important;
+    -o-appearance: menulist!important;
+    appearance: menulist!important;
+}
+
+
+
+.buttons {
+    float: center;
+}
+
+.inline {
+    display: inline;
+}
+
+.btn-create {
+    width: 70%;
+    height: 110%;
+    padding-bottom: 20px;
+  }
+
+  .col-md-4 {
+    flex: 0 0 20rem;
+    width: 300px;
+}
+
+.row {
+    justify-content: center;
+}
+
+
+  
