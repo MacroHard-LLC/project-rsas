@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'Oswald';
+    src: url('/fonts/Oswald-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('/fonts/SourceSansPro-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins-Regular.ttf');
+}
 
 .navbar-custom {
     background-color: #98C1D9;
@@ -9,6 +23,22 @@
     text-transform: uppercase;
     letter-spacing: 0.15rem;
 }
+
+.homepage {
+    justify-content: center;
+    margin-top: 10rem;
+    margin-bottom: 0rem;
+    font-family: 'Poppins';
+}
+
+
+.options{
+    margin: 5rem;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    justify-content: center;
+}
+
 
 .icon-white {
     color:white;
@@ -41,8 +71,20 @@ a.nav-link{
 .create {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 600;
-    text-transform: uppercase;
+
     letter-spacing: 0.05rem;
+    font-family: 'Poppins', serif;
+    background-color: #3d5a80;
+}
+
+a.btn-primary, button.btn, button.btn:hover, button.btn:active,
+button.btn:active:focus{
+    background-color: #3d5a80;
+    border-color: #3d5a80;
+    font-weight: 700;
+    font-size: large;
+    letter-spacing: 0.1rem;
+    padding: 0.2rem 0.6rem;
 }
 
 .form-control {
@@ -69,19 +111,7 @@ a.nav-link{
     appearance: menulist!important;
 }
 
-.homepage {
-    text-align:center;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    padding-top: 2000;
-}
 
-.subtitle {
-    text-align:center;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-weight: 600;
-    padding-top: 2000;
-}
 
 .buttons {
     float: center;
