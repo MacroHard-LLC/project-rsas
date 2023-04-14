@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
+<link rel="stylesheet" href="{{ asset('css/createuser.css') }}">
 
 @extends('master')
 @section('content')
@@ -33,7 +34,7 @@
                         <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">View Section</button>
                         </div>
                         <div class="col-md-4" style="width:300px">
-                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">View Subject</button>
+                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/subject'">View Subject</button>
                         </div>
                     </div>
                     <div class="row">

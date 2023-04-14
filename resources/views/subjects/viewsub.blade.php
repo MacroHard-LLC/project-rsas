@@ -5,20 +5,30 @@
 
 <br>
 <div class="container-fluid d-flex table-title">
-    <h2>USER LIST</h2>
+    <h2>SUBJECT LIST</h2>
 </div>
 
 <div class="container w-100">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 justify-content-md-end">
-            <a href="/users" class="btn btn-secondary" role="button">ALL</a>
-            <a href="/users/?role=student" class="btn btn-secondary" role="button">STUDENT</a>
-            <a href="/users/?role=adviser" class="btn btn-secondary" role="button">ADVISER</a>
-            <a href="/users/?role=admin" class="btn btn-secondary" role="button">ADMIN</a>
+        <div class="dropdown col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 justify-content-md-end">
+            <button class="btn-secondary btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                department
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Araling Panlipunan</a></li>
+                <li><a class="dropdown-item" href="#">English</a></li>
+                <li><a class="dropdown-item" href="#">Filipino</a></li>
+                <li><a class="dropdown-item" href="#">Mathematics</a></li>
+                <li><a class="dropdown-item" href="#">MAPEH</a></li>
+                <li><a class="dropdown-item" href="#">Science</a></li>
+                <li><a class="dropdown-item" href="#">TLE</a></li>
+                <li><a class="dropdown-item" href="#">Values Education</a></li>
+              </ul>
+
         </div>
 
         <div class="d-flex col justify-content-md-end">
-            <a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#registerModal"><i class="fa-solid fa-user-plus"></i> new user</a>
+            <a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#registerSubModal"><i class="fa-solid fa-book"></i> new subject</a>
         </div>
     </div>
 
@@ -26,48 +36,29 @@
         <table class="table table-striped table-hover" id="userTable" data-toggle="table" data-toolbar="#toolbar">
             <tr>
                 <th data-align="right"></th>
-                <th>User ID</th>
-                <th>Role</th>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Gender</th>
+                <th>Subject ID</th>
+                <th>Subject Name</th>
+                <th>Instructor ID</th>
+                <th>Room</th>
+                <th>Year Start</th>
+                <th>Year End</th>
                 <th data-align="left"></th>
+                
 
             </tr>
-            @if(count($users) > 0)
-                @foreach ($users as $row)
-                <tr>
-                    <td><i class="fa-solid fa-circle icon-baby-blue"></td>
-                    <td>{{$row['id']}}</td>
 
-                    @if($row['role'] == "0")
-                        <td>Administrator</td>
-                    @elseif($row['role'] == "1")
-                        <td>Student</td>
-                    @elseif($row['role'] == "2")
-                        <td>Adviser</td>
-                    @endif
-
-                    <td>{{$row['last']}}</td>
-                    <td>{{$row['first']}}</td>
-                    <td>{{$row['middle']}}</td>
-                    <td>{{$row['gender']}}</td>
-                    <td><a href="/users" class="btn btn-primary" role="button"><i class="fa-regular fa-pen-to-square icon-white"></i></a>&emsp; <a href="/users" class="btn btn-primary" role="button"><i class="fa-solid fa-trash-can icon-white"></i></a></td>
-
-                </tr>
-                @endforeach
-
-            @else
-				<tr>
-					<td colspan="5" class="text-center">No Data Found</td>
-				</tr>
-			@endif
+            <tr>
+                <td><i class="fa-solid fa-circle icon-baby-blue"></td>
+                <td>#####</td>
+                <td>Lorem Ipsum</td>
+                <td>*****</td>
+                <td>AS Hall</td>
+                <td>2058</td>
+                <td>2068</td>
+                <td><a href="/subject" class="btn btn-primary" role="button"><i class="fa-regular fa-pen-to-square icon-white"></i></a>&emsp; <a href="/subject" class="btn btn-primary" role="button"><i class="fa-solid fa-trash-can icon-white"></i></a></td>
+            </tr>
+            
         </table>
-    </div>
-
-    <div>
-        {{ $users->links() }}
     </div>
 
 </div>
