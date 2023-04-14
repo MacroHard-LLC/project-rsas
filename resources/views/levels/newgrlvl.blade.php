@@ -1,5 +1,5 @@
 
-<div class="modal fade" id="registerSectionModal" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
+<div class="modal fade" id="registerSectionModal" tabindex="-1" role="dialog" aria-labelledby="registerSectionModal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class='modal-content'>
             <div class='modal-header'>
@@ -41,7 +41,8 @@
                                         <strong></strong>
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="col-md-6 input-field">
                                 <div class="col-md-3 input-field">
                                     <div class="form-outline">
                                         <label for="subj_id" class="input-title">Section ID</label>
