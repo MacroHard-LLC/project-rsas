@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('css/createuser.css') }}">
+<link rel="stylesheet" href="{{ asset('css/createUser.css') }}">
 @extends('master')
 
 @section('content')
@@ -11,7 +11,7 @@
     <h2>USER LIST</h2>
 </div>
 
-<div class="container w-100">
+<div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 justify-content-md-end">
             <a href="/users" class="btn btn-secondary" role="button">ALL</a>
@@ -25,49 +25,56 @@
         </div>
     </div>
 
-    <div class="border rounded p-3 align-items-center my-2">
-        <table class="table table-striped table-hover" id="userTable" data-toggle="table" data-toolbar="#toolbar">
-            <tr>
-                <th data-align="right"></th>
-                <th>User ID</th>
-                <th>Role</th>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Gender</th>
-                <th data-align="left"></th>
+    <div class="row">
+        <div class="col">
+            <div class="border rounded p-3 align-items-center my-2">
+                <table class="table table-striped table-hover" id="userTable" data-toggle="table" data-toolbar="#toolbar">
+                    <tr>
+                        <th data-align="right"></th>
+                        <th>User ID</th>
+                        <th>Role</th>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Gender</th>
+                        <th data-align="left"></th>
+                    </tr>
 
-            </tr>
-            @if(count($users) > 0)
-                <script src="{{ asset('js/usersIndex.js') }}"></script>
-                @foreach ($users as $user)
-                <tr>
-                    <td><i class="fa-solid fa-circle icon-baby-blue"></td>
-                    <td>{{$user['id']}}</td>
+                    @if(count($users) > 0)
+                        <script src="{{ asset('js/usersIndex.js') }}"></script>
+                        @foreach ($users as $user)
+                        <tr>
+                            <td><i class="fa-solid fa-circle icon-baby-blue"></td>
+                            <td>{{$user['id']}}</td>
 
-                    @if($user['role'] == "0")
-                        <td>Administrator</td>
-                    @elseif($user['role'] == "1")
-                        <td>Student</td>
-                    @elseif($user['role'] == "2")
-                        <td>Adviser</td>
+                            @if($user['role'] == "0")
+                                <td>Administrator</td>
+                            @elseif($user['role'] == "1")
+                                <td>Student</td>
+                            @elseif($user['role'] == "2")
+                                <td>Adviser</td>
+                            @endif
+
+                            <td>{{$user['last']}}</td>
+                            <td>{{$user['first']}}</td>
+                            <td>{{$user['middle']}}</td>
+                            <td>{{$user['gender']}}</td>
+
+                            <td>
+                                <a class="btn btn-primary" role="button" onclick="updateModal({{$user}})"><i class="fa-regular fa-pen-to-square icon-white"></i></a>
+                                <form method="POST" action="/users/{{$user->id}}"> @csrf @method('DELETE')
+                                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-trash-can icon-white"></i></button></form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="5" class="text-center">No Data Found</td>
+                        </tr>
                     @endif
-
-                    <td>{{$user['last']}}</td>
-                    <td>{{$user['first']}}</td>
-                    <td>{{$user['middle']}}</td>
-                    <td>{{$user['gender']}}</td>
-                    <td><a class="btn btn-primary" role="button" onclick="updateModal({{$user}})"><i class="fa-regular fa-pen-to-square icon-white"></i></a>
-                        &emsp;<a href="/users" class="btn btn-primary" role="button"><i class="fa-solid fa-trash-can icon-white"></i></a></td>
-                </tr>
-                @endforeach
-
-            @else
-				<tr>
-					<td colspan="5" class="text-center">No Data Found</td>
-				</tr>
-			@endif
-        </table>
+                </table>
+            </div>
+        </div>
     </div>
 
     <div>

@@ -50,4 +50,10 @@ class UserController extends Controller
 
         return back()->with('message', 'User updated successfully!');
     }
+
+    public function destroy(User $user){
+        // $user->update(['is_deleted' => 1]);
+        $user->delete();
+        return back()->with('message', 'User deleted successfully');
+    }
 }

@@ -59,3 +59,6 @@ Route::get('/users/{id}/edit/', [UserController::class, 'edit']);
 
 // Update User
 Route::put('/users/{id}', [UserController::class, 'update']);
+
+// Delete User
+Route::delete('/users/{user}', [UserController::class, 'destroy']);
