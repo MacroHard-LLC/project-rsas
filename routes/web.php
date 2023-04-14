@@ -42,7 +42,7 @@ Route::post('/subjects-check', [CreateSubject::class, 'CheckSubIdExist'])->name(
 
 // create section
 Route::get('/section/create',[SectionController::class, 'CreateSection']);
-Route::post('/section-request', [CreateSubject::class, 'GetStudentName'])->name('get_name_data');
+Route::post('/section-request', [SectionController::class, 'GetStudentName'])->name('get_name_data');
 
 // goes to the homepage
 // remember that this needs to have an input added later so that we will know what

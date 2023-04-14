@@ -14,10 +14,12 @@ class SectionController extends Controller
 
     function GetStudentName(Request $request){
         $incoming_id = $request->input_data;
-        $nameID = User::where('id','=',$incoming_id);
+        $first = User::where('id','=',$incoming_id)->value('first');
+        $last = User::where('id','=',$incoming_id)->value('last');
+        $nameID = $last . ", " . $first;
         $role = User::where('id','=',$incoming_id)->value('role');
         # if the it is not a student or if it does not exist
-        if (($role != 0) || ($nameID == null)){
+        if (($role != 2) || ($nameID == null)){
             return null;
         }
         return $nameID;

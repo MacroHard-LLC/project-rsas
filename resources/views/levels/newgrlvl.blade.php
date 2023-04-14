@@ -147,6 +147,7 @@ $('#student_id').on('keyup', function () {
       url: "{{ route('get_name_data') }}",
       data: { input_data: $(this).val() },
       success: function(data) {
+        console.log(data);
         if (data != null){
             $('#student_name').val(data);
         }
@@ -154,19 +155,6 @@ $('#student_id').on('keyup', function () {
     }); 
 }});
 
-</script>
-<script>
-    $("#multiple").select2({
-        placeholder: " Select scheduled days",
-        allowClear: true
-    });
-</script>
-<script>
-    $(document).ready(function(){
-        $("#list").on('click','.btnDelete',function(){
-            $(this).closest('tr').remove();
-        });
-    });
 </script>
 
 <!--This is supposed to add student details to row but for some  reason dili siya muwork T.T-->
