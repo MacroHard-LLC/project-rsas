@@ -6,6 +6,7 @@
 {{-- Modular Pages--}}
 @include('subjects.newsub')
 @include('users.create')
+@include('levels.newgrlvl')
 
 <div class="vertical-center">
     <div class="container-fluid">

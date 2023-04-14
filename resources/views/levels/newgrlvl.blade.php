@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="registerSectionModal" tabindex="-1" role="dialog" aria-labelledby="registerSectionModal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class='modal-content'>
@@ -12,8 +11,17 @@
                     @csrf
                     <fieldset>
                         <div class="row mb-3">
-                            <div class="col-md-6 input-field">
-                                <div class="col-md-3 input-field">
+                                <div class="col-md-6 input-field">
+                                    <div class="form-outline">
+                                        <label for="subj_id" class="input-title">Section ID</label>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
+                                        <div class="is-invalid" id="idError">
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                
+                                <div class="col-md-6 input-field">
                                     <div class="form-outline">
                                         <label for="subj_id" class="input-title">Section Name</label>
                                         <input type="text" class="form-control form-control-sm" placeholder="Enter Section Name" name="subj_id" required>
@@ -22,8 +30,10 @@
                                         </div>
                                     </div>
                                 </div>
+                        </div>
 
-                                <div class="col-md-3 input-field"> 
+                        <div class="row mb-3">
+                                <div class="col-md-6 input-field"> 
                                     <label for="grade_level" class="input-title">Grade Level</label>   
                                     <select name="grade_level" class="form-control form-select" placeholder="Choose Department ID" id="grade_level" required>
                                         <option value="1">Level 1</option>
@@ -41,19 +51,8 @@
                                         <strong></strong>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 input-field">
-                                <div class="col-md-3 input-field">
-                                    <div class="form-outline">
-                                        <label for="subj_id" class="input-title">Section ID</label>
-                                        <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
-                                        <div class="is-invalid" id="idError">
-                                            <span></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-3 input-field">
+                                    
+                                <div class="col-md-6 input-field">
                                     <div class="form-outline">
                                         <label for="subj_id" class="input-title">Adviser ID</label>
                                         <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
@@ -62,65 +61,65 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-5 input-field ">
+                        <div class="row mb-3">
+                                <div class="col-md-5 input-field ">
+                                    <div class="form-outline">
+                                        <label for="subj_id" class="input-title">Student ID</label>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" id="studid" minlength="9" maxlength="9" pattern="[0-5]" required>
+                                        <div class="valid-feedback">Looks good!</div>
+                                    </div>
+                                </div>
+                            
+                                <div class="col-md-5 input-field">
                                 <div class="form-outline">
-                                    <label for="subj_id" class="input-title">Student ID</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" id="studid" minlength="9" maxlength="9" pattern="[0-5]" required>
+                                    <label for="subj_id" class="input-title">Student Name</label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="" id="studname" required>
                                     <div class="valid-feedback">Looks good!</div>
                                 </div>
-                            </div>
-                          
-                            <div class="col-md-6 input-field">
-                              <div class="form-outline">
-                                <label for="subj_id" class="input-title">Student Name</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="" id="studname" required>
-                                <div class="valid-feedback">Looks good!</div>
-                              </div>
-                            </div>
-                          
-                            <div class="col-md-1 input-field float-end" style="padding-top: 12px;">
-                                <div class="form-group pt-3 ">
-                                    <button class="btn btn-primary create" type="" onclick="addRow()" id="add"><i class="fa-solid fa-user-plus"></i>  Add</button>
                                 </div>
+                            
+                                <div class="col-md-2 input-field float-end">
+                                    <div class="form-group pt-3">
+                                        <button class="btn btn-primary create" s onclick="addRow()" id="add"><i class="fa-solid fa-user-plus"></i>  Add</button>
+                                    </div>
+                                </div>
+
+
+                            <hr style="margin-top: 20px;">
+
+                            <div class="modal-body" id=list>
+                                    <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                        <th>Firstname</th>
+                                        <th>Lastname</th>
+                                        <th style="width:20px;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        <td>John</td>
+                                        <td>Doe</td>
+                                        <td class="delete"><button type='button' class='btnDelete' style="border:0px;""><i class="fa-solid fa-xmark"></i></button></td> <!--legit dunno how to add this to the jquery below-->
+                                        </tr>
+                                    </tbody>
+                                    </table>
+                            </div>
+                        </div>                
+                            <hr style="margin-bottom:5px;">
+                            <i style="font-size:small;">Total Number of Students: 3</i> <!--dunno how to do counters pud t.t-->
+
+                            <div class="form-group pt-5 float-end" id="submission">
+                                <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
+                                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                             </div>
                         </div>
 
+                            
 
-                        <hr>
-
-                        <table id="list" class="center"> <!--the rows are placeholders, you can input ra normally pero walay delete button t.t-->
-                            <tr>
-                              <th>Student ID</th>
-                              <th>Student Name</th>
-                            </tr>
-                            <tr>
-                              <td>202012345</td>
-                              <td>Maria Anders</td>
-                              <td class="delete"><button type='button' class='btnDelete'><i class="fa-solid fa-xmark"></i></button></td>
-                            </tr>
-                            <tr>
-                              <td>202012346</td>
-                              <td>Christina Berglund</td>
-                              <td class="delete"><button type='button' class='btnDelete'><i class="fa-solid fa-xmark"></i></button></td>
-                            </tr>
-                            <tr>
-                              <td>101078945</td>
-                              <td>Francisco Chang</td>
-                              <td class="delete"><button type='button' class='btnDelete'><i class="fa-solid fa-xmark"></i></button></td> <!--legit dunno how to add this to the jquery below-->
-                            </tr>
-                        </table>
-              
-                        <hr>
-                        <i class="total">Total Number of Students: 3</i> <!--dunno how to do counters pud t.t-->
-
-                        <div class="form-group pt-3 float-end" id="submission">
-                            <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
-                            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
-                        </div>
+                        
 
                     </fieldset>
                 </form>
