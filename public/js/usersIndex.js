@@ -23,3 +23,11 @@ function updateModal(user){
 
     $('#updateUserModal').modal('show');
 };
+
+function deleteModal(user){
+    $("#id").val(user.id);
+    $("#deleteModal").children().find("#displayId").children("span").text(user.id);
+    $("#deleteModal").children().find("#displayFirstName").children("span").text(user.first);
+    $("#deleteModal").children().find("#displayLastName").children("span").text(user.last);
+    $('#deleteModal').modal('show');
+}

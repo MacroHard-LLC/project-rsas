@@ -5,6 +5,7 @@
 
 @include('users.create')
 @include('users.edit')
+@include('users.delete')
 
 <br>
 <div class="container-fluid d-flex table-title">
@@ -62,8 +63,7 @@
 
                             <td>
                                 <a class="btn btn-primary" role="button" onclick="updateModal({{$user}})"><i class="fa-regular fa-pen-to-square icon-white"></i></a>
-                                <form method="POST" action="/users/{{$user->id}}"> @csrf @method('DELETE')
-                                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-trash-can icon-white"></i></button></form>
+                                <a class="btn btn-primary" role="button" onclick="deleteModal({{$user}})"><i class="fa-solid fa-trash-can icon-white"></i></a>
                             </td>
                         </tr>
                         @endforeach
