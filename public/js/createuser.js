@@ -48,10 +48,10 @@ window.addEventListener('load', function() {
                         showCreateUserClientError(input);
                     }
                 }
-                var radios_selected = ($('input[type="radio"]:checked').length > 1);
+                var radios_selected = $("#registerForm").children().find($('input[type="radio"]:checked'));
                 var form_control = $("#registerForm").children().find('.form-control')
                 var valid_form_control = $("#registerForm").children().find('.form-control.is-valid')
-                var is_valid = form_control.length === valid_form_control.length && radios_selected;
+                var is_valid = form_control.length === valid_form_control.length && radios_selected.length > 1;
                 if (is_valid){
                     document.getElementById("submission").style.visibility = "visible";
                 } else {

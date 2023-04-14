@@ -15,9 +15,9 @@ editUserModal.addEventListener('shown.bs.modal', function() {
                         showUpdateUserClientError(input);
                     }
                 }
-                var radios_selected = ($('input[type="radio"]:checked').length > 1);
+                var radios_selected = $("#updateUserForm").children().find($('input[type="radio"]:checked'));
                 var invalid_form_control = $("#updateUserForm").children().find('.form-control.is-invalid')
-                var is_invalid = invalid_form_control.length > 0 || !radios_selected;
+                var is_invalid = invalid_form_control.length > 0 || radios_selected.length < 2;
                 if (is_invalid){
                     document.getElementById("submissionU").style.visibility = "hidden";
                 } else {

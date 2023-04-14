@@ -76,7 +76,4 @@
 
 </div>
 
-@yield('create-user-scripts')
-@yield('update-user-scripts')
-
 @endsection

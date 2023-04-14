@@ -3,11 +3,11 @@
     <div class="modal-dialog modal-lg">
         <div class='modal-content'>
             <div class='modal-header'>
-                <h1 class="modal-title fs-5" id="registerModalLabel"><i class="fa-solid fa-circle"></i> CREATE NEW USER</h1>
+                <h1 class="modal-title fs-5 white-label"><i class="fa-solid fa-circle"></i> CREATE NEW USER</h1>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body mx-5 my-3" id="modalBody">
+            <div class="modal-body mx-5 my-3">
                 <form method="POST" action="/users" id="registerForm" class="needs-validation" novalidate>
                     @csrf
                     <fieldset>
@@ -52,7 +52,6 @@
 
 
                         <!--If student or adviser-->
-                        {{-- <div class="no-display" id="student_or_adviser"> --}}
                         <div id="student_or_adviser">
                             <hr>
                             <!--Name-->
@@ -130,7 +129,7 @@
                 if (field.name == "userid")
                     field.name = field.name.replace("userid", "id")
             });
-            $(".is-invalid").children("span").text("");
+            $("#registerForm").children().find(".is-invalid").children("span").text("");
             $("#registerForm input").removeClass("is-invalid");
             $.ajax({
                 method: "POST",
@@ -144,12 +143,10 @@
                     if(response.status === 422) {
                         let errors = response.responseJSON.errors;
                         Object.keys(errors).forEach(function (key) {
-                            // if (key == "role" || key == "gender")
-                            //     $(name=key).addClass("is-invalid");
-                            // else
-                            //     $("#" + key + "Input").addClass("is-invalid");
-                            if (key != "role" || key != "gender")
-                               $("#" + key + "Input").addClass("is-invalid");
+                            if (key != "role" || key != "gender"){
+                                $("#" + key + "Input").removeClass("is-valid");
+                                $("#" + key + "Input").addClass("is-invalid");
+                            }
 
                             if (key == "id")
                                 $("#user" + key + "Error").children("span").text(errors[key][0]);

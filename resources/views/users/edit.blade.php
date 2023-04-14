@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class='modal-content'>
             <div class='modal-header'>
-                <h1 class="modal-title fs-5"><i class="fa-solid fa-circle"></i> EDIT USER</h1>
+                <h1 class="modal-title fs-5 white-label"><i class="fa-solid fa-circle"></i> EDIT USER</h1>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -127,7 +127,7 @@
             let formData = $(this).serializeArray();
             formData.push({name: '_method', value:'PUT'});
             var id = $('#originalID').val();
-            $(".is-invalid").children("span").text("");
+            $("#updateUserForm").children().find(".is-invalid").children("span").text("");
             $("#updateUserForm input").removeClass("is-invalid");
             $.ajax({
                 method: "POST",
@@ -142,13 +142,10 @@
                     if(response.status === 422) {
                         let errors = response.responseJSON.errors;
                         Object.keys(errors).forEach(function (key) {
-                            // if (key == "role" || key == "gender"){
-                            //     $(name=key).addClass("is-invalid");
-                            // } else {
-                            //     $("#" + key + "InputU").addClass("is-invalid");
-                            // }
-                            if (key != "role" || key != "gender")
-                               $("#" + key + "InputU").addClass("is-invalid");
+                            if (key != "role" || key != "gender"){
+                                $("#" + key + "InputU").removeClass("is-valid");
+                                $("#" + key + "InputU").addClass("is-invalid");
+                            }
 
                             $("#" + key + "ErrorU").children("span").text(errors[key][0]);
                         });

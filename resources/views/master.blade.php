@@ -38,10 +38,10 @@
         </div>
     </nav>
 
-
     @yield('content')
     @yield('scripts')
-
+    @yield('create-user-scripts')
+    @yield('update-user-scripts')
 
 </body>
 
