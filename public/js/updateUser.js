@@ -1,6 +1,12 @@
 const editUserModal = document.getElementById('updateUserModal')
-editUserModal.addEventListener('shown.bs.modal', function() {
+editUserModal.addEventListener('show.bs.modal', function() {
     let updateForm = document.getElementById('updateUserForm');
+
+    $("#updateUserForm input").removeClass("is-valid is-invalid");
+    updateForm.querySelectorAll(".form-control, .form-check-input").forEach(input => {
+        $("#" + input.getAttribute("name") + "ErrorU").children("span").text("");
+    });
+
     ['input','change'].forEach(evt =>
         updateForm.querySelectorAll(".form-control, .form-check-input").forEach(input => {
             input.addEventListener(evt, () => {
