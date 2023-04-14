@@ -7,6 +7,7 @@
 @include('subjects.newsub')
 @include('levels.newgrlvl')
 @include('users.create')
+@include('levels.newgrlvl')
 
 
 

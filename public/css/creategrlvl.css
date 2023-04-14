@@ -76,3 +76,7 @@
   .delete {
     width: 20px;
   }
+
+  .pt-3 {
+    padding-top: 1.25rem !important;
+}
