@@ -45,7 +45,7 @@ window.addEventListener('load', function() {
                     } else {
                         input.classList.remove('is-valid');
                         input.classList.add('is-invalid');
-                        showClientError(input);
+                        showCreateUserClientError(input);
                     }
                 }
                 var radios_selected = ($('input[type="radio"]:checked').length > 1);
@@ -62,7 +62,7 @@ window.addEventListener('load', function() {
     );
 });
 
-function showClientError(input){
+function showCreateUserClientError(input){
     var input_name = input.getAttribute("name");
     if (input_name == "userid"){
         if (input.validity.patternMismatch){

@@ -12,7 +12,7 @@ editUserModal.addEventListener('shown.bs.modal', function() {
                     } else {
                         input.classList.remove('is-valid');
                         input.classList.add('is-invalid');
-                        showClientError(input);
+                        showUpdateUserClientError(input);
                     }
                 }
                 var radios_selected = ($('input[type="radio"]:checked').length > 1);
@@ -28,7 +28,7 @@ editUserModal.addEventListener('shown.bs.modal', function() {
     );
 });
 
-function showClientError(input){
+function showUpdateUserClientError(input){
     var input_name = input.getAttribute("name");
     if (input_name == "id"){
         if (input.validity.patternMismatch){
