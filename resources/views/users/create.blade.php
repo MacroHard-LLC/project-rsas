@@ -15,8 +15,8 @@
                             <div class="col-md-6 input-field">
                                 <div class="form-outline">
                                     <label for="id" class="input-title">User ID</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="20XXXXXX" name="id" id="idInput" minlength="9" maxlength="9" pattern="[0-9]+" aria-describedby="idError" required autofocus>
-                                    <div class="is-invalid" id="idError">
+                                    <input type="text" class="form-control form-control-sm" placeholder="20XXXXXX" name="userid" id="idInput" minlength="9" maxlength="9" pattern="[0-9]+" aria-describedby="useridError" required autofocus>
+                                    <div class="is-invalid" id="useridError">
                                         <span></span>
                                     </div>
                                 </div>
@@ -126,6 +126,10 @@
         $('#registerForm').submit(function (e) {
             e.preventDefault();
             let formData = $(this).serializeArray();
+            jQuery.each(formData, function(i, field ) {
+                if (field.name == "userid")
+                    field.name = field.name.replace("userid", "id")
+            });
             $(".is-invalid").children("span").text("");
             $("#registerForm input").removeClass("is-invalid");
             $.ajax({
@@ -135,17 +139,20 @@
                 },
                 url: "{{ route('register') }}",
                 data: formData,
-                success: () => window.location.assign("{{ route('home') }}"),
+                success: () => window.location.assign(window.location.href),
                 error: (response) => {
                     if(response.status === 422) {
                         let errors = response.responseJSON.errors;
                         Object.keys(errors).forEach(function (key) {
-                            if (key == "role" || key == "gender"){
+                            if (key == "role" || key == "gender")
                                 $(name=key).addClass("is-invalid");
-                            } else {
+                            else
                                 $("#" + key + "Input").addClass("is-invalid");
-                            }
-                            $("#" + key + "Error").children("span").text(errors[key][0]);
+
+                            if (key == "id")
+                                $("#user" + key + "Error").children("span").text(errors[key][0]);
+                            else
+                                $("#" + key + "Error").children("span").text(errors[key][0]);
                         });
                     } else {
                         window.location.reload();
