@@ -4,9 +4,11 @@
 @section('content')
 
 {{-- Modular Pages--}}
-@include('users.create')
 @include('subjects.newsub')
 @include('levels.newgrlvl')
+@include('users.create')
+
+
 
 <div class="vertical-center">
     <div class="container-fluid">
@@ -41,7 +43,6 @@
                         <div class="col-md-4" style="width:300px">
                         <button class="btn btn-primary create btn-create" type="button">
                             <a data-bs-toggle="modal" data-bs-target="#registerModal">Create User</a></button>
-                        {{--<a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#registerModal">Create User</a>--}}
                         </div>
                         <div class="col-md-4" style="width:300px">
                         <button class="btn btn-primary create btn-create" type="button">

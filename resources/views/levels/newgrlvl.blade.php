@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="registerSectionModal" tabindex="-1" role="dialog" aria-labelledby="registerSectionModal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class='modal-content'>
@@ -8,7 +7,7 @@
             </div>
 
             <div class="modal-body mx-5 my-3" id="modalBody">
-                <form method="POST" action="/users" id="registerForm" class="needs-validation" novalidate>
+                <form method="POST" action="/users" id="registerSectionForm" class="needs-validation" novalidate>
                     @csrf
                     <fieldset>
                         <div class="row mb-3">
@@ -69,7 +68,7 @@
                             <div class="col-md-5 input-field ">
                                 <div class="form-outline">
                                     <label for="subj_id" class="input-title">Student ID</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" id="studid" minlength="9" maxlength="9" pattern="[0-5]" required>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" id="student_id" name="student_id" minlength="9" maxlength="9" pattern="[0-5]" required>
                                     <div class="valid-feedback">Looks good!</div>
                                 </div>
                             </div>
@@ -77,7 +76,7 @@
                             <div class="col-md-6 input-field">
                               <div class="form-outline">
                                 <label for="subj_id" class="input-title">Student Name</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="" id="studname" required>
+                                <input type="text" class="form-control form-control-sm" placeholder="" id="student_name" name="student_name" required>
                                 <div class="valid-feedback">Looks good!</div>
                               </div>
                             </div>
@@ -134,7 +133,28 @@
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$('#student_id').on('keyup', function () {
+  if ($(this).val().length === 9) {
 
+    console.log($(this).val());
+    $.ajax({
+      method: "POST",
+      headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            Accept: "application/json"
+      },
+      url: "{{ route('get_name_data') }}",
+      data: { input_data: $(this).val() },
+      success: function(data) {
+        if (data != null){
+            $('#student_name').val(data);
+        }
+    }
+    }); 
+}});
+
+</script>
 <script>
     $("#multiple").select2({
         placeholder: " Select scheduled days",
