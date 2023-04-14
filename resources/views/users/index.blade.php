@@ -1,7 +1,10 @@
 <link rel="stylesheet" href="{{ asset('css/createuser.css') }}">
-    @extends('master')
-    @section('content')
-    @include('users.create')
+@extends('master')
+
+@section('content')
+
+@include('users.create')
+@include('users.edit')
 
 <br>
 <div class="container-fluid d-flex table-title">
@@ -36,25 +39,26 @@
 
             </tr>
             @if(count($users) > 0)
-                @foreach ($users as $row)
+                <script src="{{ asset('js/usersIndex.js') }}"></script>
+                @foreach ($users as $user)
                 <tr>
                     <td><i class="fa-solid fa-circle icon-baby-blue"></td>
-                    <td>{{$row['id']}}</td>
+                    <td>{{$user['id']}}</td>
 
-                    @if($row['role'] == "0")
+                    @if($user['role'] == "0")
                         <td>Administrator</td>
-                    @elseif($row['role'] == "1")
+                    @elseif($user['role'] == "1")
                         <td>Student</td>
-                    @elseif($row['role'] == "2")
+                    @elseif($user['role'] == "2")
                         <td>Adviser</td>
                     @endif
 
-                    <td>{{$row['last']}}</td>
-                    <td>{{$row['first']}}</td>
-                    <td>{{$row['middle']}}</td>
-                    <td>{{$row['gender']}}</td>
-                    <td><a href="/users" class="btn btn-primary" role="button"><i class="fa-regular fa-pen-to-square icon-white"></i></a>&emsp; <a href="/users" class="btn btn-primary" role="button"><i class="fa-solid fa-trash-can icon-white"></i></a></td>
-
+                    <td>{{$user['last']}}</td>
+                    <td>{{$user['first']}}</td>
+                    <td>{{$user['middle']}}</td>
+                    <td>{{$user['gender']}}</td>
+                    <td><a class="btn btn-primary" role="button" onclick="updateModal({{$user}})"><i class="fa-regular fa-pen-to-square icon-white"></i></a>
+                        &emsp;<a href="/users" class="btn btn-primary" role="button"><i class="fa-solid fa-trash-can icon-white"></i></a></td>
                 </tr>
                 @endforeach
 
@@ -71,5 +75,8 @@
     </div>
 
 </div>
+
+@yield('create-user-scripts')
+@yield('update-user-scripts')
 
 @endsection

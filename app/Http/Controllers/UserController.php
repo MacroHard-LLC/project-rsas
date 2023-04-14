@@ -42,4 +42,25 @@ class UserController extends Controller
 
         return redirect('/')->with('message', 'User created successfully!');
     }
+
+
+    public function edit(User $user){
+        return view('users.edit', ['user' => $user]);
+    }
+
+    public function update(Request $request, User $user) {
+        $formFields = $request->validate([
+            'id' => ['required',Rule::unique('user')->ignore($user->id),'integer','digits:9'],
+            'password' => ['required','min:1','max:20'],
+            'role' => 'required',
+            'first' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'middle' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'last' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'gender' => 'required',
+        ]);
+
+        $user->update($formFields);
+
+        return back()->with('message', 'User updated successfully!');
+    }
 }

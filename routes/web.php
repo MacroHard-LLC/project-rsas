@@ -51,4 +51,11 @@ Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/create', [UserController::class, 'create']);
 
 // create new user
-Route::post('/users', [UserController::class, 'store'])->name('register');
+Route::post('/users', [UserController::class, 'store'])->name('createUser');
+
+// Show Edit User Form
+Route::get('/users/{user}/edit/', [UserController::class, 'edit']);
+
+// Update User
+// Route::put('/users/{user}', [UserController::class, 'update'])->name('updateUser');
+Route::put('/users', [UserController::class, 'update'])->name('updateUser');
