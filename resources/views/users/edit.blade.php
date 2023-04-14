@@ -7,10 +7,8 @@
             </div>
 
             <div class="modal-body mx-5 my-3">
-                {{-- <form method="POST" action="/users/{{$user->id}}" id="updateUserForm" class="needs-validation" novalidate> --}}
-                    <form method="POST" action="/users/" id="updateUserForm" class="needs-validation" novalidate>
+                    <form id="updateUserForm" class="needs-validation" novalidate>
                     @csrf
-                    @method('PUT')
                     <fieldset>
                         <div class="row mb-3">
                             <div class="col-md-6 input-field">
@@ -104,6 +102,8 @@
                             </div> --}}
                         </div>
 
+                        <input type="hidden" name="originalID" id="originalID" value="">
+
                         <div class="form-group pt-3 float-end" id="submissionU">
                             <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
                             <button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk fa-lg icon-white"></i> Save</button>
@@ -125,14 +125,17 @@
         $('#updateUserForm').submit(function (e) {
             e.preventDefault();
             let formData = $(this).serializeArray();
+            formData.push({name: '_method', value:'PUT'});
+            var id = $('#originalID').val();
             $(".is-invalid").children("span").text("");
             $("#updateUserForm input").removeClass("is-invalid");
             $.ajax({
                 method: "POST",
                 headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     Accept: "application/json"
                 },
-                url: "{{ route('updateUser') }}",
+                url: '/users/' + id,
                 data: formData,
                 success: () => window.location.assign(window.location.href),
                 error: (response) => {
