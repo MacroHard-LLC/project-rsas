@@ -152,9 +152,6 @@ $('#studentSubjectID').on('keyup', function () {
             $('#sectionStudIDError').text('Section ID already exists in table');
         }
         else{
-            $('#sectionStudIDError').text('');
-            inputElement.classList.remove('is-invalid');
-            inputElement.classList.add('is-valid');
             console.log($(this).val());
             $.ajax({
             method: "POST",
@@ -165,9 +162,19 @@ $('#studentSubjectID').on('keyup', function () {
             url: "{{ route('get_name_data') }}",
             data: { input_data: $(this).val() },
             success: function(data) {
-                console.log(data);
-                if (data != null){
+                console.log(data=='');
+                if (data != ''){
+                    $('#sectionStudIDError').text('');
+                    inputElement.setCustomValidity('');
+                    inputElement.classList.remove('is-invalid');
+                    inputElement.classList.add('is-valid');
                     $('#studentSubjectName').val(data);
+                }
+                else{
+                    inputElement.setCustomValidity('Invalid input');
+                    inputElement.classList.remove('is-valid');
+                    inputElement.classList.add('is-invalid');
+                    $('#sectionStudIDError').text('Student does not Exist');
                 }
             }
             }); 
@@ -175,10 +182,10 @@ $('#studentSubjectID').on('keyup', function () {
     }
     else{
         const inputElement = document.getElementById('studentSubjectID');
-        inputElement.setCustomValidity('');
-        inputElement.classList.remove('is-invalid');
+        inputElement.setCustomValidity('Invalid input');
         inputElement.classList.remove('is-valid');
-        $('#sectionStudIDError').text('');
+        inputElement.classList.add('is-invalid');
+        $('#sectionStudIDError').text('Input a 9 digit integer');
     }
 });
 

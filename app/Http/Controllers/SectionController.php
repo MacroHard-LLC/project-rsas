@@ -18,8 +18,9 @@ class SectionController extends Controller
         $last = User::where('id','=',$incoming_id)->value('last');
         $nameID = $last . ", " . $first;
         $role = User::where('id','=',$incoming_id)->value('role');
+        $doesExist = User::where('id','=',$incoming_id)->get();
         # if the it is not a student or if it does not exist
-        if (($role != 2) || ($nameID == null)){
+        if (($role != 2) || ($nameID == ', ') || ($doesExist->count()==0)){
             return null;
         }
         return $nameID;
