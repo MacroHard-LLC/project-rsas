@@ -69,6 +69,9 @@
                                         <label for="subj_id" class="input-title">Student ID</label>
                                         <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" id="studentSubjectID" name="studentSubjectID" minlength="9" maxlength="9" pattern="[0-5]" required>
                                         <div class="valid-feedback">Looks good!</div>
+                                        <div class="is-invalid" role="alert">
+                                            <span id="sectionStudIDError"></span>
+                                        </div>
                                     </div>
                                 </div>
                             
@@ -132,24 +135,52 @@
 <script>
 $('#studentSubjectID').on('keyup', function () {
   if ($(this).val().length === 9) {
+    const allStudentID = document.querySelectorAll('#IDCheckVar');
+    let condition = false;
 
-    console.log($(this).val());
-    $.ajax({
-      method: "POST",
-      headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-            Accept: "application/json"
-      },
-      url: "{{ route('get_name_data') }}",
-      data: { input_data: $(this).val() },
-      success: function(data) {
-        console.log(data);
-        if (data != null){
-            $('#studentSubjectName').val(data);
+    allStudentID.forEach(element => {
+        console.log(element.textContent);
+        if (element.textContent == $('#studentSubjectID').val()){
+            condition = true;
+        }
+    });
+    const inputElement = document.getElementById('studentSubjectID');
+    if (condition == true){
+            inputElement.setCustomValidity('Invalid input');
+            inputElement.classList.remove('is-valid');
+            inputElement.classList.add('is-invalid');
+            $('#sectionStudIDError').text('Section ID already exists in table');
+        }
+        else{
+            $('#sectionStudIDError').text('');
+            inputElement.classList.remove('is-invalid');
+            inputElement.classList.add('is-valid');
+            console.log($(this).val());
+            $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('get_name_data') }}",
+            data: { input_data: $(this).val() },
+            success: function(data) {
+                console.log(data);
+                if (data != null){
+                    $('#studentSubjectName').val(data);
+                }
+            }
+            }); 
         }
     }
-    }); 
-}});
+    else{
+        const inputElement = document.getElementById('studentSubjectID');
+        inputElement.setCustomValidity('');
+        inputElement.classList.remove('is-invalid');
+        inputElement.classList.remove('is-valid');
+        $('#sectionStudIDError').text('');
+    }
+});
 
 $('#addStudent').on('click', function () {
     // Get the table body element
@@ -167,7 +198,7 @@ $('#addStudent').on('click', function () {
 
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
-            <td>${studentID}</td>
+            <td id="IDCheckVar">${studentID}</td>
             <td>${firstName}</td>
             <td>${lastName}</td>
             <td class="delete"><button type='button' class='btnDelete' style="border:0px;"><i class="fa-solid fa-xmark"></i></button></td>
@@ -179,6 +210,12 @@ $('#addStudent').on('click', function () {
 
         const tableRows = document.querySelectorAll('#student_list tr').length;
         document.getElementById("total_students").textContent = tableRows;
+
+        // clear validation shits
+        const inputElement = document.getElementById('studentSubjectID');
+        inputElement.classList.remove('is-valid');
+        inputElement.setCustomValidity('');
+        $('#sectionStudIDError').text('');
   }
 })
 $(document).on('click', '.btnDelete', function(){
