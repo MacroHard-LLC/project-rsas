@@ -177,6 +177,11 @@ $('#addStudent').on('click', function () {
         const tableRows = document.querySelectorAll('#student_list tr').length;
         document.getElementById("total_students").textContent = tableRows;
   }
+})
+$(document).on('click', '.btnDelete', function(){
+    $(this).closest('tr').remove();
+    const tableRows = document.querySelectorAll('#student_list tr').length;
+    document.getElementById("total_students").textContent = tableRows;
 });
 
 </script>
