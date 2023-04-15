@@ -10,17 +10,9 @@ class UserController extends Controller
 {
     // Show all users
     public function index() {
-
-        // $users = User::all()->toArray();
-        // return view('users.index', compact('users'));
         return view('users.index', [
             'users' => User::latest('added_on')->filter(request(['role']))->paginate(15)
         ]);
-    }
-
-    // Show create user form
-    function create(){
-        return view('users.create');
     }
 
     public function store(Request $request) {
@@ -41,5 +33,27 @@ class UserController extends Controller
         User::create($formFields);
 
         return redirect('/')->with('message', 'User created successfully!');
+    }
+
+    public function update(Request $request, $id) {
+        $formFields = $request->validate([
+            'id' => ['required',Rule::unique('user','id')->ignore($id),'integer','digits:9'],
+            'password' => ['required','min:1','max:20'],
+            'role' => 'required',
+            'first' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'middle' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'last' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'gender' => 'required',
+        ]);
+
+        User::find($id)->update($formFields);
+
+        return back()->with('message', 'User updated successfully!');
+    }
+
+    public function destroy(Request $request){
+        // User::find($request->id)->update(['is_deleted' => 1]);
+        User::find($request->id)->delete();
+        return back()->with('message', 'User deleted successfully');
     }
 }

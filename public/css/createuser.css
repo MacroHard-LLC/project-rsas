@@ -128,7 +128,7 @@ button.btn:active:focus{
     background-color:#98C1D9;
 }
 
-#registerModalLabel{
+.white-label{
     font-family: 'Poppins';
     font-weight: 700;
     color: white;
