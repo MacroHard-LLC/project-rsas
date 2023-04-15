@@ -55,9 +55,10 @@
                                 <div class="col-md-6 input-field">
                                     <div class="form-outline">
                                         <label for="subj_id" class="input-title">Adviser ID</label>
-                                        <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="subj_id" minlength="5" maxlength="5" pattern="[0-5]+" required>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="sectionAdviserID" id="sectionAdviserID" minlength="9" maxlength="9" pattern="[0-9]+" required>
+                                        <div class="valid-feedback">Looks good!</div>
                                         <div class="is-invalid" id="idError">
-                                            <span></span>
+                                            <span id="sectionAdviserIDError"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -186,6 +187,42 @@ $('#studentSubjectID').on('keyup', function () {
         inputElement.classList.remove('is-valid');
         inputElement.classList.add('is-invalid');
         $('#sectionStudIDError').text('Input a 9 digit integer');
+    }
+});
+
+$('#sectionAdviserID').on('keyup', function () {
+    const inputElement = document.getElementById('sectionAdviserID');
+    if ($(this).val().length === 9) {
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('get_adviser_id') }}",
+            data: { input_data: $(this).val() },
+            success: function(data) {
+                if (data == true){
+                    $('#sectionAdviserIDError').text('');
+                    inputElement.setCustomValidity('');
+                    inputElement.classList.remove('is-invalid');
+                    inputElement.classList.add('is-valid');
+                }
+                else{
+                    inputElement.setCustomValidity('Invalid input');
+                    inputElement.classList.remove('is-valid');
+                    inputElement.classList.add('is-invalid');
+                    $('#sectionAdviserIDError').text('Adviser does not Exist');
+                }
+            }
+            }); 
+    }
+    else{
+        const inputElement = document.getElementById('sectionAdviserID');
+        inputElement.setCustomValidity('Invalid input');
+        inputElement.classList.remove('is-valid');
+        inputElement.classList.add('is-invalid');
+        $('#sectionAdviserIDError').text('Input a 9 digit integer');
     }
 });
 

@@ -25,4 +25,14 @@ class SectionController extends Controller
         }
         return $nameID;
     }
+
+    function DoesAdviserExist(Request $request){
+        $incoming_id = $request->input_data;
+        $doesExist = User::where('id','=',$incoming_id)->get();
+        $role = User::where('id','=',$incoming_id)->value('role');
+        if (($role == 1) && ($doesExist->count() == 1)){
+            return true;
+        }
+        return false;
+    }
 }
