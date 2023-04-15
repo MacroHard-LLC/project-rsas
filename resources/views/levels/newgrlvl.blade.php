@@ -67,7 +67,7 @@
                                 <div class="col-md-5 input-field ">
                                     <div class="form-outline">
                                         <label for="subj_id" class="input-title">Student ID</label>
-                                        <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" id="studid" minlength="9" maxlength="9" pattern="[0-5]" required>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" id="student_id" name="student_id" minlength="9" maxlength="9" pattern="[0-5]" required>
                                         <div class="valid-feedback">Looks good!</div>
                                     </div>
                                 </div>
@@ -75,14 +75,14 @@
                                 <div class="col-md-5 input-field">
                                 <div class="form-outline">
                                     <label for="subj_id" class="input-title">Student Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="" id="studname" required>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Rizal, Jose" id="student_name" name="student_name" required>
                                     <div class="valid-feedback">Looks good!</div>
                                 </div>
                                 </div>
                             
                                 <div class="col-md-2 input-field float-end">
                                     <div class="form-group pt-3">
-                                        <button class="btn btn-primary create" s onclick="addRow()" id="add"><i class="fa-solid fa-user-plus"></i>  Add</button>
+                                        <button type='button' class="btn btn-primary create" id="addStudent" name="addStudent"><i class="fa-solid fa-user-plus"></i>  Add</button>
                                     </div>
                                 </div>
 
@@ -99,11 +99,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                        <td>John</td>
-                                        <td>Doe</td>
-                                        <td class="delete"><button type='button' class='btnDelete' style="border:0px;""><i class="fa-solid fa-xmark"></i></button></td> <!--legit dunno how to add this to the jquery below-->
-                                        </tr>
                                     </tbody>
                                     </table>
                             </div>
@@ -155,10 +150,37 @@ $('#student_id').on('keyup', function () {
     }); 
 }});
 
+$('#addStudent').on('click', function () {
+    // Get the table body element
+    const tableBody = document.querySelector('#list tbody');
+
+    // Create a new tr element
+    const newRow = document.createElement('tr');
+    // accept as long as both are not empty
+    // later on, do not accept either are invalud
+    if ($('#student_id').val().length != 0 && $('#student_name').val().length != 0){
+        const studentName = $('#student_name').val().split(", ");
+        const firstName = studentName[1];
+        const lastName = studentName[0];
+
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td>${firstName}</td>
+            <td>${lastName}</td>
+            <td class="delete"><button type='button' class='btnDelete' style="border:0px;"><i class="fa-solid fa-xmark"></i></button></td>
+        `;
+
+        tableBody.appendChild(newRow);
+        $('#student_name').val(''); 
+        $('#student_id').val('');
+
+  }
+});
+
 </script>
 
 <!--This is supposed to add student details to row but for some  reason dili siya muwork T.T-->
-<script>
+<!--<script>
     function addRow() {
         "use strict";
 
@@ -177,5 +199,5 @@ $('#student_id').on('keyup', function () {
 
         table.children[0].appendChild(row);
     };
-</script>
+</script>-->
 @endsection
