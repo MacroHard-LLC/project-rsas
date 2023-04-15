@@ -93,8 +93,9 @@
                                     <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                        <th>Firstname</th>
-                                        <th>Lastname</th>
+                                        <th>Student ID</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
                                         <th style="width:20px;"></th>
                                         </tr>
                                     </thead>
