@@ -67,7 +67,7 @@
                                 <div class="col-md-5 input-field ">
                                     <div class="form-outline">
                                         <label for="subj_id" class="input-title">Student ID</label>
-                                        <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" id="student_id" name="student_id" minlength="9" maxlength="9" pattern="[0-5]" required>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" id="studentSubjectID" name="studentSubjectID" minlength="9" maxlength="9" pattern="[0-5]" required>
                                         <div class="valid-feedback">Looks good!</div>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@
                                 <div class="col-md-5 input-field">
                                 <div class="form-outline">
                                     <label for="subj_id" class="input-title">Student Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Rizal, Jose" id="student_name" name="student_name" required>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Rizal, Jose" id="studentSubjectName" name="studentSubjectName" required>
                                     <div class="valid-feedback">Looks good!</div>
                                 </div>
                                 </div>
@@ -98,13 +98,13 @@
                                         <th style="width:20px;"></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="student_list">
                                     </tbody>
                                     </table>
                             </div>
                         </div>                
                             <hr style="margin-bottom:5px;">
-                            <i style="font-size:small;">Total Number of Students: 3</i> <!--dunno how to do counters pud t.t-->
+                            <i style="font-size:small;">Total Number of Students: <span id="total_students">0</span></i> <!--dunno how to do counters pud t.t-->
 
                             <div class="form-group pt-5 float-end" id="submission">
                                 <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
@@ -129,7 +129,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$('#student_id').on('keyup', function () {
+$('#studentSubjectID').on('keyup', function () {
   if ($(this).val().length === 9) {
 
     console.log($(this).val());
@@ -144,7 +144,7 @@ $('#student_id').on('keyup', function () {
       success: function(data) {
         console.log(data);
         if (data != null){
-            $('#student_name').val(data);
+            $('#studentSubjectName').val(data);
         }
     }
     }); 
@@ -158,8 +158,8 @@ $('#addStudent').on('click', function () {
     const newRow = document.createElement('tr');
     // accept as long as both are not empty
     // later on, do not accept either are invalud
-    if ($('#student_id').val().length != 0 && $('#student_name').val().length != 0){
-        const studentName = $('#student_name').val().split(", ");
+    if ($('#studentSubjectID').val().length != 0 && $('#studentSubjectName').val().length != 0){
+        const studentName = $('#studentSubjectName').val().split(", ");
         const firstName = studentName[1];
         const lastName = studentName[0];
 
@@ -171,9 +171,11 @@ $('#addStudent').on('click', function () {
         `;
 
         tableBody.appendChild(newRow);
-        $('#student_name').val(''); 
-        $('#student_id').val('');
+        $('#studentSubjectName').val(''); 
+        $('#studentSubjectID').val('');
 
+        const tableRows = document.querySelectorAll('#student_list tr').length;
+        document.getElementById("total_students").textContent = tableRows;
   }
 });
 
