@@ -163,9 +163,11 @@ $('#addStudent').on('click', function () {
         const studentName = $('#studentSubjectName').val().split(", ");
         const firstName = studentName[1];
         const lastName = studentName[0];
+        const studentID = $('#studentSubjectID').val();
 
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
+            <td>${studentID}</td>
             <td>${firstName}</td>
             <td>${lastName}</td>
             <td class="delete"><button type='button' class='btnDelete' style="border:0px;"><i class="fa-solid fa-xmark"></i></button></td>
