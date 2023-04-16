@@ -64,4 +64,22 @@ class SectionController extends Controller
 
         return $results;
     }
+
+    function DataInsert(Request $request){
+        $formFields = $request;
+        /*$formFields = $request->validate([
+            'adviserID' => ['required','integer','digits:9','regex:/[0-9]+/'],
+            'allStudentID' => 'required',
+            'sectionID' => 'required',
+            'gradeLevel' => 'required',
+        ]);*/
+
+        foreach($formFields->input('allStudentID') as $studentID){
+            $changeRow = User::select('id')->find($studentID);
+            $changeRow->is_enrolled = 1;
+            $changeRow->grade_level = $formFields['gradeLevel'];
+            $changeRow->subject_list = $formFields['sectionID'];
+            $changeRow->save();
+        }
+    }
 }

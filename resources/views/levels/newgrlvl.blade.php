@@ -35,7 +35,7 @@
                         <div class="row mb-3">
                                 <div class="col-md-6 input-field"> 
                                     <label for="grade_level" class="input-title">Grade Level</label>   
-                                    <select name="grade_level" class="form-control form-select" placeholder="Choose Department ID" id="grade_level" required>
+                                    <select name="grade_level" class="form-control form-select" placeholder="Choose Department ID" id="sectionGradeLevel" required>
                                         <option value="" disabled selected="selected">Choose a Grade Level</option>
                                         <option value="1">Level 1</option>
                                         <option value="2">Level 2</option>
@@ -118,7 +118,7 @@
 
                             <div class="form-group pt-5 float-end" id="submission">
                                 <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
-                                <button class="btn btn-primary" type="submit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
+                                <button class="btn btn-primary create" type="submit" id="sectionButtonSubmit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                             </div>
                         </div>
 
@@ -366,6 +366,48 @@ $(document).on('click', '.btnDelete', function(){
     const tableRows = document.querySelectorAll('#student_list tr').length;
     document.getElementById("total_students").textContent = tableRows;
 });
+
+$('#registerSectionForm').submit(function (e) {
+    let allStudentID = document.querySelectorAll('#IDCheckVar');
+    let arrayStudentID = [];
+    allStudentID.forEach(element => {
+        arrayStudentID.push(element.textContent);
+    });
+    e.preventDefault();
+    let formData = {
+        allStudentID : arrayStudentID,
+        adviserID : document.querySelector('#sectionAdviserID').value,
+        sectionID : document.querySelector('#sectionSubID').value,
+        gradeLevel : document.querySelector('#sectionGradeLevel').value
+    };
+    console.log(formData);
+    $(".is-invalid").children("strong").text("");
+    $("#registerSectionForm input").removeClass("is-invalid");
+    $.ajax({
+        method: "POST",
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            Accept: "application/json"
+        },
+        url: "{{ route('register_section') }}",
+        data: formData,
+        success: () => window.location.assign(window.location.href) ,
+        error: (response) => {
+            if(response.status === 422) {
+                let errors = response.responseJSON.errors;
+                Object.keys(errors).forEach(function (key) {
+                    $("#" + key + "Input").addClass("is-invalid");
+                    $("#" + key + "Error").children("strong").text(errors[key][0]);
+                });
+            }
+        }
+    })
+
+});
+
+/*$('#sectionButtonSubmit').on('click', function(){
+    
+});*/
 
 </script>
 
