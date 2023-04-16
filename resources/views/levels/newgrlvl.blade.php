@@ -204,33 +204,37 @@ $('#studentSubjectID').on('keyup', function () {
     }
 });
 
+function showSubmit(){
+    $('#sectionButtonSubmit').css('visibility','visible');
+    $('#sectionSubmitLabel').css('visibility','visible');
+}
+
+function hideSubmit(){
+    $('#sectionSubmitLabel').css('visibility','hidden');
+    $('#sectionButtonSubmit').css('visibility','hidden');
+}
+
 function finishVal(){
-    console.log(($('#sectionSubID').val()!='') && ($('#sectionGradeLevel').val()!='') && ($('#sectionAdviserID').val()!=''));
-    if (($('#sectionSubID').val()!='') && ($('#sectionGradeLevel').val()!='') && ($('#sectionAdviserID').val()!='')){
-        $('#sectionButtonSubmit').css('visibility','visible');
-        $('#sectionSubmitLabel').css('visibility','visible');
+    if (($('#sectionGradeLevel').val()!=null) && ($('#sectionAdviserID').val()!='') && ($('#sectionAdviserID').hasClass('is-valid'))){
+        showSubmit();
     }
     else{
-        $('#sectionSubmitLabel').css('visibility','hidden');
-        $('#sectionButtonSubmit').css('visibility','hidden');
+        hideSubmit();
     }
 }
 
-$('#sectionSubID,#sectionGradeLevel,#sectionAdviserID').on('input click',function(){
+$('#sectionGradeLevel,#sectionAdviserID').on('input click',function(){
     let numberStudents = document.getElementById("total_students").textContent;
-    console.log($(this).attr('id'));
     if ($(this).attr('id')=='sectionAddStudents'){
         console.log('fuck');
         numberStudents = numberStudents + 1;
     }
-    console.log(numberStudents);
-    if (($('#sectionSubID').val()!='') && ($('#sectionGradeLevel').val()!='') && ($('#sectionAdviserID').val()!='') && (numberStudents > 0)){
-        $('#sectionButtonSubmit').css('visibility','visible');
-        $('#sectionSubmitLabel').css('visibility','visible');
+    console.log($('#sectionGradeLevel').val()!=null);
+    if (($('#sectionGradeLevel').val()!=null) && ($('#sectionAdviserID').val()!='') && (numberStudents > 0) && ($('#sectionAdviserID').val().length == 9)){
+        showSubmit();
     }
     else{
-        $('#sectionSubmitLabel').css('visibility','hidden');
-        $('#sectionButtonSubmit').css('visibility','hidden');
+        hideSubmit();
     }
 });
 
@@ -294,19 +298,6 @@ $('#studentSubjectName').on('input',function(){
                     coupleElement.classList.remove('is-invalid');
                     $('#sectionStudNameError').text('Input incomplete or Student does not exist');
                 }
-                /*
-                let counter = 0;
-                response.forEach(function(option){
-                    var optionHtml = '<div class="dropdown-option">' + option + '</div>';
-                    dropdown.append(optionHtml)
-                    counter = counter + 1;
-                });
-                if (counter != 0){
-                    dropdown.show();
-                }
-                else{
-                    dropdown.hide();
-                }*/
             }
 
         });
@@ -335,6 +326,7 @@ $('#sectionAdviserID').on('keyup', function () {
                     inputElement.classList.add('is-valid');
                 }
                 else{
+                    hideSubmit();
                     inputElement.setCustomValidity('Invalid input');
                     inputElement.classList.remove('is-valid');
                     inputElement.classList.add('is-invalid');
@@ -415,6 +407,7 @@ $('#sectionGradeLevel').on('click', function(){
     }
 });
 
+/*
 $('#sectionSubId').on('input',function(){
     let inputElement = document.getElementById('sectionSubId');
     console.log(inputElement);
@@ -430,7 +423,7 @@ $('#sectionSubId').on('input',function(){
         inputElement.classList.remove('is-valid');
         $('#sectionIDError').text('Please input a 5 digit integer');
     }
-});
+});*/
 
 $('#registerSectionForm').submit(function (e) {
     let allStudentID = document.querySelectorAll('#IDCheckVar');
@@ -442,7 +435,7 @@ $('#registerSectionForm').submit(function (e) {
     let formData = {
         allStudentID : arrayStudentID,
         adviserID : document.querySelector('#sectionAdviserID').value,
-        sectionID : document.querySelector('#sectionSubID').value,
+        //sectionID : document.querySelector('#sectionSubID').value,
         gradeLevel : document.querySelector('#sectionGradeLevel').value
     };
     console.log(formData);

@@ -74,7 +74,6 @@ class SectionController extends Controller
             $changeRow = User::select('id')->find($studentID);
             $changeRow->is_enrolled = 1;
             $changeRow->grade_level = $formFields['gradeLevel'];
-            $changeRow->subject_list = $formFields['sectionID'];
             $changeRow->save();
         }
     }
