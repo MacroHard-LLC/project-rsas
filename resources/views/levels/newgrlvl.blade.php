@@ -48,7 +48,7 @@
                                         <option value="9">Level 9</option>
                                         <option value="10">Level 10</option>
                                     </select>
-                                    <div class="is-invalid" role="alert" id="gradeError" name="gradeError">
+                                    <div class="is-invalid" role="alert" id="sectionGradeLevelError" name="gradeError">
                                         <strong></strong>
                                     </div>
                                 </div>
@@ -365,6 +365,22 @@ $(document).on('click', '.btnDelete', function(){
     $(this).closest('tr').remove();
     const tableRows = document.querySelectorAll('#student_list tr').length;
     document.getElementById("total_students").textContent = tableRows;
+});
+
+$('#sectionGradeLevel').on('click', function(){
+    let inputElement = document.getElementById('sectionGradeLevel');
+    if ($(this).val() != null){
+        inputElement.setCustomValidity('');
+        inputElement.classList.remove('is-invalid');
+        inputElement.classList.add('is-valid');
+        $('#sectionGradeLevelError').text('');
+    }
+    else{
+        $('#sectionGradeLevel').setCustomValidity('Invalid select');
+        inputElement.classList.add('is-invalid');
+        inputElement.classList.remove('is-valid');
+        $('#sectionGradeLevelError').text('Please Choose a Grade Level');
+    }
 });
 
 $('#registerSectionForm').submit(function (e) {
