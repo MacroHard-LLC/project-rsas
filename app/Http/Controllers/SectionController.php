@@ -21,7 +21,7 @@ class SectionController extends Controller
         $doesExist = User::where('id','=',$incoming_id)->get();
         $isEnrolled = User::where('id','=',$incoming_id)->value('is_enrolled');
         # if the it is not a student or if it does not exist
-        if (($role != 2) || ($nameID == ', ') || ($doesExist->count()==0) || ($isEnrolled == 1)){
+        if (($role != 1) || ($nameID == ', ') || ($doesExist->count()==0) || ($isEnrolled == 1)){
             return null;
         }
         return $nameID;
@@ -31,7 +31,7 @@ class SectionController extends Controller
         $incoming_id = $request->input_data;
         $doesExist = User::where('id','=',$incoming_id)->get();
         $role = User::where('id','=',$incoming_id)->value('role');
-        if (($role == 1) && ($doesExist->count() == 1)){
+        if (($role == 2) && ($doesExist->count() == 1)){
             return true;
         }
         return false;

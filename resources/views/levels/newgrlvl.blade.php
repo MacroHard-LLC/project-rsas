@@ -11,28 +11,6 @@
                     @csrf
                     <fieldset>
                         <div class="row mb-3">
-                                <div class="col-md-6 input-field">
-                                    <div class="form-outline">
-                                        <label for="subj_id" class="input-title">Section ID</label>
-                                        <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer between 0-5" name="sectionSubId" id="sectionSubId" minlength="5" maxlength="5" pattern="[0-5]+" required>
-                                        <div class="is-invalid" id="sectionIDError">
-                                            <span id="sectionIDError"></span>
-                                        </div>
-                                    </div>
-                                </div>                                
-                                
-                                <div class="col-md-6 input-field">
-                                    <div class="form-outline">
-                                        <label for="subj_id" class="input-title">Section Name</label>
-                                        <input type="text" class="form-control form-control-sm" placeholder="Enter Section Name" name="sectionSubName" id="sectionSubName" required>
-                                        <div class="is-invalid" id="secnameError">
-                                            <span></span>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-
-                        <div class="row mb-3">
                                 <div class="col-md-6 input-field"> 
                                     <label for="grade_level" class="input-title">Grade Level</label>   
                                     <select name="grade_level" class="form-control form-select" placeholder="Choose Department ID" id="sectionGradeLevel" required>
