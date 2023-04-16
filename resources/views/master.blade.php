@@ -15,7 +15,7 @@
     <!--NAVBAR-->
     <nav class="navbar navbar-expand-sm navbar-custom navbar-dark">
         <div class="container-fluid">
-            <a href="/home" class="navbar-brand"><i class="fa-solid fa-circle icon-white"></i> RFID Attendance System</a>
+            <a href="/home" class="navbar-brand"><i class="fa-solid fa-clipboard-user icon-white"></i> RFID Attendance System</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
               <span class="navbar-toggler-icon"></span>
             </button>
