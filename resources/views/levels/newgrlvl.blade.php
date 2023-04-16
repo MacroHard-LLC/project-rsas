@@ -15,7 +15,7 @@
                                     <div class="form-outline">
                                         <label for="subj_id" class="input-title">Section ID</label>
                                         <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer between 0-5" name="sectionSubId" id="sectionSubId" minlength="5" maxlength="5" pattern="[0-5]+" required>
-                                        <div class="is-invalid" id="idError">
+                                        <div class="is-invalid" id="sectionIDError">
                                             <span id="sectionIDError"></span>
                                         </div>
                                     </div>
@@ -380,6 +380,23 @@ $('#sectionGradeLevel').on('click', function(){
         inputElement.classList.add('is-invalid');
         inputElement.classList.remove('is-valid');
         $('#sectionGradeLevelError').text('Please Choose a Grade Level');
+    }
+});
+
+$('#sectionSubId').on('input',function(){
+    let inputElement = document.getElementById('sectionSubId');
+    console.log(inputElement);
+    if ($('#sectionSubId').val().length == 5){
+        inputElement.setCustomValidity('');
+        inputElement.classList.remove('is-invalid');
+        inputElement.classList.add('is-valid');
+        $('#sectionIDError').text('');
+    }
+    else{
+        inputElement.setCustomValidity('Invalid input');
+        inputElement.classList.add('is-invalid');
+        inputElement.classList.remove('is-valid');
+        $('#sectionIDError').text('Please input a 5 digit integer');
     }
 });
 
