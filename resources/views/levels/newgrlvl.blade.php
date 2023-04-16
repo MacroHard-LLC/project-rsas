@@ -151,10 +151,13 @@ $('#studentSubjectID').on('keyup', function () {
         }
     });
     const inputElement = document.getElementById('studentSubjectID');
+    const coupleElement = document.getElementById('studentSubjectName');
     if (condition == true){
             inputElement.setCustomValidity('Invalid input');
             inputElement.classList.remove('is-valid');
             inputElement.classList.add('is-invalid');
+            coupleElement.classList.remove('is-invalid');
+            coupleElement.classList.remove('is-valid');
             $('#sectionStudIDError').text('Section ID already exists in table');
         }
         else{
@@ -170,13 +173,19 @@ $('#studentSubjectID').on('keyup', function () {
             success: function(data) {
                 console.log(data=='');
                 if (data != ''){
+                    $('#sectionStudNameError').text('');
+                    $('#sectionStudIDError').text('');
                     $('#sectionStudIDError').text('');
                     inputElement.setCustomValidity('');
+                    coupleElement.setCustomValidity('');
                     inputElement.classList.remove('is-invalid');
                     inputElement.classList.add('is-valid');
+                    coupleElement.classList.remove('is-invalid');
+                    coupleElement.classList.add('is-valid');
                     $('#studentSubjectName').val(data);
                 }
                 else{
+                    $('#studentSubjectName').val('');
                     inputElement.setCustomValidity('Invalid input');
                     inputElement.classList.remove('is-valid');
                     inputElement.classList.add('is-invalid');
@@ -200,6 +209,7 @@ $('#studentSubjectName').on('input',function(){
         var dropdown = $('#myDropdown');
         dropdown.empty();
         const inputElement = document.getElementById('studentSubjectName');
+        const coupleElement = document.getElementById('studentSubjectID');
         $.ajax({
             method: "POST",
             headers: {
@@ -209,17 +219,47 @@ $('#studentSubjectName').on('input',function(){
             url: "{{ route('get_all_students') }}",
             data: { input_data: $(this).val()},
             success: function(response) {
-                $('#studentSubjectID').val(response);
                 if(response != ''){
-                    $('#sectionStudNameError').text('');
-                    inputElement.setCustomValidity('');
-                    inputElement.classList.remove('is-invalid');
-                    inputElement.classList.add('is-valid');
+                    const allStudentID = document.querySelectorAll('#IDCheckVar');
+                    let condition = false;
+
+                    allStudentID.forEach(element => {
+                        console.log(element.textContent);
+                        if (element.textContent == response){
+                            condition = true;
+                        }
+                    });
+                    if (condition == false){
+                        $('#studentSubjectID').val(response);
+                        $('#sectionStudNameError').text('');
+                        $('#sectionStudIDError').text('');
+                        inputElement.setCustomValidity('');
+                        coupleElement.setCustomValidity('');
+                        inputElement.classList.remove('is-invalid');
+                        inputElement.classList.add('is-valid');
+                        coupleElement.classList.remove('is-invalid');
+                        coupleElement.classList.add('is-valid');
+                    }
+                    else{
+                        $('#studentSubjectID').val('');
+                        $('#studentSubjectName').val('');
+                        inputElement.setCustomValidity('Invalid input');
+                        coupleElement.classList.remove('is-valid');
+                        coupleElement.classList.add('is-invalid');
+                        inputElement.classList.remove('is-valid');
+                        inputElement.classList.add('is-invalid');
+                        $('#sectionStudNameError').text('Student already exists in table');
+                    }
+                    
                 }
                 else{
+                    $('#studentSubjectID').val(response);
+                    $('#sectionStudIDError').text('');
                     inputElement.setCustomValidity('Invalid input');
                     inputElement.classList.remove('is-valid');
                     inputElement.classList.add('is-invalid');
+                    coupleElement.classList.remove('is-valid');
+                    coupleElement.classList.remove('is-invalid');
                     $('#sectionStudNameError').text('Input incomplete or Student does not exist');
                 }
                 /*
@@ -310,10 +350,15 @@ $('#addStudent').on('click', function () {
         document.getElementById("total_students").textContent = tableRows;
 
         // clear validation shits
-        const inputElement = document.getElementById('studentSubjectID');
+        let inputElement = document.getElementById('studentSubjectID');
         inputElement.classList.remove('is-valid');
         inputElement.setCustomValidity('');
         $('#sectionStudIDError').text('');
+
+        inputElement = document.getElementById('studentSubjectName');
+        inputElement.classList.remove('is-valid');
+        inputElement.setCustomValidity('');
+        $('#sectionStudNameError').text('');
   }
 })
 $(document).on('click', '.btnDelete', function(){
