@@ -36,6 +36,7 @@
                                 <div class="col-md-6 input-field"> 
                                     <label for="grade_level" class="input-title">Grade Level</label>   
                                     <select name="grade_level" class="form-control form-select" placeholder="Choose Department ID" id="grade_level" required>
+                                        <option value="" disabled selected="selected">Choose a Grade Level</option>
                                         <option value="1">Level 1</option>
                                         <option value="2">Level 2</option>
                                         <option value="3">Level 3</option>
@@ -80,7 +81,11 @@
                                 <div class="form-outline">
                                     <label for="subj_id" class="input-title">Student Name</label>
                                     <input type="text" class="form-control form-control-sm" placeholder="Rizal, Jose" id="studentSubjectName" name="studentSubjectName" required>
+                                    <div id="myDropdown"></div>
                                     <div class="valid-feedback">Looks good!</div>
+                                    <div class="is-invalid" role="alert">
+                                        <span id="sectionStudNameError"></span>
+                                    </div>
                                 </div>
                                 </div>
                             
@@ -100,7 +105,7 @@
                                         <th>Student ID</th>
                                         <th>First Name</th>
                                         <th>Last Name</th>
-                                        <th style="width:20px;"></th>
+                                        <th style="width:50px;"></th>
                                         </tr>
                                     </thead>
                                     <tbody id="student_list">
@@ -187,6 +192,55 @@ $('#studentSubjectID').on('keyup', function () {
         inputElement.classList.remove('is-valid');
         inputElement.classList.add('is-invalid');
         $('#sectionStudIDError').text('Input a 9 digit integer');
+    }
+});
+
+$('#studentSubjectName').on('input',function(){
+    if ($(this).val().length >= 3){
+        var dropdown = $('#myDropdown');
+        dropdown.empty();
+        const inputElement = document.getElementById('studentSubjectName');
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('get_all_students') }}",
+            data: { input_data: $(this).val()},
+            success: function(response) {
+                $('#studentSubjectID').val(response);
+                if(response != ''){
+                    $('#sectionStudNameError').text('');
+                    inputElement.setCustomValidity('');
+                    inputElement.classList.remove('is-invalid');
+                    inputElement.classList.add('is-valid');
+                }
+                else{
+                    inputElement.setCustomValidity('Invalid input');
+                    inputElement.classList.remove('is-valid');
+                    inputElement.classList.add('is-invalid');
+                    $('#sectionStudNameError').text('Input incomplete or Student does not exist');
+                }
+                /*
+                let counter = 0;
+                response.forEach(function(option){
+                    var optionHtml = '<div class="dropdown-option">' + option + '</div>';
+                    dropdown.append(optionHtml)
+                    counter = counter + 1;
+                });
+                if (counter != 0){
+                    dropdown.show();
+                }
+                else{
+                    dropdown.hide();
+                }*/
+            }
+
+        });
+    }
+    else{
+        $('#studentSubjectID').val('');
     }
 });
 
