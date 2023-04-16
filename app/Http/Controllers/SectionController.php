@@ -19,8 +19,9 @@ class SectionController extends Controller
         $nameID = $last . ", " . $first;
         $role = User::where('id','=',$incoming_id)->value('role');
         $doesExist = User::where('id','=',$incoming_id)->get();
+        $isEnrolled = User::where('id','=',$incoming_id)->value('is_enrolled');
         # if the it is not a student or if it does not exist
-        if (($role != 2) || ($nameID == ', ') || ($doesExist->count()==0)){
+        if (($role != 2) || ($nameID == ', ') || ($doesExist->count()==0) || ($isEnrolled == 1)){
             return null;
         }
         return $nameID;
@@ -50,19 +51,14 @@ class SectionController extends Controller
         if($firstNameFlag){
             $query = User::where('last','=',$lastName)
                             ->where('first','=',$firstName)
-                            ->where('role','=',2)->get();
+                            ->where('role','=',2)
+                            ->whereNull('is_enrolled')
+                            ->get();
         }
         else{
             return '';
-            $query = User::where('last','like','%'.$lastName.'%')
-                            ->where('role','=',2)->get();
         }
         return $query->value('id');
-        /*$results = $query->pluck('last', 'first')->map(function ($last, $first) {
-            return $last.', '.$first;
-        })->values()->toArray();*/
-
-        return $results;
     }
 
     function DataInsert(Request $request){

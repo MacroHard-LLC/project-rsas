@@ -91,7 +91,7 @@
                             
                                 <div class="col-md-2 input-field float-end">
                                     <div class="form-group pt-3">
-                                        <button type='button' class="btn btn-primary create" id="addStudent" name="addStudent"><i class="fa-solid fa-user-plus"></i>  Add</button>
+                                        <button type='button' class="btn btn-primary create" id="addStudent" name="sectionAddStudent" id="sectionAddStudent" onclick="finishVal()"><i class="fa-solid fa-user-plus"></i>  Add</button>
                                     </div>
                                 </div>
 
@@ -117,8 +117,8 @@
                             <i style="font-size:small;">Total Number of Students: <span id="total_students">0</span></i> <!--dunno how to do counters pud t.t-->
 
                             <div class="form-group pt-5 float-end" id="submission">
-                                <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
-                                <button class="btn btn-primary create" type="submit" id="sectionButtonSubmit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
+                                <span class="submit-reminder me-3" style="visibility:hidden;" id="sectionSubmitLabel">Double-check the information before pressing the button</span>
+                                <button class="btn btn-primary create" type="submit" id="sectionButtonSubmit" style="visibility:hidden;"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                             </div>
                         </div>
 
@@ -204,6 +204,36 @@ $('#studentSubjectID').on('keyup', function () {
     }
 });
 
+function finishVal(){
+    console.log(($('#sectionSubID').val()!='') && ($('#sectionGradeLevel').val()!='') && ($('#sectionAdviserID').val()!=''));
+    if (($('#sectionSubID').val()!='') && ($('#sectionGradeLevel').val()!='') && ($('#sectionAdviserID').val()!='')){
+        $('#sectionButtonSubmit').css('visibility','visible');
+        $('#sectionSubmitLabel').css('visibility','visible');
+    }
+    else{
+        $('#sectionSubmitLabel').css('visibility','hidden');
+        $('#sectionButtonSubmit').css('visibility','hidden');
+    }
+}
+
+$('#sectionSubID,#sectionGradeLevel,#sectionAdviserID').on('input click',function(){
+    let numberStudents = document.getElementById("total_students").textContent;
+    console.log($(this).attr('id'));
+    if ($(this).attr('id')=='sectionAddStudents'){
+        console.log('fuck');
+        numberStudents = numberStudents + 1;
+    }
+    console.log(numberStudents);
+    if (($('#sectionSubID').val()!='') && ($('#sectionGradeLevel').val()!='') && ($('#sectionAdviserID').val()!='') && (numberStudents > 0)){
+        $('#sectionButtonSubmit').css('visibility','visible');
+        $('#sectionSubmitLabel').css('visibility','visible');
+    }
+    else{
+        $('#sectionSubmitLabel').css('visibility','hidden');
+        $('#sectionButtonSubmit').css('visibility','hidden');
+    }
+});
+
 $('#studentSubjectName').on('input',function(){
     if ($(this).val().length >= 3){
         var dropdown = $('#myDropdown');
@@ -219,6 +249,8 @@ $('#studentSubjectName').on('input',function(){
             url: "{{ route('get_all_students') }}",
             data: { input_data: $(this).val()},
             success: function(response) {
+                console.log(response == '');
+                console.log(response);
                 if(response != ''){
                     const allStudentID = document.querySelectorAll('#IDCheckVar');
                     let condition = false;
