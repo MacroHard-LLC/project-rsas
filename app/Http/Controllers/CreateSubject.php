@@ -98,4 +98,10 @@ class CreateSubject extends Controller
     //}
         echo('user sucess');
     }
+
+    public function destroy(Request $request){
+        // Subject_table::find($request->id)->update(['is_deleted' => 1]);
+        Subject_table::where('id', $request->id)->delete();
+        return back()->with('message', 'Subject deleted successfully');
+    }
 }

@@ -1,7 +1,10 @@
 <link rel="stylesheet" href="{{ asset('css/createsub.css') }}">
     @extends('master')
+
     @section('content')
+
     @include('subjects.newsub')
+    @include('subjects.delete')
 
 <br>
 <div class="container-fluid d-flex table-title">
@@ -26,6 +29,7 @@
               </ul> --}}
 
                 <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/subjects">All Levels</a></li>
                     @for ($i = 1; $i < 11; $i++)
                         <li><a class="dropdown-item" href="/subjects/?grlvl={{$i}}">Grade {{$i}}</a></li>
                     @endfor
@@ -52,6 +56,7 @@
             </tr>
 
             @unless(count($subjects) == 0)
+            <script src="{{ asset('js/subjectsIndex.js') }}"></script>
             @foreach($subjects as $subject)
             <tr>
                 <td><i class="fa-solid fa-circle icon-baby-blue"></td>
@@ -67,7 +72,7 @@
                 <td>{{$year_end}}</td>
                 <td>
                     <a class="btn btn-primary" role="button" href="#"><i class="fa-regular fa-pen-to-square icon-white"></i></a>
-                    <a class="btn btn-primary" role="button" href="#"><i class="fa-solid fa-trash-can icon-white"></i></a>
+                    <a class="btn btn-primary" role="button" onclick="deleteModal({{$subject}})"><i class="fa-solid fa-trash-can icon-white"></i></a>
                 </td>
             </tr>
             @endforeach
