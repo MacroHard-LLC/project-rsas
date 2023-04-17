@@ -39,10 +39,8 @@ Route::get('/subjects/create',[CreateSubject::class, 'CreateSubjectForm']);
 Route::post('/subjects', [CreateSubject::class, 'DataInsert'])->name('register_sub');
 Route::post('/subjects-check', [CreateSubject::class, 'CheckSubIdExist'])->name('check_id');
 
-//temporary routing -yza
-Route::get('/subject', function(){
-    return view('subjects.viewsub');
-});
+// Show Subjects
+Route::get('/subjects', [CreateSubject::class, 'CreateSubjectIndex']);
 
 
 // goes to the homepage

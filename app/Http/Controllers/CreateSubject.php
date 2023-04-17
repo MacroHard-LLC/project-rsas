@@ -8,15 +8,17 @@ use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
-use App\Models\Subject_table; 
+use App\Models\Subject_table;
 use App\Models\User;
-use App\Models\Schedule_table; 
-use App\Models\Machine_table;   
+use App\Models\Schedule_table;
+use App\Models\Machine_table;
 
 class CreateSubject extends Controller
 {
     function CreateSubjectIndex(){
-        return view('subjects.index');
+        return view('subjects.viewsub', [
+            'subjects' => Subject_table::latest('added_on')->filter(request(['grlvl']))->paginate(15)
+        ]);
     }
 
     function CreateSubjectForm(){
@@ -48,9 +50,9 @@ class CreateSubject extends Controller
             'year_st' => ['required'],
             'year_end' => ['required'],
         ]);
-        
 
-        
+
+
         $subject = new Subject_table;
         $subject->grade_level = $formFields['grade_level'];
         $subject->id = $formFields['sub_id'];
@@ -90,7 +92,7 @@ class CreateSubject extends Controller
         $sched->save();
 
         #$isUserSuccess = User_table::where('id','=',$instructor_id);
-        
+
         // if($isInsertSuccess && $isSchedSuccess) echo '<h1>Create Subject Success</h1>';
        // else echo '<h1>Create Subject FAILED </h1>';*/
     //}
