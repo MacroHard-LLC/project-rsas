@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title white-label"><i class="fa-solid fa-circle"></i> DELETE SUBJECT</h5>
+                <h5 class="modal-title white-label"><i class="fa-solid fa-circle icon-white"></i> DELETE SUBJECT</h5>
             </div>
             <form method="POST" action="{{route('deleteSubject')}}">
                 <div class="modal-body text-center">
