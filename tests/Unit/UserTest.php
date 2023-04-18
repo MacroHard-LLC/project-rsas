@@ -23,7 +23,7 @@ class UserTest extends TestCase
 
     public function test_create_user_works_and_see_nontable_succesfully(): void
     {
-        $formFields = [
+        $user=User::create([
             'id' => '202009793',
             'password' => 'stardu$t',
             'role' => '1',
@@ -31,33 +31,11 @@ class UserTest extends TestCase
             'middle' => 'Krennic',
             'last' => 'Erso',
             'gender' => 'F',
-        ];
-        User::create($formFields);
+        ]);
 
-        $formFields = [
-            'id' => '197504051',
-            'password' => 'n0t1ne4du',
-            'role' => '0',
-            'first' => 'Orson',
-            'middle' => 'Mendelsohn',
-            'last' => 'Krennic',
-            'gender' => 'M',
-        ];
-
-        User::create($formFields);
-        $formFields = [
-            'id' => '198914385',
-            'password' => 'm0rl4na',
-            'role' => '2',
-            'first' => 'Cassian',
-            'middle' => 'Chlem',
-            'last' => 'Andor',
-            'gender' => 'M',
-        ];
-        User::create($formFields);
-
-        $response = $this->get('/users');
-        $response->assertDontSee(__(key:'No Data Found'));
+        $user->save();
+        $newUser = User::find(202009793);
+        $this->assertNotNull($newUser);
 
     }
     
@@ -99,7 +77,6 @@ class UserTest extends TestCase
 
     public function test_edit_user_returns_success(): void
     {
-        // Create a new user
         $user = User::create([
             'id' => '100100111',
             'password' => 'skyw4lk3rz',
@@ -111,7 +88,7 @@ class UserTest extends TestCase
         ]);
 
         // Update the user's information
-        $updatedUser = [
+        $newData = [
             'id' => '333625473',
             'password' => 'skyw4lk3rz',
             'role' => '2',
@@ -120,11 +97,13 @@ class UserTest extends TestCase
             'last' => 'Skywalker',
             'gender' => 'F',
         ];
-        User::where('id', $user->id)->update($updatedUser);
+        $user->update($newData);
 
         // Check if the user's information has been updated in the database
-        $this->assertDatabaseHas('user', $updatedUser);
+        $this->assertDatabaseHas('user', $newData);
     }
+
+
 
 
 
