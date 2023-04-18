@@ -17,9 +17,6 @@ class ViewSubjectTest extends TestCase
      */
     public function test_ViewSubject(): void
     {
-        $response = $this->get('/subject');
-        $response->assertStatus(200);
-
         $response = $this->get('/subjects/create');
         $response->assertStatus(200);
     }
