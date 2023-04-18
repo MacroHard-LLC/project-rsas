@@ -98,6 +98,13 @@ a.nav-link{
     color: white;
 }
 
+.white-label{
+    font-family: 'Poppins';
+    font-weight: 700;
+    color: white;
+}
+
+
 button.btn-secondary,button.btn-secondary:hover,button.btn-secondary:active,
 button.btn-secondary:active:focus{
     font-family: 'Poppins';
