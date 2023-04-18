@@ -297,6 +297,7 @@ $('#sectionAdviserID').on('keyup', function () {
             url: "{{ route('get_adviser_id') }}",
             data: { input_data: $(this).val() },
             success: function(data) {
+                console.log(data);
                 if (data == true){
                     $('#sectionAdviserIDError').text('');
                     inputElement.setCustomValidity('');

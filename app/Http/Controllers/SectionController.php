@@ -31,7 +31,7 @@ class SectionController extends Controller
         $incoming_id = $request->input_data;
         $doesExist = User::where('id','=',$incoming_id)->get();
         $role = User::where('id','=',$incoming_id)->value('role');
-        if (($role == 2) && ($doesExist->count() == 1)){
+        if (($role == 0) && ($doesExist->count() == 1)){
             return true;
         }
         return false;
@@ -51,7 +51,7 @@ class SectionController extends Controller
         if($firstNameFlag){
             $query = User::where('last','=',$lastName)
                             ->where('first','=',$firstName)
-                            ->where('role','=',2)
+                            ->where('role','=',1)
                             ->whereNull('is_enrolled')
                             ->get();
         }
