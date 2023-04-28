@@ -11,6 +11,30 @@
                     @csrf
                     <fieldset>
                         <div class="row mb-3">
+                            <div class="col-md-6 input-field">
+                                <div class="form-outline">
+                                    <label for="subj_id" class="input-title">Section ID</label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="sectionID" id="sectionID" pattern="[0-9]+" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="is-invalid" id="idError">
+                                        <span id="sectionIDError"></span>
+                                    </div>
+                                </div>
+                            </div>
+                                
+                            <div class="col-md-6 input-field">
+                                <div class="form-outline">
+                                    <label for="subj_id" class="input-title">Section Name</label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Enter Section Name" name="sectionNameID" id="sectionNameID" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="is-invalid" id="idError">
+                                        <span id="sectionNameIDError"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                                 <div class="col-md-6 input-field"> 
                                     <label for="grade_level" class="input-title">Grade Level</label>   
                                     <select name="grade_level" class="form-control form-select" placeholder="Choose Department ID" id="sectionGradeLevel" required>
