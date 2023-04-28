@@ -21,10 +21,11 @@ class User extends Authenticatable
         'id',
         'password',
         'role',
-        'first',
-        'middle',
-        'last',
-        'gender',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'sex',
+        'is_enrolled',
         'is_deleted',
     ];
 

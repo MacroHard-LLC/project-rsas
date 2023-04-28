@@ -35,15 +35,15 @@
                         <div class="container pt-2 input-field">
                             <div class="input-title pb-2">User Role</div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="role" id="studentCheck" value="1" required>
+                                <input class="form-check-input" type="radio" name="role" id="studentCheck" value="student" required>
                                 <label class="form-check-label" for="studentCheck">Student</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="role" id="adviserCheck" value="2" required>
+                                <input class="form-check-input" type="radio" name="role" id="adviserCheck" value="adviser" required>
                                 <label class="form-check-label" for="adviserCheck">Adviser</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="role" id="adminCheck" value="0" required>
+                                <input class="form-check-input" type="radio" name="role" id="adminCheck" value="admin" required>
                                 <label class="form-check-label" for="adminCheck">Administrator</label>
                             </div>
                             <div class="is-invalid" id="roleError">
@@ -58,40 +58,40 @@
                             <div class="row my-3">
                                 <div class="col-6 col-md-4 input-field">
                                     <label for="first" class="input-title">First Name</label>
-                                    <input type="text" class="form-control form-control-sm invalid-border" placeholder="Ex. Jose" name="first" id="firstInput" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" aria-describedby="firstError" required>
-                                    <div class="is-invalid" id="firstError">
+                                    <input type="text" class="form-control form-control-sm invalid-border" placeholder="Ex. Jose" name="first_name" id="first_nameInput" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" aria-describedby="firstError" required>
+                                    <div class="is-invalid" id="first_nameError">
                                         <span></span>
                                     </div>
                                 </div>
 
                                 <div class="col-6 col-md-4 input-field">
                                     <label for="middle" class="input-title">Middle Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Protacio" name="middle" id="middleInput" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" aria-describedby="middleError" required>
-                                    <div class="is-invalid" id="middleError">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Protacio" name="middle_name" id="middle_nameInput" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" aria-describedby="middleError" required>
+                                    <div class="is-invalid" id="middle_nameError">
                                         <span></span>
                                     </div>
                                 </div>
 
                                 <div class="col-6 col-md-4 input-field">
                                     <label for="last" class="input-title">Last Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Rizal" name="last" id="lastInput" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" aria-describedby="lastError" required>
-                                    <div class="is-invalid" id="lastError">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Ex. Rizal" name="last_name" id="last_nameInput" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" aria-describedby="lastError" required>
+                                    <div class="is-invalid" id="last_nameError">
                                         <span></span>
                                     </div>
                                 </div>
                             </div>
 
-                            <!--Gender-->
+                            <!--Sex-->
                             <div class="input-title pb-2">Gender</div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="maleInput" value="M" required>
+                                <input class="form-check-input" type="radio" name="sex" id="maleInput" value="M" required>
                                 <label class="form-check-label" for="male">Male</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="femaleInput" value="F" required>
+                                <input class="form-check-input" type="radio" name="sex" id="femaleInput" value="F" required>
                                 <label class="form-check-label" for="female">Female</label>
                             </div>
-                            <div class="is-invalid" role="alert" id="genderError">
+                            <div class="is-invalid" role="alert" id="sexError">
                                 <span></span>
                             </div>
 
@@ -143,7 +143,7 @@
                     if(response.status === 422) {
                         let errors = response.responseJSON.errors;
                         Object.keys(errors).forEach(function (key) {
-                            if (key != "role" || key != "gender"){
+                            if (key != "role" || key != "sex"){
                                 $("#" + key + "Input").removeClass("is-valid");
                                 $("#" + key + "Input").addClass("is-invalid");
                             }

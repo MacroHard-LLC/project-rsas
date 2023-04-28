@@ -20,10 +20,10 @@ class UserController extends Controller
             'id' => ['required','unique:user,id','integer','digits:9'],
             'password' => ['required','min:1','max:20'],
             'role' => 'required',
-            'first' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
-            'middle' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
-            'last' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
-            'gender' => 'required',
+            'first_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'middle_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'last_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'sex' => 'required',
         ]);
 
         // Hash Password
@@ -40,10 +40,10 @@ class UserController extends Controller
             'id' => ['required',Rule::unique('user','id')->ignore($id),'integer','digits:9'],
             'password' => ['required','min:1','max:20'],
             'role' => 'required',
-            'first' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
-            'middle' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
-            'last' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
-            'gender' => 'required',
+            'first_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'middle_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'last_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'sex' => 'required',
         ]);
 
         User::find($id)->update($formFields);
