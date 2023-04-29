@@ -1,12 +1,12 @@
 <div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="updateUserModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class='modal-content'>
             <div class='modal-header'>
                 <h1 class="modal-title fs-5 white-label"><i class="fa-solid fa-circle"></i> EDIT USER</h1>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body mx-5 my-3">
+            <div class="modal-body">
                     <form id="updateUserForm" class="needs-validation" novalidate>
                     @csrf
                     <fieldset>
@@ -105,7 +105,7 @@
                         <input type="hidden" name="originalID" id="originalID" value="">
 
                         <div class="form-group pt-3 float-end" id="submissionU">
-                            <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
+                            <!--<span class="submit-reminder me-3">Double-check the information before pressing the button</span>-->
                             <button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk fa-lg icon-white"></i> Save</button>
                         </div>
                     </div>

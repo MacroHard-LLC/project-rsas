@@ -113,7 +113,7 @@
                         </div>
 
                         <div class="form-group pt-3 float-end" id="submission">
-                            <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
+                            <!--<span class="submit-reminder me-3">Double-check the information before pressing the button</span>-->
                             <button class="btn btn-primary" type="submit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                         </div>
                     </div>
