@@ -1,13 +1,13 @@
 
 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class='modal-content'>
             <div class='modal-header'>
                 <h1 class="modal-title fs-5 white-label"><i class="fa-solid fa-circle"></i> CREATE NEW USER</h1>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body mx-5 my-3">
+            <div class="modal-body mx-2 my-2">
                 <form method="POST" action="/users" id="registerForm" class="needs-validation" novalidate>
                     @csrf
                     <fieldset>
@@ -32,23 +32,37 @@
                         </div>
 
                         <!--User Role-->
-                        <div class="container pt-2 input-field">
-                            <div class="input-title pb-2">User Role</div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="role" id="studentCheck" value="student" required>
-                                <label class="form-check-label" for="studentCheck">Student</label>
+                        <div class="row mb-3">
+                            <div class="col-md-6 input-field">
+                                <div class="input-title">User Role</div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="role" id="studentCheck" value="student" required>
+                                    <label class="form-check-label" for="studentCheck">Student</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="role" id="adviserCheck" value="adviser" required>
+                                    <label class="form-check-label" for="adviserCheck">Adviser</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="role" id="adminCheck" value="admin" required>
+                                    <label class="form-check-label" for="adminCheck">Admin</label>
+                                </div>
+                               
+                                <div class="is-invalid" id="roleError">
+                                    <span></span>
+                                </div>
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="role" id="adviserCheck" value="adviser" required>
-                                <label class="form-check-label" for="adviserCheck">Adviser</label>
+
+                            <div class="col-md-6 input-field">
+                                {{-- If student (RFID)--}}
+                                <div class="form-outline pb-2" id="rfid">
+                                    <label for="rfid" class="input-title">RFID Number</label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="rfid" pattern="[0-9]+" id='rfid_value'>
+                                </div> 
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="role" id="adminCheck" value="admin" required>
-                                <label class="form-check-label" for="adminCheck">Administrator</label>
-                            </div>
-                            <div class="is-invalid" id="roleError">
-                                <span></span>
-                            </div>
+                        </div>
+
+                        
 
 
                         <!--If student or adviser-->
@@ -95,12 +109,7 @@
                                 <span></span>
                             </div>
 
-                            {{-- If student (RFID)
-                            <div class="form-outline pb-2 no-display" id="rfid">
-                                <hr>
-                                <label for="rfid" class="input-title">RFID Number</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="rfid" pattern="[0-9]+" id='rfid_value'>
-                            </div> --}}
+                            
                         </div>
 
                         <div class="form-group pt-3 float-end" id="submission">

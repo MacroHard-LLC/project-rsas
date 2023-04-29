@@ -10,7 +10,7 @@
                 <form method="POST" action="/subjects" id="registerSubForm" class="needs-validation" novalidate>
                     @csrf
                     <fieldset>
-                        <div class="row my-3 gy-4">
+                        <div class="row my-2">
 
                             <div class="col-md-6 input-field">
                                 <label for="id" class="input-title" >Subject ID</label>
@@ -30,13 +30,7 @@
 
                             <div class="col-md-6 w-50 input-field">
                                 <label for="grade_level" class="input-title">Grade Level</label>
-                                <select name="grade_level" class="form-control form-select" placeholder="Choose Department ID" id="grade_level" required>
-                                    <option value="1">Level 1</option>
-                                    <option value="2">Level 2</option>
-                                    <option value="3">Level 3</option>
-                                    <option value="4">Level 4</option>
-                                    <option value="5">Level 5</option>
-                                    <option value="6">Level 6</option>
+                                <select name="grade_level" class="form-select" id="grade_level" required>
                                     <option value="7">Level 7</option>
                                     <option value="8">Level 8</option>
                                     <option value="9">Level 9</option>
@@ -118,7 +112,7 @@
 
                         <div class="form-group pt-3 float-end">
                             <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
-                            <button class="btn btn-primary create" type="submit" id="sbmt_btn" disabled><i class="fa-solid fa-square-plus icon-white"></i>Create</button>
+                            <button class="btn btn-primary" type="submit" id="sbmt_btn" disabled><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                         </div>
 
 

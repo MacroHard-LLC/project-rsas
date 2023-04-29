@@ -70,7 +70,7 @@ function showCreateUserClientError(input){
         } else if (input.validity.tooShort){
             $("#" + input.getAttribute("name") + "Error").children("span").text("User ID must be 9 digits.");
         }
-    } else if (input_name == "first_name" || input_name == "middle_name" || input_name == "last_name"){
+    } else if (input_name == "first" || input_name == "middle" || input_name == "last"){
         if (input.validity.patternMismatch){
             input_name = input_name.charAt(0).toUpperCase() + input_name.slice(1);
             $("#" + input.getAttribute("name") + "Error").children("span").text(input_name + " name must only be alphabetic characters.");

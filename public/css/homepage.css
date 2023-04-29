@@ -91,7 +91,7 @@ button.btn:active:focus{
     font-weight: 700;
     font-size: large;
     letter-spacing: 0.1rem;
-    padding: 0.2rem 0.6rem;
+    padding: 5rem;
 }
 
 .form-control {
