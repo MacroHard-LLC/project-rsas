@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>RFID-Based School Attendance System</title>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   @vite(['resources/js/app.js'])
@@ -14,7 +15,7 @@
     <!--NAVBAR-->
     <nav class="navbar navbar-expand-sm navbar-custom navbar-dark">
         <div class="container-fluid">
-            <a href="/home" class="navbar-brand"><i class="fa-solid fa-circle icon-white"></i> RFID Attendance System</a>
+            <a href="/home" class="navbar-brand"><i class="fa-solid fa-clipboard-user icon-white"></i> RFID Attendance System</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -37,10 +38,10 @@
         </div>
     </nav>
 
-
     @yield('content')
     @yield('scripts')
-
+    @yield('create-user-scripts')
+    @yield('update-user-scripts')
 
 </body>
 

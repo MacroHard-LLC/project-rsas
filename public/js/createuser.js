@@ -45,13 +45,13 @@ window.addEventListener('load', function() {
                     } else {
                         input.classList.remove('is-valid');
                         input.classList.add('is-invalid');
-                        showClientError(input);
+                        showCreateUserClientError(input);
                     }
                 }
-                var radios_selected = ($('input[type="radio"]:checked').length > 1);
+                var radios_selected = $("#registerForm").children().find($('input[type="radio"]:checked'));
                 var form_control = $("#registerForm").children().find('.form-control')
                 var valid_form_control = $("#registerForm").children().find('.form-control.is-valid')
-                var is_valid = form_control.length === valid_form_control.length && radios_selected;
+                var is_valid = form_control.length === valid_form_control.length && radios_selected.length > 1;
                 if (is_valid){
                     document.getElementById("submission").style.visibility = "visible";
                 } else {
@@ -62,7 +62,7 @@ window.addEventListener('load', function() {
     );
 });
 
-function showClientError(input){
+function showCreateUserClientError(input){
     var input_name = input.getAttribute("name");
     if (input_name == "userid"){
         if (input.validity.patternMismatch){

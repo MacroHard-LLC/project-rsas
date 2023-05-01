@@ -25,6 +25,7 @@ class User extends Authenticatable
         'middle',
         'last',
         'gender',
+        'is_deleted',
     ];
 
     public function scopeFilter($query, array $filters){

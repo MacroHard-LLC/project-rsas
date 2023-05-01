@@ -2,8 +2,8 @@
     <div class="modal-dialog">
         <div class='modal-content'>
             <div class='modal-header'>
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Create New Subject</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h1 class="modal-title fs-5" id="registerModalLabel"><i class="fa-solid fa-circle"></i> CREATE NEW SUBJECT</h1>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body">

@@ -46,6 +46,11 @@ Route::post('/section-request', [SectionController::class, 'GetStudentName'])->n
 Route::post('/section-adviser-request', [SectionController::class, 'DoesAdviserExist'])->name('get_adviser_id');
 Route::post('/section-get-students', [SectionController::class, 'GetAllStudents'])->name('get_all_students');
 Route::post('/section/register',[SectionController::class, 'DataInsert'])->name('register_section');
+// Show Subjects
+Route::get('/subjects', [CreateSubject::class, 'CreateSubjectIndex']);
+
+// Delete Subject
+Route::delete('/subjects', [CreateSubject::class, 'destroy'])->name('deleteSubject');
 
 // goes to the homepage
 // remember that this needs to have an input added later so that we will know what
@@ -59,4 +64,14 @@ Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/create', [UserController::class, 'create']);
 
 // create new user
-Route::post('/users', [UserController::class, 'store'])->name('register');
+Route::post('/users', [UserController::class, 'store'])->name('createUser');
+
+// Show Edit User Form
+Route::get('/users/{id}/edit/', [UserController::class, 'edit']);
+// Route::get('/users/{user}/edit/', [UserController::class, 'edit']);
+
+// Update User
+Route::put('/users/{id}', [UserController::class, 'update']);
+
+// Delete User
+Route::delete('/users', [UserController::class, 'destroy'])->name('deleteUser');

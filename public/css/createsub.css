@@ -1,3 +1,23 @@
+@font-face {
+    font-family: 'Oswald';
+    src: url('/fonts/Oswald-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('/fonts/SourceSansPro-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'Poppins';
+    src: url('/fonts/Poppins-Regular.ttf');
+}
+
+.table-title{
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    justify-content: center;
+}
 
 .navbar-custom {
     background-color: #98C1D9;
@@ -10,8 +30,21 @@
     letter-spacing: 0.15rem;
 }
 
+th{
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+}
+
 .icon-white {
     color:white;
+}
+
+.icon-baby-blue{
+    color:#98C1D9;
+}
+
+.icon-dark-blue{
+    color:#3D5A80;
 }
 
 a.nav-link{
@@ -38,12 +71,62 @@ a.nav-link{
     color: red;
 }
 
+.is-invalid{
+    font-family: 'Source Sans Pro', sans-serif;
+    color: red;
+    font-style: italic;
+    font-size: small;
+    display: block;
+    line-height: 1rem;
+    margin-top: 0.5rem;
+}
+
 .create {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05rem;
 }
+
+.modal-header{
+    background-color:#98C1D9;
+}
+
+#registerModalLabel{
+    font-family: 'Poppins';
+    font-weight: 700;
+    color: white;
+}
+
+.white-label{
+    font-family: 'Poppins';
+    font-weight: 700;
+    color: white;
+}
+
+
+button.btn-secondary,button.btn-secondary:hover,button.btn-secondary:active,
+button.btn-secondary:active:focus{
+    font-family: 'Poppins';
+    background-color: #6e7682;
+    border-color: #6e7682;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07rem;
+    padding: 0.2rem 0.6rem;
+}
+
+a.btn-primary, button.btn, button.btn:hover, button.btn:active,
+button.btn:active:focus{
+    font-family: 'Poppins';
+    background-color: #3d5a80;
+    border-color: #3d5a80;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07rem;
+    padding: 0.2rem 0.6rem;
+}
+
 
 .form-control {
     display: block;
