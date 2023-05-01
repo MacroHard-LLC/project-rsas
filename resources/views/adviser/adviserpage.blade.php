@@ -29,7 +29,7 @@
                     <div class="d-grid gap-5 text-center">
                     <div class="row">
                         <div class="col-md-4" style="width:300px">
-                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">View Attendance</button>
+                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/view-attendance'">View Attendance</button>
                         </div>
                         <div class="col-md-4" style="width:300px">
                         <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">View Students</button>
