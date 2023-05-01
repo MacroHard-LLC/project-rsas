@@ -32,10 +32,10 @@
                             <div class="col-6 col-md-4 input-field">
                                 <label for="grade_level" class="input-title">Grade Level</label>
                                 <select name="grade_level" class="form-select" id="grade_level" required>
-                                    <option value="7">Level 7</option>
-                                    <option value="8">Level 8</option>
-                                    <option value="9">Level 9</option>
-                                    <option value="10">Level 10</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
                                 </select>
                                 <!--validation needs to be updated, also this kind of error message makes an unnecessary bottom margin :((
                                 <div class="is-invalid" role="alert" id="gradeError" name="gradeError">
