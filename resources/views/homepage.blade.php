@@ -43,13 +43,13 @@
                     </div>
                     <div class="row mx-4">
                         <div class="col col-lg-3">
-                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/users'">View User</button>
+                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/users'">View Users</button>
                         </div>
                         <div class="col col-lg-3">
-                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">View Section</button>
+                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">View Sections</button>
                         </div>
                         <div class="col col-lg-3">
-                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/subjects'">View Subject</button>
+                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/subjects'">View Subjects</button>
                         </div>
                     </div>
                     
