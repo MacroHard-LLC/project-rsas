@@ -53,7 +53,7 @@ Route::get('/home', [HomeController::class, 'Homepage']);
 
 // goes to adviser views
 // change this once login is introduced
-Route::get('/home-adviser', [AdviserViewController::class, 'AdviserPage'] );
+Route::get('/home-adviser/{id}', [AdviserViewController::class, 'AdviserPage'] );
 Route::get('/view-attendance', [AdviserViewController::class, 'AttendancePage'] );
 
 // show users

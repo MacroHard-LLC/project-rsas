@@ -11,12 +11,12 @@
     <div class="row">
         <div class="col col-lg-2">
             <div class="section-title">GRADE LEVEL</div>
-            <div class="section-body">GRADE 10</div>
+            <div class="section-body" id="attendanceGradeLevel" name="attendanceGradeLevel">GRADE 10</div>
         </div>
 
         <div class="col-sm-6">
             <div class="section-title">ADVISER</div>
-            <div class="section-body">MS. MARY JANE D. PARKER</div>
+            <div class="section-body" id="attendanceAdviserName" name="attendanceAdviserName">MS. MARY JANE D. PARKER</div>
         </div>
 
         <div class="col col-md-auto">
@@ -41,9 +41,7 @@
     </div>
 
 
-
 <hr>
-
     <div class="container table-responsive">
 
         <div class="row">
