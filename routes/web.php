@@ -55,6 +55,8 @@ Route::get('/home', [HomeController::class, 'Homepage']);
 // change this once login is introduced
 Route::get('/home-adviser/{id}', [AdviserViewController::class, 'AdviserPage'] );
 Route::get('/view-attendance', [AdviserViewController::class, 'AttendancePage'] );
+Route::post('/view-attendance-start', [AdviserViewController::class, 'start'])->name('adviser_startup');
+
 
 // show users
 Route::get('/users', [UserController::class, 'index']);

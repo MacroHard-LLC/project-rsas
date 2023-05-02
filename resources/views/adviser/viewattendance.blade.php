@@ -12,7 +12,19 @@
     $(document).ready(function() {
         var adviserID = {{$adviserId}};
         console.log(adviserID);
-        $('#attendanceGradeLevel').text(adviserID);
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('adviser_startup') }}",
+            data: { input_data: adviserID },
+            success: function(data) {
+                console.log(data);
+                $('#attendanceAdviserName').text(data);
+            }
+            });
     });
 </script>
 
@@ -26,7 +38,7 @@
 
         <div class="col-sm-6">
             <div class="section-title">ADVISER</div>
-            <div class="section-body" id="attendanceAdviserName" name="attendanceAdviserName">MS. MARY JANE D. PARKER</div>
+            <div class="section-body"><span id="attendanceAdviserName" name="attendanceAdviserName">MS. MARY JANE D. PARKER</span></div>
         </div>
 
         <div class="col col-md-auto">
