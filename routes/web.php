@@ -53,12 +53,14 @@ Route::get('/home', [HomeController::class, 'Homepage']);
 
 // goes to adviser views
 // change this once login is introduced
-Route::get('/home-adviser', [AdviserViewController::class, 'AdviserPage'] );
+Route::get('/home-adviser/{id}', [AdviserViewController::class, 'AdviserPage'] );
 Route::get('/view-attendance', [AdviserViewController::class, 'AttendancePage'] );
 Route::get('/student-info', [AdviserViewController::class, 'StudentPage'] );
 
 //edit attendance in attendance page of adviser
 Route::get('/edit', [AdviserViewController::class, 'EditAttendance'] );
+Route::post('/view-attendance-start', [AdviserViewController::class, 'start'])->name('adviser_startup');
+
 
 // show users
 Route::get('/users', [UserController::class, 'index']);

@@ -5,6 +5,28 @@
 
 @extends('master')
 @section('content')
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var adviserID = {{$adviserId}};
+        console.log(adviserID);
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('adviser_startup') }}",
+            data: { input_data: adviserID },
+            success: function(data) {
+                console.log(data);
+                $('#attendanceAdviserName').text(data);
+            }
+            });
+    });
+</script>
 
 @include('adviser.editattendance')
 
@@ -13,12 +35,12 @@
     <div class="row">
         <div class="col col-lg-2">
             <div class="section-title">GRADE LEVEL</div>
-            <div class="section-body">GRADE 10</div>
+            <div class="section-body"><span  id="attendanceGradeLevel" name="attendanceGradeLevel">GRADE 10</span></div>
         </div>
 
         <div class="col-sm-6">
             <div class="section-title">ADVISER</div>
-            <div class="section-body">MS. MARY JANE D. PARKER</div>
+            <div class="section-body"><span id="attendanceAdviserName" name="attendanceAdviserName">MS. MARY JANE D. PARKER</span></div>
         </div>
 
         <div class="col col-md-auto">
@@ -43,9 +65,7 @@
     </div>
 
 
-
 <hr>
-
     <div class="container table-responsive">
 
         <div class="row">
@@ -98,6 +118,7 @@
 </div>
 
 </div>
+
 
 
 @endsection
