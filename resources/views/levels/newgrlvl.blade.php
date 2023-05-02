@@ -14,8 +14,7 @@
                             <div class="col-md-6 input-field">
                                 <div class="form-outline">
                                     <label for="subj_id" class="input-title">Section ID</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="sectionID" id="sectionID" pattern="[0-9]+" required>
-                                    <div class="valid-feedback">Looks good!</div>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="sectionSubId" id="sectionSubId" pattern="[0-9]+" required>
                                     <div class="is-invalid" id="idError">
                                         <span id="sectionIDError"></span>
                                     </div>
@@ -25,8 +24,7 @@
                             <div class="col-md-6 input-field">
                                 <div class="form-outline">
                                     <label for="subj_id" class="input-title">Section Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Enter Section Name" name="sectionNameID" id="sectionNameID" required>
-                                    <div class="valid-feedback">Looks good!</div>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Enter Section Name" name="GradeSectionNameID" id="GradeSectionNameID" required>
                                     <div class="is-invalid" id="idError">
                                         <span id="sectionNameIDError"></span>
                                     </div>
@@ -410,7 +408,6 @@ $('#sectionGradeLevel').on('click', function(){
     }
 });
 
-/*
 $('#sectionSubId').on('input',function(){
     let inputElement = document.getElementById('sectionSubId');
     console.log(inputElement);
@@ -426,7 +423,24 @@ $('#sectionSubId').on('input',function(){
         inputElement.classList.remove('is-valid');
         $('#sectionIDError').text('Please input a 5 digit integer');
     }
-});*/
+});
+
+$('#GradeSectionNameID').on('input',function(){
+    let inputElement = document.getElementById('GradeSectionNameID');
+    console.log(inputElement);
+    if (($('#GradeSectionNameID').val().length != 0) && (/^[a-zA-Z ]+$/.test($('#GradeSectionNameID').val()))){
+        inputElement.setCustomValidity('');
+        inputElement.classList.remove('is-invalid');
+        inputElement.classList.add('is-valid');
+        $('#sectionNameIDError').text('');
+    }
+    else{
+        inputElement.setCustomValidity('Invalid input');
+        inputElement.classList.add('is-invalid');
+        inputElement.classList.remove('is-valid');
+        $('#sectionNameIDError').text('Please input a valid string');
+    }
+});
 
 $('#registerSectionForm').submit(function (e) {
     let allStudentID = document.querySelectorAll('#IDCheckVar');
