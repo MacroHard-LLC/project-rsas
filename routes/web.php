@@ -46,6 +46,7 @@ Route::post('/section-request', [SectionController::class, 'GetStudentName'])->n
 Route::post('/section-adviser-request', [SectionController::class, 'DoesAdviserExist'])->name('get_adviser_id');
 Route::post('/section-get-students', [SectionController::class, 'GetAllStudents'])->name('get_all_students');
 Route::post('/section/register',[SectionController::class, 'DataInsert'])->name('register_section');
+Route::post('/section-get-sectionid',[SectionController::class, 'DoesSectionIdExist'])->name('get_section_id');
 // Show Subjects
 Route::get('/subjects', [CreateSubject::class, 'CreateSubjectIndex']);
 

@@ -14,7 +14,7 @@
                             <div class="col-md-6 input-field">
                                 <div class="form-outline">
                                     <label for="subj_id" class="input-title">Section ID</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="sectionSubId" id="sectionSubId" pattern="[0-9]+" required>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="sectionSubId" id="sectionSubId" pattern="[0-9]+" minlength="5" maxlength="5" required>
                                     <div class="is-invalid" id="idError">
                                         <span id="sectionIDError"></span>
                                     </div>
@@ -171,6 +171,7 @@ $('#studentSubjectID').on('keyup', function () {
             url: "{{ route('get_name_data') }}",
             data: { input_data: $(this).val() },
             success: function(data) {
+                console.log('bullshit');
                 console.log(data=='');
                 if (data != ''){
                     $('#sectionStudNameError').text('');
@@ -230,7 +231,7 @@ $('#sectionGradeLevel,#sectionAdviserID').on('input click',function(){
         numberStudents = numberStudents + 1;
     }
     console.log($('#sectionGradeLevel').val()!=null);
-    if (($('#sectionGradeLevel').val()!=null) && ($('#sectionAdviserID').val()!='') && (numberStudents > 0) && ($('#sectionAdviserID').val().length == 9)){
+    if (($('GradeSectionNameID').val() != '')&&($('#sectionSubId').val().length == 5)&&($('#sectionGradeLevel').val()!=null) && ($('#sectionAdviserID').val()!='') && (numberStudents > 0) && ($('#sectionAdviserID').val().length == 9)){
         showSubmit();
     }
     else{
@@ -412,10 +413,31 @@ $('#sectionSubId').on('input',function(){
     let inputElement = document.getElementById('sectionSubId');
     console.log(inputElement);
     if ($('#sectionSubId').val().length == 5){
-        inputElement.setCustomValidity('');
-        inputElement.classList.remove('is-invalid');
-        inputElement.classList.add('is-valid');
-        $('#sectionIDError').text('');
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('get_section_id') }}",
+            data: { input_data: $(this).val() },
+            success: function(data) {
+                console.log(data);
+                if (data == true){
+                    inputElement.setCustomValidity('');
+                    inputElement.classList.remove('is-invalid');
+                    inputElement.classList.add('is-valid');
+                    $('#sectionIDError').text('');
+                }
+                else{
+                    hideSubmit();
+                    inputElement.setCustomValidity('Invalid input');
+                    inputElement.classList.add('is-invalid');
+                    inputElement.classList.remove('is-valid');
+                    $('#sectionIDError').text('Please input a 5 digit integer');
+                }
+            }
+            }); 
     }
     else{
         inputElement.setCustomValidity('Invalid input');
@@ -452,7 +474,8 @@ $('#registerSectionForm').submit(function (e) {
     let formData = {
         allStudentID : arrayStudentID,
         adviserID : document.querySelector('#sectionAdviserID').value,
-        //sectionID : document.querySelector('#sectionSubID').value,
+        sectionID : document.querySelector('#sectionSubId').value,
+        sectionName : document.querySelector('#GradeSectionNameId').value,
         gradeLevel : document.querySelector('#sectionGradeLevel').value
     };
     console.log(formData);

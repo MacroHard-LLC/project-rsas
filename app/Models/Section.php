@@ -10,4 +10,5 @@ class Section extends Model
     use HasFactory;
 
     protected $table = 'section';
+    public $timestamps = FALSE;
 }
