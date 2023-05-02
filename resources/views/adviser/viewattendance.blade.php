@@ -5,13 +5,23 @@
 
 @extends('master')
 @section('content')
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var adviserID = {{$adviserId}};
+        console.log(adviserID);
+        $('#attendanceGradeLevel').text(adviserID);
+    });
+</script>
 
 <div class="container mx-10 my-5">
 <div class="border rounded px-4 pt-5 pb-3 my-2">
     <div class="row">
         <div class="col col-lg-2">
             <div class="section-title">GRADE LEVEL</div>
-            <div class="section-body" id="attendanceGradeLevel" name="attendanceGradeLevel">GRADE 10</div>
+            <div class="section-body"><span  id="attendanceGradeLevel" name="attendanceGradeLevel">GRADE 10</span></div>
         </div>
 
         <div class="col-sm-6">
@@ -93,6 +103,7 @@
 </div>
 
 </div>
+
 
 
 @endsection
