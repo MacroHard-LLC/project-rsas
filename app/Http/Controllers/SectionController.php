@@ -3,11 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-
+use App\Models\Section;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class SectionController extends Controller
 {
+    // Show list of grade levels
+    public function index() {
+        return view('levels.index');
+    }
+
+    // Show a section
+    public function show($grade_level) {
+        $section = Section::where('grade_level','=',$grade_level)->first();
+        $students = Student::where('section_id','=',$section->id)->get();
+        $users = User::where('id','=',$students->id)->get();
+        $adviser = User::where('id','=',$section->adviser_id)->first();
+        return view('levels.show', [
+            'section' => $section,
+            'students' => $students,
+            'users'
+            'adviser' => $adviser,
+        ]);
+    }
+
     function CreateSection(){
         return view('levels.newgrlvl');
     }

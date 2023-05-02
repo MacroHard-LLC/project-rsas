@@ -75,3 +75,9 @@ Route::put('/users/{id}', [UserController::class, 'update']);
 
 // Delete User
 Route::delete('/users', [UserController::class, 'destroy'])->name('deleteUser');
+
+// Show list of grade levels
+Route::get('/gradelevels', [SectionController::class, 'index']);
+
+// Show a section
+Route::get('/gradelevels/{grade}', [SectionController::class, 'show']);

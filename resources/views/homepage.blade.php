@@ -36,7 +36,7 @@
                         <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/users'">View User</button>
                         </div>
                         <div class="col-md-4" style="width:300px">
-                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">View Section</button>
+                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/gradelevels'">View Section</button>
                         </div>
                         <div class="col-md-4" style="width:300px">
                         <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/subjects'">View Subject</button>
