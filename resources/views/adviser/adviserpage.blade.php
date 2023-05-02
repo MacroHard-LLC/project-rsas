@@ -5,9 +5,6 @@
 @extends('master')
 @section('content')
 
-{{-- Modular Pages--}}
-@include('subjects.newsub')
-@include('users.create')
 
 <div class="vertical-center">
     <div class="container-fluid">
@@ -32,7 +29,7 @@
                         <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/view-attendance'">View Attendance</button>
                         </div>
                         <div class="col-md-4" style="width:300px">
-                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">View Students</button>
+                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/student-info'">View Students</button>
                         </div>
                     </div>
                     </div>

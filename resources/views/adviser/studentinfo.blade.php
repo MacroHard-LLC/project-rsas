@@ -6,13 +6,11 @@
 @extends('master')
 @section('content')
 
-@include('adviser.editattendance')
-
 <div class="container mx-10 my-5">
 <div class="border rounded px-4 pt-5 pb-3 my-2">
     <div class="row">
         <div class="col col-lg-2">
-            <div class="section-title">GRADE LEVEL</div>
+            <div class="section-title">HEYYYY</div>
             <div class="section-body">GRADE 10</div>
         </div>
 
@@ -86,12 +84,11 @@
                     <tr>
                         <td class="name">Baratheon, Stannis Robert</td>
                         <td class="attendance" data-align="right" data-status="present">Present</td>
-                        <td><button class="btn btn-primary create btn-create" type="button" onclick="location.href='/edit'"><i class="fa-regular fa-pen-to-square icon-white"></i></button></td> <!--this is the modal and it shoudl work-->
+                        <td><a class="btn btn-primary" role="button" onclick="'/hehe'"><i class="fa-regular fa-pen-to-square icon-white"></i></a></td>
                     </tr>
                 </table>
             </div>
         </div>
-
 
     </div>
 

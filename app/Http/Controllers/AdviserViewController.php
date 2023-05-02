@@ -13,4 +13,13 @@ class AdviserViewController extends Controller
     function AttendancePage(){
         return view('adviser.viewattendance');
     }
+
+    function StudentPage(){
+        return view('adviser.studentinfo');
+    }
+
+    function EditAttendance(){
+        return view('adviser.editattendance');
+    }
+
 }
