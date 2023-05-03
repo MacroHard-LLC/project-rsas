@@ -1,6 +1,6 @@
 
 
-<div class="modal modal-danger fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
+<div class="modal modal-danger fade" id="editAttendanceModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,15 +10,15 @@
                 <div class="modal-body text-center">
                     @csrf
                     @method('DELETE')
-                    <h5>Are you sure you want to edit attendance of this user?</h5>
+                    <h5>Choose the Status of the User</h5>
                     <br>
                     <div class="some-class">
                         <input type="radio" class="radio" name="x" value="y" id="y" />
                         <label for="y">Present</label>
                         <input type="radio" class="radio" name="x" value="z" id="z" />
                         <label for="z">Absent</label>
-                        <input type="radio" class="radio" name="x" value="z" id="z" />
-                        <label for="z">Late</label>
+                        <input type="radio" class="radio" name="x" value="z" id="x" />
+                        <label for="x">Late</label>
                     </div>
                 </div>
                 <input type="hidden" name="id" id="id" value="">
