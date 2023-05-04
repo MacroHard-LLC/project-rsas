@@ -60,6 +60,7 @@ Route::get('/student-info', [AdviserViewController::class, 'StudentPage'] );
 //edit attendance in attendance page of adviser
 Route::get('/edit', [AdviserViewController::class, 'EditAttendance'] );
 Route::post('/view-attendance-start', [AdviserViewController::class, 'start'])->name('adviser_startup');
+Route::post('/view-attendance-get-students', [AdviserViewController::class, 'GetAllStudents'])->name('get_all_students');
 
 
 // show users
