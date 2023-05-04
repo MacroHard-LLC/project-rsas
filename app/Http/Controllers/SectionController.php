@@ -17,14 +17,14 @@ class SectionController extends Controller
     // Show a section
     public function show($grade_level) {
         $section = Section::where('grade_level','=',$grade_level)->first();
-        $students = Student::where('section_id','=',$section->id)->get();
-        $users = User::where('id','=',$students->id)->get();
-        $adviser = User::where('id','=',$section->adviser_id)->first();
+        // $students = Student::where('section_id','=',$section->id)->get();
+        // $users = User::where('id','=',$students->id)->get();
+        // $adviser = User::where('id','=',$section->adviser_id)->first();
         return view('levels.show', [
             'section' => $section,
-            'students' => $students,
-            'users' => $users,
-            'adviser' => $adviser,
+            // 'students' => $students,
+            // 'users' => $users,
+            // 'adviser' => $adviser,
         ]);
     }
 
