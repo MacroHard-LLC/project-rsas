@@ -20,12 +20,12 @@
         <div class='col'>
             Class Adviser
             <br>
-            {{$adviser->first_name}} {{$adviser->last_name}}
+            {{$section->user->first_name}} {{$section->user->last_name}}
         </div>
         <div class='col'>
             Adviser ID
             <br>
-            {{$adviser->id}}
+            {{$section->user->id}}
         </div>
     </div>
     <hr>
@@ -48,8 +48,8 @@
                         @foreach($students as $student)
                         <tr>
                             <th scope='row'><i class="fa-solid fa-circle icon-baby-blue"></i></th>
-                            <td>{{$student->last_name}}, {{$student->first_name}}</td>
-                            <td>{{$student->user_id}}</td>
+                            <td>{{$student->user->last_name}}, {{$student->user->first_name}}</td>
+                            <td>{{$student->user->id}}</td>
                         </tr>
                         @endforeach
 
