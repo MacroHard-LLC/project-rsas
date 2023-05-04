@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title white-label"><i class="fa-solid fa-circle"></i> DELETE USER</h5>
+                <h5 class="modal-title white-label"><i class="fa-solid fa-circle"></i> EDIT ATTENDANCE</h5>
             </div>
             <form method="POST" action="{{route('deleteUser')}}">
                 <div class="modal-body text-center">
@@ -24,7 +24,7 @@
                 <input type="hidden" name="id" id="id" value="">
                 <div class="modal-footer justify-content-evenly">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i> Change</button>
+                    <button type="submit" class="btn btn-secondary"></i> Change</button>
                 </div>
             </form>
         </div>

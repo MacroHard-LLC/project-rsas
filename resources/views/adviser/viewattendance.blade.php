@@ -108,7 +108,7 @@
                     <tr>
                         <td class="name">Baratheon, Stannis Robert</td>
                         <td class="attendance" data-align="right" data-status="present">Present</td>
-                        <td><button class="btn btn-primary create btn-create" type="button"><a data-bs-toggle="modal" data-bs-target="#editAttendanceModal"><i class="fa-regular fa-pen-to-square icon-white"></i></a></button></td> <!--this is the modal and it shoudl work-->
+                        <td><button class="btn btn-primary create btn-create" type="button"><a data-bs-toggle="modal" data-bs-target="#editAttendanceModal"><i class="fa-regular fa-pen-to-square icon-white"></i></a></button></td>
                     </tr>
                 </table>
             </div>
