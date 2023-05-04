@@ -33,34 +33,34 @@
 
                         <!--User Role-->
                         <div class="row mb-3">
-                            <div class="col-md-6 input-field">
+                            <div class="col input-field">
                                 <div class="input-title">User Role</div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="role" id="studentCheck" value="student" required>
+                                    <input class="form-check-input" type="radio" onclick="javascript:userCheck();" name="role" id="studentCheck" value="student" required>
                                     <label class="form-check-label" for="studentCheck">Student</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="role" id="adviserCheck" value="adviser" required>
+                                    <input class="form-check-input" type="radio" onclick="javascript:userCheck();" name="role" id="adviserCheck" value="adviser" required>
                                     <label class="form-check-label" for="adviserCheck">Adviser</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="role" id="adminCheck" value="admin" required>
+                                    <input class="form-check-input" type="radio" onclick="javascript:userCheck();" name="role" id="adminCheck" value="admin"  required>
                                     <label class="form-check-label" for="adminCheck">Admin</label>
                                 </div>
                                
                                 <div class="is-invalid" id="roleError">
                                     <span></span>
                                 </div>
-                            </div>
 
-                            <div class="col-md-6 input-field">
-                                {{-- If student (RFID)--}}
-                                <div class="form-outline pb-2" id="rfid">
-                                    <label for="rfid" class="input-title">RFID Number</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="rfid" pattern="[0-9]+" id='rfid_value'>
-                                </div> 
+                                <div class="form-outline input-field pb-2" id="ifStudent">
+                                    {{-- If student (RFID)--}}
+                                        <label for="rfid" class="input-title">RFID Number</label>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="rfid" pattern="[0-9]+" id='rfid_value'>
+                                </div>
                             </div>
+                            
                         </div>
+
 
                         
 
@@ -130,6 +130,8 @@
 @section('create-user-scripts')
 <script src="{{ asset('js/createUser.js') }}"></script>
 <script type="text/javascript">
+
+
     $(function () {
         $('#registerForm').submit(function (e) {
             e.preventDefault();

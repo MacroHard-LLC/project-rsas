@@ -29,6 +29,11 @@ th{
     font-family: 'Source Sans Pro',Arial, Helvetica, sans-serif;
 }
 
+#ifStudent{
+    display:none;
+}
+
+
 .navbar-brand {
     font-weight: bold;
     text-transform: uppercase;

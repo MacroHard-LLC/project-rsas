@@ -1,15 +1,17 @@
-// const studentCheck = document.querySelector('#studentCheck');
-// const adviserCheck = document.querySelector('#adviserCheck');
-// const adminCheck = document.querySelector('#adminCheck');
+const studentCheck = document.querySelector('#studentCheck');
+const adviserCheck = document.querySelector('#adviserCheck');
+const adminCheck = document.querySelector('#adminCheck');
 
-// studentCheck.addEventListener('change', userCheck);
-// adviserCheck.addEventListener('change', userCheck);
-// adminCheck.addEventListener('change', userCheck);
+studentCheck.addEventListener("click", userCheck);
+adviserCheck.addEventListener("click", userCheck);
+adminCheck.addEventListener("click", userCheck);
 
-// function userCheck() {
-//   if (document.getElementById("adminCheck").checked) {
-//     var container = document.getElementById("student_or_adviser")
-//     container.style.display = "block";
+function userCheck() {
+   if (document.getElementById("studentCheck").checked) {
+     var container = document.getElementById("ifStudent")
+     container.style.display = "block";
+     document.getElementById("rfid").style.display = "block";
+    }
 
 //     // Clear input values
 //     /*var inputs = container.getElementsByTagName('input');
@@ -20,16 +22,19 @@
 //             inputs[index].checked = false;
 //         }*/
 
-//   } else if (document.getElementById("studentCheck").checked) {
-//     document.getElementById("student_or_adviser").style.display = "block";
-//     // document.getElementById("rfid").style.display = "block";
+ //   if (document.getElementById("studentCheck").checked) {
+ //       document.getElementById("student_or_adviser").style.display = "block";
+        //document.getElementById("rfid").style.display = "block";
 
-//   } else {
-//     document.getElementById("student_or_adviser").style.display = "block";
-//     // document.getElementById("rfid").style.display = "none";
-//     // document.getElementById("rfid_value").value = '';
-//   }
-// }
+ //  } 
+    else {
+        document.getElementById("ifStudent").style.display = "none";
+        document.getElementById("rfid_value").value = '';
+        
+
+   }
+ }
+
 
 window.addEventListener('load', function() {
     document.getElementById("submission").style.visibility = "hidden";
