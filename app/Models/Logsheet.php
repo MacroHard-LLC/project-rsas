@@ -2,47 +2,24 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-class Logsheet extends Authenticatable
+class Logsheet extends Model
 {
+    use HasFactory;
+
     protected $table = 'logsheet';
-    protected $primaryKey = 'log_number';
-    protected $allowedFields = ['time', 'user_id', 'machine_id', 'room'];
 
-    // use HasApiTokens, HasFactory, Notifiable;
+    public function student(){
+        return $this->belongsTo(Student::class, 'rfid_number', 'rfid_number');
+    }
 
-    // /**
-    //  * The attributes that are mass assignable.
-    //  *
-    //  * @var array<int, string>
-    //  */
-    // protected $fillable = [
-    //     'name',
-    //     'email',
-    //     'password',
-    // ];
+    public function machine(){
+        return $this->belongsTo(Machine_table::class);
+    }
 
-    // /**
-    //  * The attributes that should be hidden for serialization.
-    //  *
-    //  * @var array<int, string>
-    //  */
-    // protected $hidden = [
-    //     'password',
-    //     'remember_token',
-    // ];
-
-    // /**
-    //  * The attributes that should be cast.
-    //  *
-    //  * @var array<string, string>
-    //  */
-    // protected $casts = [
-    //     'email_verified_at' => 'datetime',
-    // ];
+    public function instructor(){
+        return $this->belongsTo(Instructor::class, 'rfid_number', 'rfid_number');
+    }
 }

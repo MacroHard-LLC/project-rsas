@@ -7,7 +7,11 @@
 
 {{-- Modular Pages--}}
 @include('subjects.newsub')
+@include('levels.newgrlvl')
 @include('users.create')
+@include('levels.newgrlvl')
+
+
 
 <div class="vertical-center">
     <div class="container-fluid">
@@ -29,16 +33,19 @@
                     <div class="d-grid gap-5 text-center">
                     <div class="row mx-4">
                         <div class="col col-lg-3">
-                        <button class="btn btn-primary create btn-create" type="button">
-                            <a data-bs-toggle="modal" data-bs-target="#registerModal">Create User</a></button>
-                        {{--<a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#registerModal">Create User</a>--}}
+                            <button class="btn btn-primary create btn-create" type="button">
+                                <a data-bs-toggle="modal" data-bs-target="#registerModal">Create User</a>
+                            </button>
                         </div>
                         <div class="col col-lg-3">
-                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">Create Section</button>
+                            <button class="btn btn-primary create btn-create" type="button">
+                                <a data-bs-toggle="modal" data-bs-target="#registerSectionModal">Create Section</a>
+                            </button>
                         </div>
                         <div class="col col-lg-3">
-                        <button class="btn btn-primary create btn-create" type="button">
-                            <a data-bs-toggle="modal" data-bs-target="#registerSubModal">Create Subject</a></button>
+                            <button class="btn btn-primary create btn-create" type="button">
+                                <a data-bs-toggle="modal" data-bs-target="#registerSubModal">Create Subject</a>
+                            </button>
                         </div>
                     </div>
                     <div class="row mx-4">
@@ -46,13 +53,13 @@
                         <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/users'">View Users</button>
                         </div>
                         <div class="col col-lg-3">
-                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">View Sections</button>
+                            <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/gradelevels'">View Sections</button>
                         </div>
                         <div class="col col-lg-3">
-                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/subjects'">View Subjects</button>
+                            <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/subjects'">View Subjects</button>
                         </div>
                     </div>
-                    
+
                     </div>
                 </div>
                 </div>

@@ -21,7 +21,7 @@ function userCheck() {
  //       document.getElementById("student_or_adviser").style.display = "block";
         //document.getElementById("rfid").style.display = "block";
 
- //  } 
+ //  }
     else {
         document.getElementById("ifStudent").style.display = "none";
         document.getElementById("rfid_numberInput").value = '';
@@ -46,19 +46,20 @@ window.addEventListener('load', function() {
                         showCreateUserClientError(input);
                     }
                 }
-                
-                var form_children = $("#registerForm").children();
-                var student_selected = form_children.find("#rfid_numberInput").is(":checked");
-                var radios_selected = $("#registerForm").children().find($('input[type="radio"]:checked'));
-                var form_control = $("#registerForm").children().find('.form-control')
-                var valid_form_control = $("#registerForm").children().find('.form-control.is-valid')
-                if (student_selected == 1){
-                    var is_valid = form_control.length === valid_form_control.length && radios_selected.length > 1;
-                } else{
-                    $('#rfid_numberInput').val("");
-                    var is_valid = (form_control.length - 1) === valid_form_control.length && radios_selected.length > 1;
-                }
 
+                var form_children = $("#registerForm").children();
+                var student_selected = form_children.find("#studentCheck").is(":checked");
+                var radios_selected = form_children.find($('input[type="radio"]:checked'));
+                var form_control = form_children.find('.form-control')
+                var valid_form_control = form_children.find('.form-control.is-valid')
+
+                if (student_selected){
+                    var is_valid = form_control.length === valid_form_control.length && radios_selected.length == 2;
+                } else {
+                    $('#rfid_numberInput').val("");
+                    $('#rfid_numberInput').removeClass("is-invalid is-valid");
+                    var is_valid = (form_control.length - 1) === valid_form_control.length && radios_selected.length == 2;
+                }
 
                 if (is_valid){
                     document.getElementById("submission").style.visibility = "visible";
