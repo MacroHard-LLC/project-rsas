@@ -51,12 +51,16 @@ class AdviserViewController extends Controller
             $is_late = LateAttendance::where('student_id',$student['user_id'])
                         ->exists();
             $status = 'Absent';
+            $student_tag =session()->get('student_id');
 
-            if($is_present){
+            if($student['user_id'] == $student_tag){
+                $status = session()->get('new_status');
+            }
+            else if($is_present){
                 $status = 'Present';
             }
             else if($is_late){
-                $stauts = 'Late';
+                $status = 'Late';
             }
             $attendanceArray[] = array(
                 'id' => $student['user_id'],
@@ -67,6 +71,21 @@ class AdviserViewController extends Controller
         
         
         return $attendanceArray;
+    }
+
+    function ChangeAttendance(Request $request){
+        $incoming_data = $request->input_data;
+        $new_status = $incoming_data['new_status'];
+        session()->put('new_status',$new_status);
+        
+        $adviserId = session()->get('adviser_id');
+        return view('adviser.viewattendance', compact('adviserId'));
+    }
+
+    function StudentTag(Request $request){
+        $incoming_data = $request->value;
+        session()->put('student_id',$incoming_data);
+        return $incoming_data;
     }
 
     function StudentPage(){

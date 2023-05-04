@@ -40,16 +40,55 @@
                 for(var i = 0; i < data.length; i++){
                     const newRow = document.createElement('tr');
                     newRow.innerHTML = `
-                        <td data-student-id="${data[i]['id']}">${data[i]['name']}</td>
+                        <td>${data[i]['name']}</td>
                         <td>${data[i]['status']}</td>
-                        <td class="delete"><button class="btn btn-primary create btn-create" type="button"><a data-bs-toggle="modal" data-bs-target="#editAttendanceModal"><i class="fa-regular fa-pen-to-square icon-white"></i></a></button></td>
-                    `;
+                        <td class="editStatus"><button id="editStatus" name="editStatus" class="btn btn-primary create btn-create" type="button"><a data-bs-toggle="modal" data-bs-target="#editAttendanceModal"><i class="fa-regular fa-pen-to-square icon-white"></i></a></button><span data-id="${data[i]['id']}"></span></td>
+                        `;
                     tableBody.appendChild(newRow);
                     
                 }
             }
             });
     });
+
+    $(document).on('click', '#editStatus', function() {
+        //var element = $(this).siblings('span');
+        //var value = element.data('id');
+        var element = $(this).closest('td').find('span');
+        console.log(element)
+        var value = element.data('id');
+
+        $.ajax({
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                Accept: "application/json"
+            },
+            url: "{{ route('add_id_edit_status') }}",
+            data: {value},
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    });
+
+
+    /*$('#editStatus').on('click',function(){
+    var value = $(this).closest('td').attr('data-student-id');
+    $.ajax({
+        method: "POST",
+        headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                Accept: "application/json"
+        },
+        url: "{{ route('add_id_edit_status') }}",
+        data: { input_data : value },
+        success: function(data) {
+            console.log('BULLSHIT');
+        }
+    });
+});*/
+
 </script>
 
 @include('adviser.editattendance')
@@ -90,7 +129,7 @@
 
 
 <hr>
-    <div class="container table-responsive">
+    <div class="container table-responsive" data-bs-backdrop="static">
 
         <div class="row">
             <div class="col">
@@ -100,44 +139,12 @@
                             <th class="w-75">Student Name</th>
                             <th data-align="right">Attendance</th>
                             <th data-align="left"></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- Table rows will be dynamically added here -->
                     </tbody>
-                </table>
-                
-                    <!--<tr>
-                        <td class="name">Snow, Jon Stark</td>
-                        <td class="attendace" data-align="right" data-status="late">
-                            Late
-                            <!-- edit class attendance portion mayhaps?
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="attendance" id="absentCheck" value="0" required>
-                                <label class="form-check-label" for="absentCheck">Absent</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="attendance" id="presentCheck" value="1" required>
-                                <label class="form-check-label" for="presentCheck">Present</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="attendance" id="lateCheck" value="2" required>
-                                <label class="form-check-label" for="lateCheck">Late</label>
-                            </div>
-                        -
-                        </td>
-                        <td><a class="btn btn-primary" role="button" onclick="'/hehe'"><i class="fa-regular fa-pen-to-square icon-white"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td class="name">Lannister, Jamie Tyrion</td>
-                        <td class="attendance" data-align="right" data-status="absent">Absent</td>
-                        <td><a class="btn btn-primary" role="button" onclick="'/hehe'"><i class="fa-regular fa-pen-to-square icon-white"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td class="name">Baratheon, Stannis Robert</td>
-                        <td class="attendance" data-align="right" data-status="present">Present</td>
-                        <td><button class="btn btn-primary create btn-create" type="button"><a data-bs-toggle="modal" data-bs-target="#editAttendanceModal"><i class="fa-regular fa-pen-to-square icon-white"></i></a></button></td> <!--this is the modal and it shoudl work
-                    </tr>-->
                 </table>
             </div>
         </div>
