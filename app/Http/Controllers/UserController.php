@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Models\Student;
 
 class UserController extends Controller
 {
@@ -20,6 +21,7 @@ class UserController extends Controller
             'id' => ['required','unique:user,id','integer','digits:9'],
             'password' => ['required','min:1','max:20'],
             'role' => 'required',
+            'rfid_number' => ['integer'],
             'first_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
             'middle_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
             'last_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
@@ -32,7 +34,14 @@ class UserController extends Controller
         // Create user
         User::create($formFields);
 
-        return redirect('/')->with('message', 'User created successfully!');
+        if ($request->rfid_number){
+            $student = new Student;
+            $student->rfid_number = $request->rfid_number;
+            $student->user_id = $request->id;
+            $student->save();
+        }
+
+        return back();
     }
 
     public function update(Request $request, $id) {
