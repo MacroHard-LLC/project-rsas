@@ -21,8 +21,8 @@
                 </div>
                 <input type="hidden" name="id" id="id" value="">
                 <div class="modal-footer justify-content-evenly">
-                    <button type="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-sm btn-danger"> Change</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-secondary"></i> Change</button>
                 </div>
             </form>
         </div>
