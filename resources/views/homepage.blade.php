@@ -7,7 +7,11 @@
 
 {{-- Modular Pages--}}
 @include('subjects.newsub')
+@include('levels.newgrlvl')
 @include('users.create')
+@include('levels.newgrlvl')
+
+
 
 <div class="vertical-center">
     <div class="container-fluid">
@@ -32,7 +36,7 @@
                         <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/users'">View User</button>
                         </div>
                         <div class="col-md-4" style="width:300px">
-                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">View Section</button>
+                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/gradelevels'">View Section</button>
                         </div>
                         <div class="col-md-4" style="width:300px">
                         <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/subjects'">View Subject</button>
@@ -42,10 +46,10 @@
                         <div class="col-md-4" style="width:300px">
                         <button class="btn btn-primary create btn-create" type="button">
                             <a data-bs-toggle="modal" data-bs-target="#registerModal">Create User</a></button>
-                        {{--<a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#registerModal">Create User</a>--}}
                         </div>
                         <div class="col-md-4" style="width:300px">
-                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='http://www.example.com'">Create Section</button>
+                        <button class="btn btn-primary create btn-create" type="button">
+                            <a data-bs-toggle="modal" data-bs-target="#registerSectionModal">Create Section</a></button>
                         </div>
                         <div class="col-md-4" style="width:300px">
                         <button class="btn btn-primary create btn-create" type="button">

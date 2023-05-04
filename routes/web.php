@@ -3,6 +3,7 @@
 use App\Http\Controllers\CreateUser;
 use App\Http\Controllers\CreateSubject;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SectionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,13 @@ Route::get('/subjects/create',[CreateSubject::class, 'CreateSubjectForm']);
 Route::post('/subjects', [CreateSubject::class, 'DataInsert'])->name('register_sub');
 Route::post('/subjects-check', [CreateSubject::class, 'CheckSubIdExist'])->name('check_id');
 
+// create section
+Route::get('/section/create',[SectionController::class, 'CreateSection']);
+Route::post('/section-request', [SectionController::class, 'GetStudentName'])->name('get_name_data');
+Route::post('/section-adviser-request', [SectionController::class, 'DoesAdviserExist'])->name('get_adviser_id');
+Route::post('/section-get-students', [SectionController::class, 'GetAllStudents'])->name('get_all_students');
+Route::post('/section/register',[SectionController::class, 'DataInsert'])->name('register_section');
+Route::post('/section-get-sectionid',[SectionController::class, 'DoesSectionIdExist'])->name('get_section_id');
 // Show Subjects
 Route::get('/subjects', [CreateSubject::class, 'CreateSubjectIndex']);
 
@@ -68,3 +76,9 @@ Route::put('/users/{id}', [UserController::class, 'update']);
 
 // Delete User
 Route::delete('/users', [UserController::class, 'destroy'])->name('deleteUser');
+
+// Show list of grade levels
+Route::get('/gradelevels', [SectionController::class, 'index']);
+
+// Show a section
+Route::get('/gradelevels/{grade}', [SectionController::class, 'show']);
