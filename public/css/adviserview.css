@@ -25,6 +25,14 @@
   }
 
 
+[data-status="Enrolled"] {
+    color: green;
+  }
+  
+[data-status="Dropped"] {
+    color: red;
+  }
+
 [data-status="present"] {
     color: green;
   }
@@ -39,4 +47,10 @@
 
 .name{
     font-style: italic;
+}
+
+.center {
+  text-align: center;
+  width: 100%;
+  display: block;
 }

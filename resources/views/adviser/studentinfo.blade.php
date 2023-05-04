@@ -10,33 +10,18 @@
 <div class="border rounded px-4 pt-5 pb-3 my-2">
     <div class="row">
         <div class="col col-lg-2">
-            <div class="section-title">HEYYYY</div>
+            <div class="section-title">GRADE LEVEL</div>
             <div class="section-body">GRADE 10</div>
         </div>
 
-        <div class="col-sm-6">
+        <div class="col col-lg-4">
             <div class="section-title">ADVISER</div>
             <div class="section-body">MS. MARY JANE D. PARKER</div>
         </div>
-
-        <div class="col col-md-auto">
-            <label for="date" class="section-title">DATE</label>
-            <br>
-            <input class="mt-2"type="date" id="date" placeholder="Choose Date" required>
-        </div>
        
-        <div class="col col-md-auto">
-            <label for="subject" class="section-title">SUBJECT</label>
-                <select name="subject" class="form-select w-auto" placeholder="Choose Subject" id="subject" required>
-                    <!--ideally mushow unsay mga subjects naa ang section -->
-                    <option value="SCI7">GEOLOGY</option>
-                    <option value="MATH7">ALGEBRA</option>
-                    <option value="ENG7">ENGLISH</option>
-                    <option value="AP7">PHILIPPINE HISTORY</option>
-                </select>
-                <div class="is-invalid" role="alert" id="subjectError" name="subjectError">
-                    <strong></strong>
-                </div>
+        <div class="col col-lg-4">
+            <div class="section-title">SUBJECT</div>
+            <div class="section-body">YASSIFICATION</div>
         </div>
     </div>
 
@@ -48,17 +33,19 @@
 
         <div class="row">
             <div class="col">
-                <table class="table table-hover table-hover" id="attendanceTable" data-toggle="table" data-toolbar="#toolbar">
+                <table class="table table-striped table-hover" id="attendanceTable" data-toggle="table" data-toolbar="#toolbar">
                     <tr>
+                        <th class="w-10"></th>
                         <th class="w-75">Student Name</th>
-                        <th data-align="right">Attendance</th>
-                        <th data-align="left"></th>
+                        <th data-align="center">Status</th>
+                        <th data-align="center">Tag</th>
                     </tr>
 
                     <tr>
+                        <td><i class="fa-solid fa-circle icon-baby-blue center"></i></a></td>
                         <td class="name">Snow, Jon Stark</td>
-                        <td class="attendace" data-align="right" data-status="late">
-                            Late
+                        <td class="attendace" data-align="center" data-status="Enrolled">
+                            Enrolled
                             <!-- edit class attendance portion mayhaps?
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="attendance" id="absentCheck" value="0" required>
@@ -74,17 +61,19 @@
                             </div>
                         -->
                         </td>
-                        <td><a class="btn btn-primary" role="button" onclick="'/hehe'"><i class="fa-regular fa-pen-to-square icon-white"></i></a></td>
+                        <td><i class="fa-regular fa-circle"></td>
                     </tr>
                     <tr>
+                        <td><i class="fa-solid fa-circle icon-baby-blue center"></i></a></td>
                         <td class="name">Lannister, Jamie Tyrion</td>
-                        <td class="attendance" data-align="right" data-status="absent">Absent</td>
-                        <td><a class="btn btn-primary" role="button" onclick="'/hehe'"><i class="fa-regular fa-pen-to-square icon-white"></i></a></td>
+                        <td class="attendance" data-align="right" data-status="Dropped">Dropped</td>
+                        <td><i class="fa-regular fa-circle"></i></td>
                     </tr>
                     <tr>
+                        <td><i class="fa-solid fa-circle icon-baby-blue center"></i></a></td>
                         <td class="name">Baratheon, Stannis Robert</td>
-                        <td class="attendance" data-align="right" data-status="present">Present</td>
-                        <td><a class="btn btn-primary" role="button" onclick="'/hehe'"><i class="fa-regular fa-pen-to-square icon-white"></i></a></td>
+                        <td class="attendance" data-align="right" data-status="Enrolled">Enrolled</td>
+                        <td><i class="fa-regular fa-circle"></a></td>
                     </tr>
                 </table>
             </div>
