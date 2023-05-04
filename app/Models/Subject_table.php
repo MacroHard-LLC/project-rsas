@@ -24,4 +24,37 @@ class Subject_table extends Model
         if($filters['grlvl'] ?? false)
             $query->where('grade_level', '=', request('grlvl'));
     }
+
+    public function schoolyear(){
+        return $this->belongsTo(Schoolyear::class);
+    }
+
+    public function instructor(){
+        return $this->belongsTo(Instructor::class, 'instructor_rfid', 'rfid_number');
+    }
+
+    public function machine(){
+        return $this->hasOne(Machine_table::class, 'room', 'room');
+    }
+
+    public function subject_list(){
+        return $this->hasOne(Subject_list::class);
+    }
+
+    public function absent(){
+        return $this->hasMany(Absent::class);
+    }
+
+    public function present(){
+        return $this->hasMany(Present::class);
+    }
+
+    public function late(){
+        return $this->hasMany(Late::class);
+    }
+
+    public function logsheet(): HasManyThrough
+    {
+        return $this->hasManyThrough(Logsheet::class, Machine::class);
+    }
 }
