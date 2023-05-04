@@ -12,6 +12,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
+        // Get today's date
+        var today = new Date();
+
+        // Format the date as "YYYY-MM-DD"
+        var year = today.getFullYear();
+        var month = (today.getMonth() + 1).toString().padStart(2, '0');
+        var day = today.getDate().toString().padStart(2, '0');
+        var formattedDate = `${year}-${month}-${day}`;
+
+        // Set the default value of the date input
+        document.getElementById('date').value = formattedDate;
+        // Get today's date
+        var today = new Date();
+
+        // Format the date as "YYYY-MM-DD"
+        var year = today.getFullYear();
+        var month = (today.getMonth() + 1).toString().padStart(2, '0');
+        var day = today.getDate().toString().padStart(2, '0');
+        var formattedDate = `${year}-${month}-${day}`;
+
+        // Set the default value of the date input
+        document.getElementById('date').value = formattedDate;
+
+
         var adviserID = {{$adviserId}};
         console.log(adviserID);
         $.ajax({
