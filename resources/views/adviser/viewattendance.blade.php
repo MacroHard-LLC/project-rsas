@@ -27,6 +27,17 @@
                 $('#attendanceAdviserName').text(data);
             }
             });
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('get_all_students') }}",
+            success: function(data) {
+                console.log(data);
+            }
+            });
     });
 </script>
 

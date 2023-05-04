@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Section;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class AdviserViewController extends Controller
@@ -34,7 +35,10 @@ class AdviserViewController extends Controller
     }
 
     function GetAllStudents(){
-        
+        $incoming_data = session()->get('section_id');
+        $query = Student::where('section_id', $incoming_data)
+                 ->get();
+        return $query;
     }
 
     function StudentPage(){
