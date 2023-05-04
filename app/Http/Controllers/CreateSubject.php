@@ -12,6 +12,8 @@ use App\Models\Subject_table;
 use App\Models\User;
 use App\Models\Schedule_table;
 use App\Models\Machine_table;
+use App\Models\Schoolyear;
+use App\Models\Instructor;
 
 class CreateSubject extends Controller
 {
@@ -51,16 +53,22 @@ class CreateSubject extends Controller
             'year_end' => ['required'],
         ]);
 
+        $schoolyear = new Schoolyear;
+        $schoolyear->start_year = $formFields['year_st'];
+        $schoolyear->end_year = $formFields['year_end'];
+        $schoolyear->save();
 
+        $instructor = new Instructor;
+        $instructor->rfid_number();
 
         $subject = new Subject_table;
         $subject->grade_level = $formFields['grade_level'];
         $subject->id = $formFields['sub_id'];
         $subject->name = $formFields['sub_name'];
-        $subject->instructor_id = 0;
+        $subject->instructor_rfid = 0;
+        $subject->schoolyear_id = Schoolyear::latest('id')->first()->id;
+        $subject->semester = "0";
         $subject->room = $formFields['as_room'];
-        $subject->year_start = new DateTime($formFields['year_st'].'-01-01');
-        $subject->year_end = new DateTime($formFields['year_end'].'-12-31');
         $subject->added_on = now();
         $subject->added_by = 0;
         $subject->updated_on = now();

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Schedule_table extends Model
 {
     public $table = 'schedule';
-    public $primary = 'subject_id';
+    public $primary = 'id';
     // timestamps is FALSE as to defer the Laravel's need for
     // UPDATED_AT where we already have updated_on in our database
     public $timestamps = FALSE;
