@@ -33,8 +33,12 @@ class Subject_table extends Model
         return $this->belongsTo(Instructor::class, 'instructor_rfid', 'rfid_number');
     }
 
+    public function section(){
+        return $this->belongsTo(Section::class);
+    }
+
     public function machine(){
-        return $this->hasOne(Machine_table::class, 'room', 'room');
+        return $this->belongsTo(Machine_table::class);
     }
 
     public function subject_list(){

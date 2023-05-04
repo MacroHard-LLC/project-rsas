@@ -18,6 +18,6 @@ class Machine_table extends Model
     }
 
     public function subject(){
-        return $this->belongsTo(Subject_table::class, 'room', 'room');
+        return $this->hasMany(Subject_table::class);
     }
 }
