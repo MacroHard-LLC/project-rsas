@@ -1,20 +1,15 @@
-const studentCheck = document.querySelector('#studentCheck');
-const adviserCheck = document.querySelector('#adviserCheck');
-const adminCheck = document.querySelector('#adminCheck');
 
+const studentCheck = document.querySelector('#studentCheck');
 studentCheck.addEventListener("click", userCheck);
-adviserCheck.addEventListener("click", userCheck);
-adminCheck.addEventListener("click", userCheck);
 
 function userCheck() {
    if (document.getElementById("studentCheck").checked) {
      var container = document.getElementById("ifStudent")
      container.style.display = "block";
-     document.getElementById("rfid").style.display = "block";
     }
 
 //     // Clear input values
-//     /*var inputs = container.getElementsByTagName('input');
+//     var inputs = container.getElementsByTagName('input');
 //         for (var index = 0; index < inputs.length; ++index) {
 //             if(inputs[index].type =="text")
 //             inputs[index].value = '';
@@ -29,9 +24,7 @@ function userCheck() {
  //  } 
     else {
         document.getElementById("ifStudent").style.display = "none";
-        document.getElementById("rfid_value").value = '';
-        
-
+        document.getElementById("rfid_numberInput").value = '';
    }
  }
 
@@ -53,10 +46,20 @@ window.addEventListener('load', function() {
                         showCreateUserClientError(input);
                     }
                 }
+                
+                var form_children = $("#registerForm").children();
+                var student_selected = form_children.find("#rfid_numberInput").is(":checked");
                 var radios_selected = $("#registerForm").children().find($('input[type="radio"]:checked'));
                 var form_control = $("#registerForm").children().find('.form-control')
                 var valid_form_control = $("#registerForm").children().find('.form-control.is-valid')
-                var is_valid = form_control.length === valid_form_control.length && radios_selected.length > 1;
+                if (student_selected == 1){
+                    var is_valid = form_control.length === valid_form_control.length && radios_selected.length > 1;
+                } else{
+                    $('#rfid_numberInput').val("");
+                    var is_valid = (form_control.length - 1) === valid_form_control.length && radios_selected.length > 1;
+                }
+
+
                 if (is_valid){
                     document.getElementById("submission").style.visibility = "visible";
                 } else {
