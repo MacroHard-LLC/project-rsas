@@ -36,25 +36,25 @@
                             <div class="col input-field">
                                 <div class="input-title">User Role</div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" onclick="javascript:userCheck();" name="role" id="studentCheck" value="student" required>
+                                    <input class="form-check-input" type="radio" name="role" id="studentCheck" value="student" required>
                                     <label class="form-check-label" for="studentCheck">Student</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" onclick="javascript:userCheck();" name="role" id="adviserCheck" value="adviser" required>
+                                    <input class="form-check-input" type="radio" name="role" id="adviserCheck" value="adviser" required>
                                     <label class="form-check-label" for="adviserCheck">Adviser</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" onclick="javascript:userCheck();" name="role" id="adminCheck" value="admin"  required>
+                                    <input class="form-check-input" type="radio" name="role" id="adminCheck" value="admin"  required>
                                     <label class="form-check-label" for="adminCheck">Admin</label>
                                 </div>
-                               
+
                                 <div class="is-invalid" id="roleError">
                                     <span></span>
                                 </div>
 
-                                
+
                             </div>
-                            
+
                         </div>
 
                         <div class="form-outline input-field pb-2" id="ifStudent">
@@ -65,10 +65,10 @@
                                     <span></span>
                                 </div>
                         </div>
-                        
 
 
-                        
+
+
 
 
                         <!--If student or adviser-->
@@ -115,7 +115,7 @@
                                 <span></span>
                             </div>
 
-                            
+
                         </div>
 
                         <div class="form-group pt-3 float-end" id="submission">

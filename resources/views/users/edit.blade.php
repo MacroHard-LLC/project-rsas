@@ -50,6 +50,16 @@
                             </div>
 
 
+                        <div class="form-outline input-field pb-2" id="ifStudentU">
+                            {{-- If student (RFID)--}}
+                                <label for="rfid_number" class="input-title">RFID Number</label>
+                                <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="rfid_number" id='rfid_numberInputU' pattern="[0-9]+" aria-describedby="rfid_numberError">
+                                <div class="is-invalid" id="rfid_numberErrorU">
+                                    <span></span>
+                                </div>
+                        </div>
+
+
                         <!--If student or adviser-->
                         <div id="student_or_adviser">
                             <hr>

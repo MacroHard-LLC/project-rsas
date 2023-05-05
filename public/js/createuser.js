@@ -1,12 +1,12 @@
 
-const studentCheck = document.querySelector('#studentCheck');
-studentCheck.addEventListener("click", userCheck);
+// const studentCheck = document.querySelector('#studentCheck');
+// studentCheck.addEventListener("click", userCheck);
 
-function userCheck() {
-   if (document.getElementById("studentCheck").checked) {
-     var container = document.getElementById("ifStudent")
-     container.style.display = "block";
-    }
+// function userCheck() {
+//    if (document.getElementById("studentCheck").checked) {
+//      var container = document.getElementById("ifStudent")
+//      container.style.display = "block";
+//     }
 
 //     // Clear input values
 //     var inputs = container.getElementsByTagName('input');
@@ -22,11 +22,11 @@ function userCheck() {
         //document.getElementById("rfid").style.display = "block";
 
  //  }
-    else {
-        document.getElementById("ifStudent").style.display = "none";
-        document.getElementById("rfid_numberInput").value = '';
-   }
- }
+//     else {
+//         document.getElementById("ifStudent").style.display = "none";
+//         document.getElementById("rfid_numberInput").value = '';
+//    }
+//  }
 
 
 window.addEventListener('load', function() {
@@ -54,8 +54,10 @@ window.addEventListener('load', function() {
                 var valid_form_control = form_children.find('.form-control.is-valid')
 
                 if (student_selected){
+                    document.getElementById("ifStudent").style.display = "block";
                     var is_valid = form_control.length === valid_form_control.length && radios_selected.length == 2;
                 } else {
+                    document.getElementById("ifStudent").style.display = "none";
                     $('#rfid_numberInput').val("");
                     $('#rfid_numberInput').removeClass("is-invalid is-valid");
                     var is_valid = (form_control.length - 1) === valid_form_control.length && radios_selected.length == 2;

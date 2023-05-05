@@ -1,5 +1,23 @@
+// const studentCheckU = document.querySelector('#studentCheckU');
+// studentCheckU.addEventListener("click", userCheckU);
+
+// function userCheckU() {
+//    if (document.getElementById("studentCheckU").checked) {
+//         document.getElementById("ifStudentU").style.display = "block";
+//     } else {
+//         document.getElementById("ifStudentU").style.display = "none";
+//    }
+// }
+
+
 const editUserModal = document.getElementById('updateUserModal')
 editUserModal.addEventListener('show.bs.modal', function() {
+    if ($("#updateUserForm").children().find("#studentCheckU").is(":checked")){
+        document.getElementById("ifStudentU").style.display = "block";
+    } else {
+        document.getElementById("ifStudentU").style.display = "none";
+    }
+
     let updateForm = document.getElementById('updateUserForm');
 
     $("#updateUserForm input").removeClass("is-valid is-invalid");
@@ -23,9 +41,24 @@ editUserModal.addEventListener('show.bs.modal', function() {
                         showUpdateUserClientError(input);
                     }
                 }
-                var radios_selected = $("#updateUserForm").children().find($('input[type="radio"]:checked'));
-                var invalid_form_control = $("#updateUserForm").children().find('.form-control.is-invalid')
+
+                var form_children = $("#updateUserForm").children();
+                var student_selected = form_children.find("#studentCheckU").is(":checked");
+                var radios_selected = form_children.find($('input[type="radio"]:checked'));
+                var invalid_form_control = form_children.find('.form-control.is-invalid')
                 var is_invalid = invalid_form_control.length > 0 || radios_selected.length < 2;
+
+                if (student_selected){
+                    document.getElementById("ifStudentU").style.display = "block";
+                    var valid_rfid = $('#rfid_numberInputU').hasClass('is-valid');
+                    var is_invalid = invalid_form_control.length > 0 || radios_selected.length < 2 || !valid_rfid;
+                } else {
+                    document.getElementById("ifStudentU").style.display = "none";
+                    $('#rfid_numberInputU').val("");
+                    $('#rfid_numberInputU').removeClass("is-invalid is-valid");
+                    var is_invalid = invalid_form_control.length > 0 || radios_selected.length < 2;
+                }
+
                 if (is_invalid){
                     document.getElementById("submissionU").style.visibility = "hidden";
                 } else {

@@ -21,7 +21,6 @@ class UserController extends Controller
             'id' => ['required','unique:user,id','integer','digits:9'],
             'password' => ['required','min:1','max:20'],
             'role' => 'required',
-            'rfid_number' => ['integer'],
             'first_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
             'middle_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
             'last_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
@@ -55,9 +54,23 @@ class UserController extends Controller
             'sex' => 'required',
         ]);
 
-        User::find($id)->update($formFields);
+        $user = User::find($id)->first();
+        // info($user);
+        if ($user->role == 'student' && $request->role != 'student'){
+            info($user);
+            dd($user);
+            info(Student::where('user_id', $id)->delete());
+        } else if ($user->role != 'student' && $request->role == 'student'){
+            $student = new Student;
+            $student->rfid_number = $request->rfid_number;
+            $student->user_id = $request->id;
+            $student->save();
+        }
 
-        return back()->with('message', 'User updated successfully!');
+        User::find($id)->update($formFields);
+        // $user->update($formFields);
+
+        return back();
     }
 
     public function destroy(Request $request){

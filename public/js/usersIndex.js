@@ -1,13 +1,20 @@
-function updateModal(user){
+function updateModal(user, student){
     $('#idInputU').val(user.id);
     $('#passwordInputU').val(user.password);
 
-    if (user.role == "admin")
+    if (user.role == "admin"){
         $("#adminCheckU").prop("checked", true);
-    else if (user.role == "student")
+        $("#rfid_numberInputU").val('');
+    }
+    else if (user.role == "student"){
         $("#studentCheckU").prop("checked", true);
-    else
+        $("#rfid_numberInputU").val(student.rfid_number);
+    }
+    else{
         $("#adviserCheckU").prop("checked", true);
+        $("#rfid_numberInputU").val('');
+    }
+
 
     $('#first_nameInputU').val(user.first_name);
     $('#middle_nameInputU').val(user.middle_name);

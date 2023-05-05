@@ -51,6 +51,9 @@
                             @if($user['role'] == "admin")
                                 <td>Administrator</td>
                             @elseif($user['role'] == "student")
+                                @php
+                                    $student = $user->student
+                                @endphp
                                 <td>Student</td>
                             @elseif($user['role'] == "adviser")
                                 <td>Adviser</td>
@@ -62,7 +65,7 @@
                             <td>{{$user['sex']}}</td>
 
                             <td>
-                                <a class="btn btn-primary" role="button" onclick="updateModal({{$user}})"><i class="fa-regular fa-pen-to-square icon-white"></i></a>
+                                <a class="btn btn-primary" role="button" onclick="updateModal({{$user}},{{$student}})"><i class="fa-regular fa-pen-to-square icon-white"></i></a>
                                 <a class="btn btn-primary" role="button" onclick="deleteModal({{$user}})"><i class="fa-solid fa-trash-can icon-white"></i></a>
                             </td>
                         </tr>
