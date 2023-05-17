@@ -3,6 +3,14 @@
 @extends('master')
 @section('content')
 
+<div class='container m-2'>
+    <div class='row'>
+        <div class='col'>
+            <a href='/gradelevels' class='text' role='button'><i class="fa-solid fa-arrow-left"></i> BACK</a>
+        </div>
+    </div>
+</div>
+
 <div class='container mx-10 my-5'>
 <div class="border rounded px-4 pt-5 pb-3 my-2">
     <div class='row px-3'>
@@ -42,8 +50,10 @@
                 <thead>
                     <tr>
                         <th scope='col' class="w-10"></th>
-                        <th scope='col' class="w-75">Student's Name</th>
+                        <th scope='col'>RFID</th>
+                        <th scope='col'>Student's Name</th>
                         <th scope='col'>Student's ID</th>
+                        <th scope='col'>Enrolment Status</th>
                     </tr>
                 </thead>
 
@@ -52,8 +62,10 @@
                         @foreach($students as $student)
                         <tr>
                             <th scope='row' ><i class="fa-solid fa-circle icon-baby-blue"></i></th>
-                            <td>{{$student->user->last_name}}, {{$student->user->first_name}}</td>
+                            <td>{{$student->rfid_number}}</td>
+                            <td>{{$student->user->last_name}}, {{$student->user->first_name}} {{$student->user->middle_name}}</td>
                             <td>{{$student->user->id}}</td>
+                            <td>{{$student->status}}</td>
                         </tr>
                         @endforeach
 
