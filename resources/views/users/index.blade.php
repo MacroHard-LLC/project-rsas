@@ -44,6 +44,9 @@
                     @if(count($users) > 0)
                         <script src="{{ asset('js/usersIndex.js') }}"></script>
                         @foreach ($users as $user)
+                        @php
+                            $student = NULL;
+                        @endphp
                         <tr>
                             <td><i class="fa-solid fa-circle icon-baby-blue"></td>
                             <td>{{$user['id']}}</td>
