@@ -38,7 +38,7 @@ editUserModal.addEventListener('show.bs.modal', function() {
 
                 if (student_selected){
                     document.getElementById("ifStudentU").style.display = "block";
-                    var is_invalid = invalid_form_control.length > 0 || radios_selected.length < 2 || invalid_rfid;
+                    var is_invalid = invalid_form_control.length > 0 || radios_selected.length < 2 || invalid_rfid || !$('#rfid_numberInputU').val()
                 } else {
                     document.getElementById("ifStudentU").style.display = "none";
                     if (invalid_rfid)
