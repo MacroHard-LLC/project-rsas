@@ -9,7 +9,9 @@ class Instructor extends Model
 {
     use HasFactory;
 
-    public $table = 'instructor';
-    public $primaryKey = 'rfid_number';
-    public $timestamps = FALSE;
+    protected $table = 'instructor';
+
+    public function subject(){
+        return $this->hasMany(Subject_table::class, 'instructor_rfid', 'rfid_number');
+    }
 }
