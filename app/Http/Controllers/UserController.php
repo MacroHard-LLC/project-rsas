@@ -44,6 +44,8 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $id) {
+        $user = User::find($id);
+
         $formFields = $request->validate([
             'id' => ['required',Rule::unique('user','id')->ignore($id),'integer','digits:9'],
             'password' => ['required','min:1','max:20'],
@@ -54,21 +56,25 @@ class UserController extends Controller
             'sex' => 'required',
         ]);
 
-        $user = User::find($id)->first();
-        // info($user);
+        if ($user->role == 'student'){
+            $form_rfid_number = $request->validate([
+                'rfid_number' => Rule::unique('student')->ignore($user->student->rfid_number, 'rfid_number'),
+            ]);
+        }
+
         if ($user->role == 'student' && $request->role != 'student'){
-            info($user);
-            dd($user);
-            info(Student::where('user_id', $id)->delete());
+            Student::where('user_id', $id)->delete();
         } else if ($user->role != 'student' && $request->role == 'student'){
+            info($user->role);
             $student = new Student;
             $student->rfid_number = $request->rfid_number;
             $student->user_id = $request->id;
             $student->save();
+        } else if ($user->role == 'student' && $user->student->rfid_number != $request->rfid_number) {
+            Student::where('user_id', $id)->update($form_rfid_number);
         }
 
-        User::find($id)->update($formFields);
-        // $user->update($formFields);
+        $user->update($formFields);
 
         return back();
     }
