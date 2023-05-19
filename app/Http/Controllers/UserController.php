@@ -27,6 +27,9 @@ class UserController extends Controller
             'sex' => 'required',
         ]);
 
+        if ($request->role == 'student')
+            $request->validate(['rfid_number' => ['sometimes','unique:student,rfid_number']]);
+
         // Hash Password
         // $formFields['password'] = bcrypt($formFields['password']);
 
