@@ -12,4 +12,12 @@ class Machine_table extends Model
     // timestamps is FALSE as to defer the Laravel's need for
     // UPDATED_AT where we already have updated_on in our database
     public $timestamps = FALSE;
+
+    public function logsheet(){
+        return $this->hasMany(Logsheet::class);
+    }
+
+    public function subject(){
+        return $this->hasMany(Subject_table::class);
+    }
 }

@@ -9,7 +9,14 @@ class Section extends Model
 {
     use HasFactory;
 
-    public $table = 'section';
-    public $primaryKey = 'id';
+    protected $table = 'section';
     public $timestamps = FALSE;
+
+    public function subject(){
+        return $this->hasMany(Subject_table::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class, 'adviser_id');
+    }
 }

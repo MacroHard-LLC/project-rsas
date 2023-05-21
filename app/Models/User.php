@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -38,5 +39,13 @@ class User extends Authenticatable
                 $user_role = 2;
             $query->where('role', '=', $user_role);
         }
+    }
+
+    public function section(){
+        return $this->hasOne(Section::class, 'adviser_id', 'id');
+    }
+
+    public function student(){
+        return $this->hasOne(Student::class, 'user_id', 'id');
     }
 }

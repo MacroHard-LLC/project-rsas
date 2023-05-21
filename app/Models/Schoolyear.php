@@ -9,7 +9,9 @@ class Schoolyear extends Model
 {
     use HasFactory;
 
-    public $table = 'schoolyear';
-    public $primaryKey = 'id';
-    public $timestamps = FALSE;
+    protected $table = 'schoolyear';
+
+    public function subject(){
+        return $this->hasMany(Subject_table::class);
+    }
 }

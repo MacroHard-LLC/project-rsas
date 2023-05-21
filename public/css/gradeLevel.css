@@ -1,0 +1,15 @@
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+.text {
+    font-family: 'Oswald';
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.grade-table {
+    font-family: 'Oswald';
+    font-size: 1.2rem;
+}
