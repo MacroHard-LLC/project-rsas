@@ -18,7 +18,8 @@ class Schoolyear extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'rfid_number',
+        'start_year',
+        'end_year'
     ];
 
     public function subject(){
