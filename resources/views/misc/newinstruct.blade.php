@@ -13,14 +13,13 @@
                     <fieldset>
                         <div class="form-outline input-field pb-2">
 
-                                <label for="rfid_number" class="input-title">RFID Number</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="rfid_number" id='rfid_numberInput' pattern="[0-9]+" aria-describedby="rfid_numberError">
-                                <div class="is-invalid" id="rfid_numberError">
+                                <label for="instructor_rfid_number_input" class="input-title">RFID Number</label>
+                                <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="instructor_rfid_number" id='instructor_rfid_number_input' minlength="10" maxlength="10" pattern="[0-9]+" aria-describedby="instructor_rfid_number_error" required>
+                                <div class="is-invalid" id="instructor_rfid_number_error">
                                     <span></span>
                                 </div>
                         </div>
-                        <div class="form-group pt-3 float-end" id="submission">
-                            <!--<span class="submit-reminder me-3">Double-check the information before pressing the button</span>-->
+                        <div class="form-group pt-3 float-end" id="submit_instructor">
                             <button id="createButton" class="btn btn-primary" type="submit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                         </div>
                     </div>
@@ -33,40 +32,38 @@
 
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ asset('js/addInstructor.js') }}"></script>
 <script>
-$(function () {
-    $('#registerInstForm').submit(function (e) {
-        e.preventDefault();
-        // var formData = $(this).serializeArray();
-        // formData = formData[1].value;
-        // console.log(formData);
+    $(function () {
+        $('#registerInstForm').submit(function (e) {
+            e.preventDefault();
+            let formData = $(this).serializeArray();
+            jQuery.each(formData, function(i, field) {
+                if (field.name == "instructor_rfid_number")
+                    field.name = field.name.replace("instructor_rfid_number", "rfid_number")
+            });
 
-        let formData = $(this).serializeArray();
-        
+            $("#registerInstForm").children().find(".is-invalid").children("span").text("");
+            $("#registerInstForm input").removeClass("is-invalid");
 
-        $(".is-invalid").children("strong").text("");
-        $("#registerForm input").removeClass("is-invalid");
-        
-        $.ajax({
-            method: "POST",
-            headers: {
-                Accept: "application/json"
-            },
-            url: "{{ route('add_instructor') }}",
-            data: formData,
-            success: () => window.location.assign(window.location.href),
-            error: (response) => {
-                if(response.status === 422) {
-                    let errors = response.responseJSON.errors;
-                    Object.keys(errors).forEach(function (key) {
-                        $("#" + key + "Input").addClass("is-invalid");
-                        $("#" + key + "Error").children("strong").text(errors[key][0]);
-                    });
+            $.ajax({
+                method: "POST",
+                headers: {
+                    Accept: "application/json"
+                },
+                url: "{{ route('add_instructor') }}",
+                data: formData,
+                success: () => window.location.assign(window.location.href),
+                error: (response) => {
+                    if(response.status === 422) {
+                        let errors = response.responseJSON.errors;
+                        Object.keys(errors).forEach(function (key) {
+                            $("#instructor_" + key + "_input").addClass("is-invalid");
+                            $("#instructor_" + key + "_error").children("strong").text(errors[key][0]);
+                        });
+                    }
                 }
-            }
-        })
-
-    });
-})
+            })
+        });
+    })
 </script>
