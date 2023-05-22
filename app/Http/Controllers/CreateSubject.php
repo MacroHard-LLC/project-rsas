@@ -53,50 +53,51 @@ class CreateSubject extends Controller
             'year_end' => ['required'],
         ]);
 
-        $schoolyear = new Schoolyear;
-        $schoolyear->start_year = $formFields['year_st'];
-        $schoolyear->end_year = $formFields['year_end'];
-        $schoolyear->save();
+        //$schoolyear = new Schoolyear;
+        //$schoolyear->start_year = $formFields['year_st'];
+        //$schoolyear->end_year = $formFields['year_end'];
 
-        $instructor = new Instructor;
-        $instructor->rfid_number();
+        //s$instructor = new Instructor;
+        //$instructor->rfid_number;
 
         $subject = new Subject_table;
-        $subject->grade_level = $formFields['grade_level'];
+        //$subject->grade_level = $formFields['grade_level'];
         $subject->id = $formFields['sub_id'];
         $subject->name = $formFields['sub_name'];
-        $subject->instructor_rfid = 0;
-        $subject->schoolyear_id = Schoolyear::latest('id')->first()->id;
+        $subject->instructor_rfid = 202042069;
+        $subject->schoolyear_id = 1;
         $subject->semester = "0";
-        $subject->room = $formFields['as_room'];
-        $subject->added_on = now();
-        $subject->added_by = 0;
-        $subject->updated_on = now();
-        $subject->updated_by = 0;
-        $subject->is_deleted = 0;
-        $subject->save();
+        //$subject->room = $formFields['as_room'];
+        //$subject->added_on = now();
+        //$subject->added_by = 0;
+        //$subject->updated_on = now();
+        //$subject->updated_by = 0;
+        //$subject->is_deleted = 0;
 
         $machine = new Machine_table;
-        $machine->room = $formFields['as_room'];
+        //$machine->room = $formFields['as_room'];
         $machine->status = 0;
-        $machine->added_on = now();
-        $machine->added_by = 0;
-        $machine->updated_on = now();
-        $machine->updated_by = 0;
-        $machine->is_deleted = 0;
-        $machine->save();
+        //$machine->added_on = now();
+        //$machine->added_by = 0;
+        //$machine->updated_on = now();
+        //$machine->updated_by = 0;
+        //$machine->is_deleted = 0;
 
         $sched = new Schedule_table;
         $sched->subject_id = $formFields['sub_id'];
-        $sched->grade_level = $formFields['grade_level'];
+        //$sched->grade_level = $formFields['grade_level'];
         $sched->day = $formFields['days'];
         $sched->time_start = $formFields['time_st'];
         $sched->time_end = $formFields['time_end'];
-        $sched->added_on = now();
-        $sched->added_by = 0;
-        $sched->updated_on = now();
-        $sched->updated_by = 0;
-        $sched->is_deleted = 0;
+        //$sched->added_on = now();
+        //$sched->added_by = 0;
+        //$sched->updated_on = now();
+        //$sched->updated_by = 0;
+        //$sched->is_deleted = 0;
+
+        $machine->save();
+        $subject->save();
+        //$schoolyear->save();
         $sched->save();
 
         #$isUserSuccess = User_table::where('id','=',$instructor_id);
