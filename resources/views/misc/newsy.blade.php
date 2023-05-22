@@ -8,28 +8,27 @@
             </div>
 
             <div class="modal-body mx-2 my-2">
-                <form method="POST" action="/users" id="registerSYForm" class="needs-validation" novalidate>
+                <form method="POST" id="registerSYForm" class="needs-validation" novalidate>
                     @csrf
                     <fieldset>
                         <div class="row my-3">
                             <div class="col-md-6 input-field">
-                                <label for="year_start" class="input-title">Year Start</label>
-                                <input class="date-own form-control" type="text"  placeholder="20XX" name="year_start" id="year_startInput" minlength="4" maxlength="4" pattern="^(19|20)\d{2}$" aria-describedby="year_startError" required>
-                                <div class="is-invalid" id="year_startError">
+                                <label for="year_start_input" class="input-title">Year Start</label>
+                                <input class="date-own form-control" type="text"  placeholder="20XX" name="year_start" id="year_start_input" minlength="4" maxlength="4" pattern="^(19|20)\d{2}$" aria-describedby="year_start_error" required>
+                                <div class="is-invalid" id="year_start_error">
                                     <span></span>
                                 </div>
                             </div>
 
                             <div class="col-md-6 input-field">
-                                <label for="last" class="input-title">Year End</label>
-                                <input class="date-own form-control" type="text"  placeholder="20XX" name="year_end" id="year_endInput" minlength="4" maxlength="4" pattern="^(19|20)\d{2}$" aria-describedby="year_endError" required>
-                                <div class="is-invalid" id="year_endError">
+                                <label for="year_end_input" class="input-title">Year End</label>
+                                <input class="date-own form-control" type="text"  placeholder="20XX" name="year_end" id="year_end_input" minlength="4" maxlength="4" pattern="^(19|20)\d{2}$" aria-describedby="year_end_error" required>
+                                <div class="is-invalid" id="year_end_error">
                                     <span></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group pt-3 float-end" id="submission">
-                            <!--<span class="submit-reminder me-3">Double-check the information before pressing the button</span>-->
+                        <div class="form-group pt-3 float-end" id="submit_schoolyear">
                             <button class="btn btn-primary" type="submit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                         </div>
                     </div>
@@ -42,17 +41,16 @@
 
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ asset('js/createSchoolyear.js') }}"></script>
 <script>
 $(function () {
     $('#registerSYForm').submit(function (e) {
         e.preventDefault();
         let formData = $(this).serializeArray();
-        console.log(formData);
 
         $(".is-invalid").children("strong").text("");
-        $("#registerForm input").removeClass("is-invalid");
-        
+        $("#registerSYForm input").removeClass("is-invalid");
+
         $.ajax({
             method: "POST",
             headers: {
@@ -65,8 +63,8 @@ $(function () {
                 if(response.status === 422) {
                     let errors = response.responseJSON.errors;
                     Object.keys(errors).forEach(function (key) {
-                        $("#" + key + "Input").addClass("is-invalid");
-                        $("#" + key + "Error").children("strong").text(errors[key][0]);
+                        $("#" + key + "_input").addClass("is-invalid");
+                        $("#" + key + "_error").children("strong").text(errors[key][0]);
                     });
                 }
             }

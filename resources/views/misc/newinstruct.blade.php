@@ -32,7 +32,7 @@
 
 </div>
 
-<script src="{{ asset('js/addInstructor.js') }}"></script>
+<script src="{{ asset('js/createInstructor.js') }}"></script>
 <script>
     $(function () {
         $('#registerInstForm').submit(function (e) {
