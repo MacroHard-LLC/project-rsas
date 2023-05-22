@@ -8,7 +8,7 @@
             </div>
 
             <div class="modal-body mx-2 my-2">
-                <form method="POST" action="/users" id="registerForm" class="needs-validation" novalidate>
+                <form method="POST" action="/users" id="registerSYForm" class="needs-validation" novalidate>
                     @csrf
                     <fieldset>
                         <div class="row my-3">
@@ -41,3 +41,37 @@
     </div>
 
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(function () {
+    $('#registerSYForm').submit(function (e) {
+        e.preventDefault();
+        let formData = $(this).serializeArray();
+        console.log(formData);
+
+        $(".is-invalid").children("strong").text("");
+        $("#registerForm input").removeClass("is-invalid");
+        
+        $.ajax({
+            method: "POST",
+            headers: {
+                Accept: "application/json"
+            },
+            url: "{{ route('add_schoolyear') }}",
+            data: formData,
+            success: () => window.location.assign(window.location.href),
+            error: (response) => {
+                if(response.status === 422) {
+                    let errors = response.responseJSON.errors;
+                    Object.keys(errors).forEach(function (key) {
+                        $("#" + key + "Input").addClass("is-invalid");
+                        $("#" + key + "Error").children("strong").text(errors[key][0]);
+                    });
+                }
+            }
+        })
+
+    });
+})
+</script>
