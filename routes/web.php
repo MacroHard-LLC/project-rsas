@@ -5,6 +5,7 @@ use App\Http\Controllers\CreateSubject;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\CreateInstructor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,7 @@ Route::post('/section-get-sectionid',[SectionController::class, 'DoesSectionIdEx
 // Show Subjects
 Route::get('/subjects', [CreateSubject::class, 'CreateSubjectIndex']);
 
+Route::post('/instructor/add',[CreateInstructor::class, 'AddInstructor'])->name('add_instructor');
 // Delete Subject
 Route::delete('/subjects', [CreateSubject::class, 'destroy'])->name('deleteSubject');
 
