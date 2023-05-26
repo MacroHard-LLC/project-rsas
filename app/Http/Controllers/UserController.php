@@ -46,13 +46,7 @@ class UserController extends Controller
         return back();
     }
 
-<<<<<<< Updated upstream
-    public function update(Request $request, $id) {
-        $user = User::find($id);
-
-=======
     public function UserUpdate(Request $request, $id) {
->>>>>>> Stashed changes
         $formFields = $request->validate([
             'id' => ['required',Rule::unique('user','id')->ignore($id),'integer','digits:9'],
             'password' => ['required','min:1','max:20'],

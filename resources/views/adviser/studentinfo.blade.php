@@ -6,6 +6,8 @@
 @extends('master')
 @section('content')
 
+@include('adviser.tag')
+
 <div class="container mx-10 my-5">
 <div class="border rounded px-4 pt-5 pb-3 my-2">
     <div class="row">
@@ -33,7 +35,7 @@
 
         <div class="row">
             <div class="col">
-                <table class="table table-striped table-hover" id="attendanceTable" data-toggle="table" data-toolbar="#toolbar">
+                <table class="table table-hover" id="attendanceTable" data-toggle="table" data-toolbar="#toolbar">
                     <tr>
                         <th class="w-10"></th>
                         <th class="w-75">Student Name</th>
@@ -44,36 +46,38 @@
                     <tr>
                         <td><i class="fa-solid fa-circle icon-baby-blue center"></i></a></td>
                         <td class="name">Snow, Jon Stark</td>
-                        <td class="attendace" data-align="center" data-status="Enrolled">
-                            Enrolled
-                            <!-- edit class attendance portion mayhaps?
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="attendance" id="absentCheck" value="0" required>
-                                <label class="form-check-label" for="absentCheck">Absent</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="attendance" id="presentCheck" value="1" required>
-                                <label class="form-check-label" for="presentCheck">Present</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="attendance" id="lateCheck" value="2" required>
-                                <label class="form-check-label" for="lateCheck">Late</label>
-                            </div>
-                        -->
+                        <td class="attendance" data-align="right" data-status="Enrolled"> Enrolled </td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <a data-bs-toggle="modal" data-bs-target="#tagModal">
+                                    <i class="fa-solid fa-tag" data-bs-target="#tagModal"></i>
+                                </a>
+                            </button>
                         </td>
-                        <td><i class="fa-regular fa-circle"></td>
                     </tr>
                     <tr>
                         <td><i class="fa-solid fa-circle icon-baby-blue center"></i></a></td>
                         <td class="name">Lannister, Jamie Tyrion</td>
-                        <td class="attendance" data-align="right" data-status="Dropped">Dropped</td>
-                        <td><i class="fa-regular fa-circle"></i></td>
+                        <td class="attendance" data-align="right" data-status="Dropped"> Dropped </td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <a data-bs-toggle="modal" data-bs-target="#tagModal">
+                                    <i class="fa-solid fa-tag" data-bs-target="#tagModal"></i>
+                                </a>
+                            </button>
+                        </td>
                     </tr>
                     <tr>
                         <td><i class="fa-solid fa-circle icon-baby-blue center"></i></a></td>
                         <td class="name">Baratheon, Stannis Robert</td>
-                        <td class="attendance" data-align="right" data-status="Enrolled">Enrolled</td>
-                        <td><i class="fa-regular fa-circle"></a></td>
+                        <td class="attendance" data-align="right" data-status="Enrolled"> Enrolled </td>
+                        <td>
+                            <button class="btn btn-primary">
+                                <a data-bs-toggle="modal" data-bs-target="#tagModal">
+                                    <i class="fa-solid fa-tag"></i>
+                                </a>
+                            </button>
+                        </td>
                     </tr>
                 </table>
             </div>
