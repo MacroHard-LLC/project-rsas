@@ -29,6 +29,11 @@ th{
     font-family: 'Source Sans Pro',Arial, Helvetica, sans-serif;
 }
 
+#ifStudent{
+    display:none;
+}
+
+
 .navbar-brand {
     font-weight: bold;
     text-transform: uppercase;
@@ -82,6 +87,11 @@ a.nav-link{
     margin-top: 0.5rem;
 }
 
+.form-check-label{
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+}
+
 .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     opacity: 0.3; /* Firefox */
 }
@@ -127,6 +137,7 @@ button.btn:active:focus{
 .modal-header{
     background-color:#98C1D9;
 }
+
 
 .white-label{
     font-family: 'Poppins';

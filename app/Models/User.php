@@ -22,22 +22,17 @@ class User extends Authenticatable
         'id',
         'password',
         'role',
-        'first',
-        'middle',
-        'last',
-        'gender',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'sex',
+        'is_enrolled',
         'is_deleted',
     ];
 
     public function scopeFilter($query, array $filters){
         if($filters['role'] ?? false){
-            if (request('role') == 'admin')
-                $user_role = 0;
-            else if (request('role') == 'student')
-                $user_role = 1;
-            else
-                $user_role = 2;
-            $query->where('role', '=', $user_role);
+            $query->where('role', 'like', '%' . request('role') . '%');
         }
     }
 

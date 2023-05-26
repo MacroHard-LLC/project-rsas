@@ -76,6 +76,10 @@ class AdviserViewController extends Controller
     function ChangeAttendance(Request $request){
         $incoming_data = $request->input_data;
         $new_status = $incoming_data['new_status'];
+        $student_id = $incoming_data['id'];
+        $target_date = $incoming_data['date'];
+        $subject = $incoming_data['subject'];
+        
         session()->put('new_status',$new_status);
         
         $adviserId = session()->get('adviser_id');

@@ -3,8 +3,11 @@
 use App\Http\Controllers\CreateUser;
 use App\Http\Controllers\CreateSubject;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdviserViewController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\CreateInstructor;
+use App\Http\Controllers\CreateSchoolYear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -62,6 +65,12 @@ Route::post('/section/register',[SectionController::class, 'DataInsert'])->name(
 Route::post('/section-get-sectionid',[SectionController::class, 'DoesSectionIdExist'])->name('get_section_id');
 // Show Subjects
 Route::get('/subjects', [CreateSubject::class, 'CreateSubjectIndex']);
+
+// instructor
+Route::post('/instructor/add',[CreateInstructor::class, 'AddInstructor'])->name('add_instructor');
+
+// instructor
+Route::post('/schoolyear/add',[CreateSchoolYear::class, 'AddSchoolYear'])->name('add_schoolyear');
 
 // Delete Subject
 Route::delete('/subjects', [CreateSubject::class, 'destroy'])->name('deleteSubject');
@@ -158,3 +167,22 @@ Route::put('/users/{id}', [UserController::class, 'update']);
 
 // Delete User
 Route::delete('/users', [UserController::class, 'destroy'])->name('deleteUser');
+
+// Show list of grade levels
+Route::get('/gradelevels', [SectionController::class, 'index']);
+
+// Show a section
+Route::get('/gradelevels/{grade}', [SectionController::class, 'show']);
+
+// goes to adviser views
+// change this once login is introduced
+Route::get('/home-adviser/{id}', [AdviserViewController::class, 'AdviserPage'] );
+Route::get('/view-attendance', [AdviserViewController::class, 'AttendancePage'] );
+Route::get('/student-info', [AdviserViewController::class, 'StudentPage'] );
+
+//edit attendance in attendance page of adviser
+Route::get('/edit', [AdviserViewController::class, 'EditAttendance'] );
+Route::post('/view-attendance-start', [AdviserViewController::class, 'start'])->name('adviser_startup');
+Route::post('/view-attendance-get-students', [AdviserViewController::class, 'GetAllStudents'])->name('get_all_students');
+Route::post('/view-attendance-change', [AdviserViewController::class,'ChangeAttendance'])->name('change_attendance');
+Route::post('\view-attendance-add-id', [AdviserViewController::class, 'StudentTag'])->name('add_id_edit_status');

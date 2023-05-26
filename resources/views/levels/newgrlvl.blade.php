@@ -35,14 +35,8 @@
                         <div class="row mb-3">
                                 <div class="col-md-6 input-field"> 
                                     <label for="grade_level" class="input-title">Grade Level</label>   
-                                    <select name="grade_level" class="form-control form-select" placeholder="Choose Department ID" id="sectionGradeLevel" required>
+                                    <select name="grade_level" class="form-select" placeholder="Choose Department ID" id="sectionGradeLevel" required>
                                         <option value="" disabled selected="selected">Choose a Grade Level</option>
-                                        <option value="1">Level 1</option>
-                                        <option value="2">Level 2</option>
-                                        <option value="3">Level 3</option>
-                                        <option value="4">Level 4</option>
-                                        <option value="5">Level 5</option>
-                                        <option value="6">Level 6</option>
                                         <option value="7">Level 7</option>
                                         <option value="8">Level 8</option>
                                         <option value="9">Level 9</option>
@@ -56,7 +50,7 @@
                                 <div class="col-md-6 input-field">
                                     <div class="form-outline">
                                         <label for="subj_id" class="input-title">Adviser ID</label>
-                                        <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" name="sectionAdviserID" id="sectionAdviserID" minlength="9" maxlength="9" pattern="[0-9]+" required>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Input a 9 digit integer" name="sectionAdviserID" id="sectionAdviserID" minlength="9" maxlength="9" pattern="[0-9]+" required>
                                         <div class="valid-feedback">Looks good!</div>
                                         <div class="is-invalid" id="idError">
                                             <span id="sectionAdviserIDError"></span>
@@ -69,7 +63,7 @@
                                 <div class="col-md-5 input-field ">
                                     <div class="form-outline">
                                         <label for="subj_id" class="input-title">Student ID</label>
-                                        <input type="text" class="form-control form-control-sm" placeholder="Input a 5 digit integer" id="studentSubjectID" name="studentSubjectID" minlength="9" maxlength="9" pattern="[0-5]" required>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Input a 9 digit integer" id="studentSubjectID" name="studentSubjectID" minlength="9" maxlength="9" pattern="[0-9]+" required>
                                         <div class="valid-feedback">Looks good!</div>
                                         <div class="is-invalid" role="alert">
                                             <span id="sectionStudIDError"></span>
@@ -91,7 +85,7 @@
                             
                                 <div class="col-md-2 input-field float-end">
                                     <div class="form-group pt-3">
-                                        <button type='button' class="btn btn-primary create" id="addStudent" name="sectionAddStudent" id="sectionAddStudent" onclick="finishVal()"><i class="fa-solid fa-user-plus"></i>  Add</button>
+                                        <button type='button' class="btn btn-primary create" id="addStudent" name="sectionAddStudent" id="sectionAddStudent" onclick="finishVal()"><i class="fa-solid fa-user-plus"></i>Add</button>
                                     </div>
                                 </div>
 
