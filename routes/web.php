@@ -92,3 +92,16 @@ Route::get('/gradelevels', [SectionController::class, 'index']);
 
 // Show a section
 Route::get('/gradelevels/{grade}', [SectionController::class, 'show']);
+
+// goes to adviser views
+// change this once login is introduced
+Route::get('/home-adviser/{id}', [AdviserViewController::class, 'AdviserPage'] );
+Route::get('/view-attendance', [AdviserViewController::class, 'AttendancePage'] );
+Route::get('/student-info', [AdviserViewController::class, 'StudentPage'] );
+
+//edit attendance in attendance page of adviser
+Route::get('/edit', [AdviserViewController::class, 'EditAttendance'] );
+Route::post('/view-attendance-start', [AdviserViewController::class, 'start'])->name('adviser_startup');
+Route::post('/view-attendance-get-students', [AdviserViewController::class, 'GetAllStudents'])->name('get_all_students');
+Route::post('/view-attendance-change', [AdviserViewController::class,'ChangeAttendance'])->name('change_attendance');
+Route::post('\view-attendance-add-id', [AdviserViewController::class, 'StudentTag'])->name('add_id_edit_status');
