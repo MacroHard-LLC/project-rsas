@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -26,7 +27,16 @@ class LoginController extends Controller
 
         $credentials = $request->only('id','password');
         if(Auth::attempt($credentials)){
-            return redirect()->intended(route('home'));
+            $user = Auth::user();
+            
+            if($user->isAdmin()){
+                return redirect()->intended(route('home'));
+            } elseif($user->isAdviser()){
+                return redirect()->intended(route('test'));
+            } elseif($user->isStudent()){
+                return redirect()->intended(route('login'));
+            }
+            
         }
         return redirect(route('login'))->with("error","Login failed.");
     }

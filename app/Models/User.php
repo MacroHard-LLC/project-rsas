@@ -45,4 +45,19 @@ class User extends Authenticatable
     public function student(){
         return $this->hasOne(Student::class, 'user_id', 'id');
     }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isAdviser()
+    {
+        return $this->role === 'adviser';
+    }
+
+    public function isStudent()
+    {
+        return $this->role === 'student';
+    }
 }

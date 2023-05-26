@@ -9,6 +9,10 @@ class HomeController extends Controller
     function Homepage(){
         return view('homepage');
     }
+
+    function Test(){
+        return view('test');
+    }
     /*
    { /**
      * Create a new controller instance.

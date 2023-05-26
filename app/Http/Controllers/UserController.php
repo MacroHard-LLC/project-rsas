@@ -91,4 +91,6 @@ class UserController extends Controller
         User::find($request->id)->delete();
         return back()->with('message', 'User deleted successfully');
     }
+
+    
 }
