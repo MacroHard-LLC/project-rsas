@@ -3,12 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
-    function Loginpage(){
+    function login(){
         return view('loginpage');
     }
+
+    function logout(){
+        Session::flush();
+        Auth::logout();
+        return redirect(route('login'));
+    }
+
+    function loginPost(Request $request){
+        $request->validate([
+            'id' => 'required',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('id','password');
+        if(Auth::attempt($credentials)){
+            return redirect()->intended(route('home'));
+        }
+        return redirect(route('login'))->with("error","Login failed.");
+    }
+
+
+    
+
     /*
    { /**
      * Create a new controller instance.

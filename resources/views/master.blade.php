@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>RFID-Based School Attendance System</title>
+  <title>@yield('title','RFID-Based School Attendance System')</title>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   @vite(['resources/js/app.js'])
   <script src="https://kit.fontawesome.com/47cd24d297.js" crossorigin="anonymous"></script>
 </head>
+<link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="images/x-icon"/>
 
 <body>
 

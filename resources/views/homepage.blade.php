@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ asset('css/createsub.css') }}">
 
 @extends('master')
+@section('title','Home')
 @section('content')
 
 {{-- Modular Pages--}}

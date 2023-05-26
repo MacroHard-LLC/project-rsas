@@ -1,5 +1,5 @@
 @extends('master')
-
+@section('title','View Section')
 @section('content')
 
 <div class='container m-2'>

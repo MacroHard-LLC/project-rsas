@@ -35,6 +35,12 @@ use App\Models\User;
 // update - Update [something]
 // destroy - Delete [something]
 
+// goes to the homepage
+// remember that this needs to have an input added later so that we will know what
+// kind of user access this
+Route::get('/home', [HomeController::class, 'Homepage'])->name('home');
+
+
 Route::get('/createsub',[CreateSubject::class,'CreateSubjectIndex']);
 Route::post('dataInsert',[CreateSubject::class, 'DataInsert'])->middleware(CheckSubjectIdValid::class);
 
@@ -62,14 +68,10 @@ Route::post('/schoolyear/add',[CreateSchoolYear::class, 'AddSchoolYear'])->name(
 // Delete Subject
 Route::delete('/subjects', [CreateSubject::class, 'destroy'])->name('deleteSubject');
 
-// goes to the homepage
-// remember that this needs to have an input added later so that we will know what
-// kind of user access this
-Route::get('/home', [HomeController::class, 'Homepage']);
 
-//go to login
-Route::get('/login', [LoginController::class, 'Loginpage']);
 
+
+ 
 // show users
 Route::get('/users', [UserController::class, 'index']);
 
@@ -94,3 +96,10 @@ Route::get('/gradelevels', [SectionController::class, 'index']);
 
 // Show a section
 Route::get('/gradelevels/{grade}', [SectionController::class, 'show']);
+
+
+//Authentications
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'loginPost'])->name('login.post');
+
+Route::get('logout',[LoginController::class,'logout'])->name('logout');
