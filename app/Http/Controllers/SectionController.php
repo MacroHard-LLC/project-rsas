@@ -21,6 +21,11 @@ class SectionController extends Controller
         return view('levels.show', [
             'section' => $section,
             'students' => $students,
+<<<<<<< Updated upstream
+=======
+            'users',
+            'adviser' => $adviser,
+>>>>>>> Stashed changes
         ]);
     }
 

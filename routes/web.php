@@ -125,19 +125,21 @@ Route::get('/edit', [AdviserViewController::class, 'EditAttendance'] );
 Route::post('/view-attendance-start', [AdviserViewController::class, 'start'])->name('adviser_startup');
 Route::post('/view-attendance-get-students', [AdviserViewController::class, 'GetAllStudents'])->name('get_all_students');
 Route::post('/view-attendance-change', [AdviserViewController::class,'ChangeAttendance'])->name('change_attendance');
-Route::post('\view-attendance-add-id', [AdviserViewController::class, 'StudentTag'])->name('add_id_edit_status');
+Route::post('/view-attendance-add-id', [AdviserViewController::class, 'StudentTag'])->name('add_id_edit_status');
 
 // form 2 of the advisor
-Route::prefix('form2')->group(function() {
-    Route::get('/{id}/show', function ($id){
-        $pdf = Pdf::loadView('document.form2', [
-            'form2' => Invoice::find($id)
-        ]);
+Route::post('/form2', [Form2Controller::class, 'ShowForm'])->name('get_all_students');
 
-        return $pdf -> download('Form2', $id, '.pdf');
-    })->name('admin.form2.show');
+// Route::prefix('form2')->group(function() {
+//     Route::get('/{id}/show', function ($id){
+//         $pdf = Pdf::loadView('document.form2', [
+//             'form2' => section::find($id)
+//         ]);
 
-}); //for the printing of the form 2 as a pdf file.
+//         return $pdf -> download('Form2', $id, '.pdf');
+//     })->name('admin.form2.show');
+
+// }); //for the printing of the form 2 as a pdf file.
 
 // Route::get('form2', function(){
 //     return view('form2');
