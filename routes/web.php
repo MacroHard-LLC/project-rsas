@@ -13,6 +13,18 @@ use App\Http\Middleware\CheckSubjectIdValid;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 
+use Barryvdh\DomPDF\Facade\PDF;
+
+/*
+For Technician
+use App\Http\Controllers\CreateUser;
+use App\Http\Controllers\CreateSubject;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController as TechHomeController
+
+use App\Http\Middleware\CheckSubjectIdValid;
+*/
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,6 +66,40 @@ Route::get('/subjects', [CreateSubject::class, 'CreateSubjectIndex']);
 // Delete Subject
 Route::delete('/subjects', [CreateSubject::class, 'destroy'])->name('deleteSubject');
 
+//I tried to group them - Pris
+//Route::resource('subjects', CreateSubject::class) -> only(['CreateSubjectForm', 'DataInsert', 'CheckSubIdExist']);
+
+/*
+Route::prefix('tech') -> middleware('is_tech' -> group(function) (){
+    Route::get('home', [TechHomeController::class, 'index']); // Dashboard
+
+    // Create Subject
+    Route::get('/createsub',[CreateSubject::class,'CreateSubjectIndex']); // Create Subject
+    Route::post('dataInsert',[CreateSubject::class, 'DataInsert'])->middleware(CheckSubjectIdValid::class); // Data Insert
+
+    // create subject Form
+    Route::get('/subjects/create',[CreateSubject::class, 'CreateSubjectForm']);
+    Route::post('/subjects', [CreateSubject::class, 'DataInsert'])->name('register_sub');
+    Route::post('/subjects-check', [CreateSubject::class, 'CheckSubIdExist'])->name('check_id');
+
+    // show users
+    Route::get('/users', [UserController::class, 'index']);
+
+    // show create user form
+    Route::get('/users/create', [UserController::class, 'create']);
+
+    // create new user
+    Route::post('/users', [UserController::class, 'store'])->name('createUser');
+
+    // Show Edit User Form
+    Route::get('/users/{id}/edit/', [UserController::class, 'edit']);
+});
+
+Route::prefix('admin' -> middleware('is_admin') ->group(function) (){
+    Route::get('home'), [HomeController::class, 'index']);
+})
+*/
+
 // goes to the homepage
 // remember that this needs to have an input added later so that we will know what
 // kind of user access this
@@ -71,6 +117,28 @@ Route::post('/view-attendance-start', [AdviserViewController::class, 'start'])->
 Route::post('/view-attendance-get-students', [AdviserViewController::class, 'GetAllStudents'])->name('get_all_students');
 Route::post('/view-attendance-change', [AdviserViewController::class,'ChangeAttendance'])->name('change_attendance');
 Route::post('\view-attendance-add-id', [AdviserViewController::class, 'StudentTag'])->name('add_id_edit_status');
+
+// form 2 of the advisor
+Route::prefix('form2')->group(function() {
+    Route::get('/{id}/show', function ($id){
+        $pdf = Pdf::loadView('document.form2', [
+            'form2' => Invoice::find($id)
+        ]);
+
+        return $pdf -> download('Form2', $id, '.pdf');
+    })->name('admin.form2.show');
+
+}); //for the printing of the form 2 as a pdf file.
+
+// Route::get('form2', function(){
+//     return view('form2');
+// }); //this is so the damn form 2 can be printed - Pris
+// Route::get('/school-form', function () {
+//     $form = SchoolForm::find(2); //Retrive data from the SchoolForm model
+//     return view('schoool-form', ['form' => $form]); //Pass the data to the 'school-form' view
+// });
+
+
 
 // show users
 Route::get('/users', [UserController::class, 'index']);
@@ -90,9 +158,3 @@ Route::put('/users/{id}', [UserController::class, 'update']);
 
 // Delete User
 Route::delete('/users', [UserController::class, 'destroy'])->name('deleteUser');
-
-// Show list of grade levels
-Route::get('/gradelevels', [SectionController::class, 'index']);
-
-// Show a section
-Route::get('/gradelevels/{grade}', [SectionController::class, 'show']);
