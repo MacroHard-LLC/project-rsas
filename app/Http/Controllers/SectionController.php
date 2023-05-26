@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Section;
 use App\Models\Student;
+
 use Illuminate\Http\Request;
 
 class SectionController extends Controller
@@ -97,7 +98,7 @@ class SectionController extends Controller
 
         // this is for the section table
         $addRow = new Section;
-        $addRow->id = $formFields['sectionID'];
+        //$addRow->id = $formFields['sectionID'];
         $addRow->name = $formFields['sectionName'];
         $addRow->grade_level = $formFields['gradeLevel'];
         $addRow->adviser_id = $formFields['adviserID'];
@@ -106,15 +107,23 @@ class SectionController extends Controller
         $addRow->updated_on = now();
         $addRow->updated_by = 0;
         $addRow->is_deleted = 0;
-        $addRow->save();
 
+        $addRow->save();
+        $latestID = Section::select('id')->find($addRow->name);
+        
         // this is for the students
         foreach($formFields->input('allStudentID') as $studentID){
-            $changeRow = User::select('id')->find($studentID);
-            $changeRow->is_enrolled = 1;
-            $changeRow->grade_level = $formFields['gradeLevel'];
-            $changeRow->updated_on = now();
-            $changeRow->save();
+            // $changeRow = User::select('id')->find($studentID);
+            // $changeRow->is_enrolled = 1;
+            // $changeRow->grade_level = $formFields['gradeLevel'];
+            // $changeRow->updated_on = now();
+            // $changeRow->save();
+
+            $changeRow = Student::find($studentID);
+            if ($changeRow) {
+                $changeRow->section_id = $latestID;
+                $changeRow->save();
+            }
         }
     }
 }
