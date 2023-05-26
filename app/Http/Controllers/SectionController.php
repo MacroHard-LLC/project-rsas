@@ -109,7 +109,7 @@ class SectionController extends Controller
         $addRow->is_deleted = 0;
 
         $addRow->save();
-        $latestID = Section::select('id')->find($addRow->name);
+        $latestID = $addRow->id;
         
         // this is for the students
         foreach($formFields->input('allStudentID') as $studentID){
@@ -118,12 +118,11 @@ class SectionController extends Controller
             $changeRow->updated_on = now();
             $changeRow->save();
 
-            $changeRow = Student::where('user_id', $studentID)->first();
-            if ($changeRow) {
-
-                $changeRow->section_id = $latestID;
-                $changeRow->save();
-            }
+            // $changeRow = Student::where('user_id', $studentID)->first();
+            // if ($changeRow) {
+            //     $changeRow->section_id = $latestID;
+            //     $changeRow->save();
+            // }
         }
     }
 }
