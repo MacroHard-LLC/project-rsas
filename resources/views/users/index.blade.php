@@ -37,39 +37,45 @@
                         <th>Last Name</th>
                         <th>First Name</th>
                         <th>Middle Name</th>
-                        <th>Gender</th>
+                        <th>Sex</th>
                         <th data-align="left"></th>
                     </tr>
 
                     @if(count($users) > 0)
                         <script src="{{ asset('js/usersIndex.js') }}"></script>
                         @foreach ($users as $user)
+                        @php
+                            $student = NULL;
+                        @endphp
                         <tr>
                             <td><i class="fa-solid fa-circle icon-baby-blue"></td>
                             <td>{{$user['id']}}</td>
 
-                            @if($user['role'] == "0")
+                            @if($user['role'] == "admin")
                                 <td>Administrator</td>
-                            @elseif($user['role'] == "1")
+                            @elseif($user['role'] == "student")
+                                @php
+                                    $student = $user->student
+                                @endphp
                                 <td>Student</td>
-                            @elseif($user['role'] == "2")
+                            @elseif($user['role'] == "adviser")
                                 <td>Adviser</td>
                             @endif
 
-                            <td>{{$user['last']}}</td>
-                            <td>{{$user['first']}}</td>
-                            <td>{{$user['middle']}}</td>
-                            <td>{{$user['gender']}}</td>
+                            <td>{{$user['last_name']}}</td>
+                            <td>{{$user['first_name']}}</td>
+                            <td>{{$user['middle_name']}}</td>
+                            <td>{{$user['sex']}}</td>
 
                             <td>
-                                <a class="btn btn-primary" role="button" onclick="updateModal({{$user}})"><i class="fa-regular fa-pen-to-square icon-white"></i></a>
+                                <a class="btn btn-primary" role="button" onclick="updateModal({{$user}},{{$student}})"><i class="fa-regular fa-pen-to-square icon-white"></i></a>
                                 <a class="btn btn-primary" role="button" onclick="deleteModal({{$user}})"><i class="fa-solid fa-trash-can icon-white"></i></a>
                             </td>
                         </tr>
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="5" class="text-center">No Data Found</td>
+                            <td colspan="8" class="text-center">No Data Found</td>
                         </tr>
                     @endif
                 </table>
