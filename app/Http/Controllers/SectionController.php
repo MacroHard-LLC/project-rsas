@@ -113,14 +113,14 @@ class SectionController extends Controller
         
         // this is for the students
         foreach($formFields->input('allStudentID') as $studentID){
-            // $changeRow = User::select('id')->find($studentID);
-            // $changeRow->is_enrolled = 1;
-            // $changeRow->grade_level = $formFields['gradeLevel'];
-            // $changeRow->updated_on = now();
-            // $changeRow->save();
+            $changeRow = User::select('id')->find($studentID);
+            $changeRow->is_enrolled = 1;
+            $changeRow->updated_on = now();
+            $changeRow->save();
 
-            $changeRow = Student::find($studentID);
+            $changeRow = Student::where('user_id', $studentID)->first();
             if ($changeRow) {
+
                 $changeRow->section_id = $latestID;
                 $changeRow->save();
             }
