@@ -34,11 +34,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     // Get the button element
-    const button = document.querySelector('button[type="submit"]');
+    const buttonSubmitEditView = document.querySelector('button[type="submit"]');
     //const studentId = document.querySelector('#editAttendanceModal td[data-student-id]').getAttribute('data-student-id');
 
     // Add a click event listener to the button
-    button.addEventListener('click', function(event) {
+    buttonSubmitEditView.addEventListener('click', function(event) {
+        const buttonEditView = document.getElementById("editStatus");
+        let array = buttonEditView.dataset.id;
+        let formatArray = array.split(",")
+
         event.preventDefault(); // prevent the default form submission
         const radioButtons = document.querySelectorAll('.radio');
         var selectedValue = '';
@@ -51,8 +55,14 @@
             });
 
         let input_data = {
-            new_status : selectedValue
+            new_status : selectedValue,
+            student_id : formatArray[0],
+            date : formatArray[1],
+            subject : formatArray[2],
         };
+
+        console.log("yeet");
+        console.log(input_data);
         $.ajax({
             method: "POST",
             headers: {
@@ -62,6 +72,7 @@
             url: "{{ route('change_attendance') }}",
             data: { input_data},
             success: function(data) {
+                
                 location.reload();
             }
             });

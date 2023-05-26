@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="{{ asset('css/adviserview.css') }}">
 <link rel="stylesheet" href="{{ asset('css/createUser.css') }}">
 
-
 @extends('master')
 @section('content')
 @section('scripts')
@@ -52,27 +51,36 @@
             }
             });
         const tableBody = document.querySelector('#attendanceTable tbody');
+        let subject = $('#subject_adviserView_dropdown').val();
         $.ajax({
-            method: "POST",
-            headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    Accept: "application/json"
-            },
-            url: "{{ route('get_all_students') }}",
-            success: function(data) {
-                console.log(data);
-                for(var i = 0; i < data.length; i++){
-                    const newRow = document.createElement('tr');
-                    newRow.innerHTML = `
-                        <td>${data[i]['name']}</td>
-                        <td>${data[i]['status']}</td>
-                        <td class="editStatus"><button id="editStatus" name="editStatus" class="btn btn-primary create btn-create" type="button"><a data-bs-toggle="modal" data-bs-target="#editAttendanceModal"><i class="fa-regular fa-pen-to-square icon-white"></i></a></button><span data-id="${data[i]['id']}"></span></td>
-                        `;
-                    tableBody.appendChild(newRow);
-                    
-                }
-            }
-            });
+    method: "POST",
+    headers: {
+        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+        Accept: "application/json"
+    },
+    url: "{{ route('get_all_students') }}",
+    success: function(data) {
+        for(var i = 0; i < data.length; i++){
+            const newRow = document.createElement('tr');
+            const array = new Array(data[i]['id'], formattedDate, subject);
+            console.log(array);
+            newRow.innerHTML = `
+                <td>${data[i]['name']}</td>
+                <td>${data[i]['status']}</td>
+                <td class="editStatus">
+                    <button id="editStatus" name="editStatus" data-id="${array}" class="btn btn-primary create btn-create" type="button">
+                        <a data-bs-toggle="modal" data-bs-target="#editAttendanceModal">
+                            <i class="fa-regular fa-pen-to-square icon-white"></i>
+                        </a>
+                    </button>
+                    <span data-id="${data[i]['id']}"></span>
+                </td>
+            `;
+            tableBody.appendChild(newRow);
+        }
+    }
+});
+
     });
 
     $(document).on('click', '#editStatus', function() {
@@ -138,7 +146,7 @@
        
         <div class="col col-md-auto">
             <label for="subject" class="section-title">SUBJECT</label>
-                <select name="subject" class="form-select w-auto" placeholder="Choose Subject" id="subject" required>
+                <select name="subject" class="form-select w-auto" placeholder="Choose Subject" id="subject_adviserView_dropdown" required>
                     <!--ideally mushow unsay mga subjects naa ang section -->
                     <option value="SCI7">GEOLOGY</option>
                     <option value="MATH7">ALGEBRA</option>
