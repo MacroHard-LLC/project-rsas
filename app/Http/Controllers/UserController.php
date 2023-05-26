@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Models\Student;
 
 class UserController extends Controller
 {
@@ -20,11 +21,14 @@ class UserController extends Controller
             'id' => ['required','unique:user,id','integer','digits:9'],
             'password' => ['required','min:1','max:20'],
             'role' => 'required',
-            'first' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
-            'middle' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
-            'last' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
-            'gender' => 'required',
+            'first_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'middle_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'last_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'sex' => 'required',
         ]);
+
+        if ($request->role == 'student')
+            $request->validate(['rfid_number' => ['sometimes','unique:student,rfid_number']]);
 
         // Hash Password
         // $formFields['password'] = bcrypt($formFields['password']);
@@ -32,23 +36,50 @@ class UserController extends Controller
         // Create user
         User::create($formFields);
 
-        return redirect('/')->with('message', 'User created successfully!');
+        if ($request->rfid_number){
+            $student = new Student;
+            $student->rfid_number = $request->rfid_number;
+            $student->user_id = $request->id;
+            $student->save();
+        }
+
+        return back();
     }
 
     public function update(Request $request, $id) {
+        $user = User::find($id);
+
         $formFields = $request->validate([
             'id' => ['required',Rule::unique('user','id')->ignore($id),'integer','digits:9'],
             'password' => ['required','min:1','max:20'],
             'role' => 'required',
-            'first' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
-            'middle' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
-            'last' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
-            'gender' => 'required',
+            'first_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'middle_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'last_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'sex' => 'required',
         ]);
 
-        User::find($id)->update($formFields);
+        if ($user->role == 'student'){
+            $form_rfid_number = $request->validate([
+                'rfid_number' => Rule::unique('student')->ignore($user->student->rfid_number, 'rfid_number'),
+            ]);
+        }
 
-        return back()->with('message', 'User updated successfully!');
+        if ($user->role == 'student' && $request->role != 'student'){
+            Student::where('user_id', $id)->delete();
+        } else if ($user->role != 'student' && $request->role == 'student'){
+            info($user->role);
+            $student = new Student;
+            $student->rfid_number = $request->rfid_number;
+            $student->user_id = $request->id;
+            $student->save();
+        } else if ($user->role == 'student' && $user->student->rfid_number != $request->rfid_number) {
+            Student::where('user_id', $id)->update($form_rfid_number);
+        }
+
+        $user->update($formFields);
+
+        return back();
     }
 
     public function destroy(Request $request){

@@ -12,6 +12,21 @@ class Student extends Model
     protected $table = 'student';
     public $timestamps = FALSE;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'rfid_number',
+        'user_id',
+        'section_id',
+        'status',
+        'added_by',
+        'updated_by',
+        'is_deleted',
+    ];
+
     public function section(){
         return $this->belongsTo(Section::class);
     }

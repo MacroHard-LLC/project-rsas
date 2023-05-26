@@ -3,7 +3,10 @@
 use App\Http\Controllers\CreateUser;
 use App\Http\Controllers\CreateSubject;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\CreateInstructor;
+use App\Http\Controllers\CreateSchoolYear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +53,12 @@ Route::post('/section-get-sectionid',[SectionController::class, 'DoesSectionIdEx
 // Show Subjects
 Route::get('/subjects', [CreateSubject::class, 'CreateSubjectIndex']);
 
+// instructor
+Route::post('/instructor/add',[CreateInstructor::class, 'AddInstructor'])->name('add_instructor');
+
+// instructor
+Route::post('/schoolyear/add',[CreateSchoolYear::class, 'AddSchoolYear'])->name('add_schoolyear');
+
 // Delete Subject
 Route::delete('/subjects', [CreateSubject::class, 'destroy'])->name('deleteSubject');
 
@@ -57,6 +66,9 @@ Route::delete('/subjects', [CreateSubject::class, 'destroy'])->name('deleteSubje
 // remember that this needs to have an input added later so that we will know what
 // kind of user access this
 Route::get('/home', [HomeController::class, 'Homepage']);
+
+//go to login
+Route::get('/login', [LoginController::class, 'Loginpage']);
 
 // show users
 Route::get('/users', [UserController::class, 'index']);
