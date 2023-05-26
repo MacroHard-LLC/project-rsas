@@ -10,7 +10,7 @@
                 <form method="POST" action="/subjects" id="registerSubForm" class="needs-validation" novalidate>
                     @csrf
                     <fieldset>
-                        <div class="row my-3 gy-4">
+                        <div class="row">
 
                             <div class="col-md-6 input-field">
                                 <label for="id" class="input-title" >Subject ID</label>
@@ -27,43 +27,50 @@
                                     <strong>Check if Subject Name is a legal string</strong>
                                 </div>
                             </div>
-
-                            <div class="col-md-6 w-50 input-field">
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-6 col-md-4 input-field">
                                 <label for="grade_level" class="input-title">Grade Level</label>
-                                <select name="grade_level" class="form-control form-select" placeholder="Choose Department ID" id="grade_level" required>
-                                    <option value="1">Level 1</option>
-                                    <option value="2">Level 2</option>
-                                    <option value="3">Level 3</option>
-                                    <option value="4">Level 4</option>
-                                    <option value="5">Level 5</option>
-                                    <option value="6">Level 6</option>
-                                    <option value="7">Level 7</option>
-                                    <option value="8">Level 8</option>
-                                    <option value="9">Level 9</option>
-                                    <option value="10">Level 10</option>
+                                <select name="grade_level" class="form-select" id="grade_level" required>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
                                 </select>
+                                <!--validation needs to be updated, also this kind of error message makes an unnecessary bottom margin :((
                                 <div class="is-invalid" role="alert" id="gradeError" name="gradeError">
                                     <strong></strong>
-                                </div>
+                                </div>-->
                             </div>
 
-                            <div class="form-outline w-25 input-field">
-                                <label for="time_st" class="input-title">Time Start</label>
-                                <input type="time" name="time_st" class="form-control form-control-sm" placeholder="00:00 XM" id="time_st" required>
+                            <div class="col-6 col-md-4 input-field">
+                                <label for="school_year" class="input-title">School Year</label>
+                                <select name="school_year" class="form-select" id="school_year" required>
+                                    <!--ideally the options that would show here is the school_year_id present in the school year table-->
+                                    <option value="20222023">AY 2022-2023</option>
+                                    <option value="20232024">AY 2023-2024</option>
+                                </select>
+                                <!--validation needs to be updated
                                 <div class="is-invalid" role="alert" id="timeStartError" name="timeStartError" style="visibility:hidden">
                                     <strong>Input the correct time format</strong>
-                                </div>
+                                </div>-->
                             </div>
 
-                            <div class="form-outline w-25 input-field">
-                                    <label for="time_end" class="input-title">Time End</label>
-                                    <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="time_end" id="time_end" maxlength="50" required>
+                            <div class="col-6 col-md-4 input-field">
+                                    <label for="semester" class="input-title">Semester</label>
+                                    <select name="semester" class="form-select" id="semester" required>
+                                        <!--ideally the options that would show here is the school_year_id present in the school year table-->
+                                        <option value="first_sem">First Semester</option>
+                                        <option value="second_sem">Second Semester</option>
+                                    </select>
+                                    <!--validation needs to be updated
                                     <div class="is-invalid" role="alert" id="timeEndError" name="timeEndError" style="visibility:hidden">
                                         <strong>Input the correct time format</strong>
-                                    </div>
-                                </div>
-
-                            <div class="col-md-6 w-50 input-field">
+                                    </div>-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 input-field">
                                     <label for="as_room" class="input-title">Assigned Room</label>
                                     <input type="text" name="as_room" class="form-control form-control-sm" placeholder="Ex. RM 143, Arts and Sciences Building" id="as_room" maxlength="20" required>
                                     <div class="is-invalid" role="alert" id="roomError" name="roomError" style="visibility:hidden">
@@ -71,59 +78,125 @@
                                     </div>
                                 </div>
 
-                            <div class="form-outline w-25 input-field">
-                                    <label for="year_st" class="input-title">Year Start</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="20XX"  name="year_st" id="year_st" required maxlength="4">
+                            <div class="col-md-6 input-field">
+                                    <label for="instruct_rfid" class="input-title">Instructor RFID</label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="instruct_rfid" pattern="[0-9]+" id='instruct_rfid' required>
+                                    <!--validation needs to be updated-->
                                     <div class="is-invalid" role="alert" id="yearStartError" name="yearStartError" style="visibility:hidden">
-                                        <strong>Input a valid year</strong>
+                                        <strong>Input a RFID number</strong>
                                     </div>
                                 </div>
 
-                            <div class="form-outline w-25 input-field">
-                                    <label for="year_end" class="input-title">Year End</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="20XX"  name="year_end" id="year_end" required maxlength="4">
-                                    <div class="is-invalid" role="alert" id="yearEndError" name="yearEndError" style="visibility:hidden">
-                                        <strong>Input a valid year</strong>
-                                    </div>
-                                </div>
-
+                        </div>
+                        <div class="form-inline">
                             <div class="container pt-2 input-field">
-                                <div class="input-title pb-2">Scheduled Days</div>
-                                <div class="d-flex justify-content-between">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="MondayCheck" value="MON">
-                                        <label class="form-check-label" for="MondayCheck">Monday</label>
+                                <div class="row input-title pb-2">
+                                <div class="col">Scheduled Days</div>
+                                <div class="col">Time Start</div>
+                                <div class="col">Time End</div>
+                                </div>
+                                <div class="row pb-2">
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-check pb-2">
+                                            <input class="form-check-input" type="checkbox" id="MondayCheck" value="MON">
+                                            <label class="form-check-label" for="MondayCheck">Monday</label>
+                                        </div>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="TuesdayCheck" value="TUE">
-                                        <label class="form-check-label" for="TuesdayCheck">Tuesday</label>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-outline input-field">
+                                            <input type="time" name="mon_time_st" class="form-control form-control-sm" placeholder="00:00 XM" id="mon_time_st">
+                                        </div>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="WednesdayCheck" value="WED">
-                                        <label class="form-check-label" for="WednesdayCheck">Wednesday</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="ThursdayCheck" value="THU">
-                                        <label class="form-check-label" for="ThursdayCheck">Thursday</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="FridayCheck" value="FRI">
-                                        <label class="form-check-label" for="FridayCheck">Friday</label>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-outline input-field">
+                                            <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="mon_time_end" id="mon_time_end">
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="row pb-2">
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-check pb-2">
+                                            <input class="form-check-input" type="checkbox" id="TuesdayCheck" value="TUE">
+                                            <label class="form-check-label" for="TuesdayCheck">Tuesday</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-outline input-field">
+                                            <input type="time" name="tue_time_st" class="form-control form-control-sm" placeholder="00:00 XM" id="tue_time_st">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-outline input-field">
+                                            <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="tue_time_end" id="tue_time_end">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pb-2">
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-check pb-2">
+                                            <input class="form-check-input" type="checkbox" id="WednesdayCheck" value="WED">
+                                            <label class="form-check-label" for="WednesdayCheck">Wednesday</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-outline input-field">
+                                            <input type="time" name="wed_time_st" class="form-control form-control-sm" placeholder="00:00 XM" id="wed_time_st">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-outline input-field">
+                                            <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="wed_time_end" id="wed_time_end">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pb-2">
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-check pb-2">
+                                            <input class="form-check-input" type="checkbox" id="ThursdayCheck" value="THU">
+                                            <label class="form-check-label" for="ThursdayCheck">Thursday</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-outline input-field">
+                                            <input type="time" name="thu_time_st" class="form-control form-control-sm" placeholder="00:00 XM" id="thu_time_st">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-outline input-field">
+                                            <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="thu_time_end" id="thu_time_end">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pb-2">
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-check pb-2">
+                                            <input class="form-check-input" type="checkbox" id="FridayCheck" value="FRI">
+                                            <label class="form-check-label" for="FridayCheck">Friday</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-outline input-field">
+                                            <input type="time" name="fri_time_st" class="form-control form-control-sm" placeholder="00:00 XM" id="fri_time_st">
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-4">
+                                        <div class="form-outline input-field">
+                                            <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="fri_time_end" id="fri_time_end">
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="is-invalid" role="alert" id="daysError" name="daysError" style="visibility:hidden">
                                     <strong>Please check at least one of the days</strong>
                                 </div>
                             </div>
 
-                        <div class="form-group pt-3 float-end">
-                            <span class="submit-reminder me-3">Double-check the information before pressing the button</span>
-                            <button class="btn btn-primary create" type="submit" id="sbmt_btn" disabled><i class="fa-solid fa-square-plus icon-white"></i>Create</button>
+                        <div class="form-group float-end">
+                            <!--<span class="submit-reminder me-3">Double-check the information before pressing the button</span>-->
+                            <button class="btn btn-primary" type="submit" id="sbmt_btn" disabled><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                         </div>
 
-
-
-                    </div>
+                        </div>
                     </fieldset>
                 </form>
             </div>

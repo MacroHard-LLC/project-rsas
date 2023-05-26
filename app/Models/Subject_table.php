@@ -61,4 +61,8 @@ class Subject_table extends Model
     {
         return $this->hasManyThrough(Logsheet::class, Machine::class);
     }
+
+    public function schedule(){
+        return $this->hasMany(Schedule_table::class);
+    }
 }
