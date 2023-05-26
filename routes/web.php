@@ -38,9 +38,11 @@ use App\Models\User;
 // goes to the homepage
 // remember that this needs to have an input added later so that we will know what
 // kind of user access this
-Route::get('/home', [HomeController::class, 'Homepage'])->name('home');
-// route to connect to adviser views
-Route::get('/test', [HomeController::class, 'Test'])->name('test');
+Route::get('/home', [HomeController::class, 'AdminHome'])->name('adminhome');
+
+
+// route to connect to adviser views, change once merged with adviser-views branch
+Route::get('/test', [HomeController::class, 'AdviserHome'])->name('adviserhome');
 
 Route::get('/createsub',[CreateSubject::class,'CreateSubjectIndex']);
 Route::post('dataInsert',[CreateSubject::class, 'DataInsert'])->middleware(CheckSubjectIdValid::class);

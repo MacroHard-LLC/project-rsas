@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    function Homepage(){
+    function AdminHome(){
         return view('homepage');
     }
 
-    function Test(){
+    function AdviserHome(){
         return view('test');
     }
     /*

@@ -28,11 +28,12 @@ class LoginController extends Controller
         $credentials = $request->only('id','password');
         if(Auth::attempt($credentials)){
             $user = Auth::user();
-            
+
+            //mured jud ni sya, pls ignore lmao -yza
             if($user->isAdmin()){
-                return redirect()->intended(route('home'));
+                return redirect()->intended(route('adminhome'));
             } elseif($user->isAdviser()){
-                return redirect()->intended(route('test'));
+                return redirect()->intended(route('adviserhome'));
             } elseif($user->isStudent()){
                 return redirect()->intended(route('login'));
             }
