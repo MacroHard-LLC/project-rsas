@@ -40,9 +40,8 @@
     // Add a click event listener to the button
     buttonSubmitEditView.addEventListener('click', function(event) {
         const buttonEditView = document.getElementById("editStatus");
-        const array = buttonEditView.dataset.id;
-        console.log("YEETABLE")
-        console.log(id);
+        let array = buttonEditView.dataset.id;
+        let formatArray = array.split(",")
 
         event.preventDefault(); // prevent the default form submission
         const radioButtons = document.querySelectorAll('.radio');
@@ -57,10 +56,13 @@
 
         let input_data = {
             new_status : selectedValue,
-            student_id : array[0],
-            date : array[1],
-            subject : array[2],
+            student_id : formatArray[0],
+            date : formatArray[1],
+            subject : formatArray[2],
         };
+
+        console.log("yeet");
+        console.log(input_data);
         $.ajax({
             method: "POST",
             headers: {
@@ -70,6 +72,7 @@
             url: "{{ route('change_attendance') }}",
             data: { input_data},
             success: function(data) {
+                
                 location.reload();
             }
             });
