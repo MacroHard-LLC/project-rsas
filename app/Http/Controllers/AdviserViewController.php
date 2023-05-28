@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Section;
 use App\Models\Student;
+use App\Models\Subject_table;
 use App\Models\Present;
 use App\Models\Absent;
 use App\Models\Late;
@@ -115,6 +116,16 @@ class AdviserViewController extends Controller
         
         $adviserId = session()->get('adviser_id');
         return view('adviser.viewattendance', compact('adviserId'));
+    }
+
+    function SubjectSetup(Request $request){
+        $adviserId = $request->input_data;
+
+        $section = Section::where('adviser_id','=',$adviserId)->first();
+        $sectionId = $section->id;
+
+        $subject = Subject_table::where('section_id','=',$sectionId)->get();
+        return $subject;
     }
 
     function StudentTag(Request $request){

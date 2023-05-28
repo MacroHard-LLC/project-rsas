@@ -35,7 +35,7 @@
         document.getElementById('date').value = formattedDate;
 
 
-        var adviserID = {{$adviserId}};
+        var adviserID = {{ $adviserId }};
         console.log(adviserID);
         $.ajax({
             method: "POST",
@@ -49,37 +49,57 @@
                 console.log(data);
                 $('#attendanceAdviserName').text(data);
             }
-            });
+        });
         const tableBody = document.querySelector('#attendanceTable tbody');
-        let subject = $('#subject_adviserView_dropdown').val();
+        let subject = $('#subject_adviserView_dropdown');
+        console.log(subject);
+
+        //subject.append('<option value="A24">meow</option>');
+
         $.ajax({
-    method: "POST",
-    headers: {
-        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-        Accept: "application/json"
-    },
-    url: "{{ route('get_all_students') }}",
-    success: function(data) {
-        for(var i = 0; i < data.length; i++){
-            const newRow = document.createElement('tr');
-            const array = new Array(data[i]['id'], formattedDate, subject);
-            console.log(array);
-            newRow.innerHTML = `
-                <td>${data[i]['name']}</td>
-                <td>${data[i]['status']}</td>
-                <td class="editStatus">
-                    <button id="editStatus" name="editStatus" data-id="${array}" class="btn btn-primary create btn-create" type="button">
-                        <a data-bs-toggle="modal" data-bs-target="#editAttendanceModal">
-                            <i class="fa-regular fa-pen-to-square icon-white"></i>
-                        </a>
-                    </button>
-                    <span data-id="${data[i]['id']}"></span>
-                </td>
-            `;
-            tableBody.appendChild(newRow);
-        }
-    }
-});
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('setUp_subjects') }}",
+            data: { input_data: adviserID },
+            success: function(data) {
+                console.log(data);
+                data.forEach(element => {
+                    subject.append(`<option value="${element.id}">${element.name}</option>`);
+                });
+            }
+        });
+
+        $.ajax({
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                Accept: "application/json"
+            },
+            url: "{{ route('get_all_students') }}",
+            success: function(data) {
+                for(var i = 0; i < data.length; i++){
+                    const newRow = document.createElement('tr');
+                    const array = new Array(data[i]['id'], formattedDate, subject);
+                    console.log(array);
+                    newRow.innerHTML = `
+                        <td>${data[i]['name']}</td>
+                        <td>${data[i]['status']}</td>
+                        <td class="editStatus">
+                            <button id="editStatus" name="editStatus" data-id="${array}" class="btn btn-primary create btn-create" type="button">
+                                <a data-bs-toggle="modal" data-bs-target="#editAttendanceModal">
+                                    <i class="fa-regular fa-pen-to-square icon-white"></i>
+                                </a>
+                            </button>
+                            <span data-id="${data[i]['id']}"></span>
+                        </td>
+                    `;
+                    tableBody.appendChild(newRow);
+                }
+            }
+        });
 
     });
 
@@ -148,10 +168,6 @@
             <label for="subject" class="section-title">SUBJECT</label>
                 <select name="subject" class="form-select w-auto" placeholder="Choose Subject" id="subject_adviserView_dropdown" required>
                     <!--ideally mushow unsay mga subjects naa ang section -->
-                    <option value="SCI7">GEOLOGY</option>
-                    <option value="MATH7">ALGEBRA</option>
-                    <option value="ENG7">ENGLISH</option>
-                    <option value="AP7">PHILIPPINE HISTORY</option>
                 </select>
                 <div class="is-invalid" role="alert" id="subjectError" name="subjectError">
                     <strong></strong>
