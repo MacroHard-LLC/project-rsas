@@ -36,7 +36,6 @@
 
 
         var adviserID = {{ $adviserId }};
-        console.log(adviserID);
         $.ajax({
             method: "POST",
             headers: {
@@ -72,14 +71,16 @@
             }
         });
 
+        console.log("sadje");
         $.ajax({
             method: "POST",
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
                 Accept: "application/json"
             },
-            url: "{{ route('get_all_students') }}",
+            url: "{{ route('get_all_students_adviser') }}",
             success: function(data) {
+                console.log(data);
                 for(var i = 0; i < data.length; i++){
                     const newRow = document.createElement('tr');
                     const array = new Array(data[i]['id'], formattedDate, subject);
@@ -98,6 +99,10 @@
                     `;
                     tableBody.appendChild(newRow);
                 }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
             }
         });
 

@@ -39,8 +39,10 @@ class AdviserViewController extends Controller
     }
 
     function GetAllStudents(){
-        $incoming_data = session()->get('section_id');
-        $query = Student::where('section_id', $incoming_data)
+        $incoming_data = session()->get('adviser_id');
+        $sectionId = Section::where('adviser_id','=',$incoming_data)->first()->id;
+
+        $query = Student::where('section_id', $sectionId)
                  ->get('user_id');
         $attendanceArray = array();
         foreach($query as $student){
