@@ -65,6 +65,10 @@ function add_student_to_row(){
 
     remove_from_dropdown(user.id);
     $('#section_student_id_input').val('');
+
+    const tableRows = document.querySelectorAll('#student_list tr').length;
+    document.getElementById("total_students").textContent = tableRows;
+
     document.getElementById('add_student_btn').disabled = true;
     checkOverallValidity();
 
@@ -78,9 +82,12 @@ function remove_from_dropdown(id){
 
 $(document).on('click', '[name="delete_button"]', function(){
     $(this).closest('tr').remove();
+
     const tableRows = document.querySelectorAll('#student_list tr').length;
     document.getElementById("total_students").textContent = tableRows;
+
     var student_id = $(this).closest('tr').find('[name="student_row"]').text();
     document.getElementById(student_id).style.display = "block";
+
     checkOverallValidity();
 });
