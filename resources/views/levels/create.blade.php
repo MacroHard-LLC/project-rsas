@@ -109,22 +109,24 @@
 <script src="{{ asset('js/createSection.js') }}"></script>
 <script>
     $('#createSectionForm').submit(function (e) {
+        e.preventDefault();
+
         let allStudentID = document.querySelectorAll('[name=student_row]');
         let arrayStudentID = [];
         allStudentID.forEach(element => {
             arrayStudentID.push(element.textContent);
         });
-        e.preventDefault();
+
         let formData = {
             allStudentID : arrayStudentID,
-            adviserID : document.querySelector('#sectionAdviserID').value,
-            sectionID : document.querySelector('#sectionSubId').value,
-            sectionName : document.querySelector('#GradeSectionNameId').value,
-            gradeLevel : document.querySelector('#sectionGradeLevel').value
+            adviser_id : document.querySelector('#section_adviser_id_input').value,
+            name : document.querySelector('#section_name_input').value,
+            grade_level : document.querySelector('#section_grade_level_input').value
         };
-        console.log(formData);
-        $(".is-invalid").children("strong").text("");
+
+        $("#createSectionForm").children().find(".is-invalid").children("span").text("");
         $("#createSectionForm input").removeClass("is-invalid");
+
         $.ajax({
             method: "POST",
             headers: {
@@ -138,8 +140,8 @@
                 if(response.status === 422) {
                     let errors = response.responseJSON.errors;
                     Object.keys(errors).forEach(function (key) {
-                        $("#" + key + "Input").addClass("is-invalid");
-                        $("#" + key + "Error").children("strong").text(errors[key][0]);
+                        $("#section_" + key + "_input").addClass("is-invalid");
+                        $("#section_" + key + "_error").children("strong").text(errors[key][0]);
                     });
                 }
             }

@@ -12,6 +12,19 @@ class Section extends Model
     protected $table = 'section';
     public $timestamps = FALSE;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'id',
+        'name',
+        'grade_level',
+        'adviser_id',
+        'is_deleted',
+    ];
+
     public function subject(){
         return $this->hasMany(Subject_table::class);
     }

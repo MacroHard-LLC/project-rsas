@@ -88,44 +88,27 @@ class SectionController extends Controller
     }
 
     function DataInsert(Request $request){
-        // $formFields = $request;
         $formFields = $request->validate([
-            'adviserID' => ['required','integer','digits:9','regex:/[0-9]+/'],
+            'adviser_id' => ['required','integer','digits:9','regex:/[0-9]+/'],
             'allStudentID' => 'required',
-            'sectionID' => 'required',
-            'gradeLevel' => 'required',
+            'name' => 'required',
+            'grade_level' => 'required',
         ]);
-
 
         // this is for the section table
         $addRow = new Section;
-        //$addRow->id = $formFields['sectionID'];
-        $addRow->name = $formFields['sectionName'];
-        $addRow->grade_level = $formFields['gradeLevel'];
-        $addRow->adviser_id = $formFields['adviserID'];
-        $addRow->added_on = now();
-        $addRow->added_by = 0;
-        $addRow->updated_on = now();
-        $addRow->updated_by = 0;
-        $addRow->is_deleted = 0;
-
+        $addRow->name = $formFields['name'];
+        $addRow->grade_level = $formFields['grade_level'];
+        $addRow->adviser_id = $formFields['adviser_id'];
         $addRow->save();
-        // $latestID = Section::select('id')->find($addRow->name);
 
-        $latestID = $addRow->id;
+        $studentIds = $formFields['allStudentID'];
 
         // this is for the students
-        foreach($formFields->input('allStudentID') as $studentID){
-            $changeRow = User::select('id')->find($studentID);
-            $changeRow->is_enrolled = 1;
-            $changeRow->updated_on = now();
-            $changeRow->save();
-
-            // $changeRow = Student::where('user_id', $studentID)->first();
-            // if ($changeRow) {
-            //     $changeRow->section_id = $latestID;
-            //     $changeRow->save();
-            // }
+        foreach($studentIds as $studentID){
+            User::where('id', $studentID)->update(['is_enrolled' => 1]);
         }
+
+        User::where('id', $request->adviser_id)->update(['is_enrolled' => 1]);
     }
 }
