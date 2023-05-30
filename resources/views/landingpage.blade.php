@@ -1,5 +1,5 @@
 @extends('title')
-@section('title','Welcome!')
+@section('title','Welcome to RSAS!')
 
 <link rel="stylesheet" href="{{ asset('css/landing.css') }}">
 @section('content')
