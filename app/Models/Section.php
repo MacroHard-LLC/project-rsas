@@ -22,6 +22,7 @@ class Section extends Model
         'name',
         'grade_level',
         'adviser_id',
+        'schoolyear_id',
         'is_deleted',
     ];
 

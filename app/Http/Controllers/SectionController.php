@@ -94,6 +94,7 @@ class SectionController extends Controller
             'allStudentID.*'  => ['required','distinct','exists:user,id'],
             'name' => ['required','max:50'],
             'grade_level' => ['required','integer','between:7,10'],
+            'schoolyear_id' => ['required','exists:schoolyear,id'],
         ]);
 
         // this is for the section table
@@ -101,6 +102,7 @@ class SectionController extends Controller
         $addRow->name = $formFields['name'];
         $addRow->grade_level = $formFields['grade_level'];
         $addRow->adviser_id = $formFields['adviser_id'];
+        $addRow->schoolyear_id = $formFields['schoolyear_id'];
         $addRow->save();
 
         $studentIds = $formFields['allStudentID'];

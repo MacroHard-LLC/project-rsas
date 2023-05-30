@@ -13,7 +13,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6 input-field">
                                 <div class="form-outline">
-                                    <label for="subj_id" class="input-title">Section Name</label>
+                                    <label for="section_name_input" class="input-title">Section Name</label>
                                     <input type="text" class="form-control form-control-sm" placeholder="Enter Section Name" name="section_name" id="section_name_input" maxlength='50' required>
                                     <div class="is-invalid" id="section_name_error">
                                         <span></span>
@@ -21,7 +21,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 input-field">
-                                <label for="grade_level" class="input-title">Grade Level</label>
+                                <label for="section_grade_level_input" class="input-title">Grade Level</label>
                                 <select name="section_grade_level" class="form-select" id="section_grade_level_input" required>
                                     <option value="" disabled selected="selected">Choose a Grade Level</option>
                                     @for ($i = 7; $i < 11; $i++)
@@ -37,7 +37,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6 input-field">
                                 <div class="form-outline">
-                                    <label for="subj_id" class="input-title">Adviser</label>
+                                    <label for="section_adviser_id_input" class="input-title">Adviser</label>
                                     <select name="section_adviser_id" class="form-select" id="section_adviser_id_input" required>
                                         <option value="" disabled selected="selected">Select an Adviser</option>
                                         @foreach ($users as $user)
@@ -47,6 +47,20 @@
                                         @endforeach
                                     </select>
                                     <div class="is-invalid" id="section_adviser_id_error">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 input-field">
+                                <div class="form-outline">
+                                    <label for="section_schoolyear_id_input" class="input-title">School Year</label>
+                                    <select name="section_schoolyear_id" class="form-select" id="section_schoolyear_id_input" required>
+                                        <option value="" disabled selected="selected">Select a School Year</option>
+                                        @foreach ($schoolyears as $schoolyear)
+                                            <option value="{{ $schoolyear->id }}">{{ $schoolyear->start_year }} - {{ $schoolyear->end_year }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="is-invalid" id="section_schoolyear_id_error">
                                         <span></span>
                                     </div>
                                 </div>
@@ -121,7 +135,8 @@
             allStudentID : arrayStudentID,
             adviser_id : document.querySelector('#section_adviser_id_input').value,
             name : document.querySelector('#section_name_input').value,
-            grade_level : document.querySelector('#section_grade_level_input').value
+            grade_level : document.querySelector('#section_grade_level_input').value,
+            schoolyear_id : document.querySelector('#section_schoolyear_id_input').value,
         };
 
         $("#createSectionForm").children().find(".is-invalid").children("span").text("");

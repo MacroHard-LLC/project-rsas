@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Schoolyear;
 
 class HomeController extends Controller
 {
     function Homepage(){
         $users = User::all();
-        return view('homepage', compact('users'));
+        $schoolyears = Schoolyear::all();
+        return view('homepage', compact('users','schoolyears'));
     }
     /*
    { /**
