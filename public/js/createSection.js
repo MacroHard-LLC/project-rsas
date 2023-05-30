@@ -1,10 +1,15 @@
 window.addEventListener('load', function() {
     document.getElementById("submit_new_section").style.visibility = "hidden";
     let createSectionForm = document.getElementById('createSectionForm');
+
     ['input','change'].forEach(evt =>
         createSectionForm.querySelectorAll(".form-control, .form-select").forEach(input => {
             input.addEventListener(evt, () => {
                 $("#section_" + input.getAttribute("name") + "_error").children("span").text("");
+
+                if (input.getAttribute('id') == 'section_student_id_input' && $('#' + input.getAttribute('id')).val() != '')
+                    document.getElementById('add_student_btn').disabled = false;
+
                 if (input.checkValidity()) {
                     input.classList.remove('is-invalid');
                     if (input.getAttribute('id') != 'section_student_id_input')
@@ -34,18 +39,12 @@ function checkOverallValidity(){
 
 function showCreateSectionClientError(input){
     var input_name = input.getAttribute("name");
-    if (input_name == "userid"){
-        if (input.validity.patternMismatch){
-            $("#" + input.getAttribute("name") + "Error").children("span").text("User ID must be an integer.");
-        } else if (input.validity.tooShort){
-            $("#" + input.getAttribute("name") + "Error").children("span").text("User ID must be 9 digits.");
-        }
-    } else if (input_name == "first_name" || input_name == "middle_name" || input_name == "last_name"){
-        if (input.validity.patternMismatch){
-            input_name = input_name.charAt(0).toUpperCase() + input_name.slice(1);
-            input_name = input_name.split("_", 1);
-            $("#" + input.getAttribute("name") + "Error").children("span").text(input_name + " name must only be alphabetic characters.");
-        }
+    if (input_name = "section_name" && input.validity.tooLong)
+        $("#section_" + input.getAttribute("name") + "_error").children("span").text("Section name must have a maximum of 50 characters.");
+    else if (input_name = 'section_grade_level' ||  input_name == 'section_adviser_id' && input.validity.valueMissing){
+        input_name = input_name.charAt(0).toUpperCase() + input_name.slice(1);
+        input_name = input_name.split("_", 1);
+        $("#section_" + input.getAttribute("name") + "_error").children("span").text(input_name + " is required.");
     }
 }
 
@@ -66,6 +65,7 @@ function add_student_to_row(){
 
     remove_from_dropdown(user.id);
     $('#section_student_id_input').val('');
+    document.getElementById('add_student_btn').disabled = true;
     checkOverallValidity();
 
     // Return false so that the default action of the button is not executed.

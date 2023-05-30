@@ -14,7 +14,7 @@
                             <div class="col-md-6 input-field">
                                 <div class="form-outline">
                                     <label for="subj_id" class="input-title">Section Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Enter Section Name" name="section_name" id="section_name_input" required>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Enter Section Name" name="section_name" id="section_name_input" maxlength='50' required>
                                     <div class="is-invalid" id="section_name_error">
                                         <span></span>
                                     </div>
@@ -22,7 +22,7 @@
                             </div>
                             <div class="col-md-6 input-field">
                                 <label for="grade_level" class="input-title">Grade Level</label>
-                                <select name="section_grade_level" class="form-select" placeholder="Choose Department ID" id="section_grade_level_input" required>
+                                <select name="section_grade_level" class="form-select" id="section_grade_level_input" required>
                                     <option value="" disabled selected="selected">Choose a Grade Level</option>
                                     @for ($i = 7; $i < 11; $i++)
                                         <option value={{$i}}>Level {{$i}}</option>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="col-md-2 input-field float-end">
                                 <div class="form-group pt-3">
-                                    <button type='button' class="btn btn-primary create" id="addStudent" onclick="add_student_to_row()"><i class="fa-solid fa-user-plus"></i>Add</button>
+                                    <button type='button' class="btn btn-primary create" id="add_student_btn" onclick="add_student_to_row()" disabled><i class="fa-solid fa-user-plus"></i> Add</button>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                             <hr style="margin-bottom:5px;">
-                            <i style="font-size:small;">Total Number of Students: <span id="total_students">0</span></i> <!--dunno how to do counters pud t.t-->
+                            <i style="font-size:small;">Total Number of Students: <span id="total_students">0</span></i>
 
                             <div class="form-group pt-5 float-end" id="submit_new_section">
                                 <button class="btn btn-primary create" type="submit" id="sectionButtonSubmit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>

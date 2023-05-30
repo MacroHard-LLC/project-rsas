@@ -89,10 +89,11 @@ class SectionController extends Controller
 
     function DataInsert(Request $request){
         $formFields = $request->validate([
-            'adviser_id' => ['required','integer','digits:9','regex:/[0-9]+/'],
-            'allStudentID' => 'required',
-            'name' => 'required',
-            'grade_level' => 'required',
+            'adviser_id' => ['required','exists:user,id'],
+            'allStudentID' => ['required','array'],
+            'allStudentID.*'  => ['required','distinct','exists:user,id'],
+            'name' => ['required','max:50'],
+            'grade_level' => ['required','integer','between:7,10'],
         ]);
 
         // this is for the section table
