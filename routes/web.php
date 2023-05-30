@@ -10,7 +10,7 @@ use App\Http\Controllers\CreateInstructor;
 use App\Http\Controllers\CreateSchoolYear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\CheckSubjectIdValid;
 
 use App\Http\Controllers\UserController;
@@ -51,9 +51,29 @@ use App\Http\Middleware\CheckSubjectIdValid;
 // goes to the homepage
 // remember that this needs to have an input added later so that we will know what
 // kind of user access this
-Route::get('/home', [HomeController::class, 'AdminHome'])->name('adminhome');
-// route to connect to adviser views, change once merged with adviser-views branch
-Route::get('/test', [HomeController::class, 'AdviserHome'])->name('adviserhome');
+
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', function () {
+        $user = Auth::user();
+
+        if ($user->isAdmin()) {
+            return redirect()->route('adminhome');
+        } elseif ($user->isAdviser()) {
+            return redirect()->route('adviserhome', ['id' => $user->id]);
+        } else {
+            return redirect()->route('login')->with("error", "Access Denied");
+        }
+    })->name('home');
+
+    //Routes for admin, and adviser homepages
+    Route::get('/admin', [HomeController::class, 'AdminHome'])->name('adminhome');
+    Route::get('/adviser/{id}', [AdviserViewController::class, 'AdviserPage'] )->name('adviserhome');
+
+});
+
+
 
 Route::get('/createsub',[CreateSubject::class,'CreateSubjectIndex']);
 Route::post('dataInsert',[CreateSubject::class, 'DataInsert'])->middleware(CheckSubjectIdValid::class);
@@ -109,8 +129,6 @@ Route::get('/gradelevels', [SectionController::class, 'index']);
 Route::get('/gradelevels/{grade}', [SectionController::class, 'show']);
 
 // goes to adviser views
-// change this once login is introduced
-Route::get('/home-adviser/{id}', [AdviserViewController::class, 'AdviserPage'] );
 Route::get('/view-attendance', [AdviserViewController::class, 'AttendancePage'] );
 Route::get('/student-info', [AdviserViewController::class, 'StudentPage'] );
 

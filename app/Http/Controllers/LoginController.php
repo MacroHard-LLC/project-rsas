@@ -33,7 +33,7 @@ class LoginController extends Controller
             if($user->isAdmin()){
                 return redirect()->intended(route('adminhome'));
             } elseif($user->isAdviser()){
-                return redirect()->intended(route('adviserhome'));
+                return redirect()->intended(route('adviserhome', ['id' => $user->id]));
             } elseif($user->isStudent()){
                 return redirect()->intended(route('login'));
             }
