@@ -41,7 +41,7 @@
                         </div>
                         <div class="col">
                             <button class="btn btn-primary create btn-create" type="button">
-                                <a data-bs-toggle="modal" data-bs-target="#registerSectionModal">Create Section</a>
+                                <a data-bs-toggle="modal" data-bs-target="#createSectionModal">Create Section</a>
                             </button>
                         </div>
                         <div class="col">

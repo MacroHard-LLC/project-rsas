@@ -1,4 +1,4 @@
-<div class="modal fade" id="registerSectionModal" tabindex="-1" role="dialog" aria-labelledby="registerSectionModal" aria-hidden="true">
+<div class="modal fade" id="createSectionModal" tabindex="-1" role="dialog" aria-labelledby="createSectionModal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class='modal-content'>
             <div class='modal-header'>
@@ -7,7 +7,7 @@
             </div>
 
             <div class="modal-body mx-5 my-3" id="modalBody">
-                <form method="POST" id="registerSectionForm" class="needs-validation" novalidate>
+                <form method="POST" id="createSectionForm" class="needs-validation" novalidate>
                     @csrf
                     <fieldset>
                         <div class="row mb-3">
@@ -38,7 +38,8 @@
                             <div class="col-md-6 input-field">
                                 <div class="form-outline">
                                     <label for="subj_id" class="input-title">Adviser ID</label>
-                                    <select name="section_adviser_id" class="form-select" placeholder="Choose an Adviser" id="section_adviser_id_input" required>
+                                    <select name="section_adviser_id" class="form-select" id="section_adviser_id_input" required>
+                                        <option value="" disabled selected="selected">Select an Adviser</option>
                                         @foreach ($users as $user)
                                             @if ($user['role'] == "adviser" && $user['is_enrolled'] == 0)
                                                 <option value="{{ $user->id }}">{{ $user->last_name }}, {{ $user->first_name }}</option>
@@ -53,7 +54,8 @@
                             <div class="col-md-5 input-field ">
                                 <div class="form-outline">
                                     <label for="section_student_id_input" class="input-title">Student ID</label>
-                                    <select name="section_student_id" class="form-select" placeholder="Choose a Student" id="section_student_id_input" required>
+                                    <select name="section_student_id" class="form-select" id="section_student_id_input" required>
+                                        <option value="" disabled selected="selected">Select a Student</option>
                                         @foreach ($users as $user)
                                             @if ($user['role'] == "student" && $user['is_enrolled'] == 0)
                                                 <option value="{{ $user }}" id="{{ $user->id }}">{{ $user->last_name }}, {{ $user->first_name }}</option>
@@ -114,8 +116,7 @@
                             <hr style="margin-bottom:5px;">
                             <i style="font-size:small;">Total Number of Students: <span id="total_students">0</span></i> <!--dunno how to do counters pud t.t-->
 
-                            <div class="form-group pt-5 float-end" id="submission">
-                                <span class="submit-reminder me-3" style="visibility:hidden;" id="sectionSubmitLabel">Double-check the information before pressing the button</span>
+                            <div class="form-group pt-5 float-end" id="submit_new_section">
                                 <button class="btn btn-primary create" type="submit" id="sectionButtonSubmit" style="visibility:hidden;"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                             </div>
                         </div>
@@ -128,7 +129,7 @@
 
 <script src="{{ asset('js/createSection.js') }}"></script>
 <script>
-    $('#registerSectionForm').submit(function (e) {
+    $('#createSectionForm').submit(function (e) {
         let allStudentID = document.querySelectorAll('[name=student_row]');
         let arrayStudentID = [];
         allStudentID.forEach(element => {
@@ -144,7 +145,7 @@
         };
         console.log(formData);
         $(".is-invalid").children("strong").text("");
-        $("#registerSectionForm input").removeClass("is-invalid");
+        $("#createSectionForm input").removeClass("is-invalid");
         $.ajax({
             method: "POST",
             headers: {
