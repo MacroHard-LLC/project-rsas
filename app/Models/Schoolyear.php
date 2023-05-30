@@ -25,4 +25,8 @@ class Schoolyear extends Model
     public function subject(){
         return $this->hasMany(Subject_table::class);
     }
+
+    public function section(){
+        return $this->hasMany(Section::class);
+    }
 }
