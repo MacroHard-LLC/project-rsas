@@ -37,7 +37,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6 input-field">
                                 <div class="form-outline">
-                                    <label for="subj_id" class="input-title">Adviser ID</label>
+                                    <label for="subj_id" class="input-title">Adviser</label>
                                     <select name="section_adviser_id" class="form-select" id="section_adviser_id_input" required>
                                         <option value="" disabled selected="selected">Select an Adviser</option>
                                         @foreach ($users as $user)
@@ -51,9 +51,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-5 input-field ">
+                            <div class="col-md-5 input-field">
                                 <div class="form-outline">
-                                    <label for="section_student_id_input" class="input-title">Student ID</label>
+                                    <label for="section_student_id_input" class="input-title">Student</label>
                                     <select name="section_student_id" class="form-select" id="section_student_id_input" required>
                                         <option value="" disabled selected="selected">Select a Student</option>
                                         @foreach ($users as $user)
@@ -75,27 +75,6 @@
                         </div>
 
                         <div class="row mb-3">
-
-
-                                <div class="col-md-5 input-field">
-                                <div class="form-outline">
-                                    <label for="subj_id" class="input-title">Student Name</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Rizal, Jose" id="studentSubjectName" name="studentSubjectName" required>
-                                    <div id="myDropdown"></div>
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="is-invalid" role="alert">
-                                        <span id="sectionStudNameError"></span>
-                                    </div>
-                                </div>
-                                </div>
-
-                                <div class="col-md-2 input-field float-end">
-                                    <div class="form-group pt-3">
-                                        <button type='button' class="btn btn-primary create" id="addStudent" name="sectionAddStudent" id="sectionAddStudent" onclick="finishVal()"><i class="fa-solid fa-user-plus"></i>Add</button>
-                                    </div>
-                                </div>
-
-
                             <hr style="margin-top: 20px;">
 
                             <div class="modal-body" id=list>
@@ -117,7 +96,7 @@
                             <i style="font-size:small;">Total Number of Students: <span id="total_students">0</span></i> <!--dunno how to do counters pud t.t-->
 
                             <div class="form-group pt-5 float-end" id="submit_new_section">
-                                <button class="btn btn-primary create" type="submit" id="sectionButtonSubmit" style="visibility:hidden;"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
+                                <button class="btn btn-primary create" type="submit" id="sectionButtonSubmit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                             </div>
                         </div>
                     </fieldset>
