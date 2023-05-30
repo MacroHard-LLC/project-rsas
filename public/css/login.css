@@ -1,4 +1,8 @@
-* { box-sizing: border-box; }
+* { 
+  margin: 0;
+	padding: 0;
+  box-sizing: border-box; 
+}
 @font-face {
   font-family: 'Oswald';
   src: url('/fonts/Oswald-VariableFont_wght.ttf');
@@ -106,7 +110,7 @@ img{
 .form > button {
   padding: 12px 10px;
   border: 0;
-  background: linear-gradient(to right, #de48b5 0%,#0097ff 100%); 
+  background-color: #ee6c4d; 
   border-radius: 3px;
   margin-top: 2rem;
   color: #fff;

@@ -5,7 +5,7 @@
 <div class="container nopadding">
     <div class="left">
       <div class="header">
-        <h2 class="animation a1">Welcome to RSAS!</h2>
+        <h2 class="animation a1">Welcome back!</h2>
         <h4 class="animation a2">Please enter your credentials</h4>
       </div>
       <form action="{{route('login.post')}}" method="POST">

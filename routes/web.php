@@ -52,7 +52,7 @@ use App\Http\Middleware\CheckSubjectIdValid;
 // remember that this needs to have an input added later so that we will know what
 // kind of user access this
 
-
+Route::get('/', [HomeController::class, 'LandingPage'] )->name('landingpage');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', function () {
