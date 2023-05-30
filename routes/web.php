@@ -67,10 +67,14 @@ Route::group(['middleware' => 'auth'], function () {
         }
     })->name('home');
 
-    //Routes for admin, and adviser homepages
-    Route::get('/admin', [HomeController::class, 'AdminHome'])->name('adminhome');
-    Route::get('/adviser/{id}', [AdviserViewController::class, 'AdviserPage'] )->name('adviserhome');
-
+    //Routes for admin
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/admin', [HomeController::class, 'AdminHome'])->name('adminhome');
+    });
+    //Route for adviser
+    Route::middleware('role:adviser')->group(function () {
+        Route::get('/adviser/{id}', [AdviserViewController::class, 'AdviserPage'] )->name('adviserhome');
+    });
 });
 
 
