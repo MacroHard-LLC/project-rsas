@@ -108,6 +108,7 @@ class SectionController extends Controller
         // this is for the students
         foreach($studentIds as $studentID){
             User::where('id', $studentID)->update(['is_enrolled' => 1]);
+            Student::where('user_id', $studentID)->update(['section_id' => $addRow->id]);
         }
 
         User::where('id', $request->adviser_id)->update(['is_enrolled' => 1]);
