@@ -48,6 +48,7 @@ class UserController extends Controller
     }
 
     public function UserUpdate(Request $request, $id) {
+        $user = User::find($id);
         $formFields = $request->validate([
             'id' => ['required',Rule::unique('user','id')->ignore($id),'integer','digits:9'],
             'password' => ['required','min:1','max:20'],

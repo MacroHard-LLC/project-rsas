@@ -126,7 +126,6 @@ Route::post('/view-attendance-setup', [AdviserViewController::class, 'SubjectSet
 //Authentications
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'loginPost'])->name('login.post');
-
 Route::get('logout',[LoginController::class,'logout'])->name('logout');
 
 
