@@ -151,7 +151,7 @@ $('#studentSubjectID').on('keyup', function () {
             inputElement.classList.remove('is-valid');
             inputElement.classList.add('is-invalid');
             coupleElement.classList.remove('is-invalid');
-            coupleElement.classList.remove('is-valid');
+            coupleElement.classList.remove('is-valid'); 
             $('#sectionStudIDError').text('Section ID already exists in table');
         }
         else{

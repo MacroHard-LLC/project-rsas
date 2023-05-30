@@ -10,6 +10,7 @@ class Absent extends Model
     use HasFactory;
 
     protected $table = 'absent';
+    public $timestamps = FALSE;
 
     public function student(){
         return $this->belongsTo(Student::class, 'student_id', 'user_id');

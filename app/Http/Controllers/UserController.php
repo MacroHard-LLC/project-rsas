@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     // Show all users
-    public function index() {
+    public function UserIndex() {
         return view('users.index', [
             'users' => User::latest('added_on')->filter(request(['role']))->paginate(15)
         ]);
     }
 
-    public function store(Request $request) {
+    public function UserStore(Request $request) {
         $formFields = $request->validate([
             'id' => ['required','unique:user,id','integer','digits:9'],
             'password' => ['required','min:1','max:20'],
@@ -47,9 +47,7 @@ class UserController extends Controller
         return back();
     }
 
-    public function update(Request $request, $id) {
-        $user = User::find($id);
-
+    public function UserUpdate(Request $request, $id) {
         $formFields = $request->validate([
             'id' => ['required',Rule::unique('user','id')->ignore($id),'integer','digits:9'],
             'password' => ['required','min:1','max:20'],
