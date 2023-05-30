@@ -7,9 +7,9 @@
 
 {{-- Modular Pages--}}
 @include('subjects.newsub')
-@include('levels.newgrlvl')
+@include('levels.create')
 @include('users.create')
-@include('levels.newgrlvl')
+{{-- @include('levels.newgrlvl') --}}
 @include('misc.newsy')
 @include('misc.newinstruct')
 

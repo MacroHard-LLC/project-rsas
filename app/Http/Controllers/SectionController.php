@@ -89,12 +89,13 @@ class SectionController extends Controller
 
     function DataInsert(Request $request){
         $formFields = $request;
-        /*$formFields = $request->validate([
+        $formFields = $request->validate([
             'adviserID' => ['required','integer','digits:9','regex:/[0-9]+/'],
             'allStudentID' => 'required',
             'sectionID' => 'required',
             'gradeLevel' => 'required',
-        ]);*/
+        ]);
+
 
         // this is for the section table
         $addRow = new Section;
@@ -110,7 +111,7 @@ class SectionController extends Controller
 
         $addRow->save();
         $latestID = Section::select('id')->find($addRow->name);
-        
+
         // this is for the students
         foreach($formFields->input('allStudentID') as $studentID){
             $changeRow = User::select('id')->find($studentID);
