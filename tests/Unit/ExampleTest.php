@@ -15,7 +15,7 @@ class ExampleTest extends TestCase
 
     public function test_the_homepage_returns_success(): void
     {
-        $response = $this->get('/home');
+        $response = $this->get('/');
         $response->assertStatus(200);
     }
 }
