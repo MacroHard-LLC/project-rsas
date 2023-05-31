@@ -152,13 +152,13 @@ Route::post('/form2', [Form2Controller::class, 'ShowForm'])->name('get_all_stude
 
 
 // show users
-Route::get('/users', [UserController::class, 'index']);
+Route::get('/users', [UserController::class, 'UserIndex']);
 
 // show create user form
 Route::get('/users/create', [UserController::class, 'create']);
 
 // create new user
-Route::post('/users', [UserController::class, 'store'])->name('createUser');
+Route::post('/users', [UserController::class, 'UserStore'])->name('createUser');
 
 // Show Edit User Form
 Route::get('/users/{id}/edit/', [UserController::class, 'edit']);

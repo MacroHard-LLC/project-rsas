@@ -114,7 +114,7 @@ class SectionController extends Controller
         foreach($formFields->input('allStudentID') as $studentID){
             $changeRow = User::select('id')->find($studentID);
             $changeRow->is_enrolled = 1;
-            $changeRow->grade_level = $formFields['gradeLevel'];
+            //$changeRow->grade_level = $formFields['gradeLevel'];
             $changeRow->updated_on = now();
             $changeRow->save();
         }
