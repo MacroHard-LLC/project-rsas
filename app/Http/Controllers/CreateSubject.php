@@ -59,7 +59,7 @@ class CreateSubject extends Controller
         //$subject->grade_level = $formFields['grade_level'];
         $subject->id = $formFields['sub_id'];
         $subject->name = $formFields['sub_name'];
-        //$subject->instructor_rfid = 202042069;
+        $subject->instructor_rfid = $formFields['instruct_rfid'];
         $subject->schoolyear_id = 1;
         $subject->semester = "0";
         //$subject->room = $formFields['as_room'];
@@ -90,6 +90,8 @@ class CreateSubject extends Controller
         //$sched->is_deleted = 0;
 
         $machine->save();
+
+        $subject->machine_id = $machine->id;
         $subject->save();
 
         $input_days = json_decode($formFields['days'],true);
