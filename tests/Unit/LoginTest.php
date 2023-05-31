@@ -42,8 +42,6 @@ class LoginTest extends TestCase
         $admin = User::factory()->create([
             'id' => $this->faker->unique()->numerify('#########'),
             'role' => 'admin',
-            'first_name' => 'Oblong',
-            'last_name' => 'Arse',
             'password' => bcrypt('password123'),
         ]);
 
