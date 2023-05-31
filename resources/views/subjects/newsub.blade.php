@@ -224,7 +224,9 @@ $(function () {
         $("input[type='checkbox']:checked").each(function() {
             selectedDays.push($(this).val());
         });
+        selectedDays = JSON.stringify(selectedDays);
         formData.push({name: 'days', value: selectedDays});
+
         $(".is-invalid").children("strong").text("");
         $("#registerSubForm input").removeClass("is-invalid");
         $.ajax({
@@ -272,6 +274,7 @@ else{
     $('#nameError.is-invalid').css('visibility','hidden');
 };
 // validation for year start
+/*
 if ($('#year_st').val().length == 0 || $('#year_st').val().match('^[0-9]{4}$')){
     $('#yearStartError.is-invalid').css('visibility','hidden');
 }
@@ -287,7 +290,7 @@ else{
     $('#yearEndError.is-invalid').css('visibility','visible');
     $('#sbmt_btn').prop('disabled', true);
 };
-
+*/
 });
 
 $('#time_st').on('keypress keyup keydown', function () {
