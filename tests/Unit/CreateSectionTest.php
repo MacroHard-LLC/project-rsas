@@ -8,6 +8,11 @@ use App\Models\User;
 
 class CreateSectionTest extends TestCase
 {
+    public function test_the_home_page_returns_success(): void
+    {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+    }
     // public function test_CreateSectionForm(): void
     // {
     //     $request = $this->get('/section/create');

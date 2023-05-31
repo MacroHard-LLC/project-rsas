@@ -11,6 +11,11 @@ use Tests\TestCase;
 
 class CreateSubjectTest extends TestCase
 {
+    public function test_the_home_page_returns_success(): void
+    {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+    }
     // /**
     //  * A basic unit test example.
     //  */
