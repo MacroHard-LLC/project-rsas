@@ -57,7 +57,7 @@ function add_student_to_row(){
         <td name="student_row">${user.id}</td>
         <td>${user.first_name}</td>
         <td>${user.last_name}</td>
-        <td class='delete'><button type='button' name="delete_button" style="border:0px;"><i class="fa-solid fa-xmark"></i></button></td>
+        <td class='delete'><button type='button' name="delete_button" style="border:0px; background-color: transparent;"><i class="fa-solid fa-xmark"></i></button></td>
     `;
 
     // Add the new row to the table.

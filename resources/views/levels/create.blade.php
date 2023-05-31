@@ -6,12 +6,12 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div class="modal-body mx-5 my-3" id="modalBody">
+            <div class="modal-body" id="modalBody">
                 <form method="POST" id="createSectionForm" class="needs-validation" novalidate>
                     @csrf
                     <fieldset>
                         <div class="row mb-3">
-                            <div class="col-md-6 input-field">
+                            <div class="col-6 col-md-4 input-field">
                                 <div class="form-outline">
                                     <label for="section_name_input" class="input-title">Section Name</label>
                                     <input type="text" class="form-control form-control-sm" placeholder="Enter Section Name" name="section_name" id="section_name_input" maxlength='50' required>
@@ -20,10 +20,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 input-field">
+                            <div class="col-6 col-md-4 input-field">
                                 <label for="section_grade_level_input" class="input-title">Grade Level</label>
                                 <select name="section_grade_level" class="form-select" id="section_grade_level_input" required>
-                                    <option value="" disabled selected="selected">Choose a Grade Level</option>
+                                    <option value="" disabled selected="selected" class="form-message">Choose a Grade Level</option>
                                     @for ($i = 7; $i < 11; $i++)
                                         <option value={{$i}}>Level {{$i}}</option>
                                     @endfor
@@ -32,10 +32,24 @@
                                     <span></span>
                                 </div>
                             </div>
+                            <div class="col-6 col-md-4 input-field">
+                                <div class="form-outline">
+                                    <label for="section_schoolyear_id_input" class="input-title">School Year</label>
+                                    <select name="section_schoolyear_id" class="form-select" id="section_schoolyear_id_input" required>
+                                        <option value="" disabled selected="selected">Select a School Year</option>
+                                        @foreach ($schoolyears as $schoolyear)
+                                            <option value="{{ $schoolyear->id }}">{{ $schoolyear->start_year }} - {{ $schoolyear->end_year }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="is-invalid" id="section_schoolyear_id_error">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row mb-3">
-                            <div class="col-md-6 input-field">
+                            <div class="col-6 col-md-4 input-field">
                                 <div class="form-outline">
                                     <label for="section_adviser_id_input" class="input-title">Adviser</label>
                                     <select name="section_adviser_id" class="form-select" id="section_adviser_id_input" required>
@@ -51,21 +65,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 input-field">
-                                <div class="form-outline">
-                                    <label for="section_schoolyear_id_input" class="input-title">School Year</label>
-                                    <select name="section_schoolyear_id" class="form-select" id="section_schoolyear_id_input" required>
-                                        <option value="" disabled selected="selected">Select a School Year</option>
-                                        @foreach ($schoolyears as $schoolyear)
-                                            <option value="{{ $schoolyear->id }}">{{ $schoolyear->start_year }} - {{ $schoolyear->end_year }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="is-invalid" id="section_schoolyear_id_error">
-                                        <span></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-5 input-field">
+                            
+
+                            <div class="col-6 col-md-4 input-field">
                                 <div class="form-outline">
                                     <label for="section_student_id_input" class="input-title">Student</label>
                                     <select name="section_student_id" class="form-select" id="section_student_id_input" required>
@@ -81,15 +83,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2 input-field float-end">
+                            <div class="col-6 col-md-4  input-field float-end">
                                 <div class="form-group pt-3">
-                                    <button type='button' class="btn btn-primary create" id="add_student_btn" onclick="add_student_to_row()" disabled><i class="fa-solid fa-user-plus"></i> Add</button>
+                                    <button type='button' class="btn btn-secondary create" id="add_student_btn" onclick="add_student_to_row()" disabled><i class="fa-solid fa-user-plus"></i>Add</button>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <hr style="margin-top: 20px;">
+                            <hr style="margin-top: 20px; width:47rem;">
 
                             <div class="modal-body" id=list>
                                     <table class="table table-striped">
