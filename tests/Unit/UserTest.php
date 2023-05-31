@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class UserTest extends TestCase
 {
-    // use RefreshDatabase;
+    use RefreshDatabase;
 
     public function test_landing_page_return_success():void
     {

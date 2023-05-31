@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
-    // use RefreshDatabase;
+    use RefreshDatabase;
     use WithFaker;
 
     /**
