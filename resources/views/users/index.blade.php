@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="{{ asset('css/createUser.css') }}">
-@extends('master')
 
+@extends('master')
+@section('title','View User')
 @section('content')
 
 @include('users.create')

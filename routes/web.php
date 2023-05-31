@@ -10,7 +10,7 @@ use App\Http\Controllers\CreateInstructor;
 use App\Http\Controllers\CreateSchoolYear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\CheckSubjectIdValid;
 
 use App\Http\Controllers\UserController;
@@ -48,6 +48,37 @@ use App\Http\Middleware\CheckSubjectIdValid;
 // update - Update [something]
 // destroy - Delete [something]
 
+// goes to the homepage
+// remember that this needs to have an input added later so that we will know what
+// kind of user access this
+
+Route::get('/', [HomeController::class, 'LandingPage'] )->name('landingpage');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', function () {
+        $user = Auth::user();
+
+        if ($user->isAdmin()) {
+            return redirect()->route('adminhome');
+        } elseif ($user->isAdviser()) {
+            return redirect()->route('adviserhome', ['id' => $user->id]);
+        } else {
+            return redirect()->route('login')->with("error", "Access Denied");
+        }
+    })->name('home');
+
+    //Routes for admin
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/admin', [HomeController::class, 'AdminHome'])->name('adminhome');
+    });
+    //Route for adviser
+    Route::middleware('role:adviser')->group(function () {
+        Route::get('/adviser/{id}', [AdviserViewController::class, 'AdviserPage'] )->name('adviserhome');
+    });
+});
+
+
+
 Route::get('/createsub',[CreateSubject::class,'CreateSubjectIndex']);
 Route::post('dataInsert',[CreateSubject::class, 'DataInsert'])->middleware(CheckSubjectIdValid::class);
 
@@ -74,6 +105,54 @@ Route::post('/schoolyear/add',[CreateSchoolYear::class, 'AddSchoolYear'])->name(
 
 // Delete Subject
 Route::delete('/subjects', [CreateSubject::class, 'destroy'])->name('deleteSubject');
+
+
+// show users
+Route::get('/users', [UserController::class, 'index']);
+
+// show create user form
+Route::get('/users/create', [UserController::class, 'create']);
+
+// create new user
+Route::post('/users', [UserController::class, 'store'])->name('createUser');
+
+// Show Edit User Form
+Route::get('/users/{id}/edit/', [UserController::class, 'edit']);
+// Route::get('/users/{user}/edit/', [UserController::class, 'edit']);
+
+// Update User
+Route::put('/users/{id}', [UserController::class, 'update']);
+
+// Delete User
+Route::delete('/users', [UserController::class, 'destroy'])->name('deleteUser');
+
+// Show list of grade levels
+Route::get('/gradelevels', [SectionController::class, 'index']);
+
+// Show a section
+Route::get('/gradelevels/{grade}', [SectionController::class, 'show']);
+
+// goes to adviser views
+Route::get('/view-attendance', [AdviserViewController::class, 'AttendancePage'] );
+Route::get('/student-info', [AdviserViewController::class, 'StudentPage'] );
+
+//edit attendance in attendance page of adviser
+Route::get('/edit', [AdviserViewController::class, 'EditAttendance'] );
+Route::post('/view-attendance-start', [AdviserViewController::class, 'start'])->name('adviser_startup');
+Route::post('/view-attendance-get-students', [AdviserViewController::class, 'GetAllStudents'])->name('get_all_students_adviser');
+Route::post('/view-attendance-change', [AdviserViewController::class,'ChangeAttendance'])->name('change_attendance');
+Route::post('/view-attendance-add-id', [AdviserViewController::class, 'StudentTag'])->name('add_id_edit_status');
+Route::post('/view-attendance-setup', [AdviserViewController::class, 'SubjectSetup'])->name('setUp_subjects');
+
+
+//Authentications
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'loginPost'])->name('login.post');
+Route::get('logout',[LoginController::class,'logout'])->name('logout');
+
+
+
+
 
 //I tried to group them - Pris
 //Route::resource('subjects', CreateSubject::class) -> only(['CreateSubjectForm', 'DataInsert', 'CheckSubIdExist']);
@@ -108,84 +187,3 @@ Route::prefix('admin' -> middleware('is_admin') ->group(function) (){
     Route::get('home'), [HomeController::class, 'index']);
 })
 */
-
-// goes to the homepage
-// remember that this needs to have an input added later so that we will know what
-// kind of user access this
-Route::get('/home', [HomeController::class, 'Homepage']);
-
-// goes to adviser views
-// change this once login is introduced
-Route::get('/home-adviser/{id}', [AdviserViewController::class, 'AdviserPage'] );
-Route::get('/view-attendance', [AdviserViewController::class, 'AttendancePage'] );
-Route::get('/student-info', [AdviserViewController::class, 'StudentPage'] );
-
-//edit attendance in attendance page of adviser
-Route::get('/edit', [AdviserViewController::class, 'EditAttendance'] );
-Route::post('/view-attendance-start', [AdviserViewController::class, 'start'])->name('adviser_startup');
-Route::post('/view-attendance-get-students', [AdviserViewController::class, 'GetAllStudents'])->name('get_all_students');
-Route::post('/view-attendance-change', [AdviserViewController::class,'ChangeAttendance'])->name('change_attendance');
-Route::post('/view-attendance-add-id', [AdviserViewController::class, 'StudentTag'])->name('add_id_edit_status');
-
-// form 2 of the advisor
-Route::post('/form2', [Form2Controller::class, 'ShowForm'])->name('get_all_students');
-
-// Route::prefix('form2')->group(function() {
-//     Route::get('/{id}/show', function ($id){
-//         $pdf = Pdf::loadView('document.form2', [
-//             'form2' => section::find($id)
-//         ]);
-
-//         return $pdf -> download('Form2', $id, '.pdf');
-//     })->name('admin.form2.show');
-
-// }); //for the printing of the form 2 as a pdf file.
-
-// Route::get('form2', function(){
-//     return view('form2');
-// }); //this is so the damn form 2 can be printed - Pris
-// Route::get('/school-form', function () {
-//     $form = SchoolForm::find(2); //Retrive data from the SchoolForm model
-//     return view('schoool-form', ['form' => $form]); //Pass the data to the 'school-form' view
-// });
-
-
-
-// show users
-Route::get('/users', [UserController::class, 'index']);
-
-// show create user form
-Route::get('/users/create', [UserController::class, 'create']);
-
-// create new user
-Route::post('/users', [UserController::class, 'store'])->name('createUser');
-
-// Show Edit User Form
-Route::get('/users/{id}/edit/', [UserController::class, 'edit']);
-// Route::get('/users/{user}/edit/', [UserController::class, 'edit']);
-
-// Update User
-Route::put('/users/{id}', [UserController::class, 'update']);
-
-// Delete User
-Route::delete('/users', [UserController::class, 'destroy'])->name('deleteUser');
-
-// Show list of grade levels
-Route::get('/gradelevels', [SectionController::class, 'index']);
-
-// Show a section
-Route::get('/gradelevels/{grade}', [SectionController::class, 'show']);
-
-// goes to adviser views
-// change this once login is introduced
-Route::get('/home-adviser/{id}', [AdviserViewController::class, 'AdviserPage'] );
-Route::get('/view-attendance', [AdviserViewController::class, 'AttendancePage'] );
-Route::get('/student-info', [AdviserViewController::class, 'StudentPage'] );
-
-//edit attendance in attendance page of adviser
-Route::get('/edit', [AdviserViewController::class, 'EditAttendance'] );
-Route::post('/view-attendance-start', [AdviserViewController::class, 'start'])->name('adviser_startup');
-Route::post('/view-attendance-get-students', [AdviserViewController::class, 'GetAllStudents'])->name('get_all_students_adviser');
-Route::post('/view-attendance-change', [AdviserViewController::class,'ChangeAttendance'])->name('change_attendance');
-Route::post('/view-attendance-add-id', [AdviserViewController::class, 'StudentTag'])->name('add_id_edit_status');
-Route::post('/view-attendance-setup', [AdviserViewController::class, 'SubjectSetup'])->name('setUp_subjects');

@@ -45,7 +45,7 @@
 
                             <div class="col-6 col-md-4 input-field">
                                 <label for="school_year" class="input-title">School Year</label>
-                                <select name="school_year" class="form-select" id="school_year" required>
+                                <select name="school_year" class="form-select" id="school_year_dropdown" name="school_year_dropdown" required>
                                     <!--ideally the options that would show here is the school_year_id present in the school year table-->
                                     <option value="20222023">AY 2022-2023</option>
                                     <option value="20232024">AY 2023-2024</option>
@@ -212,6 +212,9 @@
 @parent
 
 <script>
+$(document).ready(function() {
+    $('school_year_dropdown').append($('<option>')).val(value).text(string);
+});
 $(function () {
     $('#registerSubForm').submit(function (e) {
         e.preventDefault();

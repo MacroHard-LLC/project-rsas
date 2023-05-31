@@ -3,20 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\Models\Student;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     // Show all users
-    public function UserIndex() {
+    public function index() {
         return view('users.index', [
             'users' => User::latest('added_on')->filter(request(['role']))->paginate(15)
         ]);
     }
 
-    public function UserStore(Request $request) {
+    public function store(Request $request) {
         $formFields = $request->validate([
             'id' => ['required','unique:user,id','integer','digits:9'],
             'password' => ['required','min:1','max:20'],
@@ -31,7 +32,7 @@ class UserController extends Controller
             $request->validate(['rfid_number' => ['sometimes','unique:student,rfid_number']]);
 
         // Hash Password
-        // $formFields['password'] = bcrypt($formFields['password']);
+        $formFields['password'] = Hash::make($formFields['password']);
 
         // Create user
         User::create($formFields);
@@ -46,7 +47,9 @@ class UserController extends Controller
         return back();
     }
 
-    public function UserUpdate(Request $request, $id) {
+    public function update(Request $request, $id) {
+        $user = User::find($id);
+
         $formFields = $request->validate([
             'id' => ['required',Rule::unique('user','id')->ignore($id),'integer','digits:9'],
             'password' => ['required','min:1','max:20'],
@@ -75,6 +78,9 @@ class UserController extends Controller
             Student::where('user_id', $id)->update($form_rfid_number);
         }
 
+        // Hash Password
+        $formFields['password'] = Hash::make($formFields['password']);
+        
         $user->update($formFields);
 
         return back();
@@ -85,4 +91,6 @@ class UserController extends Controller
         User::find($request->id)->delete();
         return back()->with('message', 'User deleted successfully');
     }
+
+    
 }
