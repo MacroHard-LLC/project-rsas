@@ -38,6 +38,29 @@ class CreateSubject extends Controller
         }
     }
 
+    function DoesInstructorIdExist(Request $request){
+        $incoming_id = $request->input_data;
+
+        $instructor = Instructor::where('rfid_number','=',$incoming_id)->first();
+        if($instructor){
+            return FALSE;
+        }
+        return TRUE;
+    }
+
+    function GetAllSchoolyear(Request $request){
+        $query = Schoolyear::all();
+        $array = array();
+        foreach($query as $schoolyear){
+            $array[] = array(
+                'id' => $schoolyear['id'],
+                'start' => $schoolyear['start_year'],
+                'end' => $schoolyear['end_year']
+            );
+        }
+
+        return $array;
+    }
 
     function DataInsert(Request $request){
         // copied from UserController
@@ -60,8 +83,15 @@ class CreateSubject extends Controller
         $subject->id = $formFields['sub_id'];
         $subject->name = $formFields['sub_name'];
         $subject->instructor_rfid = $formFields['instruct_rfid'];
-        $subject->schoolyear_id = 1;
-        $subject->semester = "0";
+        $subject->schoolyear_id = $formFields['school_yearDD'];
+
+        if ($formFields['semester'] == "first_sem"){
+            $subject->semester = "0";
+        }
+        else if ($formFields['semester'] == "second_sem"){
+            $subject->semester = "1";
+        }
+        
         //$subject->room = $formFields['as_room'];
         //$subject->added_on = now();
         //$subject->added_by = 0;
