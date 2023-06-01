@@ -1,0 +1,72 @@
+table.GeneratedTable {
+    width: 100%;
+    background-color: #ffffff;
+    border-collapse: collapse;
+    border-width: 1px;
+    border-color: #000000;
+    border-style: solid;
+    color: #000000;
+  }
+  
+table.GeneratedTable td, table.GeneratedTable th {
+    border-width: 1px;
+    border-color: #000000;
+    border-style: solid;
+    padding: 3px;
+  }
+  
+table.GeneratedTable thead {
+    background-color: #ffffff;
+  }
+
+  td, th {
+    vertical-align: middle;
+    border-top: none #000000;
+    border-left: none #000000;
+    border-right: none #000000;
+    color: #000000;
+    font-family: 'Arial Narrow';
+    font-size: 11pt;
+    background-color: white;
+    width: 20pt !important;
+  }
+
+td.outerside, th.outerside {
+    border-bottom: 2px solid #000000 !important;
+    border-left: 2px solid #000000 !important;
+    border-right: 2px solid #000000 !important;
+    border-top: 2px solid #000000 !important;
+
+}
+
+td.num {
+  width: 30px !important;
+  height: 25px !important;
+}
+
+td.num1 {
+  width: 30px !important;
+  height: 40px !important;
+}
+
+td.header {
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 2px solid #000000 !important;
+  border-left: 2px solid #000000 !important;
+  border-right: 2px solid #000000 !important;
+  border-top: 2px solid #000000 !important;
+}
+
+td.headersub {
+  text-align: center;
+  border-bottom: 2px solid #000000 !important;
+  border-left: 2px solid #000000 !important;
+  border-right: 2px solid #000000 !important;
+  border-top: 2px solid #000000 !important;
+}
+
+table td.crossed
+{
+   background-image: linear-gradient(to bottom right,  transparent calc(50% - 1px), silver, transparent calc(50% + 1px)); 
+}
