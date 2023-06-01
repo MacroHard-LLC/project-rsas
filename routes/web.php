@@ -94,9 +94,6 @@ Route::post('/section-adviser-request', [SectionController::class, 'DoesAdviserE
 Route::post('/section-get-students', [SectionController::class, 'GetAllStudents'])->name('get_all_students');
 Route::post('/section/register',[SectionController::class, 'DataInsert'])->name('register_section');
 Route::post('/section-get-sectionid',[SectionController::class, 'DoesSectionIdExist'])->name('get_section_id');
-Route::post('/section-check-instruct',[CreateSubject::class, 'DoesInstructorIdExist'])->name('check_instruct_rfid');
-Route::post('/section-get-schoolyear',[CreateSubject::class, 'GetAllSchoolyear'])->name('get_all_schoolyear');
-
 // Show Subjects
 Route::get('/subjects', [CreateSubject::class, 'CreateSubjectIndex']);
 
@@ -111,13 +108,13 @@ Route::delete('/subjects', [CreateSubject::class, 'destroy'])->name('deleteSubje
 
 
 // show users
-Route::get('/users', [UserController::class, 'UserIndex']);
+Route::get('/users', [UserController::class, 'index']);
 
 // show create user form
 Route::get('/users/create', [UserController::class, 'create']);
 
 // create new user
-Route::post('/users', [UserController::class, 'UserStore'])->name('createUser');
+Route::post('/users', [UserController::class, 'store'])->name('createUser');
 
 // Show Edit User Form
 Route::get('/users/{id}/edit/', [UserController::class, 'edit']);
