@@ -12,6 +12,7 @@ class Schoolyear extends Model
     protected $table = 'schoolyear';
     public $timestamps = FALSE;
 
+<<<<<<< Updated upstream
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +23,9 @@ class Schoolyear extends Model
         'end_year'
     ];
 
+=======
     
+>>>>>>> Stashed changes
     public function subject(){
         return $this->hasMany(Subject_table::class);
     }
