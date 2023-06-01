@@ -6,8 +6,15 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    function Homepage(){
+    function LandingPage(){
+        return view('landingpage');
+    }
+    function AdminHome(){
         return view('homepage');
+    }
+
+    function AdviserHome(){
+        return view('test');
     }
     /*
    { /**

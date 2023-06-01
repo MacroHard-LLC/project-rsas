@@ -3,15 +3,19 @@
 <link rel="stylesheet" href="{{ asset('css/createsub.css') }}">
 
 @extends('master')
+@section('title','Home')
 @section('content')
 
+@php
+    $firstName = auth()->user()->first_name;
+@endphp
 
 <div class="vertical-center">
     <div class="container-fluid">
         <div class="row">
             <div class="col">
                 <div class="home-headings text-center mt-5">
-                <h1>Welcome, User!</h1>
+                <h1>Welcome, @yield('fullname',$firstName)</h1>
                 <h4>What would you like to do today?</h4>
             </div>
         </div>
