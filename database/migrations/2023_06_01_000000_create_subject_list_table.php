@@ -27,8 +27,8 @@ return new class extends Migration
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 
-            $table->foreign('section_id')->references('id')->on('sections');
-            $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->foreign('section_id')->references('id')->on('section');
+            $table->foreign('subject_id')->references('id')->on('subject');
         });
     }
 

@@ -24,8 +24,8 @@ return new class extends Migration
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 
-            $table->foreign('student_id')->references('rfid_number')->on('students');
-            $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->foreign('student_id')->references('rfid_number')->on('student');
+            $table->foreign('subject_id')->references('id')->on('subject');
         });
     }
 
