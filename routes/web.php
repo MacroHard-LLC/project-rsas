@@ -111,7 +111,7 @@ Route::delete('/subjects', [CreateSubject::class, 'destroy'])->name('deleteSubje
 
 
 // show users
-Route::get('/users', [UserController::class, 'UserIndex']);
+Route::get('/users', [UserController::class, 'index']);
 
 // show create user form
 Route::get('/users/create', [UserController::class, 'create']);
