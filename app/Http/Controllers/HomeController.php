@@ -3,9 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Schoolyear;
 
 class HomeController extends Controller
 {
+    function Homepage(){
+        $users = User::all();
+        $schoolyears = Schoolyear::all();
+        return view('homepage', compact('users','schoolyears'));
+    }
+
     function LandingPage(){
         return view('landingpage');
     }
@@ -13,9 +21,6 @@ class HomeController extends Controller
         return view('homepage');
     }
 
-    function AdviserHome(){
-        return view('test');
-    }
     /*
    { /**
      * Create a new controller instance.

@@ -69,7 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Routes for admin
     Route::middleware('role:admin')->group(function () {
-        Route::get('/admin', [HomeController::class, 'AdminHome'])->name('adminhome');
+        Route::get('/admin', [HomeController::class, 'Homepage'])->name('adminhome');
     });
     //Route for adviser
     Route::middleware('role:adviser')->group(function () {

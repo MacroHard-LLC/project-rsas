@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Section;
 use App\Models\Student;
+
 use Illuminate\Http\Request;
 
 class SectionController extends Controller
@@ -21,8 +22,6 @@ class SectionController extends Controller
         return view('levels.show', [
             'section' => $section,
             'students' => $students,
-            'users',
-            'adviser' => $adviser,
         ]);
     }
 
@@ -89,34 +88,31 @@ class SectionController extends Controller
     }
 
     function DataInsert(Request $request){
-        $formFields = $request;
-        /*$formFields = $request->validate([
-            'adviserID' => ['required','integer','digits:9','regex:/[0-9]+/'],
-            'allStudentID' => 'required',
-            'sectionID' => 'required',
-            'gradeLevel' => 'required',
-        ]);*/
+        $formFields = $request->validate([
+            'adviser_id' => ['required','exists:user,id'],
+            'allStudentID' => ['required','array'],
+            'allStudentID.*'  => ['required','distinct','exists:user,id'],
+            'name' => ['required','max:50'],
+            'grade_level' => ['required','integer','between:7,10'],
+            'schoolyear_id' => ['required','exists:schoolyear,id'],
+        ]);
 
         // this is for the section table
         $addRow = new Section;
-        $addRow->id = $formFields['sectionID'];
-        $addRow->name = $formFields['sectionName'];
-        $addRow->grade_level = $formFields['gradeLevel'];
-        $addRow->adviser_id = $formFields['adviserID'];
-        $addRow->added_on = now();
-        $addRow->added_by = 0;
-        $addRow->updated_on = now();
-        $addRow->updated_by = 0;
-        $addRow->is_deleted = 0;
+        $addRow->name = $formFields['name'];
+        $addRow->grade_level = $formFields['grade_level'];
+        $addRow->adviser_id = $formFields['adviser_id'];
+        $addRow->schoolyear_id = $formFields['schoolyear_id'];
         $addRow->save();
 
+        $studentIds = $formFields['allStudentID'];
+
         // this is for the students
-        foreach($formFields->input('allStudentID') as $studentID){
-            $changeRow = User::select('id')->find($studentID);
-            $changeRow->is_enrolled = 1;
-            $changeRow->grade_level = $formFields['gradeLevel'];
-            $changeRow->updated_on = now();
-            $changeRow->save();
+        foreach($studentIds as $studentID){
+            User::where('id', $studentID)->update(['is_enrolled' => 1]);
+            Student::where('user_id', $studentID)->update(['section_id' => $addRow->id]);
         }
+
+        User::where('id', $request->adviser_id)->update(['is_enrolled' => 1]);
     }
 }
