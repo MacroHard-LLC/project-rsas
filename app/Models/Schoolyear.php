@@ -11,11 +11,14 @@ class Schoolyear extends Model
 
     protected $table = 'schoolyear';
     public $timestamps = FALSE;
-
     
     public function subject(){
         return $this->hasMany(Subject_table::class);
     }
+
+    public function section(){
+        return $this->hasMany(Section::class);
+  }
 
     public function getSchoolDays(){
         
@@ -49,5 +52,6 @@ class Schoolyear extends Model
         }
 
         return $schoolDays;
+
     }
 }
