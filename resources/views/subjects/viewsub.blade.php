@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/createsub.css') }}">
     @extends('master')
-
+    @section('title','View Subjects')
     @section('content')
 
     @include('subjects.newsub')

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\Models\Student;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -31,7 +32,7 @@ class UserController extends Controller
             $request->validate(['rfid_number' => ['sometimes','unique:student,rfid_number']]);
 
         // Hash Password
-        // $formFields['password'] = bcrypt($formFields['password']);
+        $formFields['password'] = Hash::make($formFields['password']);
 
         // Create user
         User::create($formFields);
@@ -77,6 +78,9 @@ class UserController extends Controller
             Student::where('user_id', $id)->update($form_rfid_number);
         }
 
+        // Hash Password
+        $formFields['password'] = Hash::make($formFields['password']);
+        
         $user->update($formFields);
 
         return back();
@@ -87,4 +91,6 @@ class UserController extends Controller
         User::find($request->id)->delete();
         return back()->with('message', 'User deleted successfully');
     }
+
+    
 }

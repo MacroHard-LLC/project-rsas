@@ -22,6 +22,8 @@ class SectionController extends Controller
         return view('levels.show', [
             'section' => $section,
             'students' => $students,
+            'users',
+            'adviser' => $adviser,
         ]);
     }
 

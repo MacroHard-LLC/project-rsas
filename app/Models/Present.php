@@ -10,7 +10,8 @@ class Present extends Model
     use HasFactory;
 
     protected $table = 'present';
-
+    public $timestamps = FALSE;
+    
     public function student(){
         return $this->belongsTo(Student::class, 'student_id', 'user_id');
     }

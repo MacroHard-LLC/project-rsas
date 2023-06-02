@@ -8,10 +8,18 @@ use App\Models\Schoolyear;
 
 class HomeController extends Controller
 {
+
     function Homepage(){
         $users = User::all();
         $schoolyears = Schoolyear::all();
         return view('homepage', compact('users','schoolyears'));
+    }
+
+    function LandingPage(){
+        return view('landingpage');
+    }
+    function AdminHome(){
+        return view('homepage');
     }
     /*
    { /**

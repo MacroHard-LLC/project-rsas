@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="{{ asset('css/viewgrlvl.css') }}">
 <link rel="stylesheet" href="{{ asset('css/createUser.css') }}">
 @extends('master')
+@section('title','View Section')
 @section('content')
 
 <div class='container m-2'>

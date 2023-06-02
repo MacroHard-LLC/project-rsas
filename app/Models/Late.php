@@ -10,6 +10,7 @@ class Late extends Model
     use HasFactory;
 
     protected $table = 'late';
+    public $timestamps = FALSE;
 
     public function student(){
         return $this->belongsTo(Student::class, 'student_id', 'user_id');

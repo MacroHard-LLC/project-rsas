@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory;
+    use HasApiTokens,HasFactory,Notifiable;
 
     public $table = 'user';
     public $timestamps = false;
@@ -42,5 +44,20 @@ class User extends Authenticatable
 
     public function student(){
         return $this->hasOne(Student::class, 'user_id', 'id');
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isAdviser()
+    {
+        return $this->role === 'adviser';
+    }
+
+    public function isStudent()
+    {
+        return $this->role === 'student';
     }
 }

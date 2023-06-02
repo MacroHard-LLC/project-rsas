@@ -44,11 +44,10 @@
                             </div>
 
                             <div class="col-6 col-md-4 input-field">
-                                <label for="school_year" class="input-title">School Year</label>
-                                <select name="school_year" class="form-select" id="school_year" required>
+                                <label for="school_yearDD" class="input-title">School Year</label>
+                                <select name="school_yearDD" class="form-select" id="school_yearDD" required>
                                     <!--ideally the options that would show here is the school_year_id present in the school year table-->
-                                    <option value="20222023">AY 2022-2023</option>
-                                    <option value="20232024">AY 2023-2024</option>
+
                                 </select>
                                 <!--validation needs to be updated
                                 <div class="is-invalid" role="alert" id="timeStartError" name="timeStartError" style="visibility:hidden">
@@ -83,7 +82,7 @@
                                     <label for="instruct_rfid" class="input-title">Instructor RFID</label>
                                     <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="instruct_rfid" pattern="[0-9]+" id='instruct_rfid' required>
                                     <!--validation needs to be updated-->
-                                    <div class="is-invalid" role="alert" id="yearStartError" name="yearStartError" style="visibility:hidden">
+                                    <div class="is-invalid" role="alert" id="subjectRFIDError" name="subjectRFIDError" style="visibility:hidden">
                                         <strong>Input a RFID number</strong>
                                     </div>
                                 </div>
@@ -213,18 +212,35 @@
 @parent
 
 <script>
+$(document).ready(function() {
+    let subject = $('#school_yearDD');
+    console.log(subject);
+    $.ajax({
+        method: "POST",
+        headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                Accept: "application/json"
+        },
+        url: "{{ route('get_all_schoolyear') }}",
+        success: function(data) {
+            console.log(data);
+            data.forEach(element => {
+                subject.append(`<option value="${element.id}">AY ${element.start}-${element.end}</option>`);
+            });
+        }
+    });
+});
 $(function () {
     $('#registerSubForm').submit(function (e) {
         e.preventDefault();
         let formData = $(this).serializeArray();
         console.log(formData);
-
         let selectedDays = [];
-
         // Iterate over checked checkboxes and add their values to the selectedDays array
         $("input[type='checkbox']:checked").each(function() {
             selectedDays.push($(this).val());
         });
+        selectedDays = JSON.stringify(selectedDays);
         formData.push({name: 'days', value: selectedDays});
         $(".is-invalid").children("strong").text("");
         $("#registerSubForm input").removeClass("is-invalid");
@@ -246,20 +262,40 @@ $(function () {
                 }
             }
         })
-
     });
 })
+//instructor id vibes
+$('#instruct_rfid').on('keypress click', function() {
+    $.ajax({
+      method: "POST",
+      headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            Accept: "application/json"
+      },
+      url: "{{ route('check_instruct_rfid') }}",
+      data: { input_data: $(this).val() },
+      success: function(data) {
+        console.log(data);
+        if (data) {
+          $('#subjectRFIDError.is-invalid').css('visibility','visible');
+          $('#subjectRFIDError.is-invalid').html('<strong>Instructor does not Exist</strong>');
+          $('#sbmt_btn').prop('disabled', true);
+        }
+        else
+        {
+            $('#subjectRFIDError.is-invalid').css('visibility','hidden');
+        }
+      }
+    });
+});
 
-// disable the button if inputs are not present
-$('#MondayCheck,#TuesdayCheck,#WednesdayCheck,#ThursdayCheck,#FridayCheck,#sub_id,#sub_name,#time_st,#time_end,#as_room,#year_st,#year_end').on('keypress keyup keydown click', function () {
-  if ( $('#sub_id').val().match('^[0-9]{5}$') && $('#sub_id').val().length === 5 && $('#sub_id').val() != "" && $('#sub_name').val() != "" && $('#time_st').val() != "" && $('#time_end').val() != "" && $('#as_room').val() != "" && $('#year_st').val() != "" && $('#year_end').val() != "" && ($('#MondayCheck').is(':checked') || $('#TuesdayCheck').is(':checked') || $('#WednesdayCheck').is(':checked') || $('#ThursdayCheck').is(':checked') || $('#FridayCheck').is(':checked')))  {
+$('#MondayCheck,#TuesdayCheck,#WednesdayCheck,#ThursdayCheck,#FridayCheck,#sub_id,#sub_name,#as_room,#instruct_rfid').on('keypress keyup keydown click', function () {
+  if ( $('#sub_id').val().match('^[0-9]{5}$') && $('#sub_id').val().length === 5 && $('#sub_id').val() != "" && $('#sub_name').val() != "" && $('#as_room').val() != "" && ($('#MondayCheck').is(':checked') || $('#TuesdayCheck').is(':checked') || $('#WednesdayCheck').is(':checked') || $('#ThursdayCheck').is(':checked') || $('#FridayCheck').is(':checked')))  {
     $('#sbmt_btn').prop('disabled', false);
   }
   else {
     $('#sbmt_btn').prop('disabled', true);
   }
-
-
 // validation for subject name
 if ($('#sub_name').val().length == 0){
     $('#nameError.is-invalid').css('visibility','hidden');
@@ -273,6 +309,7 @@ else{
     $('#nameError.is-invalid').css('visibility','hidden');
 };
 // validation for year start
+/*
 if ($('#year_st').val().length == 0 || $('#year_st').val().match('^[0-9]{4}$')){
     $('#yearStartError.is-invalid').css('visibility','hidden');
 }
@@ -288,9 +325,8 @@ else{
     $('#yearEndError.is-invalid').css('visibility','visible');
     $('#sbmt_btn').prop('disabled', true);
 };
-
+*/
 });
-
 $('#time_st').on('keypress keyup keydown', function () {
     // validation for time start
 if ($('#time_st').val().length == 0){
@@ -301,7 +337,6 @@ else{
     $('#timeStartError.is-invalid').css('visibility','hidden');
 };
 });
-
 $('#time_end').on('keypress keyup keydown', function () {
     // validation for time end
 if ($('#time_end').val().length == 0){
@@ -312,11 +347,9 @@ else{
     $('#timeEndError.is-invalid').css('visibility','hidden');
 };
 });
-
 $('#MondayCheck,#TuesdayCheck,#WednesdayCheck,#ThursdayCheck,#FridayCheck').on('click', function () {
     // validation for time end
     let selectedDays = [];
-
     // Iterate over checked checkboxes and add their values to the selectedDays array
     $("input[type='checkbox']:checked").each(function() {
         selectedDays.push($(this).val());
@@ -329,7 +362,6 @@ $('#MondayCheck,#TuesdayCheck,#WednesdayCheck,#ThursdayCheck,#FridayCheck').on('
         $('#daysError.is-invalid').css('visibility','hidden');
     };
 });
-
 $('#as_room').on('keypress keyup keydown', function () {
     // validation for time end
 if ($('#as_room').val().length == 0 || $('#as_room').val().match('^[0-9a-zA-Z_ ,.]{0,50}$')){
@@ -340,7 +372,6 @@ else{
     $('#sbmt_btn').prop('disabled', true);
 };
 });
-
 $('#sub_id').on('keyup', function () {
     $('#idError.is-invalid').html('<strong>Check if Subject ID is all integers</strong>');
   if ($(this).val().length === 5) {
@@ -386,6 +417,5 @@ $('#sub_id').on('keyup', function () {
     }
   }
 });
-
 </script>
 @endsection
