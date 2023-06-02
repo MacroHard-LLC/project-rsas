@@ -145,8 +145,6 @@ class AdviserViewController extends Controller
         $status->save();
 
         return redirect()->back();
-       
-        
     }
 
     function StudentPage(){

@@ -1,3 +1,48 @@
+<!-- $(document).on('click', '#studentTag', function() {
+        //var element = $(this).siblings('span');
+        //var value = element.data('id');
+        var element = $(this).closest('td').find('span');
+        console.log(element)
+        var value = element.data('id');
+
+        $.ajax({
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                Accept: "application/json"
+            },
+            url: "{{ route('add_id_edit_status') }}",
+            data: {value},
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    }); -->
+
+<!-- $(document).ready(function() {
+  $('#updateStatus').on('click', function() {
+    var status = $('input[name="status"]:checked').val();
+    var student_id = $('#studentId').val();
+
+    $.ajax({
+      url: '/update-student-status',
+      type: 'POST',
+      data: {
+        status: status,
+        studentId: studentId,
+      },
+      success: function(data) {
+        if (data.success) {
+          $('#myModal').modal('hide');
+          alert('Status updated successfully!');
+        } else {
+          alert('Error updating status!');
+        }
+      },
+    });
+  });
+}); -->
+
 <div class="modal modal-danger fade" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -25,3 +70,4 @@
         </div>
     </div>
 </div>
+
