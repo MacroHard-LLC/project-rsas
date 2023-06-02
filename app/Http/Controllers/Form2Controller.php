@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     // Show all users
-    public function ShowForm() {
+    public function ShowForm(Request $request) {
         //get the needed incoming data
         $section_id = session() -> get('section_id');
         $start_year = session() -> get('start_year');

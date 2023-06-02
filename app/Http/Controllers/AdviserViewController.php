@@ -130,10 +130,23 @@ class AdviserViewController extends Controller
         return $subject;
     }
 
+    // function StudentTag(Request $request){ // I think this is hte update tag oof
+    //     $incoming_data = $request->value;
+    //     session()->put('student_id',$incoming_data);
+    //     return $incoming_data;
+    // }
+
     function StudentTag(Request $request){
-        $incoming_data = $request->value;
-        session()->put('student_id',$incoming_data);
-        return $incoming_data;
+        
+        $status = Student::get($request->student_id);
+
+        $status->status = $request->status;
+
+        $status->save();
+
+        return redirect()->back();
+       
+        
     }
 
     function StudentPage(){
