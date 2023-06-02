@@ -12,20 +12,7 @@ class Schoolyear extends Model
     protected $table = 'schoolyear';
     public $timestamps = FALSE;
 
-<<<<<<< Updated upstream
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'start_year',
-        'end_year'
-    ];
-
-=======
     
->>>>>>> Stashed changes
     public function subject(){
         return $this->hasMany(Subject_table::class);
     }
@@ -61,6 +48,6 @@ class Schoolyear extends Model
             $start_timestamp = strtotime('+1 week', $start_timestamp);
         }
 
-        return $schooldays;
+        return $schoolDays;
     }
 }
