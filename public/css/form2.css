@@ -49,6 +49,11 @@ td.num1 {
   height: 40px !important;
 }
 
+td.num2 {
+  width: 30px !important;
+  height: 30px !important;
+}
+
 td.header {
   text-align: center;
   font-weight: bold;
@@ -66,7 +71,59 @@ td.headersub {
   border-top: 2px solid #000000 !important;
 }
 
+td.borderL {
+  border-left: 2px solid #000000 !important;  
+}
+
+td.borderLR {
+  border-left: 2px solid #000000 !important; 
+  border-right: 2px solid #000000 !important;  
+}
+
+td.borderB {
+  border-bottom: 2px solid #000000 !important;  
+}
+
+td.borderLRB {
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 2px solid #000000 !important;
+  border-left: 2px solid #000000 !important;
+  border-right: 2px solid #000000 !important;
+}
+
+td.borderLB {
+  border-bottom: 2px solid #000000 !important;
+  border-left: 2px solid #000000 !important;
+}
+
+
 table td.crossed
 {
    background-image: linear-gradient(to bottom right,  transparent calc(50% - 1px), silver, transparent calc(50% + 1px)); 
+}
+
+tr.noBorder td {
+  border: 0;
+  border-style: hidden;
+  border-top: 1pt solid black;
+}
+
+tr.noBorderheader td {
+  border: 0;
+  border-style: hidden;
+}
+
+tr.form2header {
+  font-family:'Arial Narrow';
+  text-align: center;
+  font-weight: bold;
+  font-size: 22pt;
+}
+
+tr.form2subheader {
+  font-family:'Arial Narrow';
+  text-align: center;
+  font-size: 12pt; 
+  font-style: italic;
 }
