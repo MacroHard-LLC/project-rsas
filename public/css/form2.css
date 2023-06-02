@@ -97,6 +97,10 @@ td.borderLB {
   border-left: 2px solid #000000 !important;
 }
 
+td.right {
+  text-align: right;
+  font-size: 14pt;
+}
 
 table td.crossed
 {
@@ -114,11 +118,45 @@ tr.noBorderheader td {
   border-style: hidden;
 }
 
+tr.noBorderTLR {
+  border: 0;
+  border-style: hidden;
+  border-bottom: 1pt solid black;
+}
+
+tr.noBorderLR {
+  border: 0;
+  border-style: hidden;
+  border-bottom: 1pt solid black;
+}
+
+td.noBorderTB {
+  border: 0;
+  border-style: hidden;
+  border-left: 1pt solid black;
+  border-right: 1pt solid black;
+}
+
+td.noBorderTLB {
+  border-right: 1pt solid black;
+}
+
+td.border {
+  border-bottom: 1px solid #000000 !important;
+  border-left: 1px solid #000000 !important;
+  border-right: 1px solid #000000 !important;
+  border-top: 1px solid #000000 !important;
+}
+
 tr.form2header {
   font-family:'Arial Narrow';
   text-align: center;
   font-weight: bold;
   font-size: 22pt;
+}
+
+tr.headergap {
+  height: 10px;
 }
 
 tr.form2subheader {
