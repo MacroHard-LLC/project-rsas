@@ -63,6 +63,180 @@ td.header {
   border-top: 2px solid #000000 !important;
 }
 
+td.headerB {
+  text-align: left;
+  border-bottom: 2px solid #000000 !important;
+  border-left: 2px solid #000000 !important;
+  border-right: 2px solid #000000 !important;
+  border-top: 2px solid #000000 !important;
+}
+
+td.headerB2 {
+  text-align: left;
+  border-bottom: none solid #000000 !important;
+  border-left: none solid #000000 !important;
+  border-right: 2px solid #000000 !important;
+  border-top: none solid #000000 !important;
+}
+
+td.headerB3 {
+  text-align: left;
+  border-bottom: none solid #000000 !important;
+  border-left: 2px solid #000000 !important;
+  border-right: 2px solid #000000 !important;
+  border-top: none solid #000000 !important;
+}
+
+td.headerB4 {
+  text-align: left;
+  border-bottom: none solid #000000 !important;
+  border-left: 2px solid #000000 !important;
+  border-right: 2px solid #000000 !important;
+  border-top: 2px solid #000000 !important;
+}
+
+td.headerB5 {
+  text-align: left;
+  border-bottom: 2px solid #000000 !important;
+  border-left: 1px solid #000000 !important;
+  border-right: 1px solid #000000 !important;
+  border-top: 1px solid #000000 !important;
+}
+
+td.headerB6 {
+  text-align: left;
+  border-bottom: 2px solid #000000 !important;
+  border-left: 1px solid #000000 !important;
+  border-right: 2px solid #000000 !important;
+  border-top: 1px solid #000000 !important;
+}
+
+td.headerB7 {
+  text-align: left;
+  border-bottom: 1px solid #000000 !important;
+  border-left: 2px solid #000000 !important;
+  border-right: 2px solid #000000 !important;
+  border-top: 2px solid #000000 !important;
+}
+
+td.headerB8 {
+  text-align: left;
+  border-bottom: 1px solid #000000 !important;
+  border-left: 1px solid #000000 !important;
+  border-right: 1px solid #000000 !important;
+  border-top: 1px solid #000000 !important;
+}
+
+td.headerB9 {
+  text-align: left;
+  border-bottom: 1px solid #000000 !important;
+  border-left: 1px solid #000000 !important;
+  border-right: 2px solid #000000 !important;
+  border-top: 1px solid #000000 !important;
+}
+
+td.headerB10 {
+  text-align: left;
+  border-bottom: 1px solid #000000 !important;
+  border-left: 1px solid #000000 !important;
+  border-right: 1px solid #000000 !important;
+  border-top: 2px solid #000000 !important;
+}
+
+td.headerB11 {
+  text-align: left;
+  border-bottom: 2px solid #000000 !important;
+  border-right: 2px solid #000000 !important;
+  border-top: 2px solid #000000 !important;
+}
+
+td.headerB12 {
+  text-align: right;
+  border-bottom: 2px solid #000000 !important;
+  border-left: 2px solid #000000 !important;
+  border-top: 2px solid #000000 !important;
+}
+
+td.headerB13 {
+  text-align: left;
+  border-bottom: 1px solid #000000 !important;
+  border-left: 1px solid #000000 !important;
+  border-right: 1px solid #000000 !important;
+  border-top: 1px solid #000000 !important;
+}
+
+td.headerB14 {
+  text-align: left;
+  border-bottom: 1px solid #000000 !important;
+  border-left: 2px solid #000000 !important;
+  border-right: 1px solid #000000 !important;
+  border-top: 1px solid #000000 !important;
+}
+
+td.headerB15 {
+  text-align: left;
+  border-bottom: 1px solid #000000 !important;
+  border-left: none solid #000000 !important;
+  border-right: none solid #000000 !important;
+  border-top: none solid #000000 !important;
+}
+
+td.headerB16 {
+  text-align: left;
+  border-bottom: none solid #000000 !important;
+  border-left: none solid #000000 !important;
+  border-right: none solid #000000 !important;
+  border-top: 1px solid #000000 !important;
+}
+
+td.headerB17 {
+  text-align: left;
+  border-bottom: 2px solid #000000 !important;
+  border-left: 2px solid #000000 !important;
+  border-right: 1px solid #000000 !important;
+  border-top: 1px solid #000000 !important;
+}
+
+td.headerB18 {
+  border-top: 2px solid #000000 !important;
+}
+
+td.headerB19 {
+  border-bottom: 2px solid #000000 !important;
+}
+
+td.headerB20 {
+  border-bottom: 2px solid #000000 !important;
+  border-left: 2px solid #000000 !important;
+  border-right: 2px solid #000000 !important;
+}
+
+td.headerB21 {
+  border-bottom: 1px solid #000000 !important;
+  border-left: 1px solid #000000 !important;
+  border-right: 1px solid #000000 !important;
+  border-top: 1px solid #000000 !important;
+}
+
+td.headerB22 {
+  border-bottom: 2px solid #000000 !important;
+  border-top: 2px solid #000000 !important;
+}
+
+td.headerB23 {
+  border-top: 2px solid #000000 !important;
+}
+
+
+td.underline {
+  border-bottom: 1px solid #000000 !important;
+}
+
+td.underlineT {
+  border-top: 1px solid #000000 !important;
+}
+
+
 td.headersub {
   text-align: center;
   border-bottom: 2px solid #000000 !important;
@@ -100,6 +274,25 @@ td.borderLB {
 td.right {
   text-align: right;
   font-size: 14pt;
+  border-right: 1px solid #000000 !important;
+}
+
+td.left {
+  border-left: 1px solid #000000 !important;
+}
+
+td.top {
+  border-top: 1px solid #000000 !important;
+}
+
+td.bottom {
+  border-bottom: 1px solid #000000 !important;
+}
+
+
+td.right2 {
+  text-align: right;
+
 }
 
 table td.crossed
@@ -110,7 +303,11 @@ table td.crossed
 tr.noBorder td {
   border: 0;
   border-style: hidden;
-  border-top: 1pt solid black;
+}
+
+td.noBorder {
+  border: 0;
+  border-style: hidden;
 }
 
 tr.noBorderheader td {
@@ -126,8 +323,28 @@ tr.noBorderTLR {
 
 tr.noBorderLR {
   border: 0;
+  border-left: none solid #000000 !important;
+  border-right: none solid #000000 !important;
+}
+
+td.noBorderLR {
+  border: 0;
+  border-top: 2px solid #000000 !important;
+  border-bottom: 2px solid #000000 !important;
+}
+
+tr.noBorderLRB {
+  border: 0;
   border-style: hidden;
-  border-bottom: 1pt solid black;
+  border-top: 2pt solid black;
+  border-right: 0;
+  border-left: 0;
+}
+
+td.noBorderTL {
+  border-top-style: hidden;
+  border-top-style: hidden;
+
 }
 
 td.noBorderTB {
@@ -142,10 +359,10 @@ td.noBorderTLB {
 }
 
 td.border {
-  border-bottom: 1px solid #000000 !important;
-  border-left: 1px solid #000000 !important;
-  border-right: 1px solid #000000 !important;
-  border-top: 1px solid #000000 !important;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
 }
 
 tr.form2header {
@@ -157,6 +374,8 @@ tr.form2header {
 
 tr.headergap {
   height: 10px;
+  border-left: none;
+  border-right: none;
 }
 
 tr.form2subheader {
@@ -164,4 +383,11 @@ tr.form2subheader {
   text-align: center;
   font-size: 12pt; 
   font-style: italic;
+}
+
+tr.hide_right > td, td.hide_right{
+  border-right-style:hidden;
+}
+tr.hide_all > td, td.hide_all{
+  border-style:hidden;
 }
