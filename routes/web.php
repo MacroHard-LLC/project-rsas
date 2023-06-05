@@ -88,14 +88,9 @@ Route::post('/subjects', [CreateSubject::class, 'DataInsert'])->name('register_s
 Route::post('/subjects-check', [CreateSubject::class, 'CheckSubIdExist'])->name('check_id');
 
 // create section
-Route::get('/section/create',[SectionController::class, 'CreateSection']);
-Route::post('/section-request', [SectionController::class, 'GetStudentName'])->name('get_name_data');
-Route::post('/section-adviser-request', [SectionController::class, 'DoesAdviserExist'])->name('get_adviser_id');
-Route::post('/section-get-students', [SectionController::class, 'GetAllStudents'])->name('get_all_students');
-Route::post('/section/register',[SectionController::class, 'DataInsert'])->name('register_section');
-Route::post('/section-get-sectionid',[SectionController::class, 'DoesSectionIdExist'])->name('get_section_id');
 Route::post('/section-check-instruct',[CreateSubject::class, 'DoesInstructorIdExist'])->name('check_instruct_rfid');
 Route::post('/section-get-schoolyear',[CreateSubject::class, 'GetAllSchoolyear'])->name('get_all_schoolyear');
+Route::post('/section',[SectionController::class, 'store'])->name('create_section');
 
 // Show Subjects
 Route::get('/subjects', [CreateSubject::class, 'CreateSubjectIndex']);

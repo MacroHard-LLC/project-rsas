@@ -12,21 +12,17 @@ class SectionController extends Controller
 {
     // Show list of grade levels
     public function index() {
-        return view('levels.index');
+        return view('section.index');
     }
 
     // Show a section
     public function show($grade_level) {
         $section = Section::where('grade_level','=',$grade_level)->first();
         $students = Student::where('section_id','=',$section->id)->get();
-        return view('levels.show', [
+        return view('section.show', [
             'section' => $section,
             'students' => $students,
         ]);
-    }
-
-    function CreateSection(){
-        return view('levels.newgrlvl');
     }
 
     function GetStudentName(Request $request){
@@ -87,7 +83,7 @@ class SectionController extends Controller
         return $query->value('id');
     }
 
-    function DataInsert(Request $request){
+    function store(Request $request){
         $formFields = $request->validate([
             'adviser_id' => ['required','exists:user,id'],
             'allStudentID' => ['required','array'],

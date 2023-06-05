@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
 
                             <div class="col-6 col-md-4 input-field">
                                 <div class="form-outline">
@@ -151,7 +151,7 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
                 Accept: "application/json"
             },
-            url: "{{ route('register_section') }}",
+            url: "{{ route('create_section') }}",
             data: formData,
             success: () => window.location.assign(window.location.href) ,
             error: (response) => {
