@@ -41,7 +41,7 @@
     buttonSubmitEditView.addEventListener('click', function(event) {
         const buttonEditView = document.getElementById("editStatus");
         let array = buttonEditView.dataset.id;
-        let formatArray = array.split(",")
+        let formatArray = array.split(",");
 
         event.preventDefault(); // prevent the default form submission
         const radioButtons = document.querySelectorAll('.radio');

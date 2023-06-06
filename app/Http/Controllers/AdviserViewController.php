@@ -19,6 +19,20 @@ class AdviserViewController extends Controller
         return view('adviser.adviserpage');
     }
 
+    function SessionStudentID(Request $request){
+        $studentID = $request->input_data;
+        session()->put('student_id', $studentID);
+
+        return $studentID;
+    }
+
+    function SessionStudent(Request $request){
+        $student = $request->input_data;
+        //session()->put('subject', $student['subject']);
+        session()->put('subject',59486);
+        // subject still need to be integrated :<
+    }
+
     function AttendancePage(){
         $adviserId = session()->get('adviser_id');
         return view('adviser.viewattendance', compact('adviserId'));
@@ -86,12 +100,44 @@ class AdviserViewController extends Controller
         return $attendanceArray;
     }
 
+    function GetStudentStatus(){
+        $incoming_data = session()->get('adviser_id');
+        $sectionId = Section::where('adviser_id','=',$incoming_data)->first()->id;
+
+        $query = Student::where('section_id', $sectionId)
+                 ->get('user_id');
+        $attendanceArray = array();
+        foreach($query as $student){
+            $first_name = User::where('id',$student['user_id'])->value('first_name');
+            $last_name = User::where('id',$student['user_id'])->value('last_name');
+            $name = $last_name . ', ' . $first_name;
+
+            $student_status = User::where('id',$student['user_id'])->value('is_enrolled');
+            $status = 'Absent';
+
+            if($student_status != 1){
+                $status = 'Dropped';
+            }
+            else{
+                $status = 'Enrolled';
+            }
+            $attendanceArray[] = array(
+                'id' => $student['user_id'],
+                'name' => $name,
+                'status' => $status,
+            );
+        }
+        
+        
+        return $attendanceArray;
+    }
+
     function ChangeAttendance(Request $request){
         $incoming_data = $request->input_data;
         $new_status = $incoming_data['new_status'];
-        $student_id = $incoming_data['student_id'];
+        $student_id = session()->get('student_id');
         $target_date = $incoming_data['date'];
-        $subject = $incoming_data['subject'];
+        $subject = session()->get('subject');
 
         // get the row of the student, delete it
         $isRow = Present::where('student_id','=',$student_id);
@@ -116,9 +162,9 @@ class AdviserViewController extends Controller
             $newRow = new Absent;
         }
 
+        $newRow->date = $target_date;
         $newRow->student_id = $student_id;
         //$newRow->subject_id = $subje
-        $newRow->date = $target_date;
         $newRow->added_on = now();
         $newRow->save();
         // end
@@ -127,6 +173,26 @@ class AdviserViewController extends Controller
         
         $adviserId = session()->get('adviser_id');
         return view('adviser.viewattendance', compact('adviserId'));
+    }
+
+    function ChangeStatus(Request $request){
+        $incoming_data = $request->input_data;
+        $new_status = $incoming_data['new_status'];
+        $student_id = session()->get('student_id');
+
+        // get the row of the student, delete it
+        $isRow = User::where('id','=',$student_id)->first();
+        if ($new_status == 'Dropped'){
+            $isRow->is_enrolled = 0;
+        }
+        else {
+            $isRow->is_enrolled = 1;
+        }
+        $isRow->save();
+        //session()->put('new_status',$new_status);
+        
+        $adviserId = session()->get('adviser_id');
+        return view('adviser.studentinfo', compact('adviserId'));
     }
 
     function SubjectSetup(Request $request){
@@ -159,7 +225,8 @@ class AdviserViewController extends Controller
     }
 
     function StudentPage(){
-        return view('adviser.studentinfo');
+        $adviserId = session()->get('adviser_id');
+        return view('adviser.studentinfo', compact('adviserId'));
     }
 
     function EditAttendance(){

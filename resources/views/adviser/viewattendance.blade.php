@@ -10,6 +10,35 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+    function beforeAnchorClick(caught_value, caught_date, subject) {
+        console.log("PROBLEMATIC");
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('session_student_ID') }}",
+            data: { input_data : caught_value},
+            success: function(data) {
+                console.log('OOF');
+                console.log(data);
+            }
+        });
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('session_student') }}",
+            data: { input_data : subject},
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    }
+
     $(document).ready(function() {
         // Get today's date
         var today = new Date();
@@ -22,18 +51,6 @@
 
         // Set the default value of the date input
         document.getElementById('date').value = formattedDate;
-        // Get today's date
-        var today = new Date();
-
-        // Format the date as "YYYY-MM-DD"
-        var year = today.getFullYear();
-        var month = (today.getMonth() + 1).toString().padStart(2, '0');
-        var day = today.getDate().toString().padStart(2, '0');
-        var formattedDate = `${year}-${month}-${day}`;
-
-        // Set the default value of the date input
-        document.getElementById('date').value = formattedDate;
-
 
         var adviserID = {{ $adviserId }};
         $.ajax({
@@ -98,12 +115,12 @@
                 for(var i = 0; i < data.length; i++){
                     const newRow = document.createElement('tr');
                     const array = new Array(data[i]['id'], formattedDate, subject);
-                    console.log(array);
+                    console.log(array[1]);
                     newRow.innerHTML = `
                         <td>${data[i]['name']}</td>
                         <td>${data[i]['status']}</td>
                         <td class="editStatus">
-                            <button id="editStatus" name="editStatus" data-id="${array}" class="btn btn-primary create btn-create" type="button">
+                            <button id="editStatus" name="editStatus" data-id="${array}" onclick="beforeAnchorClick(${data[i]['id']}, ${array[1]}, ${subject.value})"class="btn btn-primary create btn-create" type="button">
                                 <a data-bs-toggle="modal" data-bs-target="#editAttendanceModal">
                                     <i class="fa-regular fa-pen-to-square icon-white"></i>
                                 </a>
