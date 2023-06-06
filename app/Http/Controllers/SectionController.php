@@ -7,80 +7,24 @@ use App\Models\Section;
 use App\Models\Student;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 
 class SectionController extends Controller
 {
     // Show list of grade levels
     public function index() {
-        return view('section.index');
+        return view('sections.index');
     }
 
     // Show a section
     public function show($grade_level) {
         $section = Section::where('grade_level','=',$grade_level)->first();
         $students = Student::where('section_id','=',$section->id)->get();
-        return view('section.show', [
+        return view('sections.show', [
             'section' => $section,
             'students' => $students,
         ]);
-    }
-
-    function GetStudentName(Request $request){
-        $incoming_id = $request->input_data;
-        $first = User::where('id','=',$incoming_id)->value('first_name');
-        $last = User::where('id','=',$incoming_id)->value('last_name');
-        $nameID = $last . ", " . $first;
-        $role = User::where('id','=',$incoming_id)->value('role');
-        $doesExist = User::where('id','=',$incoming_id)->get();
-        $isEnrolled = User::where('id','=',$incoming_id)->value('is_enrolled');
-        # if the it is not a student or if it does not exist
-        if (($role != 'student') || ($nameID == ', ') || ($doesExist->count()==0) || ($isEnrolled == 1)){
-            return null;
-        }
-        return $nameID;
-    }
-
-    function DoesAdviserExist(Request $request){
-        $incoming_id = $request->input_data;
-        $doesExist = User::where('id','=',$incoming_id)->get();
-        $role = User::where('id','=',$incoming_id)->value('role');
-        if (($role == 'adviser') && ($doesExist->count() == 1)){
-            return true;
-        }
-        return false;
-    }
-
-    function DoesSectionIdExist(Request $request){
-        $incoming_id = $request->input_data;
-        $doesExist = Section::where('id','=',$incoming_id)->get();
-        if ($doesExist == true){
-            return true;
-        }
-        return false;
-    }
-
-    function GetAllStudents(Request $request){
-        $incoming_data = $request->input('input_data');
-        $incoming_data = explode(',',$incoming_data);
-        $lastName = $incoming_data[0];
-        $firstName = "";
-        $firstNameFlag = count($incoming_data) == 2;
-        $results = "";
-        if ($firstNameFlag){
-            $firstName = $incoming_data[1];
-            $firstName = ltrim($firstName,' ');
-        };
-        if($firstNameFlag){
-            $query = User::where('last','=',$lastName)
-                            ->where('first','=',$firstName)
-                            ->where('role','=','student')
-                            ->whereNull('is_enrolled')
-                            ->get();
-        }
-        else{
-            return '';
-        }
-        return $query->value('id');
     }
 
     function store(Request $request){
@@ -110,5 +54,50 @@ class SectionController extends Controller
         }
 
         User::where('id', $request->adviser_id)->update(['is_enrolled' => 1]);
+    }
+
+    public function update(Request $request, $id) {
+        $user = User::find($id);
+
+        $formFields = $request->validate([
+            'id' => ['required',Rule::unique('user','id')->ignore($id),'integer','digits:9'],
+            'password' => ['required','min:1','max:20'],
+            'role' => 'required',
+            'first_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'middle_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'last_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'sex' => 'required',
+        ]);
+
+        if ($user->role == 'student'){
+            $form_rfid_number = $request->validate([
+                'rfid_number' => Rule::unique('student')->ignore($user->student->rfid_number, 'rfid_number'),
+            ]);
+        }
+
+        if ($user->role == 'student' && $request->role != 'student'){
+            Student::where('user_id', $id)->delete();
+        } else if ($user->role != 'student' && $request->role == 'student'){
+            info($user->role);
+            $student = new Student;
+            $student->rfid_number = $request->rfid_number;
+            $student->user_id = $request->id;
+            $student->save();
+        } else if ($user->role == 'student' && $user->student->rfid_number != $request->rfid_number) {
+            Student::where('user_id', $id)->update($form_rfid_number);
+        }
+
+        // Hash Password
+        $formFields['password'] = Hash::make($formFields['password']);
+
+        $user->update($formFields);
+
+        return back();
+    }
+
+    public function destroy(Request $request){
+        // User::find($request->id)->update(['is_deleted' => 1]);
+        Section::find($request->id)->delete();
+        return back();
     }
 }

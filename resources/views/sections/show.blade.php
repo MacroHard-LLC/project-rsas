@@ -3,6 +3,7 @@
 @extends('master')
 @section('title','View Section')
 @section('content')
+@include('sections.create')
 
 <div class='container m-2'>
     <div class='row'>
@@ -17,31 +18,31 @@
     <div class='row px-3'>
         <div class='col'>
             <div class="section-title">GRADE LEVEL</div>
-            
+
             <div class="section-body">{{$section->grade_level}} - {{$section->name}}</div>
         </div>
         <div class='col'>
             <div class="section-title">SECTION ID</div>
-            
+
             <div class="section-body">{{$section->id}}</div>
         </div>
 
 
         <div class='col'>
             <div class="section-title">CLASS ADVISER</div>
-            
+
             <div class="section-body">{{$section->user->first_name}} {{$section->user->last_name}}</div>
         </div>
         <div class='col'>
             <div class="section-title">ADVISER ID</div>
-            
+
             <div class="section-body">{{$section->user->id}}</div>
         </div>
         <div class="px-2">
         <hr>
         </div>
     </div>
-    
+
 
 
 <div class='container table-responsive'>
