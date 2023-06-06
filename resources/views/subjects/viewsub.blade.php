@@ -30,7 +30,7 @@
 
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/subjects">All Levels</a></li>
-                    @for ($i = 1; $i < 11; $i++)
+                    @for ($i = 7; $i < 11; $i++)
                         <li><a class="dropdown-item" href="/subjects/?grlvl={{$i}}">Grade {{$i}}</a></li>
                     @endfor
                 </ul>
@@ -48,8 +48,8 @@
                 <th data-align="right"></th>
                 <th>Subject ID</th>
                 <th>Subject Name</th>
+                <th>Grade Level</th>
                 <th>Instructor ID</th>
-                <th>Room</th>
                 <th>Year Start</th>
                 <th>Year End</th>
                 <th data-align="left"></th>
@@ -62,11 +62,18 @@
                 <td><i class="fa-solid fa-circle icon-baby-blue"></td>
                 <td>{{$subject->id}}</td>
                 <td>{{$subject->name}}</td>
-                <td>#####</td>
-                <td>{{$subject->room}}</td>
+                <td>{{$subject->section->grade_level ?? 'N/A'}}</td>
+                <td>{{$subject->instructor->rfid_number}}</td>
                 <?php
-                    $year_start = date('Y',strtotime($subject->year_start));
-                    $year_end = date('Y',strtotime($subject->year_end))
+                    $schoolYear = $subject->schoolyear;
+                    // Check if the schoolYear relationship exists
+                    if ($schoolYear) {
+                        $year_start = $schoolYear->start_year;
+                        $year_end = $schoolYear->end_year;
+                    } else {
+                        $year_start = 'N/A';
+                        $year_end = 'N/A';
+                    }
                 ?>
                 <td>{{$year_start}}</td>
                 <td>{{$year_end}}</td>
