@@ -38,6 +38,15 @@ class AdviserViewController extends Controller
         return $nameID;
     }
 
+    function startGradeLevel(Request $request){
+        // this is the adviser id request.
+        $incoming_id = $request->input_data;
+
+        // section id
+        $sectionId = Section::where('adviser_id','=',$incoming_id)->value('grade_level');
+        return $sectionId;
+    }
+
     function GetAllStudents(){
         $incoming_data = session()->get('adviser_id');
         $sectionId = Section::where('adviser_id','=',$incoming_data)->first()->id;

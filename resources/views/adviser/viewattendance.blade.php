@@ -49,9 +49,23 @@
                 $('#attendanceAdviserName').text(data);
             }
         });
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('grade_level_startup') }}",
+            data: { input_data: adviserID },
+            success: function(data) {
+                console.log(data);
+                $('#attendanceGradeLevel').text(data);
+            }
+        });
         const tableBody = document.querySelector('#attendanceTable tbody');
         let subject = $('#subject_adviserView_dropdown');
         console.log(subject);
+
 
         //subject.append('<option value="A24">meow</option>');
 
