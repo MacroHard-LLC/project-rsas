@@ -18,8 +18,8 @@ return new class extends Migration
             $table->increments('id');
             $table->year('start_year');
             $table->year('end_year');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamp('added_on')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->unsignedBigInteger('added_by')->nullable();
             $table->timestamp('updated_on')->nullable();

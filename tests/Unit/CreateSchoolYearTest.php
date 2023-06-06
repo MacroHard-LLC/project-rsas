@@ -9,35 +9,27 @@ use Tests\TestCase;
 
 class CreateSchoolYearTest extends TestCase
 {
-    public function test_the_home_page_returns_success(): void
+    use RefreshDatabase;
+
+    public function test_create_school_year()
     {
-        $response = $this->get('/');
+        $startYear = '2022'; // Replace with your desired start year (4 digits)
+        $endYear = '2023'; // Replace with your desired end year (4 digits)
+        $startDate = '2022-09-01'; // Replace with your desired start date
+        $endDate = '2023-06-30'; // Replace with your desired end date
+
+        $response = $this->post('/schoolyear/add', [
+            'start_year' => $startYear,
+            'end_year' => $endYear,
+        ]);
+
         $response->assertStatus(200);
+
+        // Assert that the school year is created and saved in the database
+        $this->assertDatabaseHas('schoolyear', [
+            'start_year' => $startYear,
+            'end_year' => $endYear,
+
+        ]);
     }
-    // use RefreshDatabase;
-
-    // public function test_create_school_year()
-    // {
-    //     $startYear = '2022'; // Replace with your desired start year (4 digits)
-    //     $endYear = '2023'; // Replace with your desired end year (4 digits)
-    //     $startDate = '2022-09-01'; // Replace with your desired start date
-    //     $endDate = '2023-06-30'; // Replace with your desired end date
-
-    //     $response = $this->post('/schoolyear/add', [
-    //         'start_year' => $startYear,
-    //         'end_year' => $endYear,
-    //         'start_date' => $startDate,
-    //         'end_date' => $endDate,
-    //     ]);
-
-    //     $response->assertStatus(200);
-
-    //     // Assert that the school year is created and saved in the database
-    //     $this->assertDatabaseHas('schoolyear', [
-    //         'start_year' => $startYear,
-    //         'end_year' => $endYear,
-    //         'start_date' => $startDate,
-    //         'end_date' => $endDate,
-    //     ]);
-    // }
 }

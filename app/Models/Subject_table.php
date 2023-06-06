@@ -26,7 +26,7 @@ class Subject_table extends Model
     }
 
     public function schoolyear(){
-        return $this->belongsTo(Schoolyear::class);
+        return $this->belongsTo(Schoolyear::class, 'schoolyear_id', 'id');
     }
 
     public function instructor(){

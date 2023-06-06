@@ -3,32 +3,49 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Models\User;
+
+
 
 class CreateSectionTest extends TestCase
 {
-    public function test_the_home_page_returns_success(): void
-    {
-        $response = $this->get('/');
-        $response->assertStatus(200);
-    }
-    
-    // public function test_CreateSectionForm(): void
+    use DatabaseMigrations;
+
+    // public function test_the_home_page_returns_success(): void
     // {
-    //     $request = $this->get('/section/create');
-    //     $request->assertStatus(200);
+    //     $response = $this->get('/');
+    //     $response->assertStatus(200);
     // }
+    
+    public function test_create_seciton_form(): void
+    {
+        $request = $this->get('/section/create');
+        $request->assertStatus(200);
+    }
 
-    // public function test_IfAdviserRequestWorksIfExist(): void{
-    //     $response = $this->post('/section-adviser-request',[
-    //         'input_data' => [
-    //             'id' => 234423234
-    //         ],
-    //     ])->assertStatus(200);
+    public function test_if_adviser_request_works_if_exist(): void
+    {
+        // Create a user with an adviser role
+        $adviser = User::factory()->create([
+            'role' => 'adviser',
+        ]);
 
-    //     $this->assertTrue($response == true);
-    // }
+        // Login the user
+        $this->actingAs($adviser);
+
+        // Make a POST request to the section adviser request route
+        $response = $this->post('/section-adviser-request', [
+            'input_data' => [
+                'id' => $adviser->id,
+            ],
+        ]);
+
+        // Assert that the request was successful
+        $response->assertStatus(200);
+
+    }
+
 
     // public function test_IfAdviserIdCannotBeChosen(): void{
     //     $response = $this->post('/section-adviser-request',[
