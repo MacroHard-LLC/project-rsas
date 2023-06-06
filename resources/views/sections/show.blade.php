@@ -3,7 +3,7 @@
 @extends('master')
 @section('title','View Section')
 @section('content')
-@include('sections.create')
+@include('sections.edit')
 
 <div class='container m-2'>
     <div class='row'>
@@ -84,7 +84,8 @@
 
 <div class="row px-3">
     <div class="col section-button ">
-    <a class="btn btn-primary" role="button"><i class="fa-regular fa-pen-to-square icon-white"></i> EDIT</a>
+    <script src="{{ asset('js/sectionIndex.js') }}"></script>
+    <a class="btn btn-primary" role="button" onclick="updateModal({{ $section }})"><i class="fa-regular fa-pen-to-square icon-white"></i> EDIT</a>
     <a class="btn btn-primary" role="button"><i class="fa-solid fa-trash-can icon-white"></i> DELETE</a>
     </div>
 </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Section;
 use App\Models\Student;
+use App\Models\Schoolyear;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -21,10 +22,13 @@ class SectionController extends Controller
     public function show($grade_level) {
         $section = Section::where('grade_level','=',$grade_level)->first();
         $students = Student::where('section_id','=',$section->id)->get();
-        return view('sections.show', [
-            'section' => $section,
-            'students' => $students,
-        ]);
+        $schoolyears = Schoolyear::all();
+        $unenrolled_students = User::where('role','=','student')->where('is_enrolled','=',0)->get();
+        $unenrolled_advisers = User::where('role','=','adviser')->where('is_enrolled','=',0)->get();
+        // $unenrolled_students = User::where(['role','=','student'],
+        //     ['is_enrolled','=','0'],['is_deleted','=','0'])->get();
+        return view('sections.show',
+            compact('schoolyears','students','section','unenrolled_students','unenrolled_advisers'));
     }
 
     function store(Request $request){

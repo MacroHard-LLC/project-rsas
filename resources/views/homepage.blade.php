@@ -9,7 +9,7 @@
 
 {{-- Modular Pages--}}
 @include('subjects.newsub')
-@include('section.create')
+@include('sections.create')
 @include('users.create')
 
 

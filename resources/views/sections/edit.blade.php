@@ -55,10 +55,9 @@
                                     <label for="section_adviser_id_input" class="input-title">Adviser</label>
                                     <select name="section_adviser_id" class="form-select" id="section_adviser_id_input" required>
                                         <option value="" disabled selected="selected">Select an Adviser</option>
-                                        @foreach ($users as $user)
-                                            @if ($user['role'] == "adviser" && $user['is_enrolled'] == 0)
-                                                <option value="{{ $user->id }}">{{ $user->last_name }}, {{ $user->first_name }}</option>
-                                            @endif
+                                        <option value="{{ $section->adviser_id }}"> {{ $section->user->last_name }}, {{ $section->user->first_name }}</option>
+                                        @foreach ($unenrolled_advisers as $adviser)
+                                            <option value="{{ $adviser->id }}">{{ $adviser->last_name }}, {{ $adviser->first_name }}</option>
                                         @endforeach
                                     </select>
                                     <div class="is-invalid" id="section_adviser_id_error">
@@ -73,10 +72,8 @@
                                     <label for="section_student_id_input" class="input-title">Student</label>
                                     <select name="section_student_id" class="form-select" id="section_student_id_input" required>
                                         <option value="" disabled selected="selected">Select a Student</option>
-                                        @foreach ($users as $user)
-                                            @if ($user['role'] == "student" && $user['is_enrolled'] == 0)
-                                                <option value="{{ $user }}" id="{{ $user->id }}">{{ $user->last_name }}, {{ $user->first_name }}</option>
-                                            @endif
+                                        @foreach ($unenrolled_students as $student)
+                                            <option value="{{ $student }}" id="{{ $student->id }}">{{ $student->last_name }}, {{ $student->first_name }}</option>
                                         @endforeach
                                     </select>
                                     <div class="is-invalid" id="section_student_id_error">
@@ -96,21 +93,31 @@
 
                             <div class="modal-body" id=list>
                                     <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                        <th>Student ID</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th style="width:50px;"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="student_list">
-                                    </tbody>
+                                        <thead>
+                                            <tr>
+                                            <th>Student ID</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th style="width:50px;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="student_list">
+                                            @foreach($students as $student)
+                                            <tr name="enrolled">
+                                                <td name="student_id">{{ $student->user->id }}</td>
+                                                <td name="first_name">{{ $student->user->first_name }}</td>
+                                                <td name="last_name">{{ $student->user->last_name }}</td>
+                                                <td class='delete'><button type='button' name="delete_button" style="border:0px; background-color: transparent;"><i class="fa-solid fa-xmark"></i></button></td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
                                     </table>
                             </div>
                         </div>
                             <hr style="margin-bottom:5px;">
                             <i style="font-size:small;">Total Number of Students: <span id="total_students">0</span></i>
+
+                            <input type="hidden" name="originalID" id="originalID" value={{ $section->id }}>
 
                             <div class="form-group pt-5 float-end" id="submit_new_section">
                                 <button class="btn btn-primary create" type="submit" id="sectionButtonSubmit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
