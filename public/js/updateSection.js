@@ -24,7 +24,7 @@ editSectionModal.addEventListener('show.bs.modal', function() {
                 } else {
                     input.classList.remove('is-valid');
                     input.classList.add('is-invalid');
-                    showCreateSectionClientError(input);
+                    showUpdateSectionClientError(input);
                 }
                 checkOverallValidity();
             })
@@ -33,18 +33,19 @@ editSectionModal.addEventListener('show.bs.modal', function() {
 });
 
 function checkOverallValidity(){
-    var form_children = $("#createSectionForm").children();
-    var fields = form_children.find('.form-control, .form-select')
-    var valid_fields = form_children.find('.form-control.is-valid, .form-select.is-valid')
+    var form_children = $("#updateSectionForm").children();
+    var invalid_fields = form_children.find('.form-control.is-invalid, .form-select.is-invalid')
     var student_rows = $("#student_list").children();
-    var is_valid = fields.length - 1 === valid_fields.length && student_rows.length > 0;
-    if (is_valid)
-        document.getElementById("submit_new_section").style.visibility = "visible";
-    else
+    var is_invalid = invalid_fields.length > 0 || student_rows.length <= 0;
+    console.log(student_rows.length);
+    console.log(invalid_fields.length);
+    if (is_invalid)
         document.getElementById("submit_new_section").style.visibility = "hidden";
+    else
+        document.getElementById("submit_new_section").style.visibility = "visible";
 }
 
-function showCreateSectionClientError(input){
+function showUpdateSectionClientError(input){
     var input_name = input.getAttribute("name");
     if (input_name = "section_name" && input.validity.tooLong)
         $("#section_" + input.getAttribute("name") + "_error").children("span").text("Section name must have a maximum of 50 characters.");
