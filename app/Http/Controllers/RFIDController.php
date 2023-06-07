@@ -92,12 +92,6 @@ class RFIDController extends Controller
                 }
             };
 
-            // Insert the timestamp into the attendance table
-            DB::table('attendance')->insert([
-                'rfid_tag' => $rfidTag,
-                'timestamp' => now()
-            ]);
-
             // Return a success response
             return response()->json(['message' => 'RFID tag tapped successfully']);
         }
