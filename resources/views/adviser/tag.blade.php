@@ -71,3 +71,45 @@
     </div>
 </div>
 
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    // Get the button element
+    const buttonSubmitEditStatus = document.querySelector('button[type="submit"]');
+    //const studentId = document.querySelector('#editAttendanceModal td[data-student-id]').getAttribute('data-student-id');
+
+    // Add a click event listener to the button
+    buttonSubmitEditStatus.addEventListener('click', function(event) {
+        event.preventDefault(); // prevent the default form submission
+        const radioButtons = document.querySelectorAll('.radio');
+        var selectedValue = '';
+        radioButtons.forEach((radioButton) => {
+                if (radioButton.checked) {
+                // Get the value of the selected radio button
+                selectedValue = radioButton.value;
+                console.log(selectedValue);
+                }
+            });
+
+        let input_data = {
+            new_status : selectedValue,
+        };
+        
+        console.log("yeet");
+        console.log(input_data);
+
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('change_status') }}",
+            data: { input_data},
+            success: function(data) {
+                location.reload();
+            }
+            });
+    });
+
+</script> -->

@@ -12,7 +12,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-
     $(document).ready(function() {
         var adviserID = {{ $adviserId }};
         $.ajax({
@@ -38,18 +37,18 @@
     <div class="row">
         <div class="col col-lg-2">
             <div class="section-title">GRADE LEVEL</div>
-            <div class="section-body">GRADE 10</div>
+            <div class="section-body"><span id="attendanceGradeLevel" name="attendanceGradeLevel">GRADE 10</span></div>
         </div>
 
         <div class="col col-lg-4">
             <div class="section-title">ADVISER</div>
-            <div class="section-body">MS. MARY JANE D. PARKER</div>
+            <div class="section-body"><span id="attendanceAdviserName" name="attendanceAdviserName">MS. MARY JANE D. PARKER</span></div>
         </div>
-       
+       <!--
         <div class="col col-lg-4">
             <div class="section-title">SUBJECT</div>
             <div class="section-body">YASSIFICATION</div>
-        </div>
+        </div>-->
     </div>
 
 
@@ -57,7 +56,24 @@
 <hr>
 
     <div class="container table-responsive">
-
+        <div class="row">
+            <div class="col">
+                <table class="table table-hover table-hover" id="attendanceTable" data-toggle="table" data-toolbar="#toolbar">
+                    <thead>
+                        <tr>
+                            <th class="w-75">Student Name</th>
+                            <th data-align="right">Status</th>
+                            <th data-align="left">Tag</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table rows will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--
         <div class="row">
             <div class="col">
                 <table class="table table-hover" id="attendanceTable" data-toggle="table" data-toolbar="#toolbar">
@@ -119,7 +135,7 @@
                 </table>
             </div>
         </div>
-
+    -->
     </div>
 
 </div>
