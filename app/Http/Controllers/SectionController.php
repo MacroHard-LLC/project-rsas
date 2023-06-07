@@ -100,9 +100,13 @@ class SectionController extends Controller
         $section->update($formFields);
     }
 
-    public function destroy(Request $request){
+    public function destroy(Section $section){
         // User::find($request->id)->update(['is_deleted' => 1]);
-        Section::find($request->id)->delete();
-        return back();
+        $students = Student::where('section_id',$section->id)->get();
+        foreach($students as $student){
+            User::where('id', $student->user_id)->update(['is_enrolled' => 0]);
+        }
+        $section->delete();
+        return redirect('/admin');
     }
 }

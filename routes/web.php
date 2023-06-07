@@ -92,6 +92,7 @@ Route::post('/section-check-instruct',[CreateSubject::class, 'DoesInstructorIdEx
 Route::post('/section-get-schoolyear',[CreateSubject::class, 'GetAllSchoolyear'])->name('get_all_schoolyear');
 Route::post('/gradelevels',[SectionController::class, 'store'])->name('create_section');
 Route::put('/gradelevels/{section}', [SectionController::class, 'update']);
+Route::delete('/gradelevels/{section}', [SectionController::class, 'destroy']);
 
 // Show Subjects
 Route::get('/subjects', [CreateSubject::class, 'CreateSubjectIndex']);

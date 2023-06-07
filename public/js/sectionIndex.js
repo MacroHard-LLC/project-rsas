@@ -5,8 +5,3 @@ function updateModal(section){
     $('#section_adviser_id_input').val(section.adviser_id);
     $('#updateSectionModal').modal('show');
 };
-
-function deleteModal(section){
-    $("#id").val(section.id);
-    $('#deleteModal').modal('show');
-}
