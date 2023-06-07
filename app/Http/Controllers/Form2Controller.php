@@ -52,6 +52,10 @@ class Form2Controller extends Controller
             $middle_name = User::where('id',$student['user_id'])->value('middle_name');
             $name = $last_name . ', ' . $first_name . ' ' . $middle_name;
 
+            $male_attendance_array[] = array(
+                'name' => $name,
+            );
+
 
             // $is_present = PresentAttendance::where('student_id',$student['user_id'])
             //             ->exists();
@@ -91,6 +95,7 @@ class Form2Controller extends Controller
         echo $female_query_counter;
         echo $male_query;
         echo $female_query;
+        echo 'shet';
         return view('adviser.form2')
         -> with('month', $month)
         -> with('section_id', $section_id)
