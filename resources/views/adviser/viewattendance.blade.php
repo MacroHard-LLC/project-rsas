@@ -10,68 +10,124 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function() {
-        // Get today's date
-        var today = new Date();
+    function beforeAnchorClick(caught_value, caught_date, subject) {
+        console.log("PROBLEMATIC");
+        console.log(subject);
+        console.log($('#date').val());
 
-        // Format the date as "YYYY-MM-DD"
-        var year = today.getFullYear();
-        var month = (today.getMonth() + 1).toString().padStart(2, '0');
-        var day = today.getDate().toString().padStart(2, '0');
-        var formattedDate = `${year}-${month}-${day}`;
-
-        // Set the default value of the date input
-        document.getElementById('date').value = formattedDate;
-        // Get today's date
-        var today = new Date();
-
-        // Format the date as "YYYY-MM-DD"
-        var year = today.getFullYear();
-        var month = (today.getMonth() + 1).toString().padStart(2, '0');
-        var day = today.getDate().toString().padStart(2, '0');
-        var formattedDate = `${year}-${month}-${day}`;
-
-        // Set the default value of the date input
-        document.getElementById('date').value = formattedDate;
-
-
-        var adviserID = {{ $adviserId }};
+        let input_data = {
+            subject_id : caught_value,
+            target_date : $('#date').val(),
+        };
         $.ajax({
             method: "POST",
             headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
                     Accept: "application/json"
             },
-            url: "{{ route('adviser_startup') }}",
-            data: { input_data: adviserID },
+            url: "{{ route('session_student_ID') }}",
+            data: { input_data },
             success: function(data) {
+                console.log('OOF');
                 console.log(data);
-                $('#attendanceAdviserName').text(data);
             }
         });
+    }
+
+    function onDateChange(){
         const tableBody = document.querySelector('#attendanceTable tbody');
-        let subject = $('#subject_adviserView_dropdown');
-        console.log(subject);
-
-        //subject.append('<option value="A24">meow</option>');
-
+        let value = $('#subject_adviserView_dropdown').val();
+        let target_date = $('#date').val();
+        let input_data = {
+            subject_id : value,
+            date : target_date,
+        };
         $.ajax({
             method: "POST",
             headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
                     Accept: "application/json"
             },
-            url: "{{ route('setUp_subjects') }}",
-            data: { input_data: adviserID },
+            url: "{{ route('get_all_students_in_subject') }}",
+            data: { input_data },
             success: function(data) {
-                console.log(data);
-                data.forEach(element => {
-                    subject.append(`<option value="${element.id}">${element.name}</option>`);
+                data.forEach(student => {
+                    console.log(student);
+                    const studentId = student.id;
+                    const button = document.querySelector(`button[value="${studentId}"]`);
+                    const td = button.closest('td');
+                    const closestTd = td.previousElementSibling;
+                    // Update the value of the closest <td>
+                    closestTd.textContent = student.status;
                 });
             }
         });
+    }
 
-        console.log("sadje");
+    function sectionSetUP(value){
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('session_student') }}",
+            data: { input_data : value},
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    }
+
+    function onSubjectChange(value, target_date){
+        const tableBody = document.querySelector('#attendanceTable tbody');
+        let input_data = {
+            subject_id : value,
+            date : target_date,
+        };
+
+        // code may not be useful, please double check
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('session_student') }}",
+            data: { input_data },
+            success: function(data) {
+                console.log(data);
+            }
+        });
+
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('get_all_students_in_subject') }}",
+            data: { input_data },
+            success: function(data) {
+                data.forEach(student => {
+                    console.log(student);
+                    const studentId = student.id;
+                    const button = document.querySelector(`button[value="${studentId}"]`);
+                    const td = button.closest('td');
+                    const closestTd = td.previousElementSibling;
+                    // Update the value of the closest <td>
+                    closestTd.textContent = student.status;
+                });
+            }
+        });
+    }
+
+    function forcedSetup(value, formattedDate, tableBody){
+        console.log("cat");
+        let input_data = {
+            subject_id : value,
+            date : formattedDate,
+        };
         $.ajax({
             method: "POST",
             headers: {
@@ -79,17 +135,20 @@
                 Accept: "application/json"
             },
             url: "{{ route('get_all_students_adviser') }}",
+            data: { input_data },
             success: function(data) {
+                console.log("shet");
                 console.log(data);
                 for(var i = 0; i < data.length; i++){
                     const newRow = document.createElement('tr');
-                    const array = new Array(data[i]['id'], formattedDate, subject);
-                    console.log(array);
+                    const array = new Array(data[i]['id'], formattedDate, value);
+                    console.log("this is a");
+                    console.log(array[2]);
                     newRow.innerHTML = `
                         <td>${data[i]['name']}</td>
-                        <td>${data[i]['status']}</td>
+                        <td id="studentStatusAttendance" name="studentStatusAttendance">${data[i]['status']}</td>
                         <td class="editStatus">
-                            <button id="editStatus" name="editStatus" data-id="${array}" class="btn btn-primary create btn-create" type="button">
+                            <button id="editStatus" name="editStatus" data-id="${array}" value="${data[i]['id']}" onclick="beforeAnchorClick(${data[i]['id']}, ${array[1]}, ${value})"class="btn btn-primary create btn-create" type="button">
                                 <a data-bs-toggle="modal" data-bs-target="#editAttendanceModal">
                                     <i class="fa-regular fa-pen-to-square icon-white"></i>
                                 </a>
@@ -105,7 +164,78 @@
                 console.log(thrownError);
             }
         });
+    }
 
+    $(document).ready(function() {
+        // Get today's date
+        var today = new Date();
+
+        // Format the date as "YYYY-MM-DD"
+        var year = today.getFullYear();
+        var month = (today.getMonth() + 1).toString().padStart(2, '0');
+        var day = today.getDate().toString().padStart(2, '0');
+        var formattedDate = `${year}-${month}-${day}`;
+
+        // Set the default value of the date input
+        document.getElementById('date').value = formattedDate;
+
+        var adviserID = {{ $adviserId }};
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('adviser_startup') }}",
+            data: { input_data: adviserID },
+            success: function(data) {
+                console.log(data);
+                $('#attendanceAdviserName').text(data);
+            }
+        });
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('grade_level_startup') }}",
+            data: { input_data: adviserID },
+            success: function(data) {
+                console.log(data);
+                $('#attendanceGradeLevel').text(data);
+            }
+        });
+        const tableBody = document.querySelector('#attendanceTable tbody');
+        let subject = $('#subject_adviserView_dropdown');
+        console.log("NOT DAIJOUBU");
+    
+        //subject.append('<option value="A24">meow</option>');
+        
+        let startSubject = '';
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('setUp_subjects') }}",
+            data: { input_data: adviserID },
+            success: function(data) {
+                console.log(data);
+                data.forEach(element => {
+                    if (startSubject == ''){
+                        startSubject = element.id;
+                        console.log(element.id);
+                        forcedSetup(startSubject, formattedDate, tableBody);
+                    }
+                    subject.append(`<option value="${element.id}">${element.name}</option>`);
+                });
+            }
+        });
+        
+        console.log("sadje");
+        console.log(startSubject);
     });
 
     $(document).on('click', '#editStatus', function() {
@@ -166,12 +296,12 @@
         <div class="col col-md-auto">
             <label for="date" class="section-title">DATE</label>
             <br>
-            <input class="mt-2"type="date" id="date" placeholder="Choose Date" required>
+            <input class="mt-2"type="date" id="date" onchange="onDateChange()" placeholder="Choose Date" required>
         </div>
        
         <div class="col col-md-auto">
             <label for="subject" class="section-title">SUBJECT</label>
-                <select name="subject" class="form-select w-auto" placeholder="Choose Subject" id="subject_adviserView_dropdown" required>
+                <select name="subject" class="form-select w-auto" onchange="onSubjectChange(this.value, $('#date').val())" placeholder="Choose Subject" id="subject_adviserView_dropdown" required>
                     <!--ideally mushow unsay mga subjects naa ang section -->
                 </select>
                 <div class="is-invalid" role="alert" id="subjectError" name="subjectError">

@@ -142,11 +142,16 @@ Route::get('/student-info', [AdviserViewController::class, 'StudentPage'] );
 //edit attendance in attendance page of adviser
 Route::get('/edit', [AdviserViewController::class, 'EditAttendance'] );
 Route::post('/view-attendance-start', [AdviserViewController::class, 'start'])->name('adviser_startup');
+Route::post('/view-grade-start', [AdviserViewController::class, 'startGradeLevel'])->name('grade_level_startup');
 Route::post('/view-attendance-get-students', [AdviserViewController::class, 'GetAllStudents'])->name('get_all_students_adviser');
+Route::post('/view-attendance-get-students-on-change', [AdviserViewController::class, 'GetAllStudentsInSubject'])->name('get_all_students_in_subject');
+Route::post('/view-attendance-status-students', [AdviserViewController::class, 'GetStudentStatus'])->name('get_all_students_tag');
 Route::post('/view-attendance-change', [AdviserViewController::class,'ChangeAttendance'])->name('change_attendance');
+Route::post('/view-attendance-status-change', [AdviserViewController::class,'ChangeStatus'])->name('change_status');
 Route::post('/view-attendance-add-id', [AdviserViewController::class, 'StudentTag'])->name('add_id_edit_status');
 Route::post('/view-attendance-setup', [AdviserViewController::class, 'SubjectSetup'])->name('setUp_subjects');
-
+Route::post('/view-attendance-session-student-ID', [AdviserViewController::class, 'SessionStudentID'])->name('session_student_ID');
+Route::post('/view-attendance-session-student', [AdviserViewController::class, 'SessionStudent'])->name('session_student');
 
 //Authentications
 Route::get('/login', [LoginController::class, 'login'])->name('login');
