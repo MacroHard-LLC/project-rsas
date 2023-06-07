@@ -295,9 +295,13 @@ td.right2 {
 
 }
 
-table td.crossed
-{
-   background-image: linear-gradient(to bottom right,  transparent calc(50% - 1px), silver, transparent calc(50% + 1px)); 
+table td.crossed {
+   background-image: linear-gradient(to bottom right,  transparent calc(50% - 1px), silver, transparent calc(50% + 1px));
+   text-align: center; 
+}
+
+table td.late {
+  background: linear-gradient(to bottom right, #000000 50%, #ffffff 51%);
 }
 
 tr.noBorder td {

@@ -136,9 +136,9 @@
           <td class="borderL num2" > </td>
           <td colspan="9"> </td>
           <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
+          <td class="crossed"> X </td> <!--an X in the cell means that the student is absent-->
+          <td class="crossed"> </td> <!--no X in the cell means that the student is present-->
+          <td class="late"> </td> <!--late class means student is late in class-->
           <td class="crossed"> </td>
           <td class="borderL crossed"> </td>
           <td class="crossed"> </td>
