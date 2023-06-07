@@ -21,7 +21,7 @@ class Form2Controller extends Controller
 
         $grade_level = Section::where('adviser_id', $adviser) -> get('grade_level') -> first();
 
-        $month = now();/*->format('F');*/
+        $month = now()->format('F');
 
         $query = Student::where('section_id', $section_id) -> get('user_id');
 
@@ -60,7 +60,9 @@ class Form2Controller extends Controller
 
         //var_dump($adviser);
         // var_dump($grade_level);
-        return view ('adviser.form2') -> with('section_id', $section_id,)
+        return view ('adviser.form2')
+        -> with('month', $month)
+        -> with('section_id', $section_id,)
         -> with('grade_level', $grade_level);
 
         
