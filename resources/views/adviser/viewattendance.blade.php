@@ -12,6 +12,7 @@
 <script>
     function beforeAnchorClick(caught_value, caught_date, subject) {
         console.log("PROBLEMATIC");
+        console.log(subject);
         $.ajax({
             method: "POST",
             headers: {
@@ -25,6 +26,8 @@
                 console.log(data);
             }
         });
+    }
+    function sectionSetUP(value){
         $.ajax({
             method: "POST",
             headers: {
@@ -32,9 +35,88 @@
                     Accept: "application/json"
             },
             url: "{{ route('session_student') }}",
-            data: { input_data : subject},
+            data: { input_data : value},
             success: function(data) {
                 console.log(data);
+            }
+        });
+    }
+
+    function onSubjectChange(value){
+        const tableBody = document.querySelector('#attendanceTable tbody');
+        console.log("AYIEAH");
+        console.log(value);
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('session_student') }}",
+            data: { input_data : value},
+            success: function(data) {
+                console.log(data);
+            }
+        });
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('get_all_students_in_subject') }}",
+            data: { input_data : value},
+            success: function(data) {
+                data.forEach(student => {
+                    console.log(student);
+                    const studentId = student.id;
+                    const button = document.querySelector(`button[value="${studentId}"]`);
+                    const td = button.closest('td');
+                    const closestTd = td.previousElementSibling;
+                    // Update the value of the closest <td>
+                    closestTd.textContent = student.status;
+                });
+            }
+        });
+    }
+
+    function forcedSetup(value, formattedDate, tableBody){
+        console.log("cat");
+        console.log(value);
+        $.ajax({
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                Accept: "application/json"
+            },
+            url: "{{ route('get_all_students_adviser') }}",
+            data: { input_data: value },
+            success: function(data) {
+                console.log("shet");
+                console.log(data);
+                for(var i = 0; i < data.length; i++){
+                    const newRow = document.createElement('tr');
+                    const array = new Array(data[i]['id'], formattedDate, value);
+                    console.log("this is a");
+                    console.log(array[2]);
+                    newRow.innerHTML = `
+                        <td>${data[i]['name']}</td>
+                        <td id="studentStatusAttendance" name="studentStatusAttendance">${data[i]['status']}</td>
+                        <td class="editStatus">
+                            <button id="editStatus" name="editStatus" data-id="${array}" value="${data[i]['id']}" onclick="beforeAnchorClick(${data[i]['id']}, ${array[1]}, ${value})"class="btn btn-primary create btn-create" type="button">
+                                <a data-bs-toggle="modal" data-bs-target="#editAttendanceModal">
+                                    <i class="fa-regular fa-pen-to-square icon-white"></i>
+                                </a>
+                            </button>
+                            <span data-id="${data[i]['id']}"></span>
+                        </td>
+                    `;
+                    tableBody.appendChild(newRow);
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
             }
         });
     }
@@ -81,11 +163,11 @@
         });
         const tableBody = document.querySelector('#attendanceTable tbody');
         let subject = $('#subject_adviserView_dropdown');
-        console.log(subject);
-
-
+        console.log("NOT DAIJOUBU");
+    
         //subject.append('<option value="A24">meow</option>');
-
+        
+        let startSubject = '';
         $.ajax({
             method: "POST",
             headers: {
@@ -97,46 +179,18 @@
             success: function(data) {
                 console.log(data);
                 data.forEach(element => {
+                    if (startSubject == ''){
+                        startSubject = element.id;
+                        console.log(element.id);
+                        forcedSetup(startSubject, formattedDate, tableBody);
+                    }
                     subject.append(`<option value="${element.id}">${element.name}</option>`);
                 });
             }
         });
-
+        
         console.log("sadje");
-        $.ajax({
-            method: "POST",
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                Accept: "application/json"
-            },
-            url: "{{ route('get_all_students_adviser') }}",
-            success: function(data) {
-                console.log(data);
-                for(var i = 0; i < data.length; i++){
-                    const newRow = document.createElement('tr');
-                    const array = new Array(data[i]['id'], formattedDate, subject);
-                    console.log(array[1]);
-                    newRow.innerHTML = `
-                        <td>${data[i]['name']}</td>
-                        <td>${data[i]['status']}</td>
-                        <td class="editStatus">
-                            <button id="editStatus" name="editStatus" data-id="${array}" onclick="beforeAnchorClick(${data[i]['id']}, ${array[1]}, ${subject.value})"class="btn btn-primary create btn-create" type="button">
-                                <a data-bs-toggle="modal" data-bs-target="#editAttendanceModal">
-                                    <i class="fa-regular fa-pen-to-square icon-white"></i>
-                                </a>
-                            </button>
-                            <span data-id="${data[i]['id']}"></span>
-                        </td>
-                    `;
-                    tableBody.appendChild(newRow);
-                }
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                console.log(xhr.status);
-                console.log(thrownError);
-            }
-        });
-
+        console.log(startSubject);
     });
 
     $(document).on('click', '#editStatus', function() {
@@ -202,7 +256,7 @@
        
         <div class="col col-md-auto">
             <label for="subject" class="section-title">SUBJECT</label>
-                <select name="subject" class="form-select w-auto" placeholder="Choose Subject" id="subject_adviserView_dropdown" required>
+                <select name="subject" class="form-select w-auto" onchange="onSubjectChange(this.value)" placeholder="Choose Subject" id="subject_adviserView_dropdown" required>
                     <!--ideally mushow unsay mga subjects naa ang section -->
                 </select>
                 <div class="is-invalid" role="alert" id="subjectError" name="subjectError">

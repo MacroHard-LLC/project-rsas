@@ -144,6 +144,7 @@ Route::get('/edit', [AdviserViewController::class, 'EditAttendance'] );
 Route::post('/view-attendance-start', [AdviserViewController::class, 'start'])->name('adviser_startup');
 Route::post('/view-grade-start', [AdviserViewController::class, 'startGradeLevel'])->name('grade_level_startup');
 Route::post('/view-attendance-get-students', [AdviserViewController::class, 'GetAllStudents'])->name('get_all_students_adviser');
+Route::post('/view-attendance-get-students-on-change', [AdviserViewController::class, 'GetAllStudentsInSubject'])->name('get_all_students_in_subject');
 Route::post('/view-attendance-status-students', [AdviserViewController::class, 'GetStudentStatus'])->name('get_all_students_tag');
 Route::post('/view-attendance-change', [AdviserViewController::class,'ChangeAttendance'])->name('change_attendance');
 Route::post('/view-attendance-status-change', [AdviserViewController::class,'ChangeStatus'])->name('change_status');
