@@ -134,7 +134,7 @@
           <td class="headersub" colspan = "3"> TARDY </td>
         </tr>
 
-        @for($i = 0; $i < count($male_query); $i++)
+        {{-- @for($i = 0; $i < count($male_query); $i++)
         <tr> <!--sample row 1-->
           <td class="borderL num2">{{$i + 1}}</td>
           <td colspan="9">{{$male_attendance_array[$i]['name']}}</td>
@@ -167,7 +167,59 @@
           <td class="borderL" colspan="3"> </td>
           <td class="borderLR" colspan="8"> </td>
         </tr>
-        @endfor
+        @endfor --}}
+
+        @for ($i = 0; $i < count($male_query); $i++)
+    <tr>
+        <td class="borderL num2">{{$i + 1}}</td>
+        <td colspan="9">{{$male_attendance_array[$i]['name']}}</td>
+        
+        <?php
+        // Assuming you have the array available in your controller
+        $data = $male_attendance_array[$i]['attendance'];
+        ?>
+        
+        <?php
+        // Initialize an empty string to store the generated HTML
+        $html = '';
+
+        // Iterate over the array
+        $counter = 0;
+        foreach ($data as $value) {
+          // late 2 | present 1 | else absent
+          if (($counter % 5) == 0){
+            if ($value == 2) {
+                //$html .= '<td class="borderL crossed"> </td>';
+                $html .= '<td class="late borderL"> X </td>';
+            } elseif ($value == 1) {
+                $html .= '<td class="crossed borderL"> </td>';
+            } else {
+                $html .= '<td class="crossed borderL"> X </td>';
+            }
+          }
+          else{
+            if ($value == 2) {
+                //$html .= '<td class="borderL crossed"> </td>';
+                $html .= '<td class="late"> X </td>';
+            } elseif ($value == 1) {
+                $html .= '<td class="crossed"> </td>';
+            } else {
+                $html .= '<td class="crossed"> X </td>';
+            }
+          }
+          $counter += 1;
+        }
+
+        // Output the generated HTML
+        echo $html;
+        ?>
+        
+        <td class="borderL" colspan="3"> </td>
+        <td class="borderL" colspan="3"> </td>
+        <td class="borderLR" colspan="8"> </td>
+    </tr>
+@endfor
+
         
 
         <tr> <!--sample row 2-->
@@ -235,7 +287,7 @@
         </tr>
 
 
-        @for($i = 0; $i < count($female_query); $i++)
+        {{-- @for($i = 0; $i < count($female_query); $i++)
         <tr> <!--sample row 1-->
           <td class="borderL num2">{{$i + 1}}</td>
           <td colspan="9">{{$female_attendance_array[$i]['name']}}</td>
@@ -268,8 +320,58 @@
           <td class="borderL" colspan="3"> </td>
           <td class="borderLR" colspan="8"> </td>
         </tr>
-        @endfor
+        @endfor --}}
         
+        @for ($i = 0; $i < count($female_query); $i++)
+    <tr>
+        <td class="borderL num2">{{$i + 1}}</td>
+        <td colspan="9">{{$female_attendance_array[$i]['name']}}</td>
+        
+        <?php
+        // Assuming you have the array available in your controller
+        $data = $female_attendance_array[$i]['attendance'];
+        ?>
+        
+        <?php
+        // Initialize an empty string to store the generated HTML
+        $html = '';
+
+        // Iterate over the array
+        $counter = 0;
+        foreach ($data as $value) {
+          // late 2 | present 1 | else absent
+          if (($counter % 5) == 0){
+            if ($value == 2) {
+                //$html .= '<td class="borderL crossed"> </td>';
+                $html .= '<td class="late borderL"> X </td>';
+            } elseif ($value == 1) {
+                $html .= '<td class="crossed borderL"> </td>';
+            } else {
+                $html .= '<td class="crossed borderL"> X </td>';
+            }
+          }
+          else{
+            if ($value == 2) {
+                //$html .= '<td class="borderL crossed"> </td>';
+                $html .= '<td class="late"> X </td>';
+            } elseif ($value == 1) {
+                $html .= '<td class="crossed"> </td>';
+            } else {
+                $html .= '<td class="crossed"> X </td>';
+            }
+          }
+          $counter += 1;
+        }
+
+        // Output the generated HTML
+        echo $html;
+        ?>
+        
+        <td class="borderL" colspan="3"> </td>
+        <td class="borderL" colspan="3"> </td>
+        <td class="borderLR" colspan="8"> </td>
+    </tr>
+@endfor
 
         <tr> <!--sample row 1-->
           <td class="borderL num2" > </td>

@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Section;
 use App\Models\Student;
+use App\Models\Present;
+use App\Models\Late;
 use App\Models\PresentAttendance;
 use App\Models\LateAttendance;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+
+use Carbon\Carbon;
 
 class Form2Controller extends Controller
 {
@@ -22,7 +26,7 @@ class Form2Controller extends Controller
         //also helps with finding the students that belong to the section
         $section = Section::where('adviser_id', $adviser) -> first();
         $section_id = $section->name;
-        echo $section_id;
+
 
         //finds out the grade level that the adviser handles
         $grade_level = $section->grade_level;
@@ -48,16 +52,61 @@ class Form2Controller extends Controller
             ->where('sex', 'M')
             ->count();
 
+        // Get the current month and year
+        $currentMonth = Carbon::now()->format('m');
+        $currentYear = Carbon::now()->format('Y');
+
+        // Get the first and last day of the current month
+        $firstDayOfMonth = Carbon::create($currentYear, $currentMonth, 1)->startOfMonth();
+        $lastDayOfMonth = Carbon::create($currentYear, $currentMonth, 1)->endOfMonth();
+
+        // Initialize an array to store the days
+        $days = [];
+
+        // Start from the first day and loop until the last day
+        $currentDay = $firstDayOfMonth;
+        while ($currentDay <= $lastDayOfMonth) {
+            // Check if the current day is between Monday (1) and Friday (5)
+            $dayOfWeek = $currentDay->dayOfWeek;
+            if ($dayOfWeek >= Carbon::MONDAY && $dayOfWeek <= Carbon::FRIDAY) {
+                // Add the current day to the array
+                $days[] = $currentDay->format('Y-m-d');
+            }
+
+            // Move to the next day
+            $currentDay->addDay();
+        }
+        // days is here
+
         $male_attendance_array = array();
+        $attendance_array = array();
         foreach($male_query as $student){
             
             $first_name = User::where('id',$student['user_id'])->value('first_name');
             $last_name = User::where('id',$student['user_id'])->value('last_name');
             $middle_name = User::where('id',$student['user_id'])->value('middle_name');
             $name = $last_name . ', ' . $first_name . ' ' . $middle_name;
-            echo $name;
+
+            foreach($days as  $loop){
+                $presentExist = Present::where('student_id',$student['user_id'])
+                                        ->where('date',$loop)
+                                        ->first();
+                $lateExist = Late::where('student_id',$student['user_id'])
+                                        ->where('date',$loop)
+                                        ->first();
+                if($presentExist){
+                    $attendance_array[] = 1;
+                }
+                else if ($lateExist){
+                    $attendance_array[] = 2;
+                }
+                else{
+                    $attendance_array[] = 0;
+                }
+            }
             $male_attendance_array[] = array(
                 'name' => $name,
+                'attendance' => $attendance_array,
             );
 
 
@@ -96,14 +145,34 @@ class Form2Controller extends Controller
             ->count();
 
         $female_attendance_array = array();
+        $attendance_array = array();
         foreach($female_query as $student){
             $first_name = User::where('id',$student['user_id'])->value('first_name');
             $last_name = User::where('id',$student['user_id'])->value('last_name');
             $middle_name = User::where('id',$student['user_id'])->value('middle_name');
             $name = $last_name . ', ' . $first_name . ' ' . $middle_name;
 
+            foreach($days as  $loop){
+                $presentExist = Present::where('student_id',$student['user_id'])
+                                        ->where('date',$loop)
+                                        ->first();
+                $lateExist = Late::where('student_id',$student['user_id'])
+                                        ->where('date',$loop)
+                                        ->first();
+                if($presentExist){
+                    $attendance_array[] = 1;
+                }
+                else if ($lateExist){
+                    $attendance_array[] = 2;
+                }
+                else{
+                    $attendance_array[] = 0;
+                }
+            }
+
             $female_attendance_array[] = array(
                 'name' => $name,
+                'attendance' => $attendance_array,
             );
 
 
