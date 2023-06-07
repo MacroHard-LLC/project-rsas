@@ -59,8 +59,9 @@ class Form2Controller extends Controller
         // return $attendanceArray;
 
         //var_dump($adviser);
-        var_dump($grade_level);
-        return($adviser);
+        // var_dump($grade_level);
+        return view ('adviser.form2') -> with('section_id', $section_id,)
+        -> with('grade_level', $grade_level);
 
         
     }

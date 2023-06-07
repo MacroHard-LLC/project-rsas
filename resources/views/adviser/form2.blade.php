@@ -52,8 +52,8 @@
         <tr style="height:50px;" class="noBorder">
           <td colspan="8" class="right"> Name of School</td>
           <td colspan="14" class="headerB21">  </td>
-          <td colspan="8" class="right left"> Grade Level</td>
-          <td colspan="2" class="headerB21">  </td>
+          <td colspan="8" class="right adviserleft"> Grade Level</td>
+          <td colspan="2" class="headerB21">{{ $grade_level}}</td>
           <td colspan="3" class="right left"> Section</td>
           <td colspan="10" class="headerB21">  </td>
           <td colspan="4" class="left"></td>
