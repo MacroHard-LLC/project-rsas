@@ -75,8 +75,17 @@
 
   .delete {
     width: 20px;
+    background-color: transparent;
   }
 
   .pt-3 {
     padding-top: 1.25rem !important;
 }
+
+option{
+  opacity: 50%;
+}
+
+/* .form-select{
+  border-radius: 10rem !important;
+} */

@@ -68,6 +68,10 @@
                                     </div>-->
                             </div>
                         </div>
+<<<<<<< Updated upstream
+=======
+                        
+>>>>>>> Stashed changes
                         <div class="row">
                             <div class="col-md-6 input-field">
                                     <label for="as_room" class="input-title">Assigned Room</label>
@@ -192,7 +196,11 @@
 
                         <div class="form-group float-end">
                             <!--<span class="submit-reminder me-3">Double-check the information before pressing the button</span>-->
+<<<<<<< Updated upstream
                             <button class="btn btn-primary" type="submit" id="sbmt_btn" disabled><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
+=======
+                            <button class="btn btn-secondary" type="submit" id="sbmt_btn" disabled><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
+>>>>>>> Stashed changes
                         </div>
 
                         </div>

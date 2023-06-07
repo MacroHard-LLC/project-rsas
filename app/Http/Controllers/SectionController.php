@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Section;
 use App\Models\Student;
+
 use Illuminate\Http\Request;
 
 class SectionController extends Controller
@@ -20,9 +21,7 @@ class SectionController extends Controller
         $students = Student::where('section_id','=',$section->id)->get();
         return view('levels.show', [
             'section' => $section,
-            'students' => $students,
-            'users',
-            'adviser' => $adviser,
+            'students' => $students
         ]);
     }
 
@@ -89,13 +88,14 @@ class SectionController extends Controller
     }
 
     function DataInsert(Request $request){
-        $formFields = $request;
-        /*$formFields = $request->validate([
-            'adviserID' => ['required','integer','digits:9','regex:/[0-9]+/'],
-            'allStudentID' => 'required',
-            'sectionID' => 'required',
-            'gradeLevel' => 'required',
-        ]);*/
+        $formFields = $request->validate([
+            'adviser_id' => ['required','exists:user,id'],
+            'allStudentID' => ['required','array'],
+            'allStudentID.*'  => ['required','distinct','exists:user,id'],
+            'name' => ['required','max:50'],
+            'grade_level' => ['required','integer','between:7,10'],
+            'schoolyear_id' => ['required','exists:schoolyear,id'],
+        ]);
 
         // this is for the section table
         $addRow = new Section;
@@ -118,5 +118,7 @@ class SectionController extends Controller
             $changeRow->updated_on = now();
             $changeRow->save();
         }
+
+        User::where('id', $request->adviser_id)->update(['is_enrolled' => 1]);
     }
 }

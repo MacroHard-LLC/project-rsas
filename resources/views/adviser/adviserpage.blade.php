@@ -35,6 +35,10 @@
                         <div class="col-md-4" style="width:300px">
                         <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/student-info'">View Students</button>
                         </div>
+                        <!-- Le button for form 2 -->
+                        <div class="col-md-4" style="width:300px">
+                        <button class="btn btn-primary create btn-create" type="button" onclick="location.href='/form2'">Form 2</button>
+                        </div>
                     </div>
                     </div>
                 </div>

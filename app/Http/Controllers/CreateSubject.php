@@ -120,7 +120,6 @@ class CreateSubject extends Controller
         $machine->save();
         $subject->machine_id = $machine->id;
         $subject->save();
-
         $input_days = json_decode($formFields['days'],true);
         foreach ($input_days as $key => $value) {
             $sched = new Schedule_table;

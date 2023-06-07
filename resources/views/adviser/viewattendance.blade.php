@@ -10,6 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+<<<<<<< Updated upstream
     function beforeAnchorClick(caught_value, caught_date, subject) {
         console.log("PROBLEMATIC");
         console.log(subject);
@@ -121,6 +122,8 @@
         });
     }
 
+=======
+>>>>>>> Stashed changes
     $(document).ready(function() {
         // Get today's date
         var today = new Date();
@@ -133,6 +136,21 @@
 
         // Set the default value of the date input
         document.getElementById('date').value = formattedDate;
+<<<<<<< Updated upstream
+=======
+        // Get today's date
+        var today = new Date();
+
+        // Format the date as "YYYY-MM-DD"
+        var year = today.getFullYear();
+        var month = (today.getMonth() + 1).toString().padStart(2, '0');
+        var day = today.getDate().toString().padStart(2, '0');
+        var formattedDate = `${year}-${month}-${day}`;
+
+        // Set the default value of the date input
+        document.getElementById('date').value = formattedDate;
+
+>>>>>>> Stashed changes
 
         var adviserID = {{ $adviserId }};
         $.ajax({
@@ -148,6 +166,7 @@
                 $('#attendanceAdviserName').text(data);
             }
         });
+<<<<<<< Updated upstream
         $.ajax({
             method: "POST",
             headers: {
@@ -168,6 +187,14 @@
         //subject.append('<option value="A24">meow</option>');
         
         let startSubject = '';
+=======
+        const tableBody = document.querySelector('#attendanceTable tbody');
+        let subject = $('#subject_adviserView_dropdown');
+        console.log(subject);
+
+        //subject.append('<option value="A24">meow</option>');
+
+>>>>>>> Stashed changes
         $.ajax({
             method: "POST",
             headers: {
@@ -179,18 +206,60 @@
             success: function(data) {
                 console.log(data);
                 data.forEach(element => {
+<<<<<<< Updated upstream
                     if (startSubject == ''){
                         startSubject = element.id;
                         console.log(element.id);
                         forcedSetup(startSubject, formattedDate, tableBody);
                     }
+=======
+>>>>>>> Stashed changes
                     subject.append(`<option value="${element.id}">${element.name}</option>`);
                 });
             }
         });
+<<<<<<< Updated upstream
         
         console.log("sadje");
         console.log(startSubject);
+=======
+
+        console.log("sadje");
+        $.ajax({
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                Accept: "application/json"
+            },
+            url: "{{ route('get_all_students_adviser') }}",
+            success: function(data) {
+                console.log(data);
+                for(var i = 0; i < data.length; i++){
+                    const newRow = document.createElement('tr');
+                    const array = new Array(data[i]['id'], formattedDate, subject);
+                    console.log(array);
+                    newRow.innerHTML = `
+                        <td>${data[i]['name']}</td>
+                        <td>${data[i]['status']}</td>
+                        <td class="editStatus">
+                            <button id="editStatus" name="editStatus" data-id="${array}" class="btn btn-primary create btn-create" type="button">
+                                <a data-bs-toggle="modal" data-bs-target="#editAttendanceModal">
+                                    <i class="fa-regular fa-pen-to-square icon-white"></i>
+                                </a>
+                            </button>
+                            <span data-id="${data[i]['id']}"></span>
+                        </td>
+                    `;
+                    tableBody.appendChild(newRow);
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
+            }
+        });
+
+>>>>>>> Stashed changes
     });
 
     $(document).on('click', '#editStatus', function() {
@@ -256,7 +325,11 @@
        
         <div class="col col-md-auto">
             <label for="subject" class="section-title">SUBJECT</label>
+<<<<<<< Updated upstream
                 <select name="subject" class="form-select w-auto" onchange="onSubjectChange(this.value)" placeholder="Choose Subject" id="subject_adviserView_dropdown" required>
+=======
+                <select name="subject" class="form-select w-auto" placeholder="Choose Subject" id="subject_adviserView_dropdown" required>
+>>>>>>> Stashed changes
                     <!--ideally mushow unsay mga subjects naa ang section -->
                 </select>
                 <div class="is-invalid" role="alert" id="subjectError" name="subjectError">

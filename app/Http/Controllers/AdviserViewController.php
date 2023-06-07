@@ -92,7 +92,7 @@ class AdviserViewController extends Controller
             $attendanceArray[] = array(
                 'id' => $student['user_id'],
                 'name' => $name,
-                'status' => $status,
+                'status' => $status
             );
         }
         
@@ -130,7 +130,7 @@ class AdviserViewController extends Controller
             $attendanceArray[] = array(
                 'id' => $student['user_id'],
                 'name' => $name,
-                'status' => $status,
+                'status' => $status
             );
         }
         
@@ -162,7 +162,7 @@ class AdviserViewController extends Controller
             $attendanceArray[] = array(
                 'id' => $student['user_id'],
                 'name' => $name,
-                'status' => $status,
+                'status' => $status
             );
         }
         
@@ -207,7 +207,7 @@ class AdviserViewController extends Controller
         $newRow->save();
         // end
 
-        //session()->put('new_status',$new_status);
+        session()->put('new_status',$new_status);
         
         $adviserId = session()->get('adviser_id');
         return view('adviser.viewattendance', compact('adviserId'));

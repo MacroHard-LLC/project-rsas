@@ -8,6 +8,7 @@ use App\Http\Controllers\AdviserViewController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\CreateInstructor;
 use App\Http\Controllers\CreateSchoolYear;
+use App\Http\Controllers\Form2Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -160,7 +161,8 @@ Route::post('/login', [LoginController::class, 'loginPost'])->name('login.post')
 Route::get('logout',[LoginController::class,'logout'])->name('logout');
 
 
-
+//Form 2
+Route::get('/form2', [Form2Controller::class, 'ShowForm'])->name('show_form');
 
 
 //I tried to group them - Pris

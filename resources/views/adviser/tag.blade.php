@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!-- $(document).on('click', '#studentTag', function() {
         //var element = $(this).siblings('span');
         //var value = element.data('id');
@@ -43,6 +44,8 @@
   });
 }); -->
 
+=======
+>>>>>>> Stashed changes
 <div class="modal modal-danger fade" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -69,6 +72,7 @@
             </form>
         </div>
     </div>
+<<<<<<< Updated upstream
 </div>
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -113,3 +117,6 @@
     });
 
 </script> -->
+=======
+</div>
+>>>>>>> Stashed changes
