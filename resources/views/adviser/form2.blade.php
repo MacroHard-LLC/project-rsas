@@ -1,17 +1,14 @@
 <!-- CSS Code: Place tdis code in tde document's head (between tde 'head' tags) -->
-<link href="public\css\form2.css" rel="stylesheet">
-<style>
-    
-    </style>
+<link rel="stylesheet" href="{{ asset('css/form2.css') }}">
     
     <!-- HTML Code: Place tdis code in tde document's body (between tde 'body' tags) where tde table should appear -->
     <table class="GeneratedTable">
       <tbody>
         <tr class="form2subheader noBorderheader"> 
-          <td colspan="14" > <div style="position: relative;"><img style="position: absolute; z-index: 1; left: 0px; top: 4px; width: 129px; height: 129px;" src="depedLogo.png" border="0" /></div> </td>
+          <td colspan="14" > <div style="position: relative;"><img style="position: absolute; z-index: 1; left: 0px; top: 4px; width: 129px; height: 129px;" src="{{url('images/depedLogo.png')}}" border="0" /></div> </td>
           <td colspan="21" style="font-size: 22pt"> </td>
           <td colspan="2" style="height: 30px;"></td>
-          <td colspan="12">  <div style="position: relative;"><img style="position: absolute; z-index: 1; left: 48px; top: 5px; width: 285px; height: 132px;" src="depedLogo2.png" border="0" /></div></td>
+          <td colspan="12">  <div style="position: relative;"><img style="position: absolute; z-index: 1; left: 48px; top: 5px; width: 285px; height: 132px;" src="{{url('images/depedLogo2.png')}}" border="0" /></div></td>
         </tr>
         <tr class="form2header noBorderheader"> 
           <td colspan="14" ></td>

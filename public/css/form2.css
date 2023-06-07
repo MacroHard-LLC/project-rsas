@@ -63,7 +63,6 @@ td.header {
   border-top: 2px solid #000000 !important;
 }
 
-<<<<<<< Updated upstream
 td.headerB {
   text-align: left;
   border-bottom: 2px solid #000000 !important;
@@ -238,8 +237,6 @@ td.underlineT {
 }
 
 
-=======
->>>>>>> Stashed changes
 td.headersub {
   text-align: center;
   border-bottom: 2px solid #000000 !important;
@@ -274,7 +271,6 @@ td.borderLB {
   border-left: 2px solid #000000 !important;
 }
 
-<<<<<<< Updated upstream
 td.right {
   text-align: right;
   font-size: 14pt;
@@ -298,8 +294,6 @@ td.right2 {
   text-align: right;
 
 }
-=======
->>>>>>> Stashed changes
 
 table td.crossed
 {
@@ -309,15 +303,12 @@ table td.crossed
 tr.noBorder td {
   border: 0;
   border-style: hidden;
-<<<<<<< Updated upstream
 }
 
 td.noBorder {
   border: 0;
   border-style: hidden;
-=======
   border-top: 1pt solid black;
->>>>>>> Stashed changes
 }
 
 tr.noBorderheader td {
@@ -325,7 +316,6 @@ tr.noBorderheader td {
   border-style: hidden;
 }
 
-<<<<<<< Updated upstream
 tr.noBorderTLR {
   border: 0;
   border-style: hidden;
@@ -376,8 +366,6 @@ td.border {
   border-top: 1px solid black;
 }
 
-=======
->>>>>>> Stashed changes
 tr.form2header {
   font-family:'Arial Narrow';
   text-align: center;
@@ -385,21 +373,17 @@ tr.form2header {
   font-size: 22pt;
 }
 
-<<<<<<< Updated upstream
 tr.headergap {
   height: 10px;
   border-left: none;
   border-right: none;
 }
 
-=======
->>>>>>> Stashed changes
 tr.form2subheader {
   font-family:'Arial Narrow';
   text-align: center;
   font-size: 12pt; 
   font-style: italic;
-<<<<<<< Updated upstream
 }
 
 tr.hide_right > td, td.hide_right{
@@ -407,6 +391,4 @@ tr.hide_right > td, td.hide_right{
 }
 tr.hide_all > td, td.hide_all{
   border-style:hidden;
-=======
->>>>>>> Stashed changes
 }
