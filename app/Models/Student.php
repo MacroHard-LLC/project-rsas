@@ -10,6 +10,7 @@ class Student extends Model
     use HasFactory;
 
     protected $table = 'student';
+    protected $primaryKey = 'rfid_number';
     public $timestamps = FALSE;
 
     /**

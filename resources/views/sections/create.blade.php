@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
 
                             <div class="col-6 col-md-4 input-field">
                                 <div class="form-outline">
@@ -151,7 +151,7 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
                 Accept: "application/json"
             },
-            url: "{{ route('register_section') }}",
+            url: "{{ route('create_section') }}",
             data: formData,
             success: () => window.location.assign(window.location.href) ,
             error: (response) => {
@@ -159,7 +159,7 @@
                     let errors = response.responseJSON.errors;
                     Object.keys(errors).forEach(function (key) {
                         $("#section_" + key + "_input").addClass("is-invalid");
-                        $("#section_" + key + "_error").children("strong").text(errors[key][0]);
+                        $("#section_" + key + "_error").children("span").text(errors[key][0]);
                     });
                 }
             }
