@@ -35,7 +35,6 @@ class RFIDController extends Controller
             $logsheet->time = now();
             $logsheet->rfid_number = $rfid;
             $logsheet->machine = $machine;
-            $logsheet->save();
 
             // getting the thingies from time
             // $logsheet->time is problematic because I do not know how well it translate
@@ -88,6 +87,7 @@ class RFIDController extends Controller
                         $newRow->student_id = $student->user_id;
                         $newRow->save();
                     }
+                    $logsheet->save();
 
                 }
             };
