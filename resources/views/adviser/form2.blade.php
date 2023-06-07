@@ -136,7 +136,7 @@
         @for($i = 1; $i <= count($male_query); $i++)
         <tr> <!--sample row 1-->
           <td class="borderL num2">{{$i}}</td>
-          <td colspan="9">{{$i}}</td>
+          <td colspan="9">{{$male_attendance_array->name}}</td>
           <td class="borderL crossed"> </td>
           <td class="crossed"> X </td> <!--an X in the cell means that the student is absent-->
           <td class="crossed"> </td> <!--no X in the cell means that the student is present-->
@@ -231,6 +231,42 @@
           <td class="borderLB" colspan="3"> </td>
           <td class="borderLRB" colspan="8"> </td>
         </tr>
+
+        @for($i = 1; $i <= count($female_query); $i++)
+        <tr> <!--sample row 1-->
+          <td class="borderL num2">{{$i}}</td>
+          <td colspan="9">{{$i}}</td>
+          <td class="borderL crossed"> </td>
+          <td class="crossed"> X </td> <!--an X in the cell means that the student is absent-->
+          <td class="crossed"> </td> <!--no X in the cell means that the student is present-->
+          <td class="late"> </td> <!--late class means student is late in class-->
+          <td class="crossed"> </td>
+          <td class="borderL crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="borderL crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="borderL crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="borderL crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="crossed"> </td>
+          <td class="borderL" colspan="3"> </td>
+          <td class="borderL" colspan="3"> </td>
+          <td class="borderLR" colspan="8"> </td>
+        </tr>
+        @endfor
+
         <tr> <!--sample row 1-->
           <td class="borderL num2" > </td>
           <td colspan="9"> </td>

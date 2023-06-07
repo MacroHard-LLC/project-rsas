@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\PresentAttendance;
 use App\Models\LateAttendance;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class Form2Controller extends Controller
 {
@@ -19,7 +20,7 @@ class Form2Controller extends Controller
 
         //finds out the id of the section that the adviser handles
         //also helps with finding the students that belong to the section
-        $section_id = Section::where('adviser_id', $adviser) -> get('id') -> first();
+        $section_id = Section::where('adviser_id', $adviser) -> get('id');
 
         //finds out the grade level that the adviser handles
         $grade_level = Section::where('adviser_id', $adviser) -> get('grade_level') -> first();
@@ -27,34 +28,29 @@ class Form2Controller extends Controller
         //gives the current month of asking the report
         $month = now()->format('F');
 
+        // $students = Student::where('section_id', $section_id)->get();
+
+        // $male_query = User::where('sex','M')
+        //     ->whereHas('student', function (Builder $query) {
+        //     $query->where('section_id',$section_id);
+        // })->get();
+
         //gets the number of male students that belong to the section
-        $male_query = Student::where('section_id', $section_id)
-            ->join('user', 'user.id', '=', 'student.user_id')
-            ->where('user.sex', 'M')
+        $male_query = User::join('Student', 'Student.user_id', '=', 'User.id')
+            ->where('sex', 'M')
             ->get();
 
-        $male_query_counter = Student::where('section_id', $section_id)
-            ->join('user', 'user.id', '=', 'student.user_id')
-            ->where('user.sex', 'M')
+        // to remove later
+        $male_query_counter = User::join('Student', 'Student.user_id', '=', 'User.id')
+            ->where('sex', 'M')
             ->count();
 
-        //gets the number of female students that belong to the section
-        $female_query = Student::where('section_id', $section_id)
-            ->join('user', 'user.id', '=', 'student.user_id')
-            ->where('user.sex', 'F')
-            ->get();
-
-        $female_query_counter = Student::where('section_id', $section_id)
-            ->join('user', 'user.id', '=', 'student.user_id')
-            ->where('user.sex', 'F')
-            ->count();
-
-
-        // $male_attendance_array = array();
-        // foreach($male_query as $student){
-        //     $first_name = User::where('id',$student['user_id'])->value('first_name');
-        //     $last_name = User::where('id',$student['user_id'])->value('last_name');
-        //     $name = $last_name . ', ' . $first_name;
+        $male_attendance_array = array();
+        foreach($male_query as $student){
+            $first_name = User::where('id',$student['user_id'])->value('first_name');
+            $last_name = User::where('id',$student['user_id'])->value('last_name');
+            $middle_name = User::where('id',$student['user_id'])->value('middle_name');
+            $name = $last_name . ', ' . $first_name . ' ' . $middle_name;
 
 
             // $is_present = PresentAttendance::where('student_id',$student['user_id'])
@@ -72,26 +68,36 @@ class Form2Controller extends Controller
             // else if($is_late){
             //     $status = 'Late';
             // }
-        // }
+        }
 
         //     $student_tag = session()->get('student_id'); //for the remarks
         // }
 
         // // $queryStudent = Student::where($incoming_data = session(),$incoming_data = session()->get('user_id'));
 
-        // var_dump($attendanceArray);
-        
-        // return $attendanceArray;
+        //gets the number of female students that belong to the section
+        $female_query = User::join('Student', 'Student.user_id', '=', 'User.id')
+            ->where('sex', 'F')
+            ->get();
+
+        // to remove later
+        $female_query_counter = User::join('Student', 'Student.user_id', '=', 'User.id')
+            ->where('sex', 'F')
+            ->count();
 
         //var_dump($adviser);
         // var_dump($grade_level);
         echo $male_query_counter;
-        echo $male_query_counter;
+        echo $female_query_counter;
+        echo $male_query;
+        echo $female_query;
         return view('adviser.form2')
         -> with('month', $month)
         -> with('section_id', $section_id)
         -> with('grade_level', $grade_level)
-        -> with('male_query', $male_query);
+        -> with('male_query', $male_query)
+        -> with('female_query', $female_query)
+        -> with('male_attendance_array', $male_attendance_array);
         
     }
 }
