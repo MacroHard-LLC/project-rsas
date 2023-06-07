@@ -20,10 +20,10 @@ class Form2Controller extends Controller
 
         //finds out the id of the section that the adviser handles
         //also helps with finding the students that belong to the section
-        $section_id = Section::where('adviser_id', $adviser) -> get('id');
+        $section_id = Section::where('adviser_id', $adviser) -> pluck('name');
 
         //finds out the grade level that the adviser handles
-        $grade_level = Section::where('adviser_id', $adviser) -> get('grade_level') -> first();
+        $grade_level = Section::where('adviser_id', $adviser) -> pluck('grade_level');
 
         //gives the current month of asking the report
         $month = now()->format('F');
@@ -51,6 +51,7 @@ class Form2Controller extends Controller
             $last_name = User::where('id',$student['user_id'])->value('last_name');
             $middle_name = User::where('id',$student['user_id'])->value('middle_name');
             $name = $last_name . ', ' . $first_name . ' ' . $middle_name;
+
 
 
             // $is_present = PresentAttendance::where('student_id',$student['user_id'])
@@ -91,6 +92,7 @@ class Form2Controller extends Controller
         echo $female_query_counter;
         echo $male_query;
         echo $female_query;
+        // echo $male_attendance_array[1]['id'];
         return view('adviser.form2')
         -> with('month', $month)
         -> with('section_id', $section_id)

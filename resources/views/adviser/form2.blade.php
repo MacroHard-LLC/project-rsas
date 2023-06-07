@@ -1,6 +1,7 @@
 <!-- CSS Code: Place tdis code in tde document's head (between tde 'head' tags) -->
 <link rel="stylesheet" href="{{ asset('css/form2.css') }}">
     
+
     <!-- HTML Code: Place tdis code in tde document's body (between tde 'body' tags) where tde table should appear -->
     <table class="GeneratedTable">
       <tbody>
@@ -133,10 +134,11 @@
           <td class="headersub" colspan = "3"> TARDY </td>
         </tr>
 
-        @for($i = 1; $i <= count($male_query); $i++)
+        @for($i = 0; $i < count($male_query); $i++)
+        @$shit = array_get(male_query, 'user.last_name')
         <tr> <!--sample row 1-->
-          <td class="borderL num2">{{$i}}</td>
-          <td colspan="9">{{$male_attendance_array->name}}</td>
+          <td class="borderL num2">{{$i+1}}</td>
+          <td colspan="9"></td>
           <td class="borderL crossed"> </td>
           <td class="crossed"> X </td> <!--an X in the cell means that the student is absent-->
           <td class="crossed"> </td> <!--no X in the cell means that the student is present-->
@@ -167,6 +169,7 @@
           <td class="borderLR" colspan="8"> </td>
         </tr>
         @endfor
+        
 
         <tr> <!--sample row 2-->
           <td class="borderL num2" > </td>
@@ -232,10 +235,10 @@
           <td class="borderLRB" colspan="8"> </td>
         </tr>
 
-        @for($i = 1; $i <= count($female_query); $i++)
+
         <tr> <!--sample row 1-->
-          <td class="borderL num2">{{$i}}</td>
-          <td colspan="9">{{$i}}</td>
+          <td class="borderL num2"></td>
+          <td colspan="9">s</td>
           <td class="borderL crossed"> </td>
           <td class="crossed"> X </td> <!--an X in the cell means that the student is absent-->
           <td class="crossed"> </td> <!--no X in the cell means that the student is present-->
@@ -265,7 +268,7 @@
           <td class="borderL" colspan="3"> </td>
           <td class="borderLR" colspan="8"> </td>
         </tr>
-        @endfor
+        
 
         <tr> <!--sample row 1-->
           <td class="borderL num2" > </td>
@@ -677,4 +680,4 @@
     </table>
     <!-- Codes by Quackit.com -->
     
-    
+  
