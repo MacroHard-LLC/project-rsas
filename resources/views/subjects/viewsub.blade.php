@@ -62,7 +62,7 @@
                 <td><i class="fa-solid fa-circle icon-baby-blue"></td>
                 <td>{{$subject->id}}</td>
                 <td>{{$subject->name}}</td>
-                <td>{{$subject->section->grade_level ?? 'N/A'}}</td>
+                <td>{{$subject->grade_level ?? 'N/A'}}</td>
                 <td>{{$subject->instructor->rfid_number}}</td>
                 <?php
                     $schoolYear = $subject->schoolyear;
