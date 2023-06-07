@@ -37,8 +37,6 @@ function checkOverallValidity(){
     var invalid_fields = form_children.find('.form-control.is-invalid, .form-select.is-invalid')
     var student_rows = $("#student_list").children();
     var is_invalid = invalid_fields.length > 0 || student_rows.length <= 0;
-    console.log(student_rows.length);
-    console.log(invalid_fields.length);
     if (is_invalid)
         document.getElementById("submit_new_section").style.visibility = "hidden";
     else

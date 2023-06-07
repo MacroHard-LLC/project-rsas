@@ -159,7 +159,7 @@
                     let errors = response.responseJSON.errors;
                     Object.keys(errors).forEach(function (key) {
                         $("#section_" + key + "_input").addClass("is-invalid");
-                        $("#section_" + key + "_error").children("strong").text(errors[key][0]);
+                        $("#section_" + key + "_error").children("span").text(errors[key][0]);
                     });
                 }
             }

@@ -8,8 +8,9 @@
             </div>
 
             <div class="modal-body" id="modalBody">
-                <form method="POST" id="updateSectionForm" class="needs-validation" novalidate>
+                <form id="updateSectionForm" class="needs-validation" novalidate>
                     @csrf
+                    @method('PUT')
                     <fieldset>
                         <div class="row mb-3">
                             <div class="col-6 col-md-4 input-field">
@@ -117,8 +118,6 @@
                             <hr style="margin-bottom:5px;">
                             <i style="font-size:small;">Total Number of Students: <span id="total_students">0</span></i>
 
-                            <input type="hidden" name="originalID" id="originalID" value={{ $section->id }}>
-
                             <div class="form-group pt-5 float-end" id="submit_new_section">
                                 <button class="btn btn-primary create" type="submit" id="sectionButtonSubmit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                             </div>
@@ -135,7 +134,7 @@
     $('#updateSectionForm').submit(function (e) {
         e.preventDefault();
 
-        let allStudentID = document.querySelectorAll('[name=student_row]');
+        let allStudentID = document.querySelectorAll('[name=student_id], [name=new_student_id]');
         let arrayStudentID = [];
         allStudentID.forEach(element => {
             arrayStudentID.push(element.textContent);
@@ -147,6 +146,7 @@
             name : document.querySelector('#section_name_input').value,
             grade_level : document.querySelector('#section_grade_level_input').value,
             schoolyear_id : document.querySelector('#section_schoolyear_id_input').value,
+            _method : 'PUT',
         };
 
         $("#updateSectionForm").children().find(".is-invalid").children("span").text("");
@@ -158,7 +158,7 @@
                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
                 Accept: "application/json"
             },
-            url: '/gradelevels/' + id,
+            url: '/gradelevels/' + {{$section->id}},
             data: formData,
             success: () => window.location.assign(window.location.href) ,
             error: (response) => {
@@ -166,7 +166,7 @@
                     let errors = response.responseJSON.errors;
                     Object.keys(errors).forEach(function (key) {
                         $("#section_" + key + "_input").addClass("is-invalid");
-                        $("#section_" + key + "_error").children("strong").text(errors[key][0]);
+                        $("#section_" + key + "_error").children("span").text(errors[key][0]);
                     });
                 }
             }

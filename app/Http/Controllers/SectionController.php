@@ -60,43 +60,44 @@ class SectionController extends Controller
         User::where('id', $request->adviser_id)->update(['is_enrolled' => 1]);
     }
 
-    public function update(Request $request, $id) {
-        $user = User::find($id);
-
+    public function update(Request $request, Section $section) {
         $formFields = $request->validate([
-            'id' => ['required',Rule::unique('user','id')->ignore($id),'integer','digits:9'],
-            'password' => ['required','min:1','max:20'],
-            'role' => 'required',
-            'first_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
-            'middle_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
-            'last_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
-            'sex' => 'required',
+            'adviser_id' => ['required','exists:user,id'],
+            'name' => ['required','max:50'],
+            'grade_level' => ['required','integer','between:7,10'],
+            'schoolyear_id' => ['required','exists:schoolyear,id'],
         ]);
 
-        if ($user->role == 'student'){
-            $form_rfid_number = $request->validate([
-                'rfid_number' => Rule::unique('student')->ignore($user->student->rfid_number, 'rfid_number'),
-            ]);
+        $studentIDs = $request->validate([
+            'allStudentID' => ['required','array'],
+            'allStudentID.*'  => ['required','distinct','exists:user,id'],
+        ]);
+
+        $studentIDArray = $studentIDs['allStudentID'];
+
+        $current_students = Student::where('section_id',$section->id)->get();
+        foreach($current_students as $student){
+            if (($key = array_search($student->user_id, $studentIDArray)) !== false) {
+                unset($studentIDArray[$key]);
+            } else {
+                $student->section_id = null;
+                User::where('id', $student->user_id)->update(['is_enrolled' => 0]);
+                $student->save();
+            }
         }
 
-        if ($user->role == 'student' && $request->role != 'student'){
-            Student::where('user_id', $id)->delete();
-        } else if ($user->role != 'student' && $request->role == 'student'){
-            info($user->role);
-            $student = new Student;
-            $student->rfid_number = $request->rfid_number;
-            $student->user_id = $request->id;
-            $student->save();
-        } else if ($user->role == 'student' && $user->student->rfid_number != $request->rfid_number) {
-            Student::where('user_id', $id)->update($form_rfid_number);
+        // this is for the student table
+        foreach($studentIDArray as $student_id){
+            User::where('id', $student_id)->update(['is_enrolled' => 1]);
+            Student::where('user_id', $student_id)->update(['section_id' => $section->id]);
         }
 
-        // Hash Password
-        $formFields['password'] = Hash::make($formFields['password']);
+        if ($request->adviser_id != $section->adviser_id){
+            User::where('id', $section->adviser_id)->update(['is_enrolled' => 0]);
+            User::where('id', $request->adviser_id)->update(['is_enrolled' => 1]);
+        }
 
-        $user->update($formFields);
-
-        return back();
+        $section->update($formFields);
     }
 
     public function destroy(Request $request){

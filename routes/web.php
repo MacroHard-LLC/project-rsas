@@ -91,6 +91,7 @@ Route::post('/subjects-check', [CreateSubject::class, 'CheckSubIdExist'])->name(
 Route::post('/section-check-instruct',[CreateSubject::class, 'DoesInstructorIdExist'])->name('check_instruct_rfid');
 Route::post('/section-get-schoolyear',[CreateSubject::class, 'GetAllSchoolyear'])->name('get_all_schoolyear');
 Route::post('/gradelevels',[SectionController::class, 'store'])->name('create_section');
+Route::put('/gradelevels/{section}', [SectionController::class, 'update']);
 
 // Show Subjects
 Route::get('/subjects', [CreateSubject::class, 'CreateSubjectIndex']);
@@ -113,10 +114,6 @@ Route::get('/users/create', [UserController::class, 'create']);
 
 // create new user
 Route::post('/users', [UserController::class, 'store'])->name('createUser');
-
-// Show Edit User Form
-Route::get('/users/{id}/edit/', [UserController::class, 'edit']);
-// Route::get('/users/{user}/edit/', [UserController::class, 'edit']);
 
 // Update User
 Route::put('/users/{id}', [UserController::class, 'update']);
