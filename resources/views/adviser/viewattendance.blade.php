@@ -13,6 +13,12 @@
     function beforeAnchorClick(caught_value, caught_date, subject) {
         console.log("PROBLEMATIC");
         console.log(subject);
+        console.log($('#date').val());
+
+        let input_data = {
+            subject_id : caught_value,
+            target_date : $('#date').val(),
+        };
         $.ajax({
             method: "POST",
             headers: {
@@ -20,13 +26,44 @@
                     Accept: "application/json"
             },
             url: "{{ route('session_student_ID') }}",
-            data: { input_data : caught_value},
+            data: { input_data },
             success: function(data) {
                 console.log('OOF');
                 console.log(data);
             }
         });
     }
+
+    function onDateChange(){
+        const tableBody = document.querySelector('#attendanceTable tbody');
+        let value = $('#subject_adviserView_dropdown').val();
+        let target_date = $('#date').val();
+        let input_data = {
+            subject_id : value,
+            date : target_date,
+        };
+        $.ajax({
+            method: "POST",
+            headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    Accept: "application/json"
+            },
+            url: "{{ route('get_all_students_in_subject') }}",
+            data: { input_data },
+            success: function(data) {
+                data.forEach(student => {
+                    console.log(student);
+                    const studentId = student.id;
+                    const button = document.querySelector(`button[value="${studentId}"]`);
+                    const td = button.closest('td');
+                    const closestTd = td.previousElementSibling;
+                    // Update the value of the closest <td>
+                    closestTd.textContent = student.status;
+                });
+            }
+        });
+    }
+
     function sectionSetUP(value){
         $.ajax({
             method: "POST",
@@ -42,10 +79,14 @@
         });
     }
 
-    function onSubjectChange(value){
+    function onSubjectChange(value, target_date){
         const tableBody = document.querySelector('#attendanceTable tbody');
-        console.log("AYIEAH");
-        console.log(value);
+        let input_data = {
+            subject_id : value,
+            date : target_date,
+        };
+
+        // code may not be useful, please double check
         $.ajax({
             method: "POST",
             headers: {
@@ -53,11 +94,12 @@
                     Accept: "application/json"
             },
             url: "{{ route('session_student') }}",
-            data: { input_data : value},
+            data: { input_data },
             success: function(data) {
                 console.log(data);
             }
         });
+
         $.ajax({
             method: "POST",
             headers: {
@@ -65,7 +107,7 @@
                     Accept: "application/json"
             },
             url: "{{ route('get_all_students_in_subject') }}",
-            data: { input_data : value},
+            data: { input_data },
             success: function(data) {
                 data.forEach(student => {
                     console.log(student);
@@ -82,7 +124,10 @@
 
     function forcedSetup(value, formattedDate, tableBody){
         console.log("cat");
-        console.log(value);
+        let input_data = {
+            subject_id : value,
+            date : formattedDate,
+        };
         $.ajax({
             method: "POST",
             headers: {
@@ -90,7 +135,7 @@
                 Accept: "application/json"
             },
             url: "{{ route('get_all_students_adviser') }}",
-            data: { input_data: value },
+            data: { input_data },
             success: function(data) {
                 console.log("shet");
                 console.log(data);
@@ -251,12 +296,12 @@
         <div class="col col-md-auto">
             <label for="date" class="section-title">DATE</label>
             <br>
-            <input class="mt-2"type="date" id="date" placeholder="Choose Date" required>
+            <input class="mt-2"type="date" id="date" onchange="onDateChange()" placeholder="Choose Date" required>
         </div>
        
         <div class="col col-md-auto">
             <label for="subject" class="section-title">SUBJECT</label>
-                <select name="subject" class="form-select w-auto" onchange="onSubjectChange(this.value)" placeholder="Choose Subject" id="subject_adviserView_dropdown" required>
+                <select name="subject" class="form-select w-auto" onchange="onSubjectChange(this.value, $('#date').val())" placeholder="Choose Subject" id="subject_adviserView_dropdown" required>
                     <!--ideally mushow unsay mga subjects naa ang section -->
                 </select>
                 <div class="is-invalid" role="alert" id="subjectError" name="subjectError">

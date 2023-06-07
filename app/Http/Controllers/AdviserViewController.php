@@ -20,10 +20,11 @@ class AdviserViewController extends Controller
     }
 
     function SessionStudentID(Request $request){
-        $studentID = $request->input_data;
-        session()->put('student_id', $studentID);
+        $student = $request->input_data;
+        session()->put('student_id', $student['subject_id']);
+        session()->put('target_date',$student['target_date']);
 
-        return $studentID;
+        return $student;
     }
 
     function SessionStudent(Request $request){
@@ -62,8 +63,11 @@ class AdviserViewController extends Controller
     }
 
     function GetAllStudents(Request $request){
+        $data = $request->input_data;
+        $subject_id = $data['subject_id'];
+        $target_date = $data['date'];
+
         $incoming_data = session()->get('adviser_id');
-        $subject_id = $request->input_data;
         $sectionId = Section::where('adviser_id','=',$incoming_data)->first()->id;
 
         $query = Student::where('section_id', $sectionId)
@@ -76,8 +80,10 @@ class AdviserViewController extends Controller
 
             $is_present = Present::where('student_id',$student['user_id'])
                         ->where('subject_id',$subject_id)
+                        ->where('date',$target_date)
                         ->exists();
             $is_late = Late::where('student_id',$student['user_id'])
+                        ->where('date',$target_date)
                         ->where('subject_id',$subject_id)
                         ->exists();
             $status = 'Absent';
@@ -101,7 +107,9 @@ class AdviserViewController extends Controller
     }
 
     function GetAllStudentsInSubject(Request $request){
-        $subject_id = $request->input_data;
+        $data = $request->input_data;
+        $subject_id = $data['subject_id'];
+        $target_date = $data['date'];
         $incoming_data = session()->get('adviser_id');
         $sectionId = Section::where('adviser_id','=',$incoming_data)->first()->id;
 
@@ -115,9 +123,11 @@ class AdviserViewController extends Controller
 
             $is_present = Present::where('student_id',$student['user_id'])
                         ->where('subject_id',$subject_id)
+                        ->where('date',$target_date)
                         ->exists();
             $is_late = Late::where('student_id',$student['user_id'])
                         ->where('subject_id',$subject_id)
+                        ->where('date',$target_date)
                         ->exists();
             $status = 'Absent';
 
@@ -174,8 +184,10 @@ class AdviserViewController extends Controller
         $incoming_data = $request->input_data;
         $new_status = $incoming_data['new_status'];
         $student_id = session()->get('student_id');
-        $target_date = $incoming_data['date'];
+        $target_date = session()->get('target_date');
         $subject = session()->get('subject');
+
+        $subject = $subject['subject_id'];
 
         // get the row of the student, delete it
         $isRow = Present::where('student_id','=',$student_id);

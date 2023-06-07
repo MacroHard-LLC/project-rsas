@@ -37,6 +37,7 @@
     const buttonSubmitEditView = document.querySelector('button[type="submit"]');
     //const studentId = document.querySelector('#editAttendanceModal td[data-student-id]').getAttribute('data-student-id');
 
+    console.log(buttonSubmitEditView);
     // Add a click event listener to the button
     buttonSubmitEditView.addEventListener('click', function(event) {
         const buttonEditView = document.getElementById("editStatus");
