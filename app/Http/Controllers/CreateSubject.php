@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use DateTime;
-
-use Carbon\Carbon;
-
 use Illuminate\Http\Request;
 
 use App\Models\Subject_table;
-use App\Models\User;
 use App\Models\Schedule_table;
 use App\Models\Machine_table;
 use App\Models\Schoolyear;
@@ -18,13 +13,10 @@ use App\Models\Instructor;
 class CreateSubject extends Controller
 {
     function CreateSubjectIndex(){
-        return view('subjects.viewsub', [
-            'subjects' => Subject_table::latest('added_on')->filter(request(['grlvl']))->paginate(15)
-        ]);
-    }
-
-    function CreateSubjectForm(){
-        return view('subjects.newsub');
+        $schoolyears = Schoolyear::all();
+        $instructors = Instructor::all();
+        $subjects = Subject_table::latest('added_on')->filter(request(['grlvl']))->paginate(15);
+        return view('subjects.viewsub', compact('subjects','schoolyears','instructors'));
     }
 
     function CheckSubIdExist(Request $request){
