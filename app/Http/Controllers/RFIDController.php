@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Student;
-use App\Models\Schedule;
+use App\Models\Schedule_table;
 use App\Models\Subject_table;
 use App\Models\Machine_table;
 use App\Models\Logsheet;
@@ -56,11 +56,11 @@ class RFIDController extends Controller
                 $day_of_week = 'FRI';
             }
 
-            // get all the subjects in the table with the same machine 
+            // get all the subjects in the table with the same machine
             $subject_table = Subject_table::where('machine_id',$logsheet->machine)->get();
             foreach($subject_table as $subject){
                 // get the day of the subject
-                $current_sched = Schedule::where('subject_id',$subject->id)
+                $current_sched = Schedule_table::where('subject_id',$subject->id)
                                         ->where('day',$day_of_week)->first();
                 // if the current_sched exists, execute
                 if($current_sched){
@@ -68,7 +68,7 @@ class RFIDController extends Controller
                     $sched_endTime = Carbon::createFromFormat('H:i:s',$current_sched->time_end);
 
                     $now = Carbon::now();
-                    
+
                     if($now->before($sched_startTime)){
                         $newRow = new Present;
                         $newRow->subject_id = $subject->id;
