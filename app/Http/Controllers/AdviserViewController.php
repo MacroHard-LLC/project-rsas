@@ -199,9 +199,9 @@ class AdviserViewController extends Controller
         $adviserId = $request->input_data;
 
         $section = Section::where('adviser_id','=',$adviserId)->first();
-        $sectionId = $section->id;
+        $gradeLevel = $section->grade_level;
 
-        $subject = Subject_table::where('section_id','=',$sectionId)->get();
+        $subject = Subject_table::where('grade_level','=',$gradeLevel)->get();
         return $subject;
     }
 

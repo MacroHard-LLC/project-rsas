@@ -80,6 +80,7 @@ class CreateSubject extends Controller
         $subject = new Subject_table;
         //$subject->grade_level = $formFields['grade_level'];
         $subject->id = $formFields['sub_id'];
+        $subject->grade_level = $formFields['grade_level'];
         $subject->name = $formFields['sub_name'];
         $subject->instructor_rfid = $formFields['instruct_rfid'];
         $subject->schoolyear_id = $formFields['school_yearDD'];
@@ -119,6 +120,7 @@ class CreateSubject extends Controller
         $machine->save();
         $subject->machine_id = $machine->id;
         $subject->save();
+
         $input_days = json_decode($formFields['days'],true);
         foreach ($input_days as $key => $value) {
             $sched = new Schedule_table;
