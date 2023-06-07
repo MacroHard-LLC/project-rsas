@@ -90,6 +90,36 @@ class Form2Controller extends Controller
             ->where('sex', 'F')
             ->count();
 
+        $female_attendance_array = array();
+        foreach($female_query as $student){
+            $first_name = User::where('id',$student['user_id'])->value('first_name');
+            $last_name = User::where('id',$student['user_id'])->value('last_name');
+            $middle_name = User::where('id',$student['user_id'])->value('middle_name');
+            $name = $last_name . ', ' . $first_name . ' ' . $middle_name;
+
+            $female_attendance_array[] = array(
+                'name' => $name,
+            );
+
+
+
+            // $is_present = PresentAttendance::where('student_id',$student['user_id'])
+            //             ->exists();
+            // $is_late = LateAttendance::where('student_id',$student['user_id'])
+            //             ->exists();
+            // $status = 'Absent';
+            
+            // if($student['user_id'] == $student_tag){
+            //     $status = session()->get('new_status');
+            // }
+            // else if($is_present){
+            //     $status = 'Present';
+            // }
+            // else if($is_late){
+            //     $status = 'Late';
+            // }
+        }
+
         //var_dump($adviser);
         // var_dump($grade_level);
         echo $male_query_counter;
@@ -103,7 +133,7 @@ class Form2Controller extends Controller
         -> with('grade_level', $grade_level)
         -> with('male_query', $male_query)
         -> with('female_query', $female_query)
-        -> with('male_attendance_array', $male_attendance_array);
-        
+        -> with('male_attendance_array', $male_attendance_array)
+        -> with('female_attendance_array', $female_attendance_array);
     }
 }
