@@ -146,6 +146,10 @@ Route::post('/view-attendance-setup', [AdviserViewController::class, 'SubjectSet
 Route::post('/view-attendance-session-student-ID', [AdviserViewController::class, 'SessionStudentID'])->name('session_student_ID');
 Route::post('/view-attendance-session-student', [AdviserViewController::class, 'SessionStudent'])->name('session_student');
 
+
+// RFID Controller
+Route::post('/rfid/tap', 'RFIDController@tap');
+
 //Authentications
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'loginPost'])->name('login.post');
