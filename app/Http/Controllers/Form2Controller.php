@@ -20,10 +20,12 @@ class Form2Controller extends Controller
 
         //finds out the id of the section that the adviser handles
         //also helps with finding the students that belong to the section
-        $section_id = Section::where('adviser_id', $adviser) -> pluck('name');
+        $section = Section::where('adviser_id', $adviser) -> first();
+        $section_id = $section->name;
+        echo $section_id;
 
         //finds out the grade level that the adviser handles
-        $grade_level = Section::where('adviser_id', $adviser) -> pluck('grade_level');
+        $grade_level = $section->grade_level;
 
         //gives the current month of asking the report
         $month = now()->format('F');
@@ -38,6 +40,7 @@ class Form2Controller extends Controller
         //gets the number of male students that belong to the section
         $male_query = User::join('Student', 'Student.user_id', '=', 'User.id')
             ->where('sex', 'M')
+            ->where('section_id',$section->id)
             ->get();
 
         // to remove later
@@ -47,11 +50,12 @@ class Form2Controller extends Controller
 
         $male_attendance_array = array();
         foreach($male_query as $student){
+            
             $first_name = User::where('id',$student['user_id'])->value('first_name');
             $last_name = User::where('id',$student['user_id'])->value('last_name');
             $middle_name = User::where('id',$student['user_id'])->value('middle_name');
             $name = $last_name . ', ' . $first_name . ' ' . $middle_name;
-
+            echo $name;
             $male_attendance_array[] = array(
                 'name' => $name,
             );
@@ -83,6 +87,7 @@ class Form2Controller extends Controller
         //gets the number of female students that belong to the section
         $female_query = User::join('Student', 'Student.user_id', '=', 'User.id')
             ->where('sex', 'F')
+            ->where('section_id',$section->id)
             ->get();
 
         // to remove later
@@ -122,10 +127,10 @@ class Form2Controller extends Controller
 
         //var_dump($adviser);
         // var_dump($grade_level);
-        echo $male_query_counter;
-        echo $female_query_counter;
-        echo $male_query;
-        echo $female_query;
+        // echo $male_query_counter;
+        // echo $female_query_counter;
+        // echo $male_query;
+        // echo $female_query;
         // echo $male_attendance_array[1]['id'];
         return view('adviser.form2')
         -> with('month', $month)
