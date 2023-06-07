@@ -19,10 +19,18 @@ class AdviserViewController extends Controller
         return view('adviser.adviserpage');
     }
 
+    function SessionStudentInfo(Request $request){
+        $student = $request->input_data;
+        session()->put('student_id', $student['student_id']);
+        session()->put('target_date',$student['target_date']);
+        session()->put('subject_id',$student['subject_id']);
+
+        return $student;
+    }
+
     function SessionStudentID(Request $request){
         $student = $request->input_data;
-        session()->put('student_id', $student['subject_id']);
-        session()->put('target_date',$student['target_date']);
+        session()->put('student_id', $student);
 
         return $student;
     }
@@ -183,11 +191,11 @@ class AdviserViewController extends Controller
     function ChangeAttendance(Request $request){
         $incoming_data = $request->input_data;
         $new_status = $incoming_data['new_status'];
-        $student_id = session()->get('student_id');
+        $student_id = $incoming_data['student_id'];
         $target_date = session()->get('target_date');
-        $subject = session()->get('subject');
+        $subject = session()->get('subject_id');
 
-        $subject = $subject['subject_id'];
+        //$subject = $subject['subject_id'];
 
         // get the row of the student, delete it
         $isRow = Present::where('student_id','=',$student_id);

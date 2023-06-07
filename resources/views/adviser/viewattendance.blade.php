@@ -12,20 +12,21 @@
 <script>
     function beforeAnchorClick(caught_value, caught_date, subject) {
         console.log("PROBLEMATIC");
-        console.log(subject);
-        console.log($('#date').val());
 
         let input_data = {
-            subject_id : caught_value,
+            student_id : caught_value,
             target_date : $('#date').val(),
+            subject_id: $('#subject_adviserView_dropdown').val(),
         };
+        
+        console.log(input_data);
         $.ajax({
             method: "POST",
             headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
                     Accept: "application/json"
             },
-            url: "{{ route('session_student_ID') }}",
+            url: "{{ route('session_student_info') }}",
             data: { input_data },
             success: function(data) {
                 console.log('OOF');
@@ -153,7 +154,6 @@
                                     <i class="fa-regular fa-pen-to-square icon-white"></i>
                                 </a>
                             </button>
-                            <span data-id="${data[i]['id']}"></span>
                         </td>
                     `;
                     tableBody.appendChild(newRow);

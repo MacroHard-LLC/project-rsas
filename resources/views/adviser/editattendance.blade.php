@@ -73,7 +73,7 @@
             url: "{{ route('change_attendance') }}",
             data: { input_data},
             success: function(data) {
-                
+                console.log(data);
                 location.reload();
             }
             });

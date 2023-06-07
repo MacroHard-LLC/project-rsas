@@ -151,6 +151,7 @@ Route::post('/view-attendance-status-change', [AdviserViewController::class,'Cha
 Route::post('/view-attendance-add-id', [AdviserViewController::class, 'StudentTag'])->name('add_id_edit_status');
 Route::post('/view-attendance-setup', [AdviserViewController::class, 'SubjectSetup'])->name('setUp_subjects');
 Route::post('/view-attendance-session-student-ID', [AdviserViewController::class, 'SessionStudentID'])->name('session_student_ID');
+Route::post('/view-attendance-session-student-info', [AdviserViewController::class, 'SessionStudentInfo'])->name('session_student_info');
 Route::post('/view-attendance-session-student', [AdviserViewController::class, 'SessionStudent'])->name('session_student');
 
 //Authentications
