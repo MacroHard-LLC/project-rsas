@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Machine_table;
+use App\Models\Subject_table;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class SectionController extends Controller
+class MachineController extends Controller
 {
+
     // Show all users // to be updated to group to sections
     public function index() {
         return view('users.index', [

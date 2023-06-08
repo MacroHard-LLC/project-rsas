@@ -164,6 +164,9 @@ Route::get('logout',[LoginController::class,'logout'])->name('logout');
 //Form 2
 Route::get('/form2', [Form2Controller::class, 'ShowForm'])->name('show_form');
 
+//addmachine Modal
+Route::get('/addmachine', [MachineController::class, 'name_of_function']);
+
 
 //I tried to group them - Pris
 //Route::resource('subjects', CreateSubject::class) -> only(['CreateSubjectForm', 'DataInsert', 'CheckSubIdExist']);

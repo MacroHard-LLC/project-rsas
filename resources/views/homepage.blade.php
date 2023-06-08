@@ -15,6 +15,7 @@
 
 @include('misc.newsy')
 @include('misc.newinstruct')
+@include('misc.addmachine')
 
 @php
     $firstName = auth()->user()->first_name;
@@ -76,6 +77,18 @@
                                 <a data-bs-toggle="modal" data-bs-target="#schoolyearModal">New School Year</a>
                             </button>
                         </div>
+                        
+                    </div>
+
+                    <div class="row row-cols-4 mx-4">
+                        <!-- le button to add new machine -->
+                    <div class="col">
+                            <button class="btn btn-primary create btn-create" type="button">
+                                <!-- change #schoolyearModal to the id of the add machine -->
+                                <a data-bs-toggle="modal" data-bs-target="#addmachineModal" onclick="addmachineModal">Add RFID Machine</a>
+                            </button>
+                        </div>
+                        
                     </div>
 
                     </div>
@@ -85,6 +98,7 @@
 
         </div>
     </div>
+    
 </div>
 
 @endsection
