@@ -123,9 +123,9 @@ class Form2Controller extends Controller
         }
 
         $male_attendance_array = array();
-        $attendance_array = array();
         $total_attendance_male = array_fill(0, count($days), 0);
         foreach($male_query as $student){
+            $attendance_array = array();
 
             $first_name = User::where('id',$student['user_id'])->value('first_name');
             $last_name = User::where('id',$student['user_id'])->value('last_name');
@@ -166,9 +166,9 @@ class Form2Controller extends Controller
                 'attendance' => $attendance_array,
                 'present_counter' => $present_counter,
                 'late_counter' => $late_counter,
-                'absent_counter' => $absent_counter
+                'absent_counter' => $absent_counter,
+                'is_enrolled' => User::where('id',$student['user_id'])->value('is_enrolled'),
             );
-
 
 
             // $is_present = PresentAttendance::where('student_id',$student['user_id'])
@@ -206,10 +206,9 @@ class Form2Controller extends Controller
             ->count();
 
         $female_attendance_array = array();
-        $attendance_array = array();
         $total_attendance_female = array_fill(0, count($days), 0);
         foreach($female_query as $student){
-
+            $attendance_array = array();
             $first_name = User::where('id',$student['user_id'])->value('first_name');
             $last_name = User::where('id',$student['user_id'])->value('last_name');
             $middle_name = User::where('id',$student['user_id'])->value('middle_name');
@@ -260,10 +259,9 @@ class Form2Controller extends Controller
                 'attendance' => $attendance_array,
                 'present_counter' => $present_counter,
                 'late_counter' => $late_counter,
-                'absent_counter' => $absent_counter
+                'absent_counter' => $absent_counter,
+                'is_enrolled' => User::where('id',$student['user_id'])->value('is_enrolled'),
             );
-
-            
 
             // $is_present = PresentAttendance::where('student_id',$student['user_id'])
             //             ->exists();

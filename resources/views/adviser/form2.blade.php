@@ -240,62 +240,130 @@
         </tr>
         @endfor --}}
 
-        @for ($i = 0; $i < count($male_query); $i++)
+        {{-- @for ($i = 0; $i < count($male_query); $i++)
     <tr>
         <td class="borderL num2">{{$i + 1}}</td>
         <td colspan="9">{{$male_attendance_array[$i]['name']}}</td>
         
+        
         <?php
         // Assuming you have the array available in your controller
-        $data = $male_attendance_array[$i]['attendance'];
+        // $data = $male_attendance_array[$i]['attendance'];
         ?>
         
         <?php
         // Initialize an empty string to store the generated HTML
-        $html = '';
+        // $html = '';
 
-        // Iterate over the array
-        $counter = 0;
-        foreach ($data as $value) {
-          // late 2 | present 1 | else absent
-          if (($counter % 5) == 0){
-            if($days[$counter] == 'x'){
-              $html .= '<td class="crossed borderL"> </td>';
-            }
-            elseif ($value == 2) {
-                //$html .= '<td class="borderL crossed"> </td>';
-                $html .= '<td class="late borderL"> X </td>';
-            } elseif ($value == 1) {
-                $html .= '<td class="crossed borderL"> </td>';
-            } else {
-                $html .= '<td class="crossed borderL"> X </td>';
-            }
-          }
-          else{
-            if($days[$counter] == 'x'){
-              $html .= '<td class="crossed"> </td>';
-            }
-            elseif ($value == 2) {
-                //$html .= '<td class="borderL crossed"> </td>';
-                $html .= '<td class="late"> X </td>';
-            } elseif ($value == 1) {
-                $html .= '<td class="crossed"> </td>';
-            } else {
-                $html .= '<td class="crossed"> X </td>';
-            }
-          }
-          $counter += 1;
-        }
+        // // Iterate over the array
+        // $counter = 0;
+        // foreach ($data as $value) {
+        //   // late 2 | present 1 | else absent
+        //   if (($counter % 5) == 0){
+        //     if($days[$counter] == 'x'){
+        //       $html .= '<td class="crossed borderL"> </td>';
+        //     }
+        //     elseif ($value == 2) {
+        //         //$html .= '<td class="borderL crossed"> </td>';
+        //         $html .= '<td class="late borderL"> X </td>';
+        //     } elseif ($value == 1) {
+        //         $html .= '<td class="crossed borderL"> </td>';
+        //     } else {
+        //         $html .= '<td class="crossed borderL"> X </td>';
+        //     }
+        //   }
+        //   else{
+        //     if($days[$counter] == 'x'){
+        //       $html .= '<td class="crossed"> </td>';
+        //     }
+        //     elseif ($value == 2) {
+        //         //$html .= '<td class="borderL crossed"> </td>';
+        //         $html .= '<td class="late"> X </td>';
+        //     } elseif ($value == 1) {
+        //         $html .= '<td class="crossed"> </td>';
+        //     } else {
+        //         $html .= '<td class="crossed"> X </td>';
+        //     }
+        //   }
+        //   $counter += 1;
+        // }
 
-        // Output the generated HTML
-        echo $html;
+        // // Output the generated HTML
+        // echo $html;
         ?>
         
         <td class="borderL" colspan="3">{{$male_attendance_array[$i]['absent_counter']}}</td>
         <td class="borderL" colspan="3">{{$male_attendance_array[$i]['late_counter']}}</td>
         <td class="borderLR" colspan="8"> </td>
     </tr>
-@endfor
+@endfor --}}
+<?php
+  $id_counter = 0;
+  $empty = ''
+?>
+@foreach ($male_attendance_array as $male_attendance)
+    
+  <tr>
+      <td class="borderL num2">{{$id_counter + 1}}</td>
+      <td colspan="9">{{$male_attendance['name']}}</td>
+      
+      <?php
+      
+      // Assuming you have the array available in your controller
+      $data = $male_attendance['attendance'];
+      ?>
+      
+      <?php
+      // Initialize an empty string to store the generated HTML
+      $html = '';
+
+      // Iterate over the array
+      $counter = 0;
+      foreach ($data as $value) {
+        // late 2 | present 1 | else absent
+        if (($counter % 5) == 0){
+          if($days[$counter] == 'x'){
+            $html .= '<td class="crossed borderL"> </td>';
+          }
+          elseif ($value == 2) {
+              //$html .= '<td class="borderL crossed"> </td>';
+              $html .= '<td class="late borderL"> X </td>';
+          } elseif ($value == 1) {
+              $html .= '<td class="crossed borderL"> </td>';
+          } else {
+              $html .= '<td class="crossed borderL"> X </td>';
+          }
+        }
+        else{
+          if($days[$counter] == 'x'){
+            $html .= '<td class="crossed"> </td>';
+          }
+          elseif ($value == 2) {
+              //$html .= '<td class="borderL crossed"> </td>';
+              $html .= '<td class="late"> X </td>';
+          } elseif ($value == 1) {
+              $html .= '<td class="crossed"> </td>';
+          } else {
+              $html .= '<td class="crossed"> X </td>';
+          }
+        }
+        $counter += 1;
+      }
+
+      // Output the generated HTML
+      echo $html;
+
+      $id_counter++;
+      ?>
+      
+      <td class="borderL" colspan="3">{{$male_attendance['absent_counter']}}</td>
+      <td class="borderL" colspan="3">{{$male_attendance['late_counter']}}</td>
+      <td class="borderLR" colspan="8"> {{$male_attendance['is_enrolled'] == 1 ? '' : 'Dropped' }}</td>
+      
+      
+      
+  </tr>
+@endforeach
 
         
 
@@ -407,13 +475,15 @@
         </tr>
         @endfor --}}
         
-        @for ($i = 0; $i < count($female_query); $i++)
+        @for ($i = 0; $i < count($female_attendance_array); $i++)
     <tr>
         <td class="borderL num2">{{$i + 1}}</td>
         <td colspan="9">{{$female_attendance_array[$i]['name']}}</td>
         
+        
         <?php
         // Assuming you have the array available in your controller
+
         $data = $female_attendance_array[$i]['attendance'];
         ?>
         
@@ -460,7 +530,7 @@
         
         <td class="borderL" colspan="3">{{$female_attendance_array[$i]['absent_counter']}} </td>
         <td class="borderL" colspan="3">{{$female_attendance_array[$i]['late_counter']}}</td>
-        <td class="borderLR" colspan="8"> </td>
+        <td class="borderLR" colspan="8">{{$female_attendance_array[$i]['is_enrolled'] == 1 ? '' : 'Dropped' }} </td>
     </tr>
 @endfor
 

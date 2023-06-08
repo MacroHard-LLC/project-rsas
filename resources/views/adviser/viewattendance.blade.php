@@ -11,15 +11,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     function beforeAnchorClick(caught_value, caught_date, subject) {
-        console.log("PROBLEMATIC");
-
         let input_data = {
             student_id : caught_value,
             target_date : $('#date').val(),
             subject_id: $('#subject_adviserView_dropdown').val(),
         };
-        
-        console.log(input_data);
         $.ajax({
             method: "POST",
             headers: {
@@ -31,6 +27,7 @@
             success: function(data) {
                 console.log('OOF');
                 console.log(data);
+                console.log('END OF OOF');
             }
         });
     }

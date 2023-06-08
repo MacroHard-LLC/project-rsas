@@ -36,8 +36,6 @@
     // Get the button element
     const buttonSubmitEditView = document.querySelector('button[type="submit"]');
     //const studentId = document.querySelector('#editAttendanceModal td[data-student-id]').getAttribute('data-student-id');
-
-    console.log(buttonSubmitEditView);
     // Add a click event listener to the button
     buttonSubmitEditView.addEventListener('click', function(event) {
         const buttonEditView = document.getElementById("editStatus");
@@ -57,9 +55,8 @@
 
         let input_data = {
             new_status : selectedValue,
-            student_id : formatArray[0],
-            date : formatArray[1],
-            subject : formatArray[2],
+            // date : formatArray[1],
+            // subject : formatArray[2],
         };
 
         console.log("yeet");
@@ -73,7 +70,9 @@
             url: "{{ route('change_attendance') }}",
             data: { input_data},
             success: function(data) {
+                console.log("yewe");
                 console.log(data);
+                console.log("end of yewe");
                 location.reload();
             }
             });
