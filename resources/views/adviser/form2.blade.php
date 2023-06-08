@@ -455,8 +455,8 @@
         }
 
         // Output the generated HTML
-        // echo $html;
-        // ?>
+         echo $html;
+         ?>
         
         <td class="borderL" colspan="3">{{$female_attendance_array[$i]['absent_counter']}} </td>
         <td class="borderL" colspan="3">{{$female_attendance_array[$i]['late_counter']}}</td>
@@ -562,9 +562,8 @@
             // Output the generated HTML
             echo $html;
             ?>
-          
-          <td class="borderLB" colspan="3">{{$female_total_absent}}</td>
-          <td class="borderLB" colspan="3">{{$female_total_late}}</td>
+          <td class="borderLB" colspan="3"> {{$female_total_absent}}</td>
+          <td class="borderLB" colspan="3"> {{$female_total_late}}</td>
           <td class="borderLRB" colspan="8"> </td>
         </tr>
 

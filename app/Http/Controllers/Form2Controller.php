@@ -137,10 +137,6 @@ class Form2Controller extends Controller
             $late_counter = 0;
             $absent_counter = 0;
 
-            $present_counter = 0;
-            $late_counter = 0;
-            $absent_counter = 0;
-
             foreach($days as  $loop){
                 $presentExist = Present::where('student_id',$student['user_id'])
                                         ->where('date',$loop)
@@ -151,13 +147,16 @@ class Form2Controller extends Controller
                 if($presentExist){
                     $attendance_array[] = 1;
                     $total_attendance_male[$counter] += 1;
+                    $present_counter++;
                 }
                 else if ($lateExist){
                     $attendance_array[] = 2;
                     $total_attendance_male[$counter] += 1;
+                    $late_counter++;
                 }
                 else{
                     $attendance_array[] = 0;
+                    $absent_counter++;
                 }
                 $counter += 1;
             }
