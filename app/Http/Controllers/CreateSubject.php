@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Section;
 
+use App\Models\Instructor;
+use App\Models\Schoolyear;
+use Illuminate\Http\Request;
+use App\Models\Machine_table;
 use App\Models\Subject_table;
 use App\Models\Schedule_table;
-use App\Models\Machine_table;
-use App\Models\Schoolyear;
-use App\Models\Instructor;
-use App\Models\Section;
+use Illuminate\Validation\Rule;
 
 class CreateSubject extends Controller
 {
@@ -100,6 +101,44 @@ class CreateSubject extends Controller
             }
             $sched->save();
         }
+    }
+
+    public function update(Request $request, Subject_table $subject) {
+        $formFields = $request->validate([
+            'id' => ['required',Rule::unique('subject','id')->ignore($subject->id),'integer','digits:5'],
+            'name' => ['required','min:1','max:50','regex:/^[0-9a-zA-Z_ ,.]{0,50}$/'],
+            'grade_level' => ['required','integer','between:7,10'],
+            'schoolyear_id' => ['required','exists:schoolyear,id'],
+            'semester' => ['required','integer','between:1,2'],
+            'machine_id' => ['required','exists:machine,id'],
+            'instructor_rfid' => ['required','exists:instructor,rfid_number'],
+        ]);
+
+        // $studentIDArray = $studentIDs['allStudentID'];
+
+        // $current_students = Student::where('section_id',$section->id)->get();
+        // foreach($current_students as $student){
+        //     if (($key = array_search($student->user_id, $studentIDArray)) !== false) {
+        //         unset($studentIDArray[$key]);
+        //     } else {
+        //         $student->section_id = null;
+        //         User::where('id', $student->user_id)->update(['is_enrolled' => 0]);
+        //         $student->save();
+        //     }
+        // }
+
+        // // this is for the student table
+        // foreach($studentIDArray as $student_id){
+        //     User::where('id', $student_id)->update(['is_enrolled' => 1]);
+        //     Student::where('user_id', $student_id)->update(['section_id' => $section->id]);
+        // }
+
+        // if ($request->adviser_id != $section->adviser_id){
+        //     User::where('id', $section->adviser_id)->update(['is_enrolled' => 0]);
+        //     User::where('id', $request->adviser_id)->update(['is_enrolled' => 1]);
+        // }
+
+        // $section->update($formFields);
     }
 
     public function destroy(Request $request){
