@@ -1,0 +1,57 @@
+
+@font-face {
+    font-family: 'Oswald';
+    src: url('/fonts/Oswald-VariableFont_wght.ttf');
+  }
+  @font-face {
+    font-family: 'Source Sans Pro';
+    src: url('/fonts/SourceSansPro-Regular.ttf');
+  }
+  @font-face {
+    font-family: 'Source Sans Pro Bold';
+    src: url('/fonts/SourceSansPro-Bold.ttf');
+  }
+
+  .bg-dark-blue{
+    background-color: #d3e4ee;
+  }
+  .bg-white{
+    background-color: #ffff;
+  }
+
+  .side-options{
+    font-family: 'Source Sans Pro Bold', sans-serif;
+    text-transform: uppercase;
+    font-size: large;
+    letter-spacing: 0.005rem;
+
+  }
+
+  i{
+    font-size: 1rem;
+  }
+
+  .side-suboptions{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: medium;
+    letter-spacing: 0.005rem;
+  }
+
+  .side-title{
+    font-family: 'Source Sans Pro Bold', sans-serif;
+    text-transform: uppercase;
+    font-size: large;
+  }
+
+ .nav-link{
+    color: #3d5a80;
+  }
+
+  a.nav-link:hover, a.nav-link:active, a.nav-link:active:focus{
+    color: #3d5a80;
+  }
+
+  .username{
+    font-size: large;
+    font-family: 'Source Sans Pro', sans-serif;
+  }

@@ -1,4 +1,8 @@
-@extends('master')
+<link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
+<link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
+
+
+@extends('masteradmin')
 @section('title','View Section')
 @section('content')
 

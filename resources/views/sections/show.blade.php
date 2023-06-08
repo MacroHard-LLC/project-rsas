@@ -1,10 +1,15 @@
 <link rel="stylesheet" href="{{ asset('css/viewgrlvl.css') }}">
 <link rel="stylesheet" href="{{ asset('css/createUser.css') }}">
-@extends('master')
+<link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
+<link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
+
+@extends('masteradmin')
 @section('title','View Section')
 @section('content')
 @include('sections.edit')
 @include('sections.delete')
+
+
 
 <div class='container m-2'>
     <div class='row'>

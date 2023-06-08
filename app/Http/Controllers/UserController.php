@@ -7,14 +7,18 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Schoolyear;
 
 class UserController extends Controller
 {
     // Show all users
     public function index() {
-        return view('users.index', [
+        $users = [
             'users' => User::latest('added_on')->filter(request(['role']))->paginate(15)
-        ]);
+        ];
+        $schoolyears = Schoolyear::all();
+
+        return view('users.index', compact('users','schoolyears'));
     }
 
     public function store(Request $request) {

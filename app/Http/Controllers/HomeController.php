@@ -17,9 +17,7 @@ class HomeController extends Controller
     function LandingPage(){
         return view('landingpage');
     }
-    function AdminHome(){
-        return view('homepage');
-    }
+
 
     /*
    { /**

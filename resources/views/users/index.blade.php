@@ -1,19 +1,21 @@
-<link rel="stylesheet" href="{{ asset('css/createUser.css') }}">
+<link rel="stylesheet" href="{{ asset('css/createsub.css') }}">
 
-@extends('master')
+
+@extends('masteradmin')
 @section('title','View User')
 @section('content')
+
 
 @include('users.create')
 @include('users.edit')
 @include('users.delete')
 
 <br>
-<div class="container-fluid d-flex table-title">
+<div class="container d-flex table-title">
     <h2 id="listTitle">USER LIST</h2>
 </div>
 
-<div class="container">
+<div class="container w-100">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 justify-content-md-end">
             <a href="/users" class="btn btn-secondary" role="button">ALL</a>

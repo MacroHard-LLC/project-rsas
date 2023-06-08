@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{{ asset('css/createuser.css') }}">
 <link rel="stylesheet" href="{{ asset('css/createsub.css') }}">
 
-@extends('master')
+@extends('masteradviser')
 @section('title','Home')
 @section('content')
 

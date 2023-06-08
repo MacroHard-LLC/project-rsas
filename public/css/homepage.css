@@ -14,7 +14,7 @@
 }
 
 .navbar-custom {
-    background-color: #98C1D9;
+    background-color: #3d5a80;
     font-family: 'Source Sans Pro',Arial, Helvetica, sans-serif;
 }
 
@@ -24,7 +24,14 @@
     letter-spacing: 0.15rem;
 }
 
+.homepage{
+    background-image: url('/images/background.jpg');
+    opacity: 50%;
+}
+
 .home-headings {
+    top:15rem;
+    position: relative;
     font-family: 'Poppins';
 }
 
