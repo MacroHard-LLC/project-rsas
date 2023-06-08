@@ -4,6 +4,7 @@ use App\Http\Controllers\CreateUser;
 use App\Http\Controllers\CreateSubject;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Form2Controller;
 use App\Http\Controllers\AdviserViewController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\CreateInstructor;
@@ -160,7 +161,8 @@ Route::post('/login', [LoginController::class, 'loginPost'])->name('login.post')
 Route::get('logout',[LoginController::class,'logout'])->name('logout');
 
 
-
+//Form 2
+Route::get('/form2', [Form2Controller::class, 'ShowForm'])->name('show_form');
 
 
 //I tried to group them - Pris
