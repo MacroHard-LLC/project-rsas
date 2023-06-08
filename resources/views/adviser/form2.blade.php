@@ -281,8 +281,8 @@
           <td class="borderB"> </td>
           <td class="borderB"> </td>
           <td class="borderB"> </td>
-          <td class="borderLB" colspan="3"> </td>
-          <td class="borderLB" colspan="3"> </td>
+          <td class="borderLB" colspan="3">{{$male_total_absent}}</td>
+          <td class="borderLB" colspan="3">{{$male_total_late}}</td>
           <td class="borderLRB" colspan="8"> </td>
         </tr>
 
@@ -464,8 +464,8 @@
           <td class="borderB"> </td>
           <td class="borderB"> </td>
           <td class="borderB"> </td>
-          <td class="borderLB" colspan="3"> </td>
-          <td class="borderLB" colspan="3"> </td>
+          <td class="borderLB" colspan="3">{{$female_total_absent}}</td>
+          <td class="borderLB" colspan="3">{{$female_total_late}}</td>
           <td class="borderLRB" colspan="8"> </td>
         </tr>
         <tr> <!--combined total per day row-->

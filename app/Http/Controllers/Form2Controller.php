@@ -11,6 +11,7 @@ use App\Models\PresentAttendance;
 use App\Models\LateAttendance;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 use Carbon\Carbon;
 
@@ -197,7 +198,7 @@ class Form2Controller extends Controller
                 'absent_counter' => $absent_counter
             );
 
-
+            
 
             // $is_present = PresentAttendance::where('student_id',$student['user_id'])
             //             ->exists();
@@ -215,6 +216,33 @@ class Form2Controller extends Controller
             //     $status = 'Late';
             // }
         }
+
+        //to get the total number of male absents per month
+        $male_total_absent = 0;
+        foreach ($male_attendance_array as $male_attendance) {
+            $male_total_absent = $male_total_absent + $male_attendance['absent_counter'];
+        }
+        
+        // to get the total number of male lates per month
+        $male_total_late = 0;
+        foreach ($male_attendance_array as $male_attendance) {
+            $male_total_late = $male_total_late + $male_attendance['late_counter'];
+        }
+
+        // to get the total number of female absents per month
+        $female_total_absent = 0;
+        foreach ($female_attendance_array as $female_attendance) {
+            $female_total_absent = $female_total_absent + $female_attendance['absent_counter'];
+        }
+        echo $female_total_absent;
+
+        // to get the total number of female lates per month
+        $female_total_late = 0;
+        foreach ($female_attendance_array as $female_attendance) {
+            $female_total_late = $female_total_late + $female_attendance['late_counter'];
+        }
+
+        // echo $female_total_late;
 
         //var_dump($adviser);
         // var_dump($grade_level);
@@ -235,6 +263,10 @@ class Form2Controller extends Controller
         -> with('male_query', $male_query)
         -> with('female_query', $female_query)
         -> with('male_attendance_array', $male_attendance_array)
-        -> with('female_attendance_array', $female_attendance_array);
+        -> with('female_attendance_array', $female_attendance_array)
+        -> with('male_total_absent', $male_total_absent)
+        -> with('female_total_absent', $female_total_absent)
+        -> with('male_total_late', $male_total_late)
+        -> with('female_total_late', $female_total_late);
     }
 }
