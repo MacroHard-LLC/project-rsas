@@ -367,8 +367,8 @@
         // echo $html;
         // ?>
         
-        <td class="borderL" colspan="3">{{$female_attendance_array[$i]['name']}} </td>
-        <td class="borderL" colspan="3"> </td>
+        <td class="borderL" colspan="3">{{$female_attendance_array[$i]['absent_counter']}} </td>
+        <td class="borderL" colspan="3">{{$female_attendance_array[$i]['late_counter']}}</td>
         <td class="borderLR" colspan="8"> </td>
     </tr>
 @endfor
