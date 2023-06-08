@@ -8,9 +8,10 @@
 @section('content')
 
 {{-- Modular Pages--}}
-@include('subjects.newsub')
+{{-- @include('subjects.newsub') --}}
 @include('sections.create')
 @include('users.create')
+@include('subjects.create')
 
 
 @include('misc.newsy')
@@ -52,7 +53,8 @@
                         </div>
                         <div class="col">
                             <button class="btn btn-primary create btn-create" type="button">
-                                <a data-bs-toggle="modal" data-bs-target="#registerSubModal">Create Subject</a>
+                                {{-- <a data-bs-toggle="modal" data-bs-target="#registerSubModal">Create Subject</a> --}}
+                                <a data-bs-toggle="modal" data-bs-target="#createSubjectModal">Create Subject</a>
                             </button>
                         </div>
                         <div class="col">

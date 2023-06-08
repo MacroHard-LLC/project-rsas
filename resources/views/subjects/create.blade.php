@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-md-6 input-field">
                                 <label for="subject_id_input" class="input-title" >Subject ID</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Input a 5-digit integer" name="subject_id" id="subject_id_input" minlength="5" maxlength="5" required autofocus>
+                                <input type="text" class="form-control form-control-sm" placeholder="Input a 5-digit integer" name="subject_id" id="subject_id_input" pattern="[0-9]+" minlength="5" maxlength="5" required autofocus>
                                 <div class="is-invalid" id="subject_id_error">
                                     <span></span>
                                 </div>
@@ -21,7 +21,7 @@
 
                             <div class="col-md-6 input-field">
                                 <label for="subject_name_input" class="input-title">Subject Name</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Ex. Introduction to Computer Science" name="subject_name" id="subject_name_input" minlength="1" maxlength="50" aria-describedby="nameError" required>
+                                <input type="text" class="form-control form-control-sm" placeholder="Ex. Introduction to Computer Science" name="subject_name" id="subject_name_input" pattern="^[0-9a-zA-Z_ ,.]{0,50}$" minlength="1" maxlength="50" aria-describedby="nameError" required>
                                 <div class="is-invalid" id="subject_name_error">
                                     <span></span>
                                 </div>
@@ -31,7 +31,7 @@
                             <div class="col-6 col-md-4 input-field">
                                 <label for="subject_grade_level_input" class="input-title">Grade Level</label>
                                 <select name="subject_grade_level" class="form-select" id="subject_grade_level_input" required>
-                                    <option value="" disabled selected="selected" class="form-message">Choose a Grade Level</option>
+                                    <option value="" disabled selected="selected" class="form-message">Select a Gr. Lvl</option>
                                     @for ($i = 7; $i < 11; $i++)
                                         <option value={{$i}}>Level {{$i}}</option>
                                     @endfor
@@ -44,7 +44,7 @@
                             <div class="col-6 col-md-4 input-field">
                                 <label for="subject_schoolyear_id_input" class="input-title">School Year</label>
                                 <select name="subject_schoolyear_id" class="form-select" id="subject_schoolyear_id_input" required>
-                                    <option value="" disabled selected="selected">Select a School Year</option>
+                                    <option value="" disabled selected="selected">Select a SY</option>
                                     @foreach ($schoolyears as $schoolyear)
                                         <option value="{{ $schoolyear->id }}">{{ $schoolyear->start_year }} - {{ $schoolyear->end_year }}</option>
                                     @endforeach
@@ -67,20 +67,19 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 input-field">
-                                    <label for="subject_room_input" class="input-title">Assigned Room</label>
-                                    <input type="text" name="subject_room" class="form-control form-control-sm" placeholder="Ex. RM 143, Arts and Sciences Building" id="subject_room_input" maxlength="20" required>
-                                    <div class="is-invalid" id="subject_room_error">
-                                        <span></span>
-                                    </div>
+                                <label for="subject_machine_id_input" class="input-title">Assigned Room</label>
+                                <select name="subject_machine_id" class="form-select" id="subject_machine_id_input" required>
+                                <option value="" disabled selected="selected">Select a Room</option>
+                                @foreach ($machines as $machine)
+                                    <option value="{{ $machine->id }}">{{ $machine->room }}</option>
+                                @endforeach
+                                </select>
+                                <div class="is-invalid" id="subject_machine_id_error">
+                                    <span></span>
                                 </div>
+                            </div>
 
                             <div class="col-md-6 input-field">
-                                    <label for="instruct_rfid" class="input-title">Instructor RFID</label>
-                                    <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="instruct_rfid" pattern="[0-9]+" id='instruct_rfid' required>
-                                    <div class="is-invalid" id="subject_room_error">
-                                        <span></span>
-                                    </div>
-
                                 <label for="subject_schoolyear_id_input" class="input-title">Instructor</label>
                                 <select name="subject_instructor_rfid" class="form-select" id="subject_instructor_rfid_input" required>
                                     <option value="" disabled selected="selected">Select an Instructor</option>
@@ -101,104 +100,45 @@
                                 <div class="col">Time Start</div>
                                 <div class="col">Time End</div>
                                 </div>
-                                <div class="row pb-2">
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-check pb-2">
-                                            <input class="form-check-input" type="checkbox" id="MondayCheck" value="MON">
-                                            <label class="form-check-label" for="MondayCheck">Monday</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-outline input-field">
-                                            <input type="time" name="mon_time_st" class="form-control form-control-sm" placeholder="00:00 XM" id="mon_time_st">
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-outline input-field">
-                                            <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="mon_time_end" id="mon_time_end">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row pb-2">
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-check pb-2">
-                                            <input class="form-check-input" type="checkbox" id="TuesdayCheck" value="TUE">
-                                            <label class="form-check-label" for="TuesdayCheck">Tuesday</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-outline input-field">
-                                            <input type="time" name="tue_time_st" class="form-control form-control-sm" placeholder="00:00 XM" id="tue_time_st">
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-outline input-field">
-                                            <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="tue_time_end" id="tue_time_end">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row pb-2">
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-check pb-2">
-                                            <input class="form-check-input" type="checkbox" id="WednesdayCheck" value="WED">
-                                            <label class="form-check-label" for="WednesdayCheck">Wednesday</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-outline input-field">
-                                            <input type="time" name="wed_time_st" class="form-control form-control-sm" placeholder="00:00 XM" id="wed_time_st">
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-outline input-field">
-                                            <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="wed_time_end" id="wed_time_end">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row pb-2">
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-check pb-2">
-                                            <input class="form-check-input" type="checkbox" id="ThursdayCheck" value="THU">
-                                            <label class="form-check-label" for="ThursdayCheck">Thursday</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-outline input-field">
-                                            <input type="time" name="thu_time_st" class="form-control form-control-sm" placeholder="00:00 XM" id="thu_time_st">
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-outline input-field">
-                                            <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="thu_time_end" id="thu_time_end">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row pb-2">
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-check pb-2">
-                                            <input class="form-check-input" type="checkbox" id="FridayCheck" value="FRI">
-                                            <label class="form-check-label" for="FridayCheck">Friday</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-outline input-field">
-                                            <input type="time" name="fri_time_st" class="form-control form-control-sm" placeholder="00:00 XM" id="fri_time_st">
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-4">
-                                        <div class="form-outline input-field">
-                                            <input type="time" class="form-control form-control-sm" placeholder="00:00 XM" name="fri_time_end" id="fri_time_end">
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="is-invalid" role="alert" id="daysError" name="daysError" style="visibility:hidden">
-                                    <strong>Please check at least one of the days</strong>
+                                @php
+                                    $days = [
+                                        ['value' => 'MON', 'label' => 'Monday'],
+                                        ['value' => 'TUE', 'label' => 'Tuesday'],
+                                        ['value' => 'WED', 'label' => 'Wednesday'],
+                                        ['value' => 'THU', 'label' => 'Thursday'],
+                                        ['value' => 'FRI', 'label' => 'Friday'],
+                                    ];
+                                @endphp
+
+                                @foreach($days as $day)
+                                    <div class="row pb-2">
+                                        <div class="col-6 col-md-4">
+                                            <div class="form-check pb-2">
+                                                <input class="form-check-input day-checkbox" type="checkbox" id="{{ $day['value'] }}Check" value="{{ $day['value'] }}">
+                                                <label class="form-check-label" for="{{ $day['value'] }}Check">{{ $day['label'] }}</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-4">
+                                            <div class="form-outline input-field">
+                                                <input type="time" name="{{ $day['value'] }}_time_st" class="form-control form-control-sm time-input" placeholder="00:00 XM" id="{{ $day['value'] }}_time_st_input" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 col-md-4">
+                                            <div class="form-outline input-field">
+                                                <input type="time" class="form-control form-control-sm time-input" placeholder="00:00 XM" name="{{ $day['value'] }}_time_end" id="{{ $day['value'] }}_time_end_input" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                <div class="is-invalid" id="daysError">
+                                    <span></span>
                                 </div>
                             </div>
 
                         <div class="form-group float-end">
-                            <button class="btn btn-primary" type="submit" id="submitNewSubject" disabled><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
+                            <button class="btn btn-primary" type="submit" id="submitNewSubject"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                         </div>
                         </div>
                     </fieldset>
@@ -207,3 +147,49 @@
         </div>
     </div>
 </div>
+
+<script src="{{ asset('js/createSubject.js') }}"></script>
+<script>
+    $(function () {
+        $('#createSubjectForm').submit(function (e) {
+            e.preventDefault();
+
+            let formData = $(this).serializeArray();
+            jQuery.each(formData, function(i, field ) {
+                field.name = field.name.replace("subject_", "")
+            });
+
+            console.log(formData);
+
+            let selectedDays = [];
+            // Iterate over checked checkboxes and add their values to the selectedDays array
+            $("input[type='checkbox']:checked").each(function() {
+                selectedDays.push($(this).val());
+            });
+            selectedDays = JSON.stringify(selectedDays);
+            formData.push({name: 'days', value: selectedDays});
+
+            $(".is-invalid").children("span").text("");
+            $("#createSubjectForm input").removeClass("is-invalid");
+
+            $.ajax({
+                method: "POST",
+                headers: {
+                    Accept: "application/json"
+                },
+                url: "{{ route('register_sub') }}",
+                data: formData,
+                success: () => window.location.assign(window.location.href),
+                error: (response) => {
+                    if(response.status === 422) {
+                        let errors = response.responseJSON.errors;
+                        Object.keys(errors).forEach(function (key) {
+                            $("#" + key + "_input").addClass("is-invalid");
+                            $("#" + key + "_error").children("span").text(errors[key][0]);
+                        });
+                    }
+                }
+            })
+        });
+    })
+</script>

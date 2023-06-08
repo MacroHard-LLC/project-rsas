@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Schoolyear;
 use App\Models\Instructor;
+use App\Models\Machine_table;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,8 @@ class HomeController extends Controller
         $users = User::all();
         $schoolyears = Schoolyear::all();
         $instructors = Instructor::all();
-        return view('homepage', compact('users','schoolyears','instructors'));
+        $machines = Machine_table::all();
+        return view('homepage', compact('users','schoolyears','instructors','machines'));
     }
 
     function LandingPage(){

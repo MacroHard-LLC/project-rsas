@@ -15,8 +15,9 @@ class CreateSubject extends Controller
     function CreateSubjectIndex(){
         $schoolyears = Schoolyear::all();
         $instructors = Instructor::all();
+        $machines = Machine_table::all();
         $subjects = Subject_table::latest('added_on')->filter(request(['grlvl']))->paginate(15);
-        return view('subjects.viewsub', compact('subjects','schoolyears','instructors'));
+        return view('subjects.viewsub', compact('subjects','schoolyears','instructors','machines'));
     }
 
     function CheckSubIdExist(Request $request){
@@ -68,6 +69,16 @@ class CreateSubject extends Controller
         //     'year_st' => ['required'],
         //     'year_end' => ['required'],
         // ]);
+
+        $formFields = $request->validate([
+            'id' => ['required','exists:user,id'],
+            'allStudentID' => ['required','array'],
+            'allStudentID.*'  => ['required','distinct','exists:user,id'],
+            'name' => ['required','max:50'],
+            'grade_level' => ['required','integer','between:7,10'],
+            'schoolyear_id' => ['required','exists:schoolyear,id'],
+        ]);
+
         $formFields = $request;
         $subject = new Subject_table;
         //$subject->grade_level = $formFields['grade_level'];
