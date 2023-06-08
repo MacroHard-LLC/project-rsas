@@ -3,7 +3,7 @@
     @section('title','View Subjects')
     @section('content')
 
-    @include('subjects.newsub')
+    @include('subjects.create')
     @include('subjects.delete')
 
 <br>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="d-flex col justify-content-md-end">
-            <a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#registerSubModal"><i class="fa-solid fa-book"></i> new subject</a>
+            <a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#createSubjectModal"><i class="fa-solid fa-book"></i> new subject</a>
         </div>
     </div>
 

@@ -22,42 +22,6 @@ class CreateSubject extends Controller
         return view('subjects.viewsub', compact('subjects','schoolyears','instructors','machines'));
     }
 
-    function CheckSubIdExist(Request $request){
-        $incoming_id = $request->input_data;
-        $isUserSuccess = Subject_table::where('id','=',$incoming_id)->first();
-        if ($isUserSuccess){
-            return response()->json(['exists' => true]);
-        }
-        else{
-            return response()->json(['exists' => false]);
-        }
-    }
-
-    function DoesInstructorIdExist(Request $request){
-        $incoming_id = $request->input_data;
-
-        $instructor = Instructor::where('rfid_number','=',$incoming_id)->first();
-        if($instructor){
-            return FALSE;
-        }
-        return TRUE;
-    }
-
-    function GetAllSchoolyear(Request $request){
-        $query = Schoolyear::all();
-        $array = array();
-        foreach($query as $schoolyear){
-            $array[] = array(
-                'id' => $schoolyear['id'],
-                'start' => $schoolyear['start_year'],
-                'end' => $schoolyear['end_year']
-            );
-        }
-
-        return $array;
-    }
-
-
     function DataInsert(Request $request){
         $formFields = $request->validate([
             'id' => ['required','unique:subject,id','integer','digits:5'],

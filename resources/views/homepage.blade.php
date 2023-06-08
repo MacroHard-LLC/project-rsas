@@ -8,12 +8,9 @@
 @section('content')
 
 {{-- Modular Pages--}}
-{{-- @include('subjects.newsub') --}}
-@include('sections.create')
 @include('users.create')
+@include('sections.create')
 @include('subjects.create')
-
-
 @include('misc.newsy')
 @include('misc.newinstruct')
 
