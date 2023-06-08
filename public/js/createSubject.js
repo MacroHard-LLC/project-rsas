@@ -34,17 +34,6 @@ window.addEventListener('load', function() {
     );
 });
 
-// function checkOverallValidity(){
-//     var form_children = $("#createSubjectForm").children();
-//     var fields = form_children.find('.form-control, .form-select')
-//     var valid_fields = form_children.find('.form-control.is-valid, .form-select.is-valid')
-//     var is_valid = fields.length === valid_fields.length && $("input[type='checkbox']:checked").length > 0;
-//     if (is_valid)
-//         document.getElementById("submitNewSubject").style.visibility = "visible";
-//     else
-//         document.getElementById("submitNewSubject").style.visibility = "hidden";
-// }
-
 function checkOverallValidity() {
     var formChildren = $("#createSubjectForm").children();
     var fields = formChildren.find('.form-control, .form-select');
@@ -55,10 +44,10 @@ function checkOverallValidity() {
 
     var isValid = fields.length - 10 === validFields.length && checkedCheckboxes.length > 0 && isTimeInputsFilled;
 
-    console.log("FIELDS " + fields.length)
-    console.log("validfields " + validFields.length)
-    console.log("checkedcb " + checkedCheckboxes.length)
-    console.log("istimeinf " + isTimeInputsFilled)
+    // console.log("FIELDS " + fields.length)
+    // console.log("validfields " + validFields.length)
+    // console.log("checkedcb " + checkedCheckboxes.length)
+    // console.log("istimeinf " + isTimeInputsFilled)
 
     if (isValid) {
       document.getElementById("submitNewSubject").style.visibility = "visible";

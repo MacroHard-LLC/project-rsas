@@ -184,8 +184,9 @@
                     if(response.status === 422) {
                         let errors = response.responseJSON.errors;
                         Object.keys(errors).forEach(function (key) {
-                            $("#" + key + "_input").addClass("is-invalid");
-                            $("#" + key + "_error").children("span").text(errors[key][0]);
+                            $("#subject_" + key + "_input").addClass("is-invalid");
+                            $("#subject_" + key + "_error").children("span").text(errors[key][0]);
+                            console.log(errors);
                         });
                     }
                 }
