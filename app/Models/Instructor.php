@@ -24,4 +24,8 @@ class Instructor extends Model
     public function subject(){
         return $this->hasMany(Subject_table::class, 'instructor_rfid', 'rfid_number');
     }
+
+    public function instructor_logsheet(){
+        return $this->hasMany(Instructor_logsheet::class, 'rfid_number', 'rfid_number');
+    }
 }

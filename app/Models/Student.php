@@ -48,7 +48,7 @@ class Student extends Model
         return $this->hasMany(Late::class, 'student_id', 'user_id');
     }
 
-    public function logsheet(){
-        return $this->hasMany(Logsheet::class, 'rfid_number', 'rfid_number');
+    public function student_logsheet(){
+        return $this->hasMany(Student_logsheet::class, 'rfid_number', 'rfid_number');
     }
 }
