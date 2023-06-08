@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RFIDController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // RFID Controller
-Route::post('/rfid/tap', 'RFIDController@tap');
+Route::post('/rfid/tap', [RFIDController::class, 'tap']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

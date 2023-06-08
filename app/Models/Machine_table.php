@@ -13,8 +13,12 @@ class Machine_table extends Model
     // UPDATED_AT where we already have updated_on in our database
     public $timestamps = FALSE;
 
-    public function logsheet(){
-        return $this->hasMany(Logsheet::class);
+    public function student_logsheet(){
+        return $this->hasMany(Student_logsheet::class);
+    }
+
+    public function instructor_logsheet(){
+        return $this->hasMany(Instructor_logsheet::class);
     }
 
     public function subject(){

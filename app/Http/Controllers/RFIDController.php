@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Student;
 use App\Models\Schedule_table;
 use App\Models\Subject_table;
 use App\Models\Machine_table;
-use App\Models\Logsheet;
-
+use App\Models\Student_logsheet;
+use App\Models\Instructor_logsheet;
+use App\Models\Instructor;
 use App\Models\Present;
 use App\Models\Late;
-use App\Models\Absent;
 
 use Carbon\Carbon;
 
@@ -25,21 +24,39 @@ class RFIDController extends Controller
         $rfid = $request->input('rfid_number');
         $machine = $request->input('machine_id');
 
-        // Check if RFID tag exists in the database
-        $rfidExists = Student::where('rfid_number', $rfid)->where('role','student')->exists();
+        // Check if RFID tag exists in the student table
+        $student = Student::where('rfid_number', $rfid)->first();
 
-        // if it does exist
-        if ($rfidExists) {
-            // log sheet things - move this
-            $logsheet = new Logsheet;
-            $logsheet->time = now();
-            $logsheet->rfid_number = $rfid;
-            $logsheet->machine = $machine;
+        // If RFID tag not found in the student table, check in the instructor table
+        $instructor = null;
+        if (!$student) {
+            $instructor = Instructor::where('rfid_number', $rfid)->first();
+        }
+
+        // If the RFID tag doesn't belong to any student or instructor, handle the error case
+        if (!$student && !$instructor){
+            return response()->json(['message' => 'RFID tag not found'], 404);
+        }
+
+        // If the RFID tag belongs to an instructor, associate the instructor with the logsheet
+        if ($instructor) {
+            $logsheet = new Instructor_logsheet;
+            $logsheet->machine_id = $machine;
+            $logsheet->rfid_number = $instructor->rfid_number;
+            // testing only
+            $logsheet->save();
+        }
+        // If the RFID tag belongs to a student, associate the student with the logsheet
+        else {
+            $logsheet = new Student_logsheet;
+            $logsheet->machine_id = $machine;
+            $logsheet->rfid_number = $student->rfid_number;
 
             // getting the thingies from time
             // $logsheet->time is problematic because I do not know how well it translate
             // the date since it has time
-            $day_of_week = Carbon::parse($logsheet->time)->format('l');
+            $now = Carbon::now();
+            $day_of_week = Carbon::parse($now)->format('l');
             if($day_of_week == 'Monday'){
                 $day_of_week = 'MON';
             }
@@ -57,46 +74,34 @@ class RFIDController extends Controller
             }
 
             // get all the subjects in the table with the same machine
-            $subject_table = Subject_table::where('machine_id',$logsheet->machine)->get();
-            foreach($subject_table as $subject){
+            $subjects = Subject_table::where('machine_id',$logsheet->machine_id)->get();
+            foreach($subjects as $subject){
                 // get the day of the subject
                 $current_sched = Schedule_table::where('subject_id',$subject->id)
                                         ->where('day',$day_of_week)->first();
                 // if the current_sched exists, execute
-                if($current_sched){
+                if ($current_sched){
                     $sched_startTime = Carbon::createFromFormat('H:i:s',$current_sched->time_start);
                     $sched_endTime = Carbon::createFromFormat('H:i:s',$current_sched->time_end);
 
-                    $now = Carbon::now();
-
-                    if($now->before($sched_startTime)){
+                    if($now->before($sched_startTime))
                         $newRow = new Present;
-                        $newRow->subject_id = $subject->id;
-                        $newRow->date = now();
-
-                        $student = Student::where('rfid_number',$rfid)->first();
-                        $newRow->student_id = $student->id;
-                        $newRow->save();
-                    }
-                    else if($now->between($sched_startTime,$sched_endTime)){
+                    else if($now->between($sched_startTime,$sched_endTime))
                         $newRow = new Late;
-                        $newRow->subject_id = $subject->user_id;
-                        $newRow->date = now();
 
-                        $student = Student::where('rfid_number',$rfid)->first();
-                        $newRow->student_id = $student->user_id;
-                        $newRow->save();
-                    }
+                    $newRow->subject_id = $subject->id;
+                    $newRow->date = $now;
+                    $newRow->student_id = $student->id;
+                    $newRow->save();
+
                     $logsheet->save();
-
+                } else{
+                    // testing only
+                    $logsheet->save();
+                    return response()->json(['message' => 'No scheduled class right now'], 400);
                 }
             };
-
-            // Return a success response
-            return response()->json(['message' => 'RFID tag tapped successfully']);
         }
-
-        // Return a failure response
-        return response()->json(['message' => 'RFID tag not found'], 404);
+        return response()->json(['message' => 'RFID tag tapped successfully']);
     }
 }
