@@ -214,8 +214,8 @@
         echo $html;
         ?>
         
-        <td class="borderL" colspan="3"> </td>
-        <td class="borderL" colspan="3"> </td>
+        <td class="borderL" colspan="3">{{$male_attendance_array[$i]['absent_counter']}}</td>
+        <td class="borderL" colspan="3">{{$male_attendance_array[$i]['late_counter']}}</td>
         <td class="borderLR" colspan="8"> </td>
     </tr>
 @endfor
@@ -316,8 +316,8 @@
           <td class="crossed"> </td>
           <td class="crossed"> </td>
           <td class="crossed"> </td>
-          <td class="borderL" colspan="3"> </td>
-          <td class="borderL" colspan="3"> </td>
+          <td class="borderL" colspan="3">{{$female_attendance_array[$i]['absent_counter']}}</td>
+          <td class="borderL" colspan="3">{{$female_attendance_array[$i]['late_counter']}}</td>
           <td class="borderLR" colspan="8"> </td>
         </tr>
         @endfor --}}
@@ -364,10 +364,10 @@
         }
 
         // Output the generated HTML
-        echo $html;
-        ?>
+        // echo $html;
+        // ?>
         
-        <td class="borderL" colspan="3"> </td>
+        <td class="borderL" colspan="3">{{$female_attendance_array[$i]['name']}} </td>
         <td class="borderL" colspan="3"> </td>
         <td class="borderLR" colspan="8"> </td>
     </tr>
