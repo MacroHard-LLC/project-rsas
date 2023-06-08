@@ -206,7 +206,7 @@ class AdviserViewController extends Controller
         //$subject = $subject['subject_id'];
 
         // get the row of the student, delete it
-        $isRow = Present::where('student_id','=',$student_id);
+        $isRow = Present::where('student_id','=',$student_id)->where('date',$target_date)->where('subject_id',$subject);
         if (!isset($isRow)){
             $isRow = Late::where('student_id','=',$student_id)->where('date',$target_date)->where('subject_id',$subject);
             if (!isset($isRow)){
