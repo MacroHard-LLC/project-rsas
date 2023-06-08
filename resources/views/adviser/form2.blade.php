@@ -495,8 +495,8 @@
           <td class="borderB"> </td>
           <td class="borderB"> </td>
           <td class="borderB"> </td>
-          <td class="borderLB" colspan="3"> </td>
-          <td class="borderLB" colspan="3"> </td>
+          <td class="borderLB" colspan="3">{{$total_absent}}</td>
+          <td class="borderLB" colspan="3">{{$total_late}}</td>
           <td class="borderLRB" colspan="8"> </td>
         </tr>
         <tr class="noBorder"> <!--holder row para di maguba ang formatting-->

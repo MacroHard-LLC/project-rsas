@@ -242,6 +242,9 @@ class Form2Controller extends Controller
             $female_total_late = $female_total_late + $female_attendance['late_counter'];
         }
 
+        $total_absent = $male_total_absent + $female_total_absent;
+        $total_late = $male_total_late + $female_total_late;
+
         // echo $female_total_late;
 
         //var_dump($adviser);
@@ -267,6 +270,8 @@ class Form2Controller extends Controller
         -> with('male_total_absent', $male_total_absent)
         -> with('female_total_absent', $female_total_absent)
         -> with('male_total_late', $male_total_late)
-        -> with('female_total_late', $female_total_late);
+        -> with('female_total_late', $female_total_late)
+        -> with('total_absent', $total_absent)
+        -> with('total_late', $total_late);
     }
 }
