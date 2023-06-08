@@ -60,8 +60,19 @@ class Form2Controller extends Controller
         $firstDayOfMonth = Carbon::create($currentYear, $currentMonth, 1)->startOfMonth();
         $lastDayOfMonth = Carbon::create($currentYear, $currentMonth, 1)->endOfMonth();
 
+        $init_dayOfWeek = $firstDayOfMonth->dayOfWeek;
+
         // Initialize an array to store the days
         $days = [];
+
+        // Add dummy things depending on which day the start of the month
+        for($i = 1; $i < $init_dayOfWeek; $i++){
+            $days[] = 'x';
+        }
+
+        $daysLabel = []; // Label of the days i.e. M, W, F
+        $daysNumber = []; // Label of the date i.e. 1 , 12, 23
+
 
         // Start from the first day and loop until the last day
         $currentDay = $firstDayOfMonth;
@@ -76,16 +87,47 @@ class Form2Controller extends Controller
             // Move to the next day
             $currentDay->addDay();
         }
+
         // days is here
+        foreach($days as $loop){
+            if($loop == 'x'){
+                $daysLabel[] = 'x';
+                $daysNumber[] = 'x';
+            } 
+            else{
+                $carbonDate = Carbon::parse($loop);
+                $target_dayOfWeek = $carbonDate->dayOfWeek;
+                $target_day = $carbonDate->day;
+                $daysNumber[] = $target_day;
+                if($target_dayOfWeek == 1){
+                    $scape = 'M';
+                } 
+                else if($target_dayOfWeek == 2){
+                    $scape = 'T';
+                }
+                else if($target_dayOfWeek == 3){
+                    $scape = 'W';
+                } 
+                else if($target_dayOfWeek == 4){
+                    $scape = 'Th';
+                } 
+                else if($target_dayOfWeek == 5){
+                    $scape = 'F';
+                }  
+                $daysLabel[] = $scape;
+            }
+        }
 
         $male_attendance_array = array();
         $attendance_array = array();
+        $total_attendance_male = array_fill(0, count($days), 0);
         foreach($male_query as $student){
             
             $first_name = User::where('id',$student['user_id'])->value('first_name');
             $last_name = User::where('id',$student['user_id'])->value('last_name');
             $middle_name = User::where('id',$student['user_id'])->value('middle_name');
             $name = $last_name . ', ' . $first_name . ' ' . $middle_name;
+            $counter = 0;
 
             foreach($days as  $loop){
                 $presentExist = Present::where('student_id',$student['user_id'])
@@ -96,14 +138,18 @@ class Form2Controller extends Controller
                                         ->first();
                 if($presentExist){
                     $attendance_array[] = 1;
+                    $total_attendance_male[$counter] += 1;
                 }
                 else if ($lateExist){
                     $attendance_array[] = 2;
+                    $total_attendance_male[$counter] += 1;
                 }
                 else{
                     $attendance_array[] = 0;
                 }
+                $counter += 1;
             }
+
             $male_attendance_array[] = array(
                 'name' => $name,
                 'attendance' => $attendance_array,
@@ -146,12 +192,14 @@ class Form2Controller extends Controller
 
         $female_attendance_array = array();
         $attendance_array = array();
+        $total_attendance_female = array_fill(0, count($days), 0);
         foreach($female_query as $student){
             $first_name = User::where('id',$student['user_id'])->value('first_name');
             $last_name = User::where('id',$student['user_id'])->value('last_name');
             $middle_name = User::where('id',$student['user_id'])->value('middle_name');
             $name = $last_name . ', ' . $first_name . ' ' . $middle_name;
 
+            $counter = 0;
             foreach($days as  $loop){
                 $presentExist = Present::where('student_id',$student['user_id'])
                                         ->where('date',$loop)
@@ -161,15 +209,29 @@ class Form2Controller extends Controller
                                         ->first();
                 if($presentExist){
                     $attendance_array[] = 1;
+                    $total_attendance_female[$counter] += 1;
                 }
                 else if ($lateExist){
                     $attendance_array[] = 2;
+                    $total_attendance_female[$counter] += 1;
                 }
                 else{
                     $attendance_array[] = 0;
                 }
+                $counter += 1;
             }
 
+            $total_attendance = array_fill(0, count($days), 0);
+            $counter = 0;
+            foreach($total_attendance_male as $looper){
+                $total_attendance[$counter] += $looper;
+                $counter += 1;
+            }
+            $counter = 0;
+            foreach($total_attendance_female as $looper){
+                $total_attendance[$counter] += $looper;
+                $counter += 1;
+            }
             $female_attendance_array[] = array(
                 'name' => $name,
                 'attendance' => $attendance_array,
@@ -208,6 +270,12 @@ class Form2Controller extends Controller
         -> with('male_query', $male_query)
         -> with('female_query', $female_query)
         -> with('male_attendance_array', $male_attendance_array)
-        -> with('female_attendance_array', $female_attendance_array);
+        -> with('female_attendance_array', $female_attendance_array)
+        -> with('total_attendance_male', $total_attendance_male)
+        -> with('total_attendance', $total_attendance)
+        -> with('days', $days)
+        -> with('daysLabel', $daysLabel)
+        -> with('daysNumber', $daysNumber)
+        -> with('total_attendance_female', $total_attendance_female);
     }
 }

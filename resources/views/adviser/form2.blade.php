@@ -77,7 +77,7 @@
           <td class="header" colspan = "6" rowspan="2"> Total for the Month </td>
           <td class="headersub" colspan = "8" rowspan = "3">  <b>REMARK/S</b> (If <b>DROPPED OUT,</b> state reason, please refer to legend number 2. If <b>TRANSFERRED IN/OUT</b>, write the name of School.) </td>
         </tr>
-        <tr>
+        {{-- <tr>
           <td class="num"> </td>
           <td class="num"> </td>
           <td class="num"> </td>
@@ -103,8 +103,42 @@
           <td class="num"> </td>
           <td class="num"> </td>
           <td class="num"> </td>
+        </tr> --}}
+      <tr>
+        <?php
+            $data = $daysNumber;
+          ?>
+          
+          <?php
+            // Initialize an empty string to store the generated HTML
+            $html = ''; 
+            $counter = 0;
+            foreach ($data as $value) {
+                // late 2 | present 1 | else absent
+                if (($counter % 5) == 0) {
+                  if ($days[$counter] == 'x'){
+                    $html .= '<td class="num borderL"></td>';  
+                  }
+                  else{
+                    $html .= '<td class="num borderL">' .strval($value). '</td>';
+                  }
+                } else {
+                  if($days[$counter] == 'x'){
+                    $html .= '<td class="num"> </td>';
+                  }
+                  else{
+                    $html .= '<td class="num">' .strval($value). ' </td>';
+                  }
+                  
+                }
+                $counter += 1;
+            }
+
+            // Output the generated HTML
+            echo $html;
+            ?>
         </tr>
-        <tr> <!--third row, for dates sa attendance-->
+        {{-- <tr> <!--third row, for dates sa attendance-->
           <td class="borderB num1"> </td>
           <td class="borderB"> </td>
           <td class="borderB"> </td>
@@ -132,7 +166,44 @@
           <td class="borderB"> </td>
           <td class="headersub" colspan = "3"> ABSENT </td>
           <td class="headersub" colspan = "3"> TARDY </td>
-        </tr>
+        </tr> --}}
+
+        <tr>
+          <?php
+              $data = $daysLabel;
+            ?>
+            
+            <?php
+              // Initialize an empty string to store the generated HTML
+              $html = ''; 
+              $counter = 0;
+              foreach ($data as $value) {
+                  // late 2 | present 1 | else absent
+                  if (($counter % 5) == 0) {
+                  if ($days[$counter] == 'x'){
+                    $html .= '<td class="num borderLB"></td>';  
+                  }
+                  else{
+                    $html .= '<td class="num borderLB">' .strval($value). '</td>';
+                  }
+                } else {
+                  if($days[$counter] == 'x'){
+                    $html .= '<td class="num borderB"> </td>';
+                  }
+                  else{
+                    $html .= '<td class="num borderB">' .strval($value). ' </td>';
+                  }
+                  
+                }
+                  $counter += 1;
+              }
+  
+              // Output the generated HTML
+              echo $html;
+              ?>
+              <td class="headersub" colspan = "3"> ABSENT </td>
+              <td class="headersub" colspan = "3"> TARDY </td>
+          </tr>
 
         {{-- @for($i = 0; $i < count($male_query); $i++)
         <tr> <!--sample row 1-->
@@ -188,7 +259,10 @@
         foreach ($data as $value) {
           // late 2 | present 1 | else absent
           if (($counter % 5) == 0){
-            if ($value == 2) {
+            if($days[$counter] == 'x'){
+              $html .= '<td class="crossed borderL"> </td>';
+            }
+            elseif ($value == 2) {
                 //$html .= '<td class="borderL crossed"> </td>';
                 $html .= '<td class="late borderL"> X </td>';
             } elseif ($value == 1) {
@@ -198,7 +272,10 @@
             }
           }
           else{
-            if ($value == 2) {
+            if($days[$counter] == 'x'){
+              $html .= '<td class="crossed"> </td>';
+            }
+            elseif ($value == 2) {
                 //$html .= '<td class="borderL crossed"> </td>';
                 $html .= '<td class="late"> X </td>';
             } elseif ($value == 1) {
@@ -222,7 +299,7 @@
 
         
 
-        <tr> <!--sample row 2-->
+        {{-- <tr> <!--sample row 2-->
           <td class="borderL num2" > </td>
           <td colspan="9"> </td>
           <td class="borderL crossed"> </td>
@@ -253,34 +330,42 @@
           <td class="borderL" colspan="3"> </td>
           <td class="borderL" colspan="3"> </td>
           <td class="borderLR" colspan="8"> </td>
-        </tr>
+        </tr> --}}
         <tr> <!--total male per day row-->
           <td class="borderLRB num2" colspan="10"> MALE | TOTAL per day </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderLB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderLB "> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderLB "> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderLB "> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
+          <?php
+            $data = $total_attendance_male;
+          ?>
+          
+          <?php
+            // Initialize an empty string to store the generated HTML
+            $html = ''; 
+            $counter = 0;
+            foreach ($data as $value) {
+                // late 2 | present 1 | else absent
+                if (($counter % 5) == 0) {
+                  if ($days[$counter] == 'x'){
+                    $html .= '<td class="borderLB"></td>';  
+                  }
+                  else{
+                    $html .= '<td class="borderLB">' .strval($value). '</td>';
+                  }
+                } else {
+                  if($days[$counter] == 'x'){
+                    $html .= '<td class="borderB"> </td>';
+                  }
+                  else{
+                    $html .= '<td class="borderB">' .strval($value). ' </td>';
+                  }
+                  
+                }
+                $counter += 1;
+            }
+
+            // Output the generated HTML
+            echo $html;
+            ?>
+          
           <td class="borderLB" colspan="3"> </td>
           <td class="borderLB" colspan="3"> </td>
           <td class="borderLRB" colspan="8"> </td>
@@ -341,7 +426,10 @@
         foreach ($data as $value) {
           // late 2 | present 1 | else absent
           if (($counter % 5) == 0){
-            if ($value == 2) {
+            if($days[$counter] == 'x'){
+              $html .= '<td class="crossed borderL"> </td>';
+            }
+            elseif ($value == 2) {
                 //$html .= '<td class="borderL crossed"> </td>';
                 $html .= '<td class="late borderL"> X </td>';
             } elseif ($value == 1) {
@@ -351,7 +439,10 @@
             }
           }
           else{
-            if ($value == 2) {
+            if($days[$counter] == 'x'){
+              $html .= '<td class="crossed"> </td>';
+            }
+            elseif ($value == 2) {
                 //$html .= '<td class="borderL crossed"> </td>';
                 $html .= '<td class="late"> X </td>';
             } elseif ($value == 1) {
@@ -373,7 +464,7 @@
     </tr>
 @endfor
 
-        <tr> <!--sample row 1-->
+        {{-- <tr> <!--sample row 1-->
           <td class="borderL num2" > </td>
           <td colspan="9"> </td>
           <td class="borderL crossed"> </td>
@@ -436,65 +527,81 @@
           <td class="borderL" colspan="3"> </td>
           <td class="borderL" colspan="3"> </td>
           <td class="borderLR" colspan="8"> </td>
-        </tr>
-        <tr> <!--total female per day row-->
+        </tr> --}}
+        <tr> <!--total FEmale per day row-->
           <td class="borderLRB num2" colspan="10"> FEMALE | TOTAL per day </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderLB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderLB "> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderLB "> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderLB "> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
+          <?php
+            $data = $total_attendance_female;
+          ?>
+          
+          <?php
+            // Initialize an empty string to store the generated HTML
+            $html = ''; 
+            $counter = 0;
+            foreach ($data as $value) {
+                // late 2 | present 1 | else absent
+                if (($counter % 5) == 0) {
+                  if ($days[$counter] == 'x'){
+                    $html .= '<td class="borderLB"></td>';  
+                  }
+                  else{
+                    $html .= '<td class="borderLB">' .strval($value). '</td>';
+                  }
+                } else {
+                  if($days[$counter] == 'x'){
+                    $html .= '<td class="borderB"> </td>';
+                  }
+                  else{
+                    $html .= '<td class="borderB">' .strval($value). ' </td>';
+                  }
+                  
+                }
+                $counter += 1;
+            }
+
+            // Output the generated HTML
+            echo $html;
+            ?>
+          
           <td class="borderLB" colspan="3"> </td>
           <td class="borderLB" colspan="3"> </td>
           <td class="borderLRB" colspan="8"> </td>
         </tr>
-        <tr> <!--combined total per day row-->
+
+        <tr> <!--total attendance per day row-->
           <td class="borderLRB num2" colspan="10"> Combined TOTAL PER DAY </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderLB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderLB "> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderLB "> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderLB "> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
+          <?php
+            $data = $total_attendance;
+          ?>
+          
+          <?php
+            // Initialize an empty string to store the generated HTML
+            $html = ''; 
+            $counter = 0;
+            foreach ($data as $value) {
+              if (($counter % 5) == 0) {
+                  if ($days[$counter] == 'x'){
+                    $html .= '<td class="borderLB"></td>';  
+                  }
+                  else{
+                    $html .= '<td class="borderLB">' .strval($value). '</td>';
+                  }
+                } else {
+                  if($days[$counter] == 'x'){
+                    $html .= '<td class="borderB"> </td>';
+                  }
+                  else{
+                    $html .= '<td class="borderB">' .strval($value). ' </td>';
+                  }
+                  
+                }
+                $counter += 1;
+            }
+
+            // Output the generated HTML
+            echo $html;
+            ?>
+          
           <td class="borderLB" colspan="3"> </td>
           <td class="borderLB" colspan="3"> </td>
           <td class="borderLRB" colspan="8"> </td>
