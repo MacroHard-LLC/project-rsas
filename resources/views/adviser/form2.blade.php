@@ -291,8 +291,8 @@
         echo $html;
         ?>
         
-        <td class="borderL" colspan="3"> </td>
-        <td class="borderL" colspan="3"> </td>
+        <td class="borderL" colspan="3">{{$male_attendance_array[$i]['absent_counter']}}</td>
+        <td class="borderL" colspan="3">{{$male_attendance_array[$i]['late_counter']}}</td>
         <td class="borderLR" colspan="8"> </td>
     </tr>
 @endfor
@@ -366,8 +366,8 @@
             echo $html;
             ?>
           
-          <td class="borderLB" colspan="3"> </td>
-          <td class="borderLB" colspan="3"> </td>
+          <td class="borderLB" colspan="3">{{$male_total_absent}}</td>
+          <td class="borderLB" colspan="3">{{$male_total_late}}</td>
           <td class="borderLRB" colspan="8"> </td>
         </tr>
 
@@ -401,8 +401,8 @@
           <td class="crossed"> </td>
           <td class="crossed"> </td>
           <td class="crossed"> </td>
-          <td class="borderL" colspan="3"> </td>
-          <td class="borderL" colspan="3"> </td>
+          <td class="borderL" colspan="3">{{$female_attendance_array[$i]['absent_counter']}}</td>
+          <td class="borderL" colspan="3">{{$female_attendance_array[$i]['late_counter']}}</td>
           <td class="borderLR" colspan="8"> </td>
         </tr>
         @endfor --}}
@@ -455,11 +455,11 @@
         }
 
         // Output the generated HTML
-        echo $html;
-        ?>
+        // echo $html;
+        // ?>
         
-        <td class="borderL" colspan="3"> </td>
-        <td class="borderL" colspan="3"> </td>
+        <td class="borderL" colspan="3">{{$female_attendance_array[$i]['absent_counter']}} </td>
+        <td class="borderL" colspan="3">{{$female_attendance_array[$i]['late_counter']}}</td>
         <td class="borderLR" colspan="8"> </td>
     </tr>
 @endfor
@@ -563,8 +563,8 @@
             echo $html;
             ?>
           
-          <td class="borderLB" colspan="3"> </td>
-          <td class="borderLB" colspan="3"> </td>
+          <td class="borderLB" colspan="3">{{$female_total_absent}}</td>
+          <td class="borderLB" colspan="3">{{$female_total_late}}</td>
           <td class="borderLRB" colspan="8"> </td>
         </tr>
 
@@ -602,8 +602,8 @@
             echo $html;
             ?>
           
-          <td class="borderLB" colspan="3"> </td>
-          <td class="borderLB" colspan="3"> </td>
+          <td class="borderLB" colspan="3">{{$total_absent}}</td>
+          <td class="borderLB" colspan="3">{{$total_late}}</td>
           <td class="borderLRB" colspan="8"> </td>
         </tr>
         <tr class="noBorder"> <!--holder row para di maguba ang formatting-->

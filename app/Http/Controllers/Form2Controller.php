@@ -11,6 +11,7 @@ use App\Models\PresentAttendance;
 use App\Models\LateAttendance;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 use Carbon\Carbon;
 
@@ -24,11 +25,12 @@ class Form2Controller extends Controller
 
         //finds out the id of the section that the adviser handles
         //also helps with finding the students that belong to the section
+        $section_id = Section::where('adviser_id', $adviser) -> pluck('name');
         $section = Section::where('adviser_id', $adviser) -> first();
         $section_id = $section->name;
 
-
         //finds out the grade level that the adviser handles
+        $grade_level = Section::where('adviser_id', $adviser) -> pluck('grade_level');
         $grade_level = $section->grade_level;
 
         //gives the current month of asking the report
@@ -43,6 +45,7 @@ class Form2Controller extends Controller
 
         //gets the number of male students that belong to the section
         $male_query = User::join('Student', 'Student.user_id', '=', 'User.id')
+            // ->where('student.section_id', $section_id)
             ->where('sex', 'M')
             ->where('section_id',$section->id)
             ->get();
@@ -50,6 +53,7 @@ class Form2Controller extends Controller
         // to remove later
         $male_query_counter = User::join('Student', 'Student.user_id', '=', 'User.id')
             ->where('sex', 'M')
+            ->where('section_id',$section->id)
             ->count();
 
         // Get the current month and year
@@ -122,12 +126,20 @@ class Form2Controller extends Controller
         $attendance_array = array();
         $total_attendance_male = array_fill(0, count($days), 0);
         foreach($male_query as $student){
-            
+
             $first_name = User::where('id',$student['user_id'])->value('first_name');
             $last_name = User::where('id',$student['user_id'])->value('last_name');
             $middle_name = User::where('id',$student['user_id'])->value('middle_name');
             $name = $last_name . ', ' . $first_name . ' ' . $middle_name;
             $counter = 0;
+
+            $present_counter = 0;
+            $late_counter = 0;
+            $absent_counter = 0;
+
+            $present_counter = 0;
+            $late_counter = 0;
+            $absent_counter = 0;
 
             foreach($days as  $loop){
                 $presentExist = Present::where('student_id',$student['user_id'])
@@ -153,6 +165,9 @@ class Form2Controller extends Controller
             $male_attendance_array[] = array(
                 'name' => $name,
                 'attendance' => $attendance_array,
+                'present_counter' => $present_counter,
+                'late_counter' => $late_counter,
+                'absent_counter' => $absent_counter
             );
 
 
@@ -188,35 +203,44 @@ class Form2Controller extends Controller
         // to remove later
         $female_query_counter = User::join('Student', 'Student.user_id', '=', 'User.id')
             ->where('sex', 'F')
+            ->where('section_id',$section->id)
             ->count();
 
         $female_attendance_array = array();
         $attendance_array = array();
         $total_attendance_female = array_fill(0, count($days), 0);
         foreach($female_query as $student){
+
             $first_name = User::where('id',$student['user_id'])->value('first_name');
             $last_name = User::where('id',$student['user_id'])->value('last_name');
             $middle_name = User::where('id',$student['user_id'])->value('middle_name');
             $name = $last_name . ', ' . $first_name . ' ' . $middle_name;
 
+            $present_counter = 0;
+            $late_counter = 0;
+            $absent_counter = 0;
+
             $counter = 0;
             foreach($days as  $loop){
                 $presentExist = Present::where('student_id',$student['user_id'])
-                                        ->where('date',$loop)
-                                        ->first();
+                    ->where('date',$loop)
+                    ->first();
                 $lateExist = Late::where('student_id',$student['user_id'])
-                                        ->where('date',$loop)
-                                        ->first();
+                    ->where('date',$loop)
+                    ->first();
                 if($presentExist){
                     $attendance_array[] = 1;
+                    $present_counter++;
                     $total_attendance_female[$counter] += 1;
                 }
                 else if ($lateExist){
                     $attendance_array[] = 2;
+                    $late_counter++;
                     $total_attendance_female[$counter] += 1;
                 }
                 else{
                     $attendance_array[] = 0;
+                    $absent_counter++;
                 }
                 $counter += 1;
             }
@@ -235,9 +259,12 @@ class Form2Controller extends Controller
             $female_attendance_array[] = array(
                 'name' => $name,
                 'attendance' => $attendance_array,
+                'present_counter' => $present_counter,
+                'late_counter' => $late_counter,
+                'absent_counter' => $absent_counter
             );
 
-
+            
 
             // $is_present = PresentAttendance::where('student_id',$student['user_id'])
             //             ->exists();
@@ -256,6 +283,36 @@ class Form2Controller extends Controller
             // }
         }
 
+        //to get the total number of male absents per month
+        $male_total_absent = 0;
+        foreach ($male_attendance_array as $male_attendance) {
+            $male_total_absent = $male_total_absent + $male_attendance['absent_counter'];
+        }
+        
+        // to get the total number of male lates per month
+        $male_total_late = 0;
+        foreach ($male_attendance_array as $male_attendance) {
+            $male_total_late = $male_total_late + $male_attendance['late_counter'];
+        }
+
+        // to get the total number of female absents per month
+        $female_total_absent = 0;
+        foreach ($female_attendance_array as $female_attendance) {
+            $female_total_absent = $female_total_absent + $female_attendance['absent_counter'];
+        }
+        echo $female_total_absent;
+
+        // to get the total number of female lates per month
+        $female_total_late = 0;
+        foreach ($female_attendance_array as $female_attendance) {
+            $female_total_late = $female_total_late + $female_attendance['late_counter'];
+        }
+
+        $total_absent = $male_total_absent + $female_total_absent;
+        $total_late = $male_total_late + $female_total_late;
+
+        // echo $female_total_late;
+
         //var_dump($adviser);
         // var_dump($grade_level);
         // echo $male_query_counter;
@@ -263,6 +320,11 @@ class Form2Controller extends Controller
         // echo $male_query;
         // echo $female_query;
         // echo $male_attendance_array[1]['id'];
+
+        // foreach ($male_attendance_array as $male_attendance) {
+        //     echo $male_attendance['absent_counter'];
+        // }
+        
         return view('adviser.form2')
         -> with('month', $month)
         -> with('section_id', $section_id)
@@ -271,6 +333,12 @@ class Form2Controller extends Controller
         -> with('female_query', $female_query)
         -> with('male_attendance_array', $male_attendance_array)
         -> with('female_attendance_array', $female_attendance_array)
+        -> with('male_total_absent', $male_total_absent)
+        -> with('female_total_absent', $female_total_absent)
+        -> with('male_total_late', $male_total_late)
+        -> with('female_total_late', $female_total_late)
+        -> with('total_absent', $total_absent)
+        -> with('total_late', $total_late)
         -> with('total_attendance_male', $total_attendance_male)
         -> with('total_attendance', $total_attendance)
         -> with('days', $days)
