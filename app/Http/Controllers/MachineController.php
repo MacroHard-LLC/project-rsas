@@ -15,4 +15,16 @@ class MachineController extends Controller
 
         Machine_table::create($formFields);
     }
+
+    public function AddMachine(Request $request){
+        //var_dump($request->input('room'),$request->input('role'));
+        $incoming_data = $request;
+
+        $machine = new Machine_table;
+        $machine->status = $incoming_data->input('role');
+        $machine->room = $incoming_data->input('room');
+        $machine->save();
+        return back();
+
+    }
 }
