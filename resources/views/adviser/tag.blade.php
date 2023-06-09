@@ -62,6 +62,7 @@
             url: "{{ route('change_status') }}",
             data: { input_data},
             success: function(data) {
+                console.log(data);
                 location.reload();
             }
             });

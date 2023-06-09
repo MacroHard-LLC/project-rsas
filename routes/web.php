@@ -4,10 +4,12 @@ use App\Http\Controllers\CreateUser;
 use App\Http\Controllers\CreateSubject;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Form2Controller;
 use App\Http\Controllers\AdviserViewController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\CreateInstructor;
 use App\Http\Controllers\CreateSchoolYear;
+use App\Http\Controllers\MachineController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +18,6 @@ use App\Http\Middleware\CheckSubjectIdValid;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 
-use Barryvdh\DomPDF\Facade\PDF;
 
 /*
 For Technician
@@ -146,6 +147,7 @@ Route::post('/view-attendance-status-change', [AdviserViewController::class,'Cha
 Route::post('/view-attendance-add-id', [AdviserViewController::class, 'StudentTag'])->name('add_id_edit_status');
 Route::post('/view-attendance-setup', [AdviserViewController::class, 'SubjectSetup'])->name('setUp_subjects');
 Route::post('/view-attendance-session-student-ID', [AdviserViewController::class, 'SessionStudentID'])->name('session_student_ID');
+Route::post('/view-attendance-session-student-info', [AdviserViewController::class, 'SessionStudentInfo'])->name('session_student_info');
 Route::post('/view-attendance-session-student', [AdviserViewController::class, 'SessionStudent'])->name('session_student');
 
 
@@ -158,7 +160,11 @@ Route::post('/login', [LoginController::class, 'loginPost'])->name('login.post')
 Route::get('logout',[LoginController::class,'logout'])->name('logout');
 
 
+//Form 2
+Route::get('/form2', [Form2Controller::class, 'ShowForm'])->name('show_form');
 
+//addmachine Modal
+Route::post('/', [MachineController::class, 'store'])->name('addMachine');
 
 
 //I tried to group them - Pris

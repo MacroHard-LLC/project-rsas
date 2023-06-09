@@ -13,16 +13,30 @@ use Illuminate\Http\Request;
 
 class AdviserViewController extends Controller
 {
+
+    var $student_id_var = 0;
+
     function AdviserPage($id){
         $adviserId = $id;
         session()->put('adviser_id', $adviserId);
         return view('adviser.adviserpage');
     }
 
+    function SessionStudentInfo(Request $request){
+        $student = $request->input_data;
+        session()->put('student', $student['student_id']);
+        session()->put('target_date', $student['target_date']);
+        session()->put('subject_id', $student['subject_id']);
+
+        global $student_id_var;
+        $student_id_var = session()->get('student_id');
+        return session()->get('student');
+        // return "Between the yewew";
+    }
+
     function SessionStudentID(Request $request){
         $student = $request->input_data;
-        session()->put('student_id', $student['subject_id']);
-        session()->put('target_date',$student['target_date']);
+        session()->put('student', $student);
 
         return $student;
     }
@@ -180,21 +194,23 @@ class AdviserViewController extends Controller
         return $attendanceArray;
     }
 
+    
     function ChangeAttendance(Request $request){
         $incoming_data = $request->input_data;
         $new_status = $incoming_data['new_status'];
-        $student_id = session()->get('student_id');
+        $student_id = session()->get('student');
         $target_date = session()->get('target_date');
-        $subject = session()->get('subject');
+        $subject = session()->get('subject_id');
 
-        $subject = $subject['subject_id'];
+        var_dump($student_id,$target_date,$subject);
+        //$subject = $subject['subject_id'];
 
         // get the row of the student, delete it
-        $isRow = Present::where('student_id','=',$student_id);
+        $isRow = Present::where('student_id','=',$student_id)->where('date',$target_date)->where('subject_id',$subject);
         if (!isset($isRow)){
-            $isRow = Late::where('student_id','=',$student_id);
+            $isRow = Late::where('student_id','=',$student_id)->where('date',$target_date)->where('subject_id',$subject);
             if (!isset($isRow)){
-                $isRow = Absent::where('student_id','=',$student_id);
+                $isRow = Absent::where('student_id','=',$student_id)->where('date',$target_date)->where('subject_id',$subject);
             }
         }
         if($isRow){
@@ -218,17 +234,17 @@ class AdviserViewController extends Controller
         $newRow->added_on = now();
         $newRow->save();
         // end
-
-        //session()->put('new_status',$new_status);
         
         $adviserId = session()->get('adviser_id');
         return view('adviser.viewattendance', compact('adviserId'));
     }
-
+    
     function ChangeStatus(Request $request){
         $incoming_data = $request->input_data;
         $new_status = $incoming_data['new_status'];
-        $student_id = session()->get('student_id');
+        $student_id = session()->get('student');
+
+        var_dump($new_status);
 
         // get the row of the student, delete it
         $isRow = User::where('id','=',$student_id)->first();

@@ -8,10 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Machine_table extends Model
 {
     public $table = 'machine';
-    public $primaryKey = 'id';
     // timestamps is FALSE as to defer the Laravel's need for
     // UPDATED_AT where we already have updated_on in our database
     public $timestamps = FALSE;
+  
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'id',
+        'status',
+        'room',
+        'is_deleted',
+    ];
 
     public function student_logsheet(){
         return $this->hasMany(Student_logsheet::class);
