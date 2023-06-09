@@ -22,7 +22,6 @@
             url: "{{ route('adviser_startup') }}",
             data: { input_data: adviserID },
             success: function(data) {
-                console.log(data);
                 $('#attendanceAdviserName').text(data);
             }
         });
@@ -92,8 +91,6 @@
     }
 
     $(document).on('click', '#editStatus', function() {
-        //var element = $(this).siblings('span');
-        //var value = element.data('id');
         var element = $(this).closest('td').find('span');
         var value = element.data('id');
 
@@ -124,11 +121,6 @@
             <div class="section-title">ADVISER</div>
             <div class="section-body"><span id="attendanceAdviserName" name="attendanceAdviserName">MS. MARY JANE D. PARKER</span></div>
         </div>
-       <!--
-        <div class="col col-lg-4">
-            <div class="section-title">SUBJECT</div>
-            <div class="section-body">YASSIFICATION</div>
-        </div>-->
     </div>
 
 
@@ -153,57 +145,6 @@
                 </table>
             </div>
         </div>
-        <!--
-        <div class="row">
-            <div class="col">
-                <table class="table table-hover" id="attendanceTable" data-toggle="table" data-toolbar="#toolbar">
-                    <tr>
-                        <th class="w-10"></th>
-                        <th class="w-75">Student Name</th>
-                        <th data-align="center">Status</th>
-                        <th data-align="center">Tag</th>
-                    </tr>
-
-                    <tr>
-                        <td><i class="fa-solid fa-circle icon-baby-blue center"></i></a></td>
-                        <td class="name">Snow, Jon Stark</td>
-                        <td class="attendance" data-align="right" data-status="Enrolled"> Enrolled </td>
-                        <td>
-                            <button class="btn btn-primary">
-                                <a data-bs-toggle="modal" data-bs-target="#tagModal">
-                                    <i class="fa-solid fa-tag" data-bs-target="#tagModal"></i>
-                                </a>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa-solid fa-circle icon-baby-blue center"></i></a></td>
-                        <td class="name">Lannister, Jamie Tyrion</td>
-                        <td class="attendance" data-align="right" data-status="Dropped"> Dropped </td>
-                        <td>
-                            <button class="btn btn-primary">
-                                <a data-bs-toggle="modal" data-bs-target="#tagModal">
-                                    <i class="fa-solid fa-tag" data-bs-target="#tagModal"></i>
-                                </a>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa-solid fa-circle icon-baby-blue center"></i></a></td>
-                        <td class="name">Baratheon, Stannis Robert</td>
-                        <td class="attendance" data-align="right" data-status="Enrolled"> Enrolled </td>
-                        <td>
-                            <button class="btn btn-primary">
-                                <a data-bs-toggle="modal" data-bs-target="#tagModal">
-                                    <i class="fa-solid fa-tag"></i>
-                                </a>
-                            </button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    -->
     </div>
 
 </div>

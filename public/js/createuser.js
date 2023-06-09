@@ -1,34 +1,3 @@
-
-// const studentCheck = document.querySelector('#studentCheck');
-// studentCheck.addEventListener("click", userCheck);
-
-// function userCheck() {
-//    if (document.getElementById("studentCheck").checked) {
-//      var container = document.getElementById("ifStudent")
-//      container.style.display = "block";
-//     }
-
-//     // Clear input values
-//     var inputs = container.getElementsByTagName('input');
-//         for (var index = 0; index < inputs.length; ++index) {
-//             if(inputs[index].type =="text")
-//             inputs[index].value = '';
-//             else
-//             inputs[index].checked = false;
-//         }*/
-
- //   if (document.getElementById("studentCheck").checked) {
- //       document.getElementById("student_or_adviser").style.display = "block";
-        //document.getElementById("rfid").style.display = "block";
-
- //  }
-//     else {
-//         document.getElementById("ifStudent").style.display = "none";
-//         document.getElementById("rfid_numberInput").value = '';
-//    }
-//  }
-
-
 window.addEventListener('load', function() {
     document.getElementById("submission").style.visibility = "hidden";
     let createUserForm = document.getElementById('registerForm');

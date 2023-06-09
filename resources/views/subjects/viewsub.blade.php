@@ -18,16 +18,6 @@
             <button class="btn-secondary btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 Grade Level
               </button>
-              {{-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Araling Panlipunan</a></li>
-                <li><a class="dropdown-item" href="#">English</a></li>
-                <li><a class="dropdown-item" href="#">Filipino</a></li>
-                <li><a class="dropdown-item" href="#">Mathematics</a></li>
-                <li><a class="dropdown-item" href="#">MAPEH</a></li>
-                <li><a class="dropdown-item" href="#">Science</a></li>
-                <li><a class="dropdown-item" href="#">TLE</a></li>
-                <li><a class="dropdown-item" href="#">Values Education</a></li>
-              </ul> --}}
 
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/subjects">All Levels</a></li>

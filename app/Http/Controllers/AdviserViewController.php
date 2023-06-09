@@ -202,9 +202,6 @@ class AdviserViewController extends Controller
         $target_date = session()->get('target_date');
         $subject = session()->get('subject_id');
 
-        var_dump($student_id,$target_date,$subject);
-        //$subject = $subject['subject_id'];
-
         // get the row of the student, delete it
         $isRow = Present::where('student_id','=',$student_id)->where('date',$target_date)->where('subject_id',$subject);
         if (!isset($isRow)){
@@ -244,8 +241,6 @@ class AdviserViewController extends Controller
         $new_status = $incoming_data['new_status'];
         $student_id = session()->get('student');
 
-        var_dump($new_status);
-
         // get the row of the student, delete it
         $isRow = User::where('id','=',$student_id)->first();
         if ($new_status == 'Dropped'){
@@ -276,19 +271,6 @@ class AdviserViewController extends Controller
         session()->put('student_id',$incoming_data);
         return $incoming_data;
     }
-
-    /*function StudentTag(Request $request){
-        
-        $status = Student::get($request->student_id);
-
-        $status->status = $request->status;
-
-        $status->save();
-
-        return redirect()->back();
-       
-        
-    }*/
 
     function StudentPage(){
         $adviserId = session()->get('adviser_id');

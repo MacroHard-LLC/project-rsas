@@ -131,8 +131,6 @@
 
     </div>
 
-<!-- I don't know where to put the scripts for Scheduled Days, but it's in resources/js (jquery.min.js and select2.min.js)-->
-
 </div>
 
 @section('scripts')

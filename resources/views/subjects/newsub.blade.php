@@ -37,10 +37,6 @@
                                     <option value="9">9</option>
                                     <option value="10">10</option>
                                 </select>
-                                <!--validation needs to be updated, also this kind of error message makes an unnecessary bottom margin :((
-                                <div class="is-invalid" role="alert" id="gradeError" name="gradeError">
-                                    <strong></strong>
-                                </div>-->
                             </div>
 
                             <div class="col-6 col-md-4 input-field">
@@ -49,10 +45,6 @@
                                     <!--ideally the options that would show here is the school_year_id present in the school year table-->
 
                                 </select>
-                                <!--validation needs to be updated
-                                <div class="is-invalid" role="alert" id="timeStartError" name="timeStartError" style="visibility:hidden">
-                                    <strong>Input the correct time format</strong>
-                                </div>-->
                             </div>
 
                             <div class="col-6 col-md-4 input-field">
@@ -62,10 +54,6 @@
                                         <option value="first_sem">First Semester</option>
                                         <option value="second_sem">Second Semester</option>
                                     </select>
-                                    <!--validation needs to be updated
-                                    <div class="is-invalid" role="alert" id="timeEndError" name="timeEndError" style="visibility:hidden">
-                                        <strong>Input the correct time format</strong>
-                                    </div>-->
                             </div>
                         </div>
                         <div class="row">
@@ -202,8 +190,6 @@
         </div>
 
     </div>
-
-<!-- I don't know where to put the scripts for Scheduled Days, but it's in resources/js (jquery.min.js and select2.min.js)-->
 
 </div>
 

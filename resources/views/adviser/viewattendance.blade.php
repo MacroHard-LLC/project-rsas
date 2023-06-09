@@ -192,8 +192,7 @@
             }
         });
         const tableBody = document.querySelector('#attendanceTable tbody');
-        let subject = $('#subject_adviserView_dropdown');    
-        //subject.append('<option value="A24">meow</option>');
+        let subject = $('#subject_adviserView_dropdown');   
         
         let startSubject = '';
         $.ajax({
@@ -217,8 +216,6 @@
     });
 
     $(document).on('click', '#editStatus', function() {
-        //var element = $(this).siblings('span');
-        //var value = element.data('id');
         var element = $(this).closest('td').find('span');
         var value = element.data('id');
 
@@ -235,23 +232,6 @@
             }
         });
     });
-
-
-    /*$('#editStatus').on('click',function(){
-    var value = $(this).closest('td').attr('data-student-id');
-    $.ajax({
-        method: "POST",
-        headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                Accept: "application/json"
-        },
-        url: "{{ route('add_id_edit_status') }}",
-        data: { input_data : value },
-        success: function(data) {
-            console.log('BULLSHIT');
-        }
-    });
-});*/
 
 </script>
 

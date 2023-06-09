@@ -31,7 +31,6 @@
 <script>
     // Get the button element
     const buttonSubmitEditStatus = document.querySelector('button[type="submit"]');
-    //const studentId = document.querySelector('#editAttendanceModal td[data-student-id]').getAttribute('data-student-id');
 
     // Add a click event listener to the button
     buttonSubmitEditStatus.addEventListener('click', function(event) {
