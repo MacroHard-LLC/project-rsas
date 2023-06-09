@@ -9,6 +9,7 @@ use App\Http\Controllers\AdviserViewController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\CreateInstructor;
 use App\Http\Controllers\CreateSchoolYear;
+use App\Http\Controllers\MachineController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,6 @@ use App\Http\Middleware\CheckSubjectIdValid;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 
-use Barryvdh\DomPDF\Facade\PDF;
 
 /*
 For Technician
@@ -165,7 +165,7 @@ Route::get('logout',[LoginController::class,'logout'])->name('logout');
 Route::get('/form2', [Form2Controller::class, 'ShowForm'])->name('show_form');
 
 //addmachine Modal
-Route::get('/addmachine', [MachineController::class, 'name_of_function']);
+Route::post('/', [MachineController::class, 'store'])->name('addMachine');
 
 
 //I tried to group them - Pris
