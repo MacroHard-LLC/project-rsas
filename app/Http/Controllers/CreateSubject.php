@@ -67,9 +67,11 @@ class CreateSubject extends Controller
         }
     }
 
-    public function update(Request $request, Subject_table $subject) {
+    public function update(Request $request, $id) {
+        $subject = Subject_table::find($id);
+
         $formFields = $request->validate([
-            'id' => ['required',Rule::unique('subject','id')->ignore($subject->id),'integer','digits:5'],
+            'id' => ['required',Rule::unique('subject','id')->ignore($id),'integer','digits:5'],
             'name' => ['required','min:1','max:50','regex:/^[0-9a-zA-Z_ ,.]{0,50}$/'],
             'grade_level' => ['required','integer','between:7,10'],
             'schoolyear_id' => ['required','exists:schoolyear,id'],
@@ -78,31 +80,53 @@ class CreateSubject extends Controller
             'instructor_rfid' => ['required','exists:instructor,rfid_number'],
         ]);
 
-        // $studentIDArray = $studentIDs['allStudentID'];
+        $inputDays = json_decode($request->days,true);
+        $request->merge(["days" => $inputDays]);
+        $formDays = $request->validate([
+            'days' => ['required','array'],
+            'days.*'  => ['required','distinct'],
+        ]);
 
-        // $current_students = Student::where('section_id',$section->id)->get();
-        // foreach($current_students as $student){
-        //     if (($key = array_search($student->user_id, $studentIDArray)) !== false) {
-        //         unset($studentIDArray[$key]);
-        //     } else {
-        //         $student->section_id = null;
-        //         User::where('id', $student->user_id)->update(['is_enrolled' => 0]);
-        //         $student->save();
-        //     }
-        // }
+        $subject->update($formFields);
+        $section_id = Section::where('schoolyear_id',$formFields['schoolyear_id'])
+            ->where('grade_level',$formFields['grade_level'])->value('id');
+        Subject_table::where('id', $formFields['id'])->update(['section_id' => $section_id]);
 
-        // // this is for the student table
-        // foreach($studentIDArray as $student_id){
-        //     User::where('id', $student_id)->update(['is_enrolled' => 1]);
-        //     Student::where('user_id', $student_id)->update(['section_id' => $section->id]);
-        // }
+        $requestedDays = $formDays['days'];
+        $currentSchedules = Schedule_table::where('subject_id',$subject->id)->get();
+        foreach ($currentSchedules as $schedule){
+            if (($key = array_search($schedule->day, $requestedDays)) !== false)
+                unset($requestedDays[$key]);
+            else
+                $schedule->delete();
+        }
 
-        // if ($request->adviser_id != $section->adviser_id){
-        //     User::where('id', $section->adviser_id)->update(['is_enrolled' => 0]);
-        //     User::where('id', $request->adviser_id)->update(['is_enrolled' => 1]);
-        // }
-
-        // $section->update($formFields);
+        foreach ($requestedDays as $key => $value) {
+            $sched = new Schedule_table;
+            $sched->subject_id = $formFields['id'];
+            $sched->day = $value;
+            if ($value == 'MON'){
+                $sched->time_start = $request->MON_time_st;
+                $sched->time_end = $request->MON_time_end;
+            }
+            else if($value == 'TUE'){
+                $sched->time_start = $request->TUE_time_st;
+                $sched->time_end = $request->TUE_time_end;
+            }
+            else if($value == 'WED'){
+                $sched->time_start = $request->WED_time_st;
+                $sched->time_end = $request->WED_time_end;
+            }
+            else if($value == 'THU'){
+                $sched->time_start = $request->THU_time_st;
+                $sched->time_end = $request->THU_time_end;
+            }
+            else if($value == 'FRI'){
+                $sched->time_start = $request->FRI_time_st;
+                $sched->time_end = $request->FRI_time_end;
+            }
+            $sched->save();
+        }
     }
 
     public function destroy(Request $request){

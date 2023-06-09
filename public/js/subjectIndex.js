@@ -1,4 +1,5 @@
 function updateModal(subject, schedules){
+    $("#originalID").val(subject.id);
     $('#Usubject_id_input').val(subject.id);
     $('#Usubject_name_input').val(subject.name);
     $('#Usubject_grade_level_input').val(subject.grade_level);

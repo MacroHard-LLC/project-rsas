@@ -106,6 +106,8 @@ Route::post('/schoolyear/add',[CreateSchoolYear::class, 'AddSchoolYear'])->name(
 // Delete Subject
 Route::delete('/subjects', [CreateSubject::class, 'destroy'])->name('deleteSubject');
 
+// update subject
+Route::put('/subjects/{subject}', [CreateSubject::class, 'update']);
 
 // show users
 Route::get('/users', [UserController::class, 'index']);

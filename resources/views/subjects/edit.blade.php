@@ -133,10 +133,12 @@
                                     </div>
                                 @endforeach
 
-                                <div class="is-invalid" id="daysError">
+                                <div class="is-invalid" id="Usubject_days_error">
                                     <span></span>
                                 </div>
                             </div>
+
+                        <input type="hidden" name="originalID" id="originalID" value="">
 
                         <div class="form-group float-end">
                             <button class="btn btn-primary" type="submit" id="submitUpdatedSubject"><i class="fa-solid fa-floppy-disk fa-lg icon-white"></i> Save</button>
@@ -160,8 +162,6 @@
                 field.name = field.name.replace("Usubject_", "")
             });
 
-            console.log(formData);
-
             let selectedDays = [];
             // Iterate over checked checkboxes and add their values to the selectedDays array
             $("input[type='checkbox']:checked").each(function() {
@@ -173,12 +173,14 @@
             $(".is-invalid").children("span").text("");
             $("#updateSubjectForm input").removeClass("is-invalid");
 
+            var id = $('#originalID').val();
+
             $.ajax({
                 method: "POST",
                 headers: {
                     Accept: "application/json"
                 },
-                url: "{{ route('register_sub') }}",
+                url: '/subjects/' + id,
                 data: formData,
                 success: () => window.location.assign(window.location.href),
                 error: (response) => {
@@ -187,7 +189,6 @@
                         Object.keys(errors).forEach(function (key) {
                             $("#Usubject_" + key + "_input").addClass("is-invalid");
                             $("#Usubject_" + key + "_error").children("span").text(errors[key][0]);
-                            console.log(errors);
                         });
                     }
                 }

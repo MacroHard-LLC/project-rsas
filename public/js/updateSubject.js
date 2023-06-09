@@ -10,7 +10,7 @@ editSubjectModal.addEventListener('show.bs.modal', function() {
     document.getElementById("submitUpdatedSubject").style.visibility = "visible";
 
     ['input','change'].forEach(evt =>
-        createSubjectForm.querySelectorAll(".form-control, .form-select, .form-check-input").forEach(input => {
+        updateSubjectForm.querySelectorAll(".form-control, .form-select, .form-check-input").forEach(input => {
             input.addEventListener(evt, () => {
                 $("#" + input.getAttribute("name") + "_error").children("span").text("");
 
@@ -18,10 +18,10 @@ editSubjectModal.addEventListener('show.bs.modal', function() {
                     var isChecked = $(input).prop('checked');
                     var $timeInputs = $(input).closest('.row').find('.time-input');
                     if (isChecked){
-                        $("#daysError").children("span").text("");
+                        $("#Usubject_days_error").children("span").text("");
                         $timeInputs.prop('disabled', false);
                     } else if (!isChecked && $("input[type='checkbox']:checked").length < 1){
-                        $("#daysError").children("span").text("Please check at least one of the days.");
+                        $("#Usubject_days_error").children("span").text("Please check at least one of the days.");
                         $timeInputs.prop('disabled', true).val('');
                     } else
                         $timeInputs.prop('disabled', true).val('');
@@ -42,19 +42,17 @@ editSubjectModal.addEventListener('show.bs.modal', function() {
 });
 
 function checkOverallValidity() {
-    var formChildren = $("#createSubjectForm").children();
-    var fields = formChildren.find('.form-control, .form-select');
-    var validFields = formChildren.find('.form-control.is-valid, .form-select.is-valid');
+    var formChildren = $("#updateSubjectForm").children();
+    var invalidFields = formChildren.find('.form-control.is-invalid, .form-select.is-invalid');
     var checkedCheckboxes = $("input[type='checkbox']:checked");
     var timeInputs = checkedCheckboxes.closest('.row').find('.time-input');
     var isTimeInputsFilled = timeInputs.toArray().every(input => input.value.trim() !== '');
 
-    var isValid = fields.length - 10 === validFields.length && checkedCheckboxes.length > 0 && isTimeInputsFilled;
-    if (isValid) {
-      document.getElementById("submitUpdatedSubject").style.visibility = "visible";
-    } else {
-      document.getElementById("submitUpdatedSubject").style.visibility = "hidden";
-    }
+    var isInvalid = invalidFields.length > 0 || checkedCheckboxes.length < 1 || !isTimeInputsFilled;
+    if (isInvalid)
+        document.getElementById("submitUpdatedSubject").style.visibility = "hidden";
+    else
+        document.getElementById("submitUpdatedSubject").style.visibility = "visible";
 }
 
 function showUpdateSubjectClientError(input){
