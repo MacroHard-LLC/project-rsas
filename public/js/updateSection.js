@@ -4,7 +4,7 @@ editSectionModal.addEventListener('show.bs.modal', function() {
 
     $("#updateSectionForm input").removeClass("is-valid is-invalid");
     updateForm.querySelectorAll(".form-control, .form-select").forEach(input => {
-        $("#section_" + input.getAttribute("name") + "_error").children("span").text("");
+        $("#" + input.getAttribute("name") + "_error").children("span").text("");
     });
 
     document.getElementById("submit_new_section").style.visibility = "visible";
@@ -12,7 +12,7 @@ editSectionModal.addEventListener('show.bs.modal', function() {
     ['input','change'].forEach(evt =>
         updateForm.querySelectorAll(".form-control, .form-select").forEach(input => {
             input.addEventListener(evt, () => {
-                $("#section_" + input.getAttribute("name") + "_error").children("span").text("");
+                $("#" + input.getAttribute("name") + "_error").children("span").text("");
 
                 if (input.getAttribute('id') == 'section_student_id_input' && $('#' + input.getAttribute('id')).val() != '')
                     document.getElementById('add_student_btn').disabled = false;
@@ -46,11 +46,11 @@ function checkOverallValidity(){
 function showUpdateSectionClientError(input){
     var input_name = input.getAttribute("name");
     if (input_name = "section_name" && input.validity.tooLong)
-        $("#section_" + input.getAttribute("name") + "_error").children("span").text("Section name must have a maximum of 50 characters.");
+        $("#" + input.getAttribute("name") + "_error").children("span").text("Section name must have a maximum of 50 characters.");
     else if (input_name = 'section_grade_level' ||  input_name == 'section_adviser_id' && input.validity.valueMissing){
         input_name = input_name.charAt(0).toUpperCase() + input_name.slice(1);
         input_name = input_name.split("_", 1);
-        $("#section_" + input.getAttribute("name") + "_error").children("span").text(input_name + " is required.");
+        $("#" + input.getAttribute("name") + "_error").children("span").text(input_name + " is required.");
     }
 }
 

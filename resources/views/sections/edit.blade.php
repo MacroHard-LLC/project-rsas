@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg">
         <div class='modal-content'>
             <div class='modal-header'>
-                <h1 class="modal-title fs-5" id="registerModalLabel"><i class="fa-solid fa-circle"></i> EDIT SECTION</h1>
+                <h1 class="modal-title fs-5 white-label" id="registerModalLabel"><i class="fa-solid fa-circle"></i> EDIT SECTION</h1>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -119,7 +119,7 @@
                             <i style="font-size:small;">Total Number of Students: <span id="total_students">0</span></i>
 
                             <div class="form-group pt-5 float-end" id="submit_new_section">
-                                <button class="btn btn-primary create" type="submit" id="sectionButtonSubmit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
+                                <button class="btn btn-primary create" type="submit" id="sectionButtonSubmit"><i class="fa-solid fa-floppy-disk fa-lg icon-white"></i> Save</button>
                             </div>
                         </div>
                     </fieldset>

@@ -3,7 +3,8 @@
     @section('title','View Subjects')
     @section('content')
 
-    @include('subjects.newsub')
+    @include('subjects.create')
+    @include('subjects.edit')
     @include('subjects.delete')
 
 <br>
@@ -38,7 +39,7 @@
         </div>
 
         <div class="d-flex col justify-content-md-end">
-            <a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#registerSubModal"><i class="fa-solid fa-book"></i> new subject</a>
+            <a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#createSubjectModal"><i class="fa-solid fa-book"></i> new subject</a>
         </div>
     </div>
 
@@ -56,7 +57,7 @@
             </tr>
 
             @unless(count($subjects) == 0)
-            <script src="{{ asset('js/subjectsIndex.js') }}"></script>
+            <script src="{{ asset('js/subjectIndex.js') }}"></script>
             @foreach($subjects as $subject)
             <tr>
                 <td><i class="fa-solid fa-circle icon-baby-blue"></td>
@@ -78,7 +79,7 @@
                 <td>{{$year_start}}</td>
                 <td>{{$year_end}}</td>
                 <td>
-                    <a class="btn btn-primary" role="button" href="#"><i class="fa-regular fa-pen-to-square icon-white"></i></a>
+                    <a class="btn btn-primary" role="button" onclick="updateModal({{ $subject }}, {{ $subject->schedule }})"><i class="fa-regular fa-pen-to-square icon-white"></i></a>
                     <a class="btn btn-primary" role="button" onclick="deleteModal({{$subject}})"><i class="fa-solid fa-trash-can icon-white"></i></a>
                 </td>
             </tr>
