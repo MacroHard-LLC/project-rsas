@@ -15,10 +15,10 @@
                             <!-- needed -->
                             <!-- for the room name -->
                             <div class="col-md-6 input-field">
-                                <label for="room_name" class="input-title">ROOM NAME</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Ex. Room 123" name="room_name" id="room_name" minlength="1" maxlength="50" aria-describedby="nameError" required>
+                                <label for="room" class="input-title">ROOM NAME</label>
+                                <input type="text" class="form-control form-control-sm" placeholder="Ex. Room 123" name="room" id="room" minlength="1" maxlength="50" aria-describedby="nameError" required>
                                 <div class="is-invalid" role="alert" id="nameError" name="nameError" style="visibility:hidden">
-                                    <strong>Check if Subject Name is a legal string</strong>
+                                    <strong>Check if Room Name is a legal string</strong>
                                 </div>
                             </div>
                         </div>
@@ -43,8 +43,48 @@
 
                         <div class="form-group float-end">
                             <!--<span class="submit-reminder me-3">Double-check the information before pressing the button</span>-->
-                            <button class="btn btn-primary" type="submit" id="sbmt_btn" disabled><i class="fa-solid fa-square-plus icon-white"></i> Add Machine</button>
+                            <button class="btn btn-primary" onclick="getData()" type="submit" id="sbmt_btn" disabled><i class="fa-solid fa-square-plus icon-white"></i> Add Machine</button>
                         </div>
+
+                        <?php
+                        
+                        function getData() {
+                            // Get the data from the modal
+                            $status = $_POST['status'];
+                            $room = $_POST['room'];
+                          
+                            // Return the data
+                            return array(
+                              'status' => $status,
+                              'room' => $room
+                            );
+                          }
+                        
+                        function insertData($data) {
+// Connect to the database
+$db = new PDO('mysql:host=localhost;dbname=rsas', 'root', 'password');
+
+// Prepare the insert statement
+$stmt = $db->prepare('INSERT INTO machine (status, room) VALUES (?, ?)');
+
+// Bind the data to the statement
+$stmt->bindParam(1, $data['status']);
+$stmt->bindParam(2, $data['room']);
+
+// Execute the statement
+$stmt->execute();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Get the data from the modal
+$data = getData();
+
+// Insert the data into the database
+insertData($data);
+}
+
+?>
+
 
                         </div>
                     </fieldset>
