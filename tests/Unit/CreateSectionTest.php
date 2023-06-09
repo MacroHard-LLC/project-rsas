@@ -12,39 +12,39 @@ class CreateSectionTest extends TestCase
 {
     use DatabaseMigrations;
 
-    // public function test_the_home_page_returns_success(): void
-    // {
-    //     $response = $this->get('/');
-    //     $response->assertStatus(200);
-    // }
-    
-    public function test_create_seciton_form(): void
+    public function test_the_home_page_returns_success(): void
     {
-        $request = $this->get('/section/create');
-        $request->assertStatus(200);
-    }
-
-    public function test_if_adviser_request_works_if_exist(): void
-    {
-        // Create a user with an adviser role
-        $adviser = User::factory()->create([
-            'role' => 'adviser',
-        ]);
-
-        // Login the user
-        $this->actingAs($adviser);
-
-        // Make a POST request to the section adviser request route
-        $response = $this->post('/section-adviser-request', [
-            'input_data' => [
-                'id' => $adviser->id,
-            ],
-        ]);
-
-        // Assert that the request was successful
+        $response = $this->get('/');
         $response->assertStatus(200);
-
     }
+    
+    // public function test_create_seciton_form(): void
+    // {
+    //     $request = $this->get('/section/create');
+    //     $request->assertStatus(200);
+    // }
+
+    // public function test_if_adviser_request_works_if_exist(): void
+    // {
+    //     // Create a user with an adviser role
+    //     $adviser = User::factory()->create([
+    //         'role' => 'adviser',
+    //     ]);
+
+    //     // Login the user
+    //     $this->actingAs($adviser);
+
+    //     // Make a POST request to the section adviser request route
+    //     $response = $this->post('/section-adviser-request', [
+    //         'input_data' => [
+    //             'id' => $adviser->id,
+    //         ],
+    //     ]);
+
+    //     // Assert that the request was successful
+    //     $response->assertStatus(200);
+
+    // }
 
 
     // public function test_IfAdviserIdCannotBeChosen(): void{

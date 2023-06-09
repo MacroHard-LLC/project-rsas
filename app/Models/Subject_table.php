@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Subject_table extends Model
 {
@@ -12,8 +13,8 @@ class Subject_table extends Model
     public $primaryKey = 'id';
 
     // this is the thing for the unit testing
-    protected $fillable = ['id', 'name', 'grade_level','instructor_id','room','year_start',
-                            'year_end','added_on','added_by','is_deleted'];
+    protected $fillable = ['id', 'name', 'grade_level', 'section_id','instructor_rfid','room',
+                            'schoolyear_id','semester','machine_id','is_deleted'];
 
     // timestamps is FALSE as to defer the Laravel's need for
     // UPDATED_AT where we already have updated_on in our database
@@ -57,12 +58,17 @@ class Subject_table extends Model
         return $this->hasMany(Late::class);
     }
 
-    public function logsheet(): HasManyThrough
+    public function instructor_logsheet(): HasManyThrough
     {
-        return $this->hasManyThrough(Logsheet::class, Machine::class);
+        return $this->hasManyThrough(Instructor_logsheet::class, Machine::class);
+    }
+
+    public function student_logsheet(): HasManyThrough
+    {
+        return $this->hasManyThrough(Student_logsheet::class, Machine::class);
     }
 
     public function schedule(){
-        return $this->hasMany(Schedule_table::class);
+        return $this->hasMany(Schedule_table::class, 'subject_id');
     }
 }

@@ -3,6 +3,8 @@
 @extends('master')
 @section('title','View Section')
 @section('content')
+@include('sections.edit')
+@include('sections.delete')
 
 <div class='container m-2'>
     <div class='row'>
@@ -17,31 +19,31 @@
     <div class='row px-3'>
         <div class='col'>
             <div class="section-title">GRADE LEVEL</div>
-            
+
             <div class="section-body">{{$section->grade_level}} - {{$section->name}}</div>
         </div>
         <div class='col'>
             <div class="section-title">SECTION ID</div>
-            
+
             <div class="section-body">{{$section->id}}</div>
         </div>
 
 
         <div class='col'>
             <div class="section-title">CLASS ADVISER</div>
-            
+
             <div class="section-body">{{$section->user->first_name}} {{$section->user->last_name}}</div>
         </div>
         <div class='col'>
             <div class="section-title">ADVISER ID</div>
-            
+
             <div class="section-body">{{$section->user->id}}</div>
         </div>
         <div class="px-2">
         <hr>
         </div>
     </div>
-    
+
 
 
 <div class='container table-responsive'>
@@ -83,8 +85,9 @@
 
 <div class="row px-3">
     <div class="col section-button ">
-    <a class="btn btn-primary" role="button"><i class="fa-regular fa-pen-to-square icon-white"></i> EDIT</a>
-    <a class="btn btn-primary" role="button"><i class="fa-solid fa-trash-can icon-white"></i> DELETE</a>
+    <script src="{{ asset('js/sectionIndex.js') }}"></script>
+    <a class="btn btn-primary" role="button" onclick="updateModal({{ $section }})"><i class="fa-regular fa-pen-to-square icon-white"></i> EDIT</a>
+    <a class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa-solid fa-trash-can icon-white"></i> DELETE</a>
     </div>
 </div>
 

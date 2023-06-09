@@ -10,16 +10,16 @@
 
 <br>
 <div class="container-fluid d-flex table-title">
-    <h2>USER LIST</h2>
+    <h2 id="listTitle">USER LIST</h2>
 </div>
 
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 justify-content-md-end">
             <a href="/users" class="btn btn-secondary" role="button">ALL</a>
-            <a href="/users/?role=student" class="btn btn-secondary" role="button">STUDENT</a>
-            <a href="/users/?role=adviser" class="btn btn-secondary" role="button">ADVISER</a>
-            <a href="/users/?role=admin" class="btn btn-secondary" role="button">ADMIN</a>
+            <a href="/users/?role=student" class="btn btn-secondary" role="button" onclick="changeListTitle('STUDENT')">STUDENT</a>
+            <a href="/users/?role=adviser" class="btn btn-secondary" role="button" onclick="changeListTitle('ADVISER')">ADVISER</a>
+            <a href="/users/?role=admin" class="btn btn-secondary" role="button" onclick="changeListTitle('ADMIN')">ADMIN</a>
         </div>
 
         <div class="d-flex col justify-content-md-end">
@@ -89,5 +89,21 @@
     </div>
 
 </div>
+
+<script>
+    function changeListTitle(title) {
+        document.getElementById('listTitle').innerHTML = title + ' LIST';
+    }
+
+    // Retrieve URL parameters and update title if "role" parameter exists
+    window.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const roleParam = urlParams.get('role');
+
+        if (roleParam) {
+            changeListTitle(roleParam.toUpperCase());
+        }
+    });
+</script>
 
 @endsection

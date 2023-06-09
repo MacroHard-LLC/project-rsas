@@ -1,9 +1,16 @@
-window.addEventListener('load', function() {
-    document.getElementById("submit_new_section").style.visibility = "hidden";
-    let createSectionForm = document.getElementById('createSectionForm');
+const editSectionModal = document.getElementById('updateSectionModal')
+editSectionModal.addEventListener('show.bs.modal', function() {
+    let updateForm = document.getElementById('updateSectionForm');
+
+    $("#updateSectionForm input").removeClass("is-valid is-invalid");
+    updateForm.querySelectorAll(".form-control, .form-select").forEach(input => {
+        $("#" + input.getAttribute("name") + "_error").children("span").text("");
+    });
+
+    document.getElementById("submit_new_section").style.visibility = "visible";
 
     ['input','change'].forEach(evt =>
-        createSectionForm.querySelectorAll(".form-control, .form-select").forEach(input => {
+        updateForm.querySelectorAll(".form-control, .form-select").forEach(input => {
             input.addEventListener(evt, () => {
                 $("#" + input.getAttribute("name") + "_error").children("span").text("");
 
@@ -17,7 +24,7 @@ window.addEventListener('load', function() {
                 } else {
                     input.classList.remove('is-valid');
                     input.classList.add('is-invalid');
-                    showCreateSectionClientError(input);
+                    showUpdateSectionClientError(input);
                 }
                 checkOverallValidity();
             })
@@ -26,18 +33,17 @@ window.addEventListener('load', function() {
 });
 
 function checkOverallValidity(){
-    var form_children = $("#createSectionForm").children();
-    var fields = form_children.find('.form-control, .form-select')
-    var valid_fields = form_children.find('.form-control.is-valid, .form-select.is-valid')
+    var form_children = $("#updateSectionForm").children();
+    var invalid_fields = form_children.find('.form-control.is-invalid, .form-select.is-invalid')
     var student_rows = $("#student_list").children();
-    var is_valid = fields.length - 1 === valid_fields.length && student_rows.length > 0;
-    if (is_valid)
-        document.getElementById("submit_new_section").style.visibility = "visible";
-    else
+    var is_invalid = invalid_fields.length > 0 || student_rows.length <= 0;
+    if (is_invalid)
         document.getElementById("submit_new_section").style.visibility = "hidden";
+    else
+        document.getElementById("submit_new_section").style.visibility = "visible";
 }
 
-function showCreateSectionClientError(input){
+function showUpdateSectionClientError(input){
     var input_name = input.getAttribute("name");
     if (input_name = "section_name" && input.validity.tooLong)
         $("#" + input.getAttribute("name") + "_error").children("span").text("Section name must have a maximum of 50 characters.");
@@ -54,7 +60,7 @@ function add_student_to_row(){
     // Create a new row in the table.
     const newRow = document.createElement('tr');
     newRow.innerHTML = `
-        <td name="student_row">${user.id}</td>
+        <td name="new_student_id">${user.id}</td>
         <td>${user.first_name}</td>
         <td>${user.last_name}</td>
         <td class='delete'><button type='button' name="delete_button" style="border:0px; background-color: transparent;"><i class="fa-solid fa-xmark"></i></button></td>
@@ -76,6 +82,12 @@ function add_student_to_row(){
     return false;
 }
 
+function add_student_to_dropdown(id, first_name, last_name){
+    const student = '{"id":'+ id +', "first_name":"'+ first_name
+        +'", "last_name":"'+ last_name +'"}';
+    $('#section_student_id_input').append(`<option value='${student}' id='${id}'>${first_name}, ${last_name}</option>`);
+}
+
 function remove_from_dropdown(id){
     document.getElementById(id).style.display = "none";
 }
@@ -86,8 +98,16 @@ $(document).on('click', '[name="delete_button"]', function(){
     const tableRows = document.querySelectorAll('#student_list tr').length;
     document.getElementById("total_students").textContent = tableRows;
 
-    var student_id = $(this).closest('tr').find('[name="student_row"]').text();
-    document.getElementById(student_id).style.display = "block";
+    var enrolled_student = $(this).closest('tr').attr('name') == 'enrolled';
+    if (enrolled_student){
+        var id = $(this).closest('tr').find('[name="student_id"]').text();
+        var first_name = $(this).closest('tr').find('[name="first_name"]').text();
+        var last_name = $(this).closest('tr').find('[name="last_name"]').text();
+        add_student_to_dropdown(id,first_name,last_name)
+    } else {
+        var student_id = $(this).closest('tr').find('[name="new_student_id"]').text();
+        document.getElementById(student_id).style.display = "block";
+    }
 
     checkOverallValidity();
 });
