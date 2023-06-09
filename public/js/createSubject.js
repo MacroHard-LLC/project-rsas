@@ -43,12 +43,6 @@ function checkOverallValidity() {
     var isTimeInputsFilled = timeInputs.toArray().every(input => input.value.trim() !== '');
 
     var isValid = fields.length - 10 === validFields.length && checkedCheckboxes.length > 0 && isTimeInputsFilled;
-
-    // console.log("FIELDS " + fields.length)
-    // console.log("validfields " + validFields.length)
-    // console.log("checkedcb " + checkedCheckboxes.length)
-    // console.log("istimeinf " + isTimeInputsFilled)
-
     if (isValid) {
       document.getElementById("submitNewSubject").style.visibility = "visible";
     } else {

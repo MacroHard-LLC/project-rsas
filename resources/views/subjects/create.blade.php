@@ -159,8 +159,6 @@
                 field.name = field.name.replace("subject_", "")
             });
 
-            console.log(formData);
-
             let selectedDays = [];
             // Iterate over checked checkboxes and add their values to the selectedDays array
             $("input[type='checkbox']:checked").each(function() {
@@ -186,7 +184,6 @@
                         Object.keys(errors).forEach(function (key) {
                             $("#subject_" + key + "_input").addClass("is-invalid");
                             $("#subject_" + key + "_error").children("span").text(errors[key][0]);
-                            console.log(errors);
                         });
                     }
                 }

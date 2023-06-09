@@ -119,7 +119,7 @@
                             <i style="font-size:small;">Total Number of Students: <span id="total_students">0</span></i>
 
                             <div class="form-group pt-5 float-end" id="submit_new_section">
-                                <button class="btn btn-primary create" type="submit" id="sectionButtonSubmit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
+                                <button class="btn btn-primary create" type="submit" id="sectionButtonSubmit"><i class="fa-solid fa-floppy-disk fa-lg icon-white"></i> Save</button>
                             </div>
                         </div>
                     </fieldset>
