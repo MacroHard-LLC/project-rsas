@@ -42,7 +42,7 @@
 
 
                         <div class="form-group float-end">
-                            <button class="btn btn-primary" onclick="getData()" type="submit" id="sbmt_btn" disabled><i class="fa-solid fa-square-plus icon-white"></i> Add Machine</button>
+                            <button class="btn btn-primary" type="submit" id="sbmt_btn"><i class="fa-solid fa-square-plus icon-white"></i> Add Machine</button>
                         </div>
                         </div>
                     </fieldset>
