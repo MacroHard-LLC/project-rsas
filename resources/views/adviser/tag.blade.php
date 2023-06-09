@@ -42,16 +42,13 @@
                 if (radioButton.checked) {
                 // Get the value of the selected radio button
                 selectedValue = radioButton.value;
-                console.log(selectedValue);
                 }
             });
 
         let input_data = {
             new_status : selectedValue,
         };
-        
-        console.log("yeet");
-        console.log(input_data);
+    
 
         $.ajax({
             method: "POST",
@@ -62,7 +59,6 @@
             url: "{{ route('change_status') }}",
             data: { input_data},
             success: function(data) {
-                console.log(data);
                 location.reload();
             }
             });

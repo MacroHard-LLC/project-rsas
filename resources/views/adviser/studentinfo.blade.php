@@ -35,14 +35,11 @@
             url: "{{ route('grade_level_startup') }}",
             data: { input_data: adviserID },
             success: function(data) {
-                console.log(data);
                 $('#attendanceGradeLevel').text(data);
             }
         });
         const tableBody = document.querySelector('#attendanceTable tbody');
         let subject = $('#subject_adviserView_dropdown');
-        console.log(subject);
-
         
         $.ajax({
             method: "POST",
@@ -52,11 +49,9 @@
             },
             url: "{{ route('get_all_students_tag') }}",
             success: function(data) {
-                console.log(data);
                 for(var i = 0; i < data.length; i++){
                     const newRow = document.createElement('tr');
                     const array = data[i]['id'];
-                    console.log(array);
                     newRow.innerHTML = `
                         <td>${data[i]['name']}</td>
                         <td>${data[i]['status']}</td>
@@ -81,8 +76,6 @@
     });
 
     function beforeAnchorClick(button) {
-        console.log("PROBLEMATIC");
-        console.log(button.getAttribute('data-id'));
         caught_value = button.getAttribute('data-id');
         $.ajax({
             method: "POST",
@@ -93,7 +86,7 @@
             url: "{{ route('session_student_ID') }}",
             data: { input_data: caught_value },
             success: function(data) {
-                console.log(data);
+                console.log("");
             }
         });
     }
@@ -102,7 +95,6 @@
         //var element = $(this).siblings('span');
         //var value = element.data('id');
         var element = $(this).closest('td').find('span');
-        console.log(element)
         var value = element.data('id');
 
         $.ajax({
@@ -114,7 +106,7 @@
             url: "{{ route('add_id_edit_status') }}",
             data: {value},
             success: function(data) {
-                console.log(data);
+                console.log('');
             }
         });
     });

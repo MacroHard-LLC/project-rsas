@@ -213,7 +213,6 @@
 <script>
 $(document).ready(function() {
     let subject = $('#school_yearDD');
-    console.log(subject);
     $.ajax({
         method: "POST",
         headers: {
@@ -222,7 +221,6 @@ $(document).ready(function() {
         },
         url: "{{ route('get_all_schoolyear') }}",
         success: function(data) {
-            console.log(data);
             data.forEach(element => {
                 subject.append(`<option value="${element.id}">AY ${element.start}-${element.end}</option>`);
             });
@@ -233,7 +231,6 @@ $(function () {
     $('#registerSubForm').submit(function (e) {
         e.preventDefault();
         let formData = $(this).serializeArray();
-        console.log(formData);
         let selectedDays = [];
         // Iterate over checked checkboxes and add their values to the selectedDays array
         $("input[type='checkbox']:checked").each(function() {
@@ -274,7 +271,6 @@ $('#instruct_rfid').on('keypress click', function() {
       url: "{{ route('check_instruct_rfid') }}",
       data: { input_data: $(this).val() },
       success: function(data) {
-        console.log(data);
         if (data) {
           $('#subjectRFIDError.is-invalid').css('visibility','visible');
           $('#subjectRFIDError.is-invalid').html('<strong>Instructor does not Exist</strong>');
@@ -300,7 +296,6 @@ if ($('#sub_name').val().length == 0){
     $('#nameError.is-invalid').css('visibility','hidden');
 }
 else if (!$('#sub_name').val().match('^[0-9a-zA-Z_ ,.]{0,50}$')) {
-    console.log('hooter');
     $('#nameError.is-invalid').css('visibility','visible');
     $('#sbmt_btn').prop('disabled', true);
 }
@@ -374,7 +369,6 @@ else{
 $('#sub_id').on('keyup', function () {
     $('#idError.is-invalid').html('<strong>Check if Subject ID is all integers</strong>');
   if ($(this).val().length === 5) {
-    console.log($(this).val());
     $.ajax({
       method: "POST",
       headers: {

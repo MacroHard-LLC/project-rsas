@@ -49,7 +49,6 @@
                 if (radioButton.checked) {
                 // Get the value of the selected radio button
                 selectedValue = radioButton.value;
-                console.log(selectedValue);
                 }
             });
 
@@ -59,8 +58,6 @@
             // subject : formatArray[2],
         };
 
-        console.log("yeet");
-        console.log(input_data);
         $.ajax({
             method: "POST",
             headers: {
@@ -70,9 +67,6 @@
             url: "{{ route('change_attendance') }}",
             data: { input_data},
             success: function(data) {
-                console.log("yewe");
-                console.log(data);
-                console.log("end of yewe");
                 location.reload();
             }
             });
