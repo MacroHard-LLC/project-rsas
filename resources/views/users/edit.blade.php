@@ -103,19 +103,11 @@
                             <div class="is-invalid" role="alert" id="sexErrorU">
                                 <span></span>
                             </div>
-
-                            {{-- If student (RFID)
-                            <div class="form-outline pb-2 no-display" id="rfid">
-                                <hr>
-                                <label for="rfid" class="input-title">RFID Number</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="rfid" pattern="[0-9]+" id='rfid_value'>
-                            </div> --}}
                         </div>
 
                         <input type="hidden" name="originalID" id="originalID" value="">
 
                         <div class="form-group pt-3 float-end" id="submissionU">
-                            <!--<span class="submit-reminder me-3">Double-check the information before pressing the button</span>-->
                             <button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk fa-lg icon-white"></i> Save</button>
                         </div>
                     </div>

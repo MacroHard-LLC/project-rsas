@@ -25,9 +25,6 @@
             url: "{{ route('session_student_info') }}",
             data: { input_data },
             success: function(data) {
-                console.log('OOF');
-                console.log(data);
-                console.log('END OF OOF');
             }
         });
     }
@@ -50,7 +47,6 @@
             data: { input_data },
             success: function(data) {
                 data.forEach(student => {
-                    console.log(student);
                     const studentId = student.id;
                     const button = document.querySelector(`button[value="${studentId}"]`);
                     const td = button.closest('td');
@@ -72,7 +68,7 @@
             url: "{{ route('session_student') }}",
             data: { input_data : value},
             success: function(data) {
-                console.log(data);
+                console.log('');
             }
         });
     }
@@ -94,7 +90,7 @@
             url: "{{ route('session_student') }}",
             data: { input_data },
             success: function(data) {
-                console.log(data);
+                console.log("");
             }
         });
 
@@ -108,7 +104,6 @@
             data: { input_data },
             success: function(data) {
                 data.forEach(student => {
-                    console.log(student);
                     const studentId = student.id;
                     const button = document.querySelector(`button[value="${studentId}"]`);
                     const td = button.closest('td');
@@ -121,7 +116,6 @@
     }
 
     function forcedSetup(value, formattedDate, tableBody){
-        console.log("cat");
         let input_data = {
             subject_id : value,
             date : formattedDate,
@@ -135,13 +129,9 @@
             url: "{{ route('get_all_students_adviser') }}",
             data: { input_data },
             success: function(data) {
-                console.log("shet");
-                console.log(data);
                 for(var i = 0; i < data.length; i++){
                     const newRow = document.createElement('tr');
                     const array = new Array(data[i]['id'], formattedDate, value);
-                    console.log("this is a");
-                    console.log(array[2]);
                     newRow.innerHTML = `
                         <td>${data[i]['name']}</td>
                         <td id="studentStatusAttendance" name="studentStatusAttendance">${data[i]['status']}</td>
@@ -186,7 +176,6 @@
             url: "{{ route('adviser_startup') }}",
             data: { input_data: adviserID },
             success: function(data) {
-                console.log(data);
                 $('#attendanceAdviserName').text(data);
             }
         });
@@ -199,15 +188,11 @@
             url: "{{ route('grade_level_startup') }}",
             data: { input_data: adviserID },
             success: function(data) {
-                console.log(data);
                 $('#attendanceGradeLevel').text(data);
             }
         });
         const tableBody = document.querySelector('#attendanceTable tbody');
-        let subject = $('#subject_adviserView_dropdown');
-        console.log("NOT DAIJOUBU");
-    
-        //subject.append('<option value="A24">meow</option>');
+        let subject = $('#subject_adviserView_dropdown');   
         
         let startSubject = '';
         $.ajax({
@@ -219,27 +204,19 @@
             url: "{{ route('setUp_subjects') }}",
             data: { input_data: adviserID },
             success: function(data) {
-                console.log(data);
                 data.forEach(element => {
                     if (startSubject == ''){
                         startSubject = element.id;
-                        console.log(element.id);
                         forcedSetup(startSubject, formattedDate, tableBody);
                     }
                     subject.append(`<option value="${element.id}">${element.name}</option>`);
                 });
             }
         });
-        
-        console.log("sadje");
-        console.log(startSubject);
     });
 
     $(document).on('click', '#editStatus', function() {
-        //var element = $(this).siblings('span');
-        //var value = element.data('id');
         var element = $(this).closest('td').find('span');
-        console.log(element)
         var value = element.data('id');
 
         $.ajax({
@@ -251,27 +228,10 @@
             url: "{{ route('add_id_edit_status') }}",
             data: {value},
             success: function(data) {
-                console.log(data);
+                console.log("");
             }
         });
     });
-
-
-    /*$('#editStatus').on('click',function(){
-    var value = $(this).closest('td').attr('data-student-id');
-    $.ajax({
-        method: "POST",
-        headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                Accept: "application/json"
-        },
-        url: "{{ route('add_id_edit_status') }}",
-        data: { input_data : value },
-        success: function(data) {
-            console.log('BULLSHIT');
-        }
-    });
-});*/
 
 </script>
 

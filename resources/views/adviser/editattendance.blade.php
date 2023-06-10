@@ -35,7 +35,6 @@
 <script>
     // Get the button element
     const buttonSubmitEditView = document.querySelector('button[type="submit"]');
-    //const studentId = document.querySelector('#editAttendanceModal td[data-student-id]').getAttribute('data-student-id');
     // Add a click event listener to the button
     buttonSubmitEditView.addEventListener('click', function(event) {
         const buttonEditView = document.getElementById("editStatus");
@@ -49,18 +48,13 @@
                 if (radioButton.checked) {
                 // Get the value of the selected radio button
                 selectedValue = radioButton.value;
-                console.log(selectedValue);
                 }
             });
 
         let input_data = {
             new_status : selectedValue,
-            // date : formatArray[1],
-            // subject : formatArray[2],
         };
 
-        console.log("yeet");
-        console.log(input_data);
         $.ajax({
             method: "POST",
             headers: {
@@ -70,9 +64,6 @@
             url: "{{ route('change_attendance') }}",
             data: { input_data},
             success: function(data) {
-                console.log("yewe");
-                console.log(data);
-                console.log("end of yewe");
                 location.reload();
             }
             });

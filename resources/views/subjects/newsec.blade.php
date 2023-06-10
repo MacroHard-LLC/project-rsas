@@ -131,8 +131,6 @@
 
     </div>
 
-<!-- I don't know where to put the scripts for Scheduled Days, but it's in resources/js (jquery.min.js and select2.min.js)-->
-
 </div>
 
 @section('scripts')
@@ -143,7 +141,6 @@ $(function () {
     $('#registerSubForm').submit(function (e) {
         e.preventDefault();
         let formData = $(this).serializeArray();
-        console.log(formData);
 
         let selectedDays = [];
 
@@ -191,7 +188,6 @@ if ($('#sub_name').val().length == 0){
     $('#nameError.is-invalid').css('visibility','hidden');
 }
 else if (!$('#sub_name').val().match('^[0-9a-zA-Z_ ,.]{0,50}$')) {
-    console.log('hooter');
     $('#nameError.is-invalid').css('visibility','visible');
     $('#sbmt_btn').prop('disabled', true);
 }
@@ -270,7 +266,6 @@ else{
 $('#sub_id').on('keyup', function () {
     $('#idError.is-invalid').html('<strong>Check if Subject ID is all integers</strong>');
   if ($(this).val().length === 5) {
-    console.log($(this).val());
     $.ajax({
       method: "POST",
       headers: {

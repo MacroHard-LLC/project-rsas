@@ -36,13 +36,6 @@ class Form2Controller extends Controller
         //gives the current month of asking the report
         $month = now()->format('F');
 
-        // $students = Student::where('section_id', $section_id)->get();
-
-        // $male_query = User::where('sex','M')
-        //     ->whereHas('student', function (Builder $query) {
-        //     $query->where('section_id',$section_id);
-        // })->get();
-
         //gets the number of male students that belong to the section
         $male_query = User::join('Student', 'Student.user_id', '=', 'User.id')
             // ->where('student.section_id', $section_id)
@@ -169,29 +162,7 @@ class Form2Controller extends Controller
                 'absent_counter' => $absent_counter,
                 'is_enrolled' => User::where('id',$student['user_id'])->value('is_enrolled'),
             );
-
-
-            // $is_present = PresentAttendance::where('student_id',$student['user_id'])
-            //             ->exists();
-            // $is_late = LateAttendance::where('student_id',$student['user_id'])
-            //             ->exists();
-            // $status = 'Absent';
-            
-            // if($student['user_id'] == $student_tag){
-            //     $status = session()->get('new_status');
-            // }
-            // else if($is_present){
-            //     $status = 'Present';
-            // }
-            // else if($is_late){
-            //     $status = 'Late';
-            // }
         }
-
-        //     $student_tag = session()->get('student_id'); //for the remarks
-        // }
-
-        // // $queryStudent = Student::where($incoming_data = session(),$incoming_data = session()->get('user_id'));
 
         //gets the number of female students that belong to the section
         $female_query = User::join('Student', 'Student.user_id', '=', 'User.id')
@@ -263,21 +234,6 @@ class Form2Controller extends Controller
                 'is_enrolled' => User::where('id',$student['user_id'])->value('is_enrolled'),
             );
 
-            // $is_present = PresentAttendance::where('student_id',$student['user_id'])
-            //             ->exists();
-            // $is_late = LateAttendance::where('student_id',$student['user_id'])
-            //             ->exists();
-            // $status = 'Absent';
-            
-            // if($student['user_id'] == $student_tag){
-            //     $status = session()->get('new_status');
-            // }
-            // else if($is_present){
-            //     $status = 'Present';
-            // }
-            // else if($is_late){
-            //     $status = 'Late';
-            // }
         }
 
         //to get the total number of male absents per month
@@ -306,20 +262,6 @@ class Form2Controller extends Controller
 
         $total_absent = $male_total_absent + $female_total_absent;
         $total_late = $male_total_late + $female_total_late;
-
-        // echo $female_total_late;
-
-        //var_dump($adviser);
-        // var_dump($grade_level);
-        // echo $male_query_counter;
-        // echo $female_query_counter;
-        // echo $male_query;
-        // echo $female_query;
-        // echo $male_attendance_array[1]['id'];
-
-        // foreach ($male_attendance_array as $male_attendance) {
-        //     echo $male_attendance['absent_counter'];
-        // }
         
         return view('adviser.form2')
         -> with('month', $month)

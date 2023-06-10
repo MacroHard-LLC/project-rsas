@@ -166,37 +166,3 @@ Route::get('/form2', [Form2Controller::class, 'ShowForm'])->name('show_form');
 //addmachine Modal
 Route::post('/', [MachineController::class, 'store'])->name('addMachine');
 
-
-//I tried to group them - Pris
-//Route::resource('subjects', CreateSubject::class) -> only(['CreateSubjectForm', 'DataInsert', 'CheckSubIdExist']);
-
-/*
-Route::prefix('tech') -> middleware('is_tech' -> group(function) (){
-    Route::get('home', [TechHomeController::class, 'index']); // Dashboard
-
-    // Create Subject
-    Route::get('/createsub',[CreateSubject::class,'CreateSubjectIndex']); // Create Subject
-    Route::post('dataInsert',[CreateSubject::class, 'DataInsert'])->middleware(CheckSubjectIdValid::class); // Data Insert
-
-    // create subject Form
-    Route::get('/subjects/create',[CreateSubject::class, 'CreateSubjectForm']);
-    Route::post('/subjects', [CreateSubject::class, 'DataInsert'])->name('register_sub');
-    Route::post('/subjects-check', [CreateSubject::class, 'CheckSubIdExist'])->name('check_id');
-
-    // show users
-    Route::get('/users', [UserController::class, 'index']);
-
-    // show create user form
-    Route::get('/users/create', [UserController::class, 'create']);
-
-    // create new user
-    Route::post('/users', [UserController::class, 'store'])->name('createUser');
-
-    // Show Edit User Form
-    Route::get('/users/{id}/edit/', [UserController::class, 'edit']);
-});
-
-Route::prefix('admin' -> middleware('is_admin') ->group(function) (){
-    Route::get('home'), [HomeController::class, 'index']);
-})
-*/

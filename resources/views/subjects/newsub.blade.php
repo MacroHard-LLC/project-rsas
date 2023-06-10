@@ -37,10 +37,6 @@
                                     <option value="9">9</option>
                                     <option value="10">10</option>
                                 </select>
-                                <!--validation needs to be updated, also this kind of error message makes an unnecessary bottom margin :((
-                                <div class="is-invalid" role="alert" id="gradeError" name="gradeError">
-                                    <strong></strong>
-                                </div>-->
                             </div>
 
                             <div class="col-6 col-md-4 input-field">
@@ -49,10 +45,6 @@
                                     <!--ideally the options that would show here is the school_year_id present in the school year table-->
 
                                 </select>
-                                <!--validation needs to be updated
-                                <div class="is-invalid" role="alert" id="timeStartError" name="timeStartError" style="visibility:hidden">
-                                    <strong>Input the correct time format</strong>
-                                </div>-->
                             </div>
 
                             <div class="col-6 col-md-4 input-field">
@@ -62,10 +54,6 @@
                                         <option value="first_sem">First Semester</option>
                                         <option value="second_sem">Second Semester</option>
                                     </select>
-                                    <!--validation needs to be updated
-                                    <div class="is-invalid" role="alert" id="timeEndError" name="timeEndError" style="visibility:hidden">
-                                        <strong>Input the correct time format</strong>
-                                    </div>-->
                             </div>
                         </div>
                         <div class="row">
@@ -203,8 +191,6 @@
 
     </div>
 
-<!-- I don't know where to put the scripts for Scheduled Days, but it's in resources/js (jquery.min.js and select2.min.js)-->
-
 </div>
 
 @section('scripts')
@@ -213,7 +199,6 @@
 <script>
 $(document).ready(function() {
     let subject = $('#school_yearDD');
-    console.log(subject);
     $.ajax({
         method: "POST",
         headers: {
@@ -222,7 +207,6 @@ $(document).ready(function() {
         },
         url: "{{ route('get_all_schoolyear') }}",
         success: function(data) {
-            console.log(data);
             data.forEach(element => {
                 subject.append(`<option value="${element.id}">AY ${element.start}-${element.end}</option>`);
             });
@@ -233,7 +217,6 @@ $(function () {
     $('#registerSubForm').submit(function (e) {
         e.preventDefault();
         let formData = $(this).serializeArray();
-        console.log(formData);
         let selectedDays = [];
         // Iterate over checked checkboxes and add their values to the selectedDays array
         $("input[type='checkbox']:checked").each(function() {
@@ -274,7 +257,6 @@ $('#instruct_rfid').on('keypress click', function() {
       url: "{{ route('check_instruct_rfid') }}",
       data: { input_data: $(this).val() },
       success: function(data) {
-        console.log(data);
         if (data) {
           $('#subjectRFIDError.is-invalid').css('visibility','visible');
           $('#subjectRFIDError.is-invalid').html('<strong>Instructor does not Exist</strong>');
@@ -300,7 +282,6 @@ if ($('#sub_name').val().length == 0){
     $('#nameError.is-invalid').css('visibility','hidden');
 }
 else if (!$('#sub_name').val().match('^[0-9a-zA-Z_ ,.]{0,50}$')) {
-    console.log('hooter');
     $('#nameError.is-invalid').css('visibility','visible');
     $('#sbmt_btn').prop('disabled', true);
 }
@@ -374,7 +355,6 @@ else{
 $('#sub_id').on('keyup', function () {
     $('#idError.is-invalid').html('<strong>Check if Subject ID is all integers</strong>');
   if ($(this).val().length === 5) {
-    console.log($(this).val());
     $.ajax({
       method: "POST",
       headers: {

@@ -77,33 +77,6 @@
           <td class="header" colspan = "6" rowspan="2"> Total for the Month </td>
           <td class="headersub" colspan = "8" rowspan = "3">  <b>REMARK/S</b> (If <b>DROPPED OUT,</b> state reason, please refer to legend number 2. If <b>TRANSFERRED IN/OUT</b>, write the name of School.) </td>
         </tr>
-        {{-- <tr>
-          <td class="num"> </td>
-          <td class="num"> </td>
-          <td class="num"> </td>
-          <td class="num"> </td>
-          <td class="num"> </td>
-          <td class="borderL num"> </td>
-          <td class="num"> </td>
-          <td class="num"> </td>
-          <td class="num"> </td>
-          <td class="num"> </td>
-          <td class="borderL num"> </td>
-          <td class="num"> </td>
-          <td class="num"> </td>
-          <td class="num"> </td>
-          <td class="num"> </td>
-          <td class="borderL num"> </td>
-          <td class="num"> </td>
-          <td class="num"> </td>
-          <td class="num"> </td>
-          <td class="num"> </td>
-          <td class="borderL num"> </td>
-          <td class="num"> </td>
-          <td class="num"> </td>
-          <td class="num"> </td>
-          <td class="num"> </td>
-        </tr> --}}
       <tr>
         <?php
             $data = $daysNumber;
@@ -138,36 +111,6 @@
             echo $html;
             ?>
         </tr>
-        {{-- <tr> <!--third row, for dates sa attendance-->
-          <td class="borderB num1"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderL borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderL borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderL borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderL borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="borderB"> </td>
-          <td class="headersub" colspan = "3"> ABSENT </td>
-          <td class="headersub" colspan = "3"> TARDY </td>
-        </tr> --}}
-
         <tr>
           <?php
               $data = $daysLabel;
@@ -204,99 +147,6 @@
               <td class="headersub" colspan = "3"> ABSENT </td>
               <td class="headersub" colspan = "3"> TARDY </td>
           </tr>
-
-        {{-- @for($i = 0; $i < count($male_query); $i++)
-        <tr> <!--sample row 1-->
-          <td class="borderL num2">{{$i + 1}}</td>
-          <td colspan="9">{{$male_attendance_array[$i]['name']}}</td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> X </td> <!--an X in the cell means that the student is absent-->
-          <td class="crossed"> </td> <!--no X in the cell means that the student is present-->
-          <td class="late"> </td> <!--late class means student is late in class-->
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL" colspan="3"> </td>
-          <td class="borderL" colspan="3"> </td>
-          <td class="borderLR" colspan="8"> </td>
-        </tr>
-        @endfor --}}
-
-        {{-- @for ($i = 0; $i < count($male_query); $i++)
-    <tr>
-        <td class="borderL num2">{{$i + 1}}</td>
-        <td colspan="9">{{$male_attendance_array[$i]['name']}}</td>
-        
-        
-        <?php
-        // Assuming you have the array available in your controller
-        // $data = $male_attendance_array[$i]['attendance'];
-        ?>
-        
-        <?php
-        // Initialize an empty string to store the generated HTML
-        // $html = '';
-
-        // // Iterate over the array
-        // $counter = 0;
-        // foreach ($data as $value) {
-        //   // late 2 | present 1 | else absent
-        //   if (($counter % 5) == 0){
-        //     if($days[$counter] == 'x'){
-        //       $html .= '<td class="crossed borderL"> </td>';
-        //     }
-        //     elseif ($value == 2) {
-        //         //$html .= '<td class="borderL crossed"> </td>';
-        //         $html .= '<td class="late borderL"> X </td>';
-        //     } elseif ($value == 1) {
-        //         $html .= '<td class="crossed borderL"> </td>';
-        //     } else {
-        //         $html .= '<td class="crossed borderL"> X </td>';
-        //     }
-        //   }
-        //   else{
-        //     if($days[$counter] == 'x'){
-        //       $html .= '<td class="crossed"> </td>';
-        //     }
-        //     elseif ($value == 2) {
-        //         //$html .= '<td class="borderL crossed"> </td>';
-        //         $html .= '<td class="late"> X </td>';
-        //     } elseif ($value == 1) {
-        //         $html .= '<td class="crossed"> </td>';
-        //     } else {
-        //         $html .= '<td class="crossed"> X </td>';
-        //     }
-        //   }
-        //   $counter += 1;
-        // }
-
-        // // Output the generated HTML
-        // echo $html;
-        ?>
-        
-        <td class="borderL" colspan="3">{{$male_attendance_array[$i]['absent_counter']}}</td>
-        <td class="borderL" colspan="3">{{$male_attendance_array[$i]['late_counter']}}</td>
-        <td class="borderLR" colspan="8"> </td>
-    </tr>
-@endfor --}}
 <?php
   $id_counter = 0;
   $empty = ''
@@ -364,41 +214,6 @@
       
   </tr>
 @endforeach
-
-        
-
-        {{-- <tr> <!--sample row 2-->
-          <td class="borderL num2" > </td>
-          <td colspan="9"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL" colspan="3"> </td>
-          <td class="borderL" colspan="3"> </td>
-          <td class="borderLR" colspan="8"> </td>
-        </tr> --}}
         <tr> <!--total male per day row-->
           <td class="borderLRB num2" colspan="10"> MALE | TOTAL per day </td>
           <?php
@@ -438,42 +253,6 @@
           <td class="borderLB" colspan="3">{{$male_total_late}}</td>
           <td class="borderLRB" colspan="8"> </td>
         </tr>
-
-
-        {{-- @for($i = 0; $i < count($female_query); $i++)
-        <tr> <!--sample row 1-->
-          <td class="borderL num2">{{$i + 1}}</td>
-          <td colspan="9">{{$female_attendance_array[$i]['name']}}</td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> X </td> <!--an X in the cell means that the student is absent-->
-          <td class="crossed"> </td> <!--no X in the cell means that the student is present-->
-          <td class="late"> </td> <!--late class means student is late in class-->
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL" colspan="3">{{$female_attendance_array[$i]['absent_counter']}}</td>
-          <td class="borderL" colspan="3">{{$female_attendance_array[$i]['late_counter']}}</td>
-          <td class="borderLR" colspan="8"> </td>
-        </tr>
-        @endfor --}}
         
         @for ($i = 0; $i < count($female_attendance_array); $i++)
     <tr>
@@ -534,70 +313,6 @@
     </tr>
 @endfor
 
-        {{-- <tr> <!--sample row 1-->
-          <td class="borderL num2" > </td>
-          <td colspan="9"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL" colspan="3"> </td>
-          <td class="borderL" colspan="3"> </td>
-          <td class="borderLR" colspan="8"> </td>
-        </tr>
-        <tr> <!--sample row 2-->
-          <td class="borderL num2" > </td>
-          <td colspan="9"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="crossed"> </td>
-          <td class="borderL" colspan="3"> </td>
-          <td class="borderL" colspan="3"> </td>
-          <td class="borderLR" colspan="8"> </td>
-        </tr> --}}
         <tr> <!--total FEmale per day row-->
           <td class="borderLRB num2" colspan="10"> FEMALE | TOTAL per day </td>
           <?php

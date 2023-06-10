@@ -11,9 +11,6 @@
                     <br>
                     <h4>Are you sure you want to delete this user?</h4>
                     <br>
-                    <!--<h5 id="displayId"><b>ID:</b> <span></span></h5>
-                    <h5 id="displayFirstName"><b>First Name:</b> <span></span></h5>
-                    <h5 id="displayLastName"><b>Last Name:</b> <span></span></h5>-->
                 </div>
                 <input type="hidden" name="id" id="id" value="">
                 <div class="modal-footer justify-content-evenly">

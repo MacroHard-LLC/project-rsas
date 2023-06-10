@@ -33,8 +33,5 @@ function updateModal(user, student){
 
 function deleteModal(user){
     $("#id").val(user.id);
-    // $("#deleteModal").children().find("#displayId").children("span").text(user.id);
-    // $("#deleteModal").children().find("#displayFirstName").children("span").text(user.first_name);
-    // $("#deleteModal").children().find("#displayLastName").children("span").text(user.last_name);
     $('#deleteModal').modal('show');
 }

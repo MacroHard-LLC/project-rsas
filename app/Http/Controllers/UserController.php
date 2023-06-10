@@ -87,7 +87,6 @@ class UserController extends Controller
     }
 
     public function destroy(Request $request){
-        // User::find($request->id)->update(['is_deleted' => 1]);
         User::find($request->id)->delete();
         return back()->with('message', 'User deleted successfully');
     }
