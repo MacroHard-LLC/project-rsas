@@ -7,8 +7,6 @@ editSectionModal.addEventListener('show.bs.modal', function() {
         $("#" + input.getAttribute("name") + "_error").children("span").text("");
     });
 
-    document.getElementById("submit_new_section").style.visibility = "visible";
-
     ['input','change'].forEach(evt =>
         updateForm.querySelectorAll(".form-control, .form-select").forEach(input => {
             input.addEventListener(evt, () => {

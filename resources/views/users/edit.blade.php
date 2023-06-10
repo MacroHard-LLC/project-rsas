@@ -107,7 +107,7 @@
 
                         <input type="hidden" name="originalID" id="originalID" value="">
 
-                        <div class="form-group pt-3 float-end" id="submissionU">
+                        <div class="form-group pt-3 float-end" id="submissionU" style="visibility:hidden">
                             <button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk fa-lg icon-white"></i> Save</button>
                         </div>
                     </div>

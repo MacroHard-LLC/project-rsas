@@ -7,8 +7,6 @@ editSubjectModal.addEventListener('show.bs.modal', function() {
         $("#" + input.getAttribute("name") + "_error").children("span").text("");
     });
 
-    document.getElementById("submitUpdatedSubject").style.visibility = "visible";
-
     ['input','change'].forEach(evt =>
         updateSubjectForm.querySelectorAll(".form-control, .form-select, .form-check-input").forEach(input => {
             input.addEventListener(evt, () => {

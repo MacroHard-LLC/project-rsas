@@ -140,7 +140,7 @@
 
                         <input type="hidden" name="originalID" id="originalID" value="">
 
-                        <div class="form-group float-end">
+                        <div class="form-group float-end" style="visibility:hidden">
                             <button class="btn btn-primary" type="submit" id="submitUpdatedSubject"><i class="fa-solid fa-floppy-disk fa-lg icon-white"></i> Save</button>
                         </div>
                         </div>

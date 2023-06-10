@@ -13,8 +13,6 @@ editUserModal.addEventListener('show.bs.modal', function() {
         $("#" + input.getAttribute("name") + "ErrorU").children("span").text("");
     });
 
-    document.getElementById("submissionU").style.visibility = "visible";
-
     ['input','change'].forEach(evt =>
         updateForm.querySelectorAll(".form-control, .form-check-input").forEach(input => {
             input.addEventListener(evt, () => {
