@@ -28,13 +28,13 @@ window.addEventListener('load', function() {
                     input.classList.add('is-invalid');
                     showCreateSubjectClientError(input);
                 }
-                checkOverallCreateSectionValidity();
+                checkOverallCreateSubjectValidity();
             })
         })
     );
 });
 
-function checkOverallCreateSectionValidity() {
+function checkOverallCreateSubjectValidity() {
     var formChildren = $("#createSubjectForm").children();
     var fields = formChildren.find('.form-control, .form-select');
     var validFields = formChildren.find('.form-control.is-valid, .form-select.is-valid');
