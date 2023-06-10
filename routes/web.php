@@ -150,19 +150,13 @@ Route::post('/view-attendance-session-student-ID', [AdviserViewController::class
 Route::post('/view-attendance-session-student-info', [AdviserViewController::class, 'SessionStudentInfo'])->name('session_student_info');
 Route::post('/view-attendance-session-student', [AdviserViewController::class, 'SessionStudent'])->name('session_student');
 
-
-// RFID Controller
-// Route::post('/rfid/tap', 'RFIDController@tap');
-
 //Authentications
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'loginPost'])->name('login.post');
 Route::get('logout',[LoginController::class,'logout'])->name('logout');
-
 
 //Form 2
 Route::get('/form2', [Form2Controller::class, 'ShowForm'])->name('show_form');
 
 //addmachine Modal
 Route::post('/', [MachineController::class, 'store'])->name('addMachine');
-
