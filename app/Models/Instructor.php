@@ -19,6 +19,12 @@ class Instructor extends Model
      */
     protected $fillable = [
         'rfid_number',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'added_by',
+        'updated_by',
+        'is_deleted',
     ];
 
     public function subject(){

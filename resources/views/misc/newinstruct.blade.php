@@ -62,7 +62,7 @@
 
             let formData = $(this).serializeArray();
             jQuery.each(formData, function(i, field) {
-                    field.name = field.name.replace("instructor_", "")
+                field.name = field.name.replace("instructor_", "")
             });
 
             $("#registerInstForm").children().find(".is-invalid").children("span").text("");

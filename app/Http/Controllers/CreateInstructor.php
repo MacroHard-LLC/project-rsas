@@ -9,10 +9,13 @@ use Illuminate\Http\Request;
 class CreateInstructor extends Controller
 {
     function AddInstructor(Request $request){
-        $formField = $request->validate([
-            'rfid_number' => ['required','unique:instructor,rfid_number','integer','digits:10']
+        $formFields = $request->validate([
+            'rfid_number' => ['required','unique:instructor,rfid_number','integer','digits:10'],
+            'first_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'middle_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
+            'last_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
         ]);
 
-        Instructor::create($formField);
+        Instructor::create($formFields);
     }
 }
