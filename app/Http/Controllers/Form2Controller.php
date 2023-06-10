@@ -37,14 +37,14 @@ class Form2Controller extends Controller
         $month = now()->format('F');
 
         //gets the number of male students that belong to the section
-        $male_query = User::join('Student', 'Student.user_id', '=', 'User.id')
+        $male_query = User::join('student', 'student.user_id', '=', 'user.id')
             // ->where('student.section_id', $section_id)
             ->where('sex', 'M')
             ->where('section_id',$section->id)
             ->get();
 
         // to remove later
-        $male_query_counter = User::join('Student', 'Student.user_id', '=', 'User.id')
+        $male_query_counter = User::join('student', 'student.user_id', '=', 'user.id')
             ->where('sex', 'M')
             ->where('section_id',$section->id)
             ->count();
@@ -90,7 +90,7 @@ class Form2Controller extends Controller
             if($loop == 'x'){
                 $daysLabel[] = 'x';
                 $daysNumber[] = 'x';
-            } 
+            }
             else{
                 $carbonDate = Carbon::parse($loop);
                 $target_dayOfWeek = $carbonDate->dayOfWeek;
@@ -98,19 +98,19 @@ class Form2Controller extends Controller
                 $daysNumber[] = $target_day;
                 if($target_dayOfWeek == 1){
                     $scape = 'M';
-                } 
+                }
                 else if($target_dayOfWeek == 2){
                     $scape = 'T';
                 }
                 else if($target_dayOfWeek == 3){
                     $scape = 'W';
-                } 
+                }
                 else if($target_dayOfWeek == 4){
                     $scape = 'Th';
-                } 
+                }
                 else if($target_dayOfWeek == 5){
                     $scape = 'F';
-                }  
+                }
                 $daysLabel[] = $scape;
             }
         }
@@ -165,13 +165,13 @@ class Form2Controller extends Controller
         }
 
         //gets the number of female students that belong to the section
-        $female_query = User::join('Student', 'Student.user_id', '=', 'User.id')
+        $female_query = User::join('student', 'student.user_id', '=', 'user.id')
             ->where('sex', 'F')
             ->where('section_id',$section->id)
             ->get();
 
         // to remove later
-        $female_query_counter = User::join('Student', 'Student.user_id', '=', 'User.id')
+        $female_query_counter = User::join('student', 'student.user_id', '=', 'user.id')
             ->where('sex', 'F')
             ->where('section_id',$section->id)
             ->count();
@@ -241,7 +241,7 @@ class Form2Controller extends Controller
         foreach ($male_attendance_array as $male_attendance) {
             $male_total_absent = $male_total_absent + $male_attendance['absent_counter'];
         }
-        
+
         // to get the total number of male lates per month
         $male_total_late = 0;
         foreach ($male_attendance_array as $male_attendance) {
@@ -262,7 +262,7 @@ class Form2Controller extends Controller
 
         $total_absent = $male_total_absent + $female_total_absent;
         $total_late = $male_total_late + $female_total_late;
-        
+
         return view('adviser.form2')
         -> with('month', $month)
         -> with('section_id', $section_id)
