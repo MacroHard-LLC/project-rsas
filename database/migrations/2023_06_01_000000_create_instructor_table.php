@@ -16,6 +16,9 @@ return new class extends Migration
     {
         Schema::create('instructor', function (Blueprint $table) {
             $table->string('rfid_number')->primary();
+            $table->string('first_name');
+            $table->string('middle_name')->nullable();
+            $table->string('last_name');
             $table->timestamp('added_on')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->unsignedBigInteger('added_by')->nullable();
             $table->timestamp('updated_on')->nullable();
