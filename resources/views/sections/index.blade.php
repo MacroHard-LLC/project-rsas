@@ -2,23 +2,23 @@
 @section('title','View Section')
 @section('content')
 
-<div class='container m-2'>
+<div class='container-fluid m-2'>
     <div class='row'>
         <div class='col'>
             <a href='/home' class='text' role='button'><i class="fa-solid fa-arrow-left"></i> BACK</a>
         </div>
 
-        <div class="dropdown col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6 justify-content-md-end">
+        <div class="d-flex justify-content-end dropdown col mx-1">
             <button class="btn-secondary btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                School Year
+                SY {{ $selectedSchoolyear->start_year }} - {{ $selectedSchoolyear->end_year }}
             </button>
 
             <ul class="dropdown-menu">
                 @foreach ($schoolyears as $schoolyear)
                     @if ($schoolyear == $currentSchoolyear)
-                        <li><a class="dropdown-item {{ $selectedSchoolyear == $schoolyear->id ? 'active' : '' }}" href="/gradelevels">
+                        <li><a class="dropdown-item" href="/gradelevels">
                     @else
-                        <li><a class="dropdown-item {{ $selectedSchoolyear == $schoolyear->id ? 'active' : '' }}" href="/gradelevels/?sy={{ $schoolyear->id }}">
+                        <li><a class="dropdown-item" href="/gradelevels/?sy={{ $schoolyear->id }}">
                     @endif
                     {{ $schoolyear->start_year }} - {{ $schoolyear->end_year }}</a></li>
                 @endforeach

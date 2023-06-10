@@ -19,9 +19,9 @@ class SectionController extends Controller
         $currentSchoolyear = Schoolyear::where('start_date', '<=', Carbon::today())
             ->where('end_date', '>=', Carbon::today())
             ->first();
-        $schoolyears = Schoolyear::all();
-        $selectedSchoolyear = $request->input('sy', $currentSchoolyear->id);
-        $sections = Section::where('schoolyear_id', $selectedSchoolyear)->get();
+        $schoolyears = Schoolyear::where('id','!=',$request->input('sy', $currentSchoolyear->id))->get();
+        $selectedSchoolyear = Schoolyear::where('id',$request->input('sy', $currentSchoolyear->id))->first();
+        $sections = Section::where('schoolyear_id', $selectedSchoolyear->id)->get();
         return view('sections.index', compact('currentSchoolyear','schoolyears','selectedSchoolyear', 'sections'));
     }
 
