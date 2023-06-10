@@ -15,13 +15,13 @@ window.addEventListener('load', function() {
                     input.classList.add('is-invalid');
                     showAddMachineClientError(input);
                 }
-                checkOverallValidity();
+                checkOverallAddMachineValidity();
             })
         })
     );
 });
 
-function checkOverallValidity(){
+function checkOverallAddMachineValidity(){
     var form_children = $("#addMachineForm").children();
     var formControl = form_children.find('.form-control')
     var validFormControl = form_children.find('.form-control.is-valid')

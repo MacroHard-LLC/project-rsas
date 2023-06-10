@@ -33,13 +33,13 @@ editSubjectModal.addEventListener('show.bs.modal', function() {
                     input.classList.add('is-invalid');
                     showUpdateSubjectClientError(input);
                 }
-                checkOverallValidity();
+                checkOverallUpdateSubjectValidity();
             })
         })
     );
 });
 
-function checkOverallValidity() {
+function checkOverallUpdateSubjectValidity() {
     var formChildren = $("#updateSubjectForm").children();
     var invalidFields = formChildren.find('.form-control.is-invalid, .form-select.is-invalid');
     var checkedCheckboxes = $("input[type='checkbox']:checked");

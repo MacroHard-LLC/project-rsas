@@ -28,17 +28,17 @@ window.addEventListener('load', function() {
                     input.classList.add('is-invalid');
                     showCreateSubjectClientError(input);
                 }
-                checkOverallValidity();
+                checkOverallCreateSectionValidity();
             })
         })
     );
 });
 
-function checkOverallValidity() {
+function checkOverallCreateSectionValidity() {
     var formChildren = $("#createSubjectForm").children();
     var fields = formChildren.find('.form-control, .form-select');
     var validFields = formChildren.find('.form-control.is-valid, .form-select.is-valid');
-    var checkedCheckboxes = $("input[type='checkbox']:checked");
+    var checkedCheckboxes = formChildren.find($("input[type='checkbox']:checked"));
     var timeInputs = checkedCheckboxes.closest('.row').find('.time-input');
     var isTimeInputsFilled = timeInputs.toArray().every(input => input.value.trim() !== '');
 

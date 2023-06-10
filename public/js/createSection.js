@@ -19,13 +19,13 @@ window.addEventListener('load', function() {
                     input.classList.add('is-invalid');
                     showCreateSectionClientError(input);
                 }
-                checkOverallValidity();
+                checkOverallCreateSectionValidity();
             })
         })
     );
 });
 
-function checkOverallValidity(){
+function checkOverallCreateSectionValidity(){
     var form_children = $("#createSectionForm").children();
     var fields = form_children.find('.form-control, .form-select')
     var valid_fields = form_children.find('.form-control.is-valid, .form-select.is-valid')
@@ -70,7 +70,7 @@ function add_student_to_row(){
     document.getElementById("total_students").textContent = tableRows;
 
     document.getElementById('add_student_btn').disabled = true;
-    checkOverallValidity();
+    checkOverallCreateSectionValidity();
 
     // Return false so that the default action of the button is not executed.
     return false;
@@ -89,5 +89,5 @@ $(document).on('click', '[name="delete_button"]', function(){
     var student_id = $(this).closest('tr').find('[name="student_row"]').text();
     document.getElementById(student_id).style.display = "block";
 
-    checkOverallValidity();
+    checkOverallCreateSectionValidity();
 });

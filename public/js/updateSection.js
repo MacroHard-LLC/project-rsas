@@ -24,13 +24,13 @@ editSectionModal.addEventListener('show.bs.modal', function() {
                     input.classList.add('is-invalid');
                     showUpdateSectionClientError(input);
                 }
-                checkOverallValidity();
+                checkOverallUpdateSectionValidity();
             })
         })
     );
 });
 
-function checkOverallValidity(){
+function checkOverallUpdateSectionValidity(){
     var form_children = $("#updateSectionForm").children();
     var invalid_fields = form_children.find('.form-control.is-invalid, .form-select.is-invalid')
     var student_rows = $("#student_list").children();
@@ -74,7 +74,7 @@ function add_student_to_row(){
     document.getElementById("total_students").textContent = tableRows;
 
     document.getElementById('add_student_btn').disabled = true;
-    checkOverallValidity();
+    checkOverallUpdateSectionValidity();
 
     // Return false so that the default action of the button is not executed.
     return false;
@@ -107,5 +107,5 @@ $(document).on('click', '[name="delete_button"]', function(){
         document.getElementById(student_id).style.display = "block";
     }
 
-    checkOverallValidity();
+    checkOverallUpdateSectionValidity();
 });
