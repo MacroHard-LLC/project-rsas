@@ -114,7 +114,7 @@
 
                         </div>
 
-                        <div class="form-group pt-3 float-end" id="submission">
+                        <div class="form-group pt-3 float-end" id="submission" style="visibility:hidden">
                             <button class="btn btn-primary" type="submit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                         </div>
                     </div>

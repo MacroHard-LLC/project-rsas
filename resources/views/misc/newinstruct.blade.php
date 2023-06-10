@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group pt-3 float-end" id="submit_instructor">
+                        <div class="form-group pt-3 float-end" id="submit_instructor" style="visibility:hidden">
                             <button id="createButton" class="btn btn-primary" type="submit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                         </div>
                     </div>

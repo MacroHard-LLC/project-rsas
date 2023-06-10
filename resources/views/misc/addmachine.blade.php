@@ -41,7 +41,7 @@
                         </div>
 
 
-                        <div class="form-group float-end">
+                        <div class="form-group float-end" style="visibility:hidden">
                             <button class="btn btn-primary" type="submit" id="submitNewMachine"><i class="fa-solid fa-square-plus icon-white"></i> Add Machine</button>
                         </div>
                         </div>
