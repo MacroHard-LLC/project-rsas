@@ -1,37 +1,52 @@
-window.addEventListener('load', function() {
-    document.getElementById("submitNewSubject").style.visibility = "hidden";
+const createSubjectModal = document.getElementById('createSubjectModal')
+createSubjectModal.addEventListener('shown.bs.modal', function() {
+    checkOverallCreateSubjectValidity();
     let createSubjectForm = document.getElementById('createSubjectForm');
 
     ['input','change'].forEach(evt =>
         createSubjectForm.querySelectorAll(".form-control, .form-select, .form-check-input").forEach(input => {
-            input.addEventListener(evt, () => {
-                $("#" + input.getAttribute("name") + "_error").children("span").text("");
-
-                if(input.type == "checkbox"){
-                    var isChecked = $(input).prop('checked');
-                    var $timeInputs = $(input).closest('.row').find('.time-input');
-                    if (isChecked){
-                        $("#daysError").children("span").text("");
-                        $timeInputs.prop('disabled', false);
-                    } else if (!isChecked && $("input[type='checkbox']:checked").length < 1){
-                        $("#daysError").children("span").text("Please check at least one of the days.");
-                        $timeInputs.prop('disabled', true).val('');
-                    } else
-                        $timeInputs.prop('disabled', true).val('');
-                }
-
-                if (input.checkValidity() && input.type != 'checkbox' && input.type != 'time') {
-                    input.classList.remove('is-invalid');
-                    input.classList.add('is-valid');
-                } else if (!input.checkValidity() && input.type != 'checkbox' && input.type != 'time') {
-                    input.classList.remove('is-valid');
-                    input.classList.add('is-invalid');
-                    showCreateSubjectClientError(input);
-                }
-                checkOverallCreateSubjectValidity();
-            })
+            input.addEventListener(evt, createSubjectInputListener(input));
         })
     );
+});
+
+const createSubjectInputListener = (input) => {
+    return () => {
+        $("#" + input.getAttribute("name") + "_error").children("span").text("");
+
+        if(input.type == "checkbox"){
+            var isChecked = $(input).prop('checked');
+            var $timeInputs = $(input).closest('.row').find('.time-input');
+            if (isChecked){
+                $("#daysError").children("span").text("");
+                $timeInputs.prop('disabled', false);
+            } else if (!isChecked && $("input[type='checkbox']:checked").length < 1){
+                $("#daysError").children("span").text("Please check at least one of the days.");
+                $timeInputs.prop('disabled', true).val('');
+            } else
+                $timeInputs.prop('disabled', true).val('');
+        }
+
+        if (input.checkValidity() && input.type != 'checkbox' && input.type != 'time') {
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+        } else if (!input.checkValidity() && input.type != 'checkbox' && input.type != 'time') {
+            input.classList.remove('is-valid');
+            input.classList.add('is-invalid');
+            showCreateSubjectClientError(input);
+        }
+
+        checkOverallCreateSubjectValidity();
+    };
+};
+
+createSubjectModal.addEventListener('hidden.bs.modal', function(){
+    // Remove event listeners
+    const inputElements = createSubjectModal.querySelectorAll('.form-control, .form-select, .form-check-input');
+    inputElements.forEach(input => {
+        input.removeEventListener('input', createSubjectInputListener);
+        input.removeEventListener('change', createSubjectInputListener);
+    });
 });
 
 function checkOverallCreateSubjectValidity() {

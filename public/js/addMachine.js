@@ -1,24 +1,39 @@
-window.addEventListener('load', function() {
-    document.getElementById("submitNewMachine").style.visibility = "hidden";
+const addMachineModal = document.getElementById('addMachineModal')
+addMachineModal.addEventListener('shown.bs.modal', function() {
+    checkOverallAddMachineValidity();
     let addMachineForm = document.getElementById('addMachineForm');
 
     ['input','change'].forEach(evt =>
         addMachineForm.querySelectorAll(".form-control, .form-check-input").forEach(input => {
-            input.addEventListener(evt, () => {
-                $("#" + input.getAttribute("name") + "_error").children("span").text("");
-
-                if (input.checkValidity()) {
-                    input.classList.remove('is-invalid');
-                    input.classList.add('is-valid');
-                } else {
-                    input.classList.remove('is-valid');
-                    input.classList.add('is-invalid');
-                    showAddMachineClientError(input);
-                }
-                checkOverallAddMachineValidity();
-            })
+            input.addEventListener(evt, addMachineInputListener(input));
         })
     );
+});
+
+const addMachineInputListener = (input) => {
+    return () => {
+        $("#" + input.getAttribute("name") + "_error").children("span").text("");
+
+        if (input.checkValidity()) {
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+        } else {
+            input.classList.remove('is-valid');
+            input.classList.add('is-invalid');
+            showAddMachineClientError(input);
+        }
+
+        checkOverallAddMachineValidity();
+    };
+};
+
+addMachineModal.addEventListener('hidden.bs.modal', function(){
+    // Remove event listeners
+    const inputElements = addMachineModal.querySelectorAll('.form-control, .form-check-input');
+    inputElements.forEach(input => {
+        input.removeEventListener('input', addMachineInputListener);
+        input.removeEventListener('change', addMachineInputListener);
+    });
 });
 
 function checkOverallAddMachineValidity(){

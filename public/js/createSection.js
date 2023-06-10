@@ -5,12 +5,12 @@ createSectionModal.addEventListener('shown.bs.modal', function() {
 
     ['input','change'].forEach(evt =>
         createSectionForm.querySelectorAll(".form-control, .form-select").forEach(input => {
-            input.addEventListener(evt, inputListener(input));
+            input.addEventListener(evt, createSectionInputListener(input));
         })
     );
 });
 
-const inputListener = (input) => {
+const createSectionInputListener = (input) => {
     return () => {
         $("#" + input.getAttribute("name") + "_error").children("span").text("");
 
@@ -35,8 +35,8 @@ createSectionModal.addEventListener('hidden.bs.modal', function(){
     // Remove event listeners
     const inputElements = createSectionModal.querySelectorAll('.form-control, .form-select');
     inputElements.forEach(input => {
-        input.removeEventListener('input', inputListener);
-        input.removeEventListener('change', inputListener);
+        input.removeEventListener('input', createSectionInputListener);
+        input.removeEventListener('change', createSectionInputListener);
     });
 });
 
