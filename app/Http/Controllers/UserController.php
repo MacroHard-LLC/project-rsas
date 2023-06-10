@@ -80,7 +80,7 @@ class UserController extends Controller
 
         // Hash Password
         $formFields['password'] = Hash::make($formFields['password']);
-        
+
         $user->update($formFields);
 
         return back();
@@ -91,5 +91,5 @@ class UserController extends Controller
         return back()->with('message', 'User deleted successfully');
     }
 
-    
+
 }

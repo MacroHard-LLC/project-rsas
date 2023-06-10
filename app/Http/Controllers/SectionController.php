@@ -10,12 +10,19 @@ use App\Models\Schoolyear;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class SectionController extends Controller
 {
-    // Show list of grade levels
-    public function index() {
-        return view('sections.index');
+    // Show list of grade levels according to the selected school year (default is current sy)
+    public function index(Request $request) {
+        $currentSchoolyear = Schoolyear::where('start_date', '<=', Carbon::today())
+            ->where('end_date', '>=', Carbon::today())
+            ->first();
+        $schoolyears = Schoolyear::all();
+        $selectedSchoolyear = $request->input('sy', $currentSchoolyear->id);
+        $sections = Section::where('schoolyear_id', $selectedSchoolyear)->get();
+        return view('sections.index', compact('currentSchoolyear','schoolyears','selectedSchoolyear', 'sections'));
     }
 
     // Show a section
