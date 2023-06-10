@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="{{ asset('css/newsy.css') }}">
 <div class="modal fade" id="schoolyearModal" tabindex="-1" role="dialog" aria-labelledby="schoolyearModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class='modal-content'>
