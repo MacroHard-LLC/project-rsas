@@ -29,7 +29,7 @@ class UserController extends Controller
         ]);
 
         if ($request->role == 'student')
-            $request->validate(['rfid_number' => ['sometimes','unique:student,rfid_number']]);
+            $request->validate(['rfid_number' => ['sometimes','unique:student,rfid_number','integer','digits_between:8,12']]);
 
         // Hash Password
         $formFields['password'] = Hash::make($formFields['password']);

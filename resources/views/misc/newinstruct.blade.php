@@ -13,7 +13,7 @@
                     <fieldset>
                         <div class="form-outline input-field pb-2">
                                 <label for="instructor_rfid_number_input" class="input-title">RFID Number</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Enter a 10-digit number" name="instructor_rfid_number" id='instructor_rfid_number_input' minlength="10" maxlength="10" pattern="[0-9]+" required>
+                                <input type="text" class="form-control form-control-sm" placeholder="Enter a 8-12 digit RFID UID" name="instructor_rfid_number" id='instructor_rfid_number_input' minlength="8" maxlength="12" pattern="[0-9]+" required>
                                 <div class="is-invalid" id="instructor_rfid_number_error">
                                     <span></span>
                                 </div>

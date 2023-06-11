@@ -74,5 +74,10 @@ function showCreateUserClientError(input){
             input_name = input_name.split("_", 1);
             $("#" + input.getAttribute("name") + "Error").children("span").text(input_name + " name must only be alphabetic characters.");
         }
+    } else if (input_name == "rfid_number"){
+        if (input.validity.patternMismatch)
+            $("#" + input.getAttribute("name") + "Error").children("span").text("RFID number must be an integer.");
+        else if (input.validity.tooShort || input.validity.tooLong)
+            $("#" + input.getAttribute("name") + "Error").children("span").text("RFID number must be between 8-12 digits.");
     }
 }

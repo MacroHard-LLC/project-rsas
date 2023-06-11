@@ -52,8 +52,8 @@ function showAddInstructorError(input){
     if (input_name == "instructor_rfid_number"){
         if (input.validity.patternMismatch)
             $("#" + input.getAttribute("name") + "_error").children("span").text("RFID number must be an integer.");
-        else if (input.validity.tooShort)
-            $("#" + input.getAttribute("name") + "_error").children("span").text("RFID number must be 10 digits.");
+        else if (input.validity.tooShort || input.validity.tooLong)
+            $("#" + input.getAttribute("name") + "_error").children("span").text("RFID number must be between 8-12 digits.");
     } else if (input_name == "instructor_first_name" || input_name == "instructor_middle_name" || input_name == "instructor_last_name"){
         if (input.validity.patternMismatch)
             $("#" + input.getAttribute("name") + "_error").children("span").text("Name must only be alphabetic characters.");
