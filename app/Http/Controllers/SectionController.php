@@ -26,8 +26,7 @@ class SectionController extends Controller
     }
 
     // Show a section
-    public function show($grade_level) {
-        $section = Section::where('grade_level','=',$grade_level)->first();
+    public function show($grade_level, Section $section) {
         $students = Student::where('section_id','=',$section->id)->get();
         $schoolyears = Schoolyear::all();
         $unenrolled_students = User::where('role','=','student')->where('is_enrolled','=',0)->get();

@@ -129,7 +129,7 @@ Route::delete('/users', [UserController::class, 'destroy'])->name('deleteUser');
 Route::get('/gradelevels', [SectionController::class, 'index']);
 
 // Show a section
-Route::get('/gradelevels/{grade}', [SectionController::class, 'show']);
+Route::get('/gradelevels/{grade}/{section}', [SectionController::class, 'show']);
 
 // goes to adviser views
 Route::get('/view-attendance', [AdviserViewController::class, 'AttendancePage'] );

@@ -41,7 +41,7 @@
                     @foreach ($sections->sortBy('grade_level') as $section)
                     <tr>
                         <td>
-                            <a href='/gradelevels/{{ $section->grade_level }}' role='button'>
+                            <a href='/gradelevels/{{ $section->grade_level }}/{{ $section->id }}' role='button'>
                                 <i class="fa-solid fa-circle icon-baby-blue"></i>&emsp;Grade {{ $section->grade_level }}
                             </a>
                         </td>
