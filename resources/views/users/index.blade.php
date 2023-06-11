@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('css/createUser.css') }}">
+<link rel="stylesheet" href="{{ asset('css/createuser.css') }}">
 
 @extends('master')
 @section('title','View User')

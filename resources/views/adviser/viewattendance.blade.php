@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
 <link rel="stylesheet" href="{{ asset('css/adviserview.css') }}">
-<link rel="stylesheet" href="{{ asset('css/createUser.css') }}">
+<link rel="stylesheet" href="{{ asset('css/createuser.css') }}">
 
 @extends('master')
 @section('content')
@@ -192,8 +192,8 @@
             }
         });
         const tableBody = document.querySelector('#attendanceTable tbody');
-        let subject = $('#subject_adviserView_dropdown');   
-        
+        let subject = $('#subject_adviserView_dropdown');
+
         let startSubject = '';
         $.ajax({
             method: "POST",
@@ -255,7 +255,7 @@
             <br>
             <input class="mt-2"type="date" id="date" onchange="onDateChange()" placeholder="Choose Date" required>
         </div>
-       
+
         <div class="col col-md-auto">
             <label for="subject" class="section-title">SUBJECT</label>
                 <select name="subject" class="form-select w-auto" onchange="onSubjectChange(this.value, $('#date').val())" placeholder="Choose Subject" id="subject_adviserView_dropdown" required>

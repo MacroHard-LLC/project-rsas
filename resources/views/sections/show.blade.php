@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{ asset('css/viewgrlvl.css') }}">
-<link rel="stylesheet" href="{{ asset('css/createUser.css') }}">
+<link rel="stylesheet" href="{{ asset('css/createuser.css') }}">
 @extends('master')
 @section('title','View Section')
 @section('content')
