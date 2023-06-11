@@ -75,6 +75,10 @@ class RFIDController extends Controller
 
             // get all the subjects in the table with the same machine
             $subjects = Subject_table::where('machine_id',$logsheet->machine_id)->get();
+
+            if (!$subjects)
+                return response()->json(['message' => 'Machine is not registered to any subjects'], 400);
+
             foreach($subjects as $subject){
                 // get the day of the subject
                 $current_sched = Schedule_table::where('subject_id',$subject->id)
@@ -102,6 +106,6 @@ class RFIDController extends Controller
                 }
             };
         }
-        return response()->json(['message' => 'RFID tag tapped successfully']);
+        return response()->json(['message' => 'RFID tag tapped successfully'], 200);
     }
 }
