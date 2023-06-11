@@ -58,6 +58,7 @@
                             <div class="col-6 col-md-4 input-field">
                                     <label for="Usubject_semester_input" class="input-title">Semester</label>
                                     <select name="Usubject_semester" class="form-select" id="Usubject_semester_input" required>
+                                        <option value="" disabled selected="selected">Select a Semester</option>
                                         <option value="1">First Semester</option>
                                         <option value="2">Second Semester</option>
                                     </select>
