@@ -54,6 +54,9 @@ function checkOverallCreateUserValidity(){
         var is_valid = form_control.length === valid_form_control.length && radios_selected.length == 2;
     } else {
         document.getElementById("ifStudent").style.display = "none";
+        $('#rfid_numberInput').val("");
+        $('#rfid_numberInput').removeClass("is-invalid is-valid");
+        $("#rfid_numberError").children("span").text("");
         var is_valid = (form_control.length - 1) === valid_form_control.length && radios_selected.length == 2;
     }
 
