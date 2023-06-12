@@ -50,7 +50,7 @@ class RFIDController extends Controller
         else {
             // get all the subjects in the table with the same machine
             $subjects = Subject_table::where('machine_id', $machine)->get();
-            if ($subjects->isEmpty())
+            if ($subjects->count() == 0)
                 return response()->json(['message' => 'Machine is not registered to any subject'], 400);
 
             $logsheet = new Student_logsheet;
@@ -83,7 +83,7 @@ class RFIDController extends Controller
                 $current_sched = Schedule_table::where('subject_id',$subject->id)
                                         ->where('day',$day_of_week)->first();
                 // if the current_sched exists, execute
-                if ($current_sched->isNotEmpty()){
+                if ($current_sched->count() > 0){
                     $sched_startTime = Carbon::createFromFormat('H:i:s',$current_sched->time_start);
                     $sched_endTime = Carbon::createFromFormat('H:i:s',$current_sched->time_end);
 
