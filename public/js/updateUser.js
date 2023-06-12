@@ -29,6 +29,11 @@ editUserModal.addEventListener('show.bs.modal', function() {
                         input.classList.add('is-invalid');
                         showUpdateUserClientError(input);
                     }
+                } else {
+                    if (input.getAttribute("id") == "studentCheckU")
+                        document.getElementById("rfid_numberInputU").required = true;
+                    else
+                        document.getElementById("rfid_numberInputU").required = false;
                 }
 
                 var form_children = $("#updateUserForm").children();
@@ -57,10 +62,6 @@ editUserModal.addEventListener('show.bs.modal', function() {
         })
     );
 });
-
-document.getElementById("studentCheckU").addEventListener('change', function(){
-    document.getElementById("rfid_numberInputU").required = this.checked;
-})
 
 function showUpdateUserClientError(input){
     var input_name = input.getAttribute("name");

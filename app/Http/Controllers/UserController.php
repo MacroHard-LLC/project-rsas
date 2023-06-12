@@ -69,7 +69,6 @@ class UserController extends Controller
         if ($user->role == 'student' && $request->role != 'student'){
             Student::where('user_id', $id)->delete();
         } else if ($user->role != 'student' && $request->role == 'student'){
-            info($user->role);
             $student = new Student;
             $student->rfid_number = $request->rfid_number;
             $student->user_id = $request->id;

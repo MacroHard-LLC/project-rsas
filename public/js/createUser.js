@@ -22,6 +22,11 @@ const createUserInputListener = (input) => {
                 input.classList.add('is-invalid');
                 showCreateUserClientError(input);
             }
+        } else {
+            if (input.getAttribute("id") == "studentCheck")
+                document.getElementById("rfid_numberInput").required = true;
+            else
+                document.getElementById("rfid_numberInput").required = false;
         }
 
         checkOverallCreateUserValidity();
@@ -49,8 +54,6 @@ function checkOverallCreateUserValidity(){
         var is_valid = form_control.length === valid_form_control.length && radios_selected.length == 2;
     } else {
         document.getElementById("ifStudent").style.display = "none";
-        $('#rfid_numberInput').val("");
-        $('#rfid_numberInput').removeClass("is-invalid is-valid");
         var is_valid = (form_control.length - 1) === valid_form_control.length && radios_selected.length == 2;
     }
 
