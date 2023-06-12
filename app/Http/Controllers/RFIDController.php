@@ -35,7 +35,7 @@ class RFIDController extends Controller
 
         // If the RFID tag doesn't belong to any student or instructor, handle the error case
         if (!$student && !$instructor){
-            return response()->json(['message' => 'RFID tag not found'], 404);
+            return response()->json(['message' => 'RFID tag does not belong to any student or instructor'], 404);
         }
 
         // If the RFID tag belongs to an instructor, associate the instructor with the logsheet
@@ -48,6 +48,11 @@ class RFIDController extends Controller
         }
         // If the RFID tag belongs to a student, associate the student with the logsheet
         else {
+            // get all the subjects in the table with the same machine
+            $subjects = Subject_table::where('machine_id', $machine)->get();
+            if ($subjects->isEmpty())
+                return response()->json(['message' => 'Machine is not registered to any subject'], 400);
+
             $logsheet = new Student_logsheet;
             $logsheet->machine_id = $machine;
             $logsheet->rfid_number = $student->rfid_number;
@@ -73,18 +78,12 @@ class RFIDController extends Controller
                 $day_of_week = 'FRI';
             }
 
-            // get all the subjects in the table with the same machine
-            $subjects = Subject_table::where('machine_id',$logsheet->machine_id)->get();
-
-            if (!$subjects)
-                return response()->json(['message' => 'Machine is not registered to any subjects'], 400);
-
             foreach($subjects as $subject){
                 // get the day of the subject
                 $current_sched = Schedule_table::where('subject_id',$subject->id)
                                         ->where('day',$day_of_week)->first();
                 // if the current_sched exists, execute
-                if ($current_sched){
+                if ($current_sched->isNotEmpty()){
                     $sched_startTime = Carbon::createFromFormat('H:i:s',$current_sched->time_start);
                     $sched_endTime = Carbon::createFromFormat('H:i:s',$current_sched->time_end);
 
@@ -99,11 +98,11 @@ class RFIDController extends Controller
                     $newRow->save();
 
                     $logsheet->save();
-                } else{
-                    return response()->json(['message' => 'No scheduled class right now'], 400);
+                } else {
+                    return response()->json(['message' => 'No scheduled class today'], 400);
                 }
             };
         }
-        return response()->json(['message' => 'RFID tag tapped successfully'], 200);
+        return response()->json(['message' => 'Attendance logged successfully'], 200);
     }
 }
