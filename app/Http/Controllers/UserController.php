@@ -52,7 +52,7 @@ class UserController extends Controller
 
         $formFields = $request->validate([
             'id' => ['required',Rule::unique('user','id')->ignore($id),'integer','digits:9'],
-            'password' => ['required','min:1','max:20'],
+            'password' => ['sometimes','min:1','max:20'],
             'role' => 'required',
             'first_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
             'middle_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],

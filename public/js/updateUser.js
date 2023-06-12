@@ -20,7 +20,10 @@ editUserModal.addEventListener('show.bs.modal', function() {
                 if (input.type != "radio"){
                     if (input.checkValidity()) {
                         input.classList.remove('is-invalid');
-                        input.classList.add('is-valid');
+                        if ($(input).attr('name') == "password" && $(input).val() == "")
+                            input.classList.remove('is-valid');
+                        else
+                            input.classList.add('is-valid');
                     } else {
                         input.classList.remove('is-valid');
                         input.classList.add('is-invalid');
@@ -54,6 +57,10 @@ editUserModal.addEventListener('show.bs.modal', function() {
         })
     );
 });
+
+document.getElementById("studentCheckU").addEventListener('change', function(){
+    document.getElementById("rfid_numberInputU").required = this.checked;
+})
 
 function showUpdateUserClientError(input){
     var input_name = input.getAttribute("name");

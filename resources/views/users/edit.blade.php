@@ -23,7 +23,7 @@
 
                             <div class="col-md-6 input-field">
                                 <label for="passwordInputU" class="input-title">User Password</label>
-                                <input type="password" class="form-control form-control-sm" placeholder="XXXX" name="password" id="passwordInputU" minlength="1" maxlength="20" aria-describedby="passwordError" required>
+                                <input type="password" class="form-control form-control-sm" placeholder="XXXX" name="password" id="passwordInputU" minlength="1" maxlength="20">
                                 <div class="is-invalid" id="passwordErrorU">
                                     <span></span>
                                 </div>
