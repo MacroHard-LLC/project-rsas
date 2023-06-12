@@ -88,9 +88,9 @@ class RFIDController extends Controller
                     $sched_startTime = Carbon::createFromFormat('H:i:s',$current_sched->time_start);
                     $sched_endTime = Carbon::createFromFormat('H:i:s',$current_sched->time_end);
 
-                    if($now->before($sched_startTime))
+                    if($now->isBefore($sched_startTime))
                         $newRow = new Present;
-                    else if($now->between($sched_startTime,$sched_endTime))
+                    else if($now->isBetween($sched_startTime,$sched_endTime))
                         $newRow = new Late;
 
                     $newRow->subject_id = $subject->id;
@@ -100,8 +100,6 @@ class RFIDController extends Controller
 
                     $logsheet->save();
                 } else{
-                    // testing only
-                    $logsheet->save();
                     return response()->json(['message' => 'No scheduled class right now'], 400);
                 }
             };
