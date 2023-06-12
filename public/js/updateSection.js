@@ -9,25 +9,39 @@ editSectionModal.addEventListener('show.bs.modal', function() {
 
     ['input','change'].forEach(evt =>
         updateForm.querySelectorAll(".form-control, .form-select").forEach(input => {
-            input.addEventListener(evt, () => {
-                $("#" + input.getAttribute("name") + "_error").children("span").text("");
-
-                if (input.getAttribute('id') == 'section_student_id_input' && $('#' + input.getAttribute('id')).val() != '')
-                    document.getElementById('add_student_btn').disabled = false;
-
-                if (input.checkValidity()) {
-                    input.classList.remove('is-invalid');
-                    if (input.getAttribute('id') != 'section_student_id_input')
-                        input.classList.add('is-valid');
-                } else {
-                    input.classList.remove('is-valid');
-                    input.classList.add('is-invalid');
-                    showUpdateSectionClientError(input);
-                }
-                checkOverallUpdateSectionValidity();
-            })
+            input.addEventListener(evt, updateSectionInputListener(input));
         })
     );
+});
+
+const updateSectionInputListener = (input) => {
+    return () => {
+        $("#" + input.getAttribute("name") + "_error").children("span").text("");
+
+        if (input.getAttribute('id') == 'section_student_id_input' && $('#' + input.getAttribute('id')).val() != '')
+            document.getElementById('add_student_btn').disabled = false;
+
+        if (input.checkValidity()) {
+            input.classList.remove('is-invalid');
+            if (input.getAttribute('id') != 'section_student_id_input')
+                input.classList.add('is-valid');
+        } else {
+            input.classList.remove('is-valid');
+            input.classList.add('is-invalid');
+            showUpdateSectionClientError(input);
+        }
+
+        checkOverallUpdateSectionValidity();
+    };
+};
+
+editSectionModal.addEventListener('hidden.bs.modal', function(){
+    // Remove event listeners
+    const inputElements = editSectionModal.querySelectorAll('.form-control, .form-select');
+    inputElements.forEach(input => {
+        input.removeEventListener('input', updateSectionInputListener);
+        input.removeEventListener('change', updateSectionInputListener);
+    });
 });
 
 function checkOverallUpdateSectionValidity(){
