@@ -94,7 +94,7 @@ class RFIDController extends Controller
 
                     $newRow->subject_id = $subject->id;
                     $newRow->date = $now;
-                    $newRow->student_id = $student->id;
+                    $newRow->student_id = $student->user_id;
                     $newRow->save();
 
                     $logsheet->save();
