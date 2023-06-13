@@ -18,8 +18,12 @@ class Schoolyear extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'start_year',
-        'end_year'
+        'end_year',
+        'start_date',
+        'end_date',
+        'is_deleted',
     ];
 
     public function subject(){
@@ -31,7 +35,7 @@ class Schoolyear extends Model
     }
 
     public function getSchoolDays(){
-        
+
         $mondays = [];
         $tuesdays = [];
         $wednesdays = [];
@@ -39,7 +43,7 @@ class Schoolyear extends Model
         $fridays = [];
 
         $schoolDays = [$mondays, $tuesdays, $wednesdays, $thursdays, $fridays];
-        
+
         $start_timestamp = strtotime($this->start_date);
         $end_timestamp = strtotime($this->end_date);
 
