@@ -1,6 +1,5 @@
 function updateModal(user, student){
     $('#idInputU').val(user.id);
-    $('#passwordInputU').val(user.password);
 
     if (user.role == "admin"){
         $("#adminCheckU").prop("checked", true);

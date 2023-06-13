@@ -26,6 +26,11 @@ class Section extends Model
         'is_deleted',
     ];
 
+    public function scopeFilter($query, array $filters) {
+        if($filters['sy'] ?? false)
+            $query->where('schoolyear_id', request('sy'));
+    }
+
     public function subject(){
         return $this->hasMany(Subject_table::class);
     }

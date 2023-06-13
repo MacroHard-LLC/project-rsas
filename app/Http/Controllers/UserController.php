@@ -29,7 +29,7 @@ class UserController extends Controller
         ]);
 
         if ($request->role == 'student')
-            $request->validate(['rfid_number' => ['sometimes','unique:student,rfid_number']]);
+            $request->validate(['rfid_number' => ['sometimes','unique:student,rfid_number','integer','digits_between:8,12']]);
 
         // Hash Password
         $formFields['password'] = Hash::make($formFields['password']);
@@ -52,7 +52,7 @@ class UserController extends Controller
 
         $formFields = $request->validate([
             'id' => ['required',Rule::unique('user','id')->ignore($id),'integer','digits:9'],
-            'password' => ['required','min:1','max:20'],
+            'password' => ['sometimes','min:1','max:20'],
             'role' => 'required',
             'first_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
             'middle_name' => ['required','min:1','max:20','regex:/^[a-zA-Z\s]*$/'],
@@ -69,7 +69,6 @@ class UserController extends Controller
         if ($user->role == 'student' && $request->role != 'student'){
             Student::where('user_id', $id)->delete();
         } else if ($user->role != 'student' && $request->role == 'student'){
-            info($user->role);
             $student = new Student;
             $student->rfid_number = $request->rfid_number;
             $student->user_id = $request->id;
@@ -80,7 +79,7 @@ class UserController extends Controller
 
         // Hash Password
         $formFields['password'] = Hash::make($formFields['password']);
-        
+
         $user->update($formFields);
 
         return back();
@@ -91,5 +90,5 @@ class UserController extends Controller
         return back()->with('message', 'User deleted successfully');
     }
 
-    
+
 }

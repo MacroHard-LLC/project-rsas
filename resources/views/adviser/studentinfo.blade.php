@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
 <link rel="stylesheet" href="{{ asset('css/adviserview.css') }}">
-<link rel="stylesheet" href="{{ asset('css/createUser.css') }}">
+<link rel="stylesheet" href="{{ asset('css/createuser.css') }}">
 
 
 @extends('master')
@@ -39,7 +39,7 @@
         });
         const tableBody = document.querySelector('#attendanceTable tbody');
         let subject = $('#subject_adviserView_dropdown');
-        
+
         $.ajax({
             method: "POST",
             headers: {
@@ -71,7 +71,7 @@
                 console.log(thrownError);
             }
         });
-        
+
     });
 
     function beforeAnchorClick(button) {

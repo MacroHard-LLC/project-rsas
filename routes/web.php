@@ -129,7 +129,7 @@ Route::delete('/users', [UserController::class, 'destroy'])->name('deleteUser');
 Route::get('/gradelevels', [SectionController::class, 'index']);
 
 // Show a section
-Route::get('/gradelevels/{grade}', [SectionController::class, 'show']);
+Route::get('/gradelevels/{grade}/{section}', [SectionController::class, 'show']);
 
 // goes to adviser views
 Route::get('/view-attendance', [AdviserViewController::class, 'AttendancePage'] );
@@ -150,19 +150,13 @@ Route::post('/view-attendance-session-student-ID', [AdviserViewController::class
 Route::post('/view-attendance-session-student-info', [AdviserViewController::class, 'SessionStudentInfo'])->name('session_student_info');
 Route::post('/view-attendance-session-student', [AdviserViewController::class, 'SessionStudent'])->name('session_student');
 
-
-// RFID Controller
-// Route::post('/rfid/tap', 'RFIDController@tap');
-
 //Authentications
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'loginPost'])->name('login.post');
 Route::get('logout',[LoginController::class,'logout'])->name('logout');
-
 
 //Form 2
 Route::get('/form2', [Form2Controller::class, 'ShowForm'])->name('show_form');
 
 //addmachine Modal
 Route::post('/', [MachineController::class, 'store'])->name('addMachine');
-

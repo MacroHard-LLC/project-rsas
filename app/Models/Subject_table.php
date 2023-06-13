@@ -42,10 +42,6 @@ class Subject_table extends Model
         return $this->belongsTo(Machine_table::class);
     }
 
-    public function subject_list(){
-        return $this->hasOne(Subject_list::class);
-    }
-
     public function absent(){
         return $this->hasMany(Absent::class);
     }

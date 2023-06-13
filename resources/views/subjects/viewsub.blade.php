@@ -7,6 +7,14 @@
     @include('subjects.edit')
     @include('subjects.delete')
 
+<div class='container m-2'>
+    <div class='row'>
+        <div class='col'>
+            <a href='/home' class='text' role='button'><i class="fa-solid fa-arrow-left"></i> BACK</a>
+        </div>
+    </div>
+</div>
+
 <br>
 <div class="container-fluid d-flex table-title">
     <h2>SUBJECT LIST</h2>

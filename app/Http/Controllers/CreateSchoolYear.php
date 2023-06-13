@@ -11,6 +11,8 @@ class CreateSchoolYear extends Controller
         $formFields = $request->validate([
             'start_year' => ['required','regex:/^(19|20)\d{2}$/','integer','digits:4'],
             'end_year' => ['required','regex:/^(19|20)\d{2}$/','integer','digits:4'],
+            'start_date' => ['required','date'],
+            'end_date' => ['required','date'],
         ]);
 
         Schoolyear::create($formFields);

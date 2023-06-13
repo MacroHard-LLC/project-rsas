@@ -8,18 +8,42 @@
             </div>
 
             <div class="modal-body mx-2 my-2">
-                <form method="POST" action="/users" id="registerInstForm" class="needs-validation" novalidate>
+                <form id="registerInstForm" class="needs-validation" novalidate>
                     @csrf
                     <fieldset>
                         <div class="form-outline input-field pb-2">
-
                                 <label for="instructor_rfid_number_input" class="input-title">RFID Number</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="instructor_rfid_number" id='instructor_rfid_number_input' minlength="10" maxlength="10" pattern="[0-9]+" aria-describedby="instructor_rfid_number_error" required>
+                                <input type="text" class="form-control form-control-sm" placeholder="Enter a 8-12 digit RFID UID" name="instructor_rfid_number" id='instructor_rfid_number_input' minlength="8" maxlength="12" pattern="[0-9]+" required>
                                 <div class="is-invalid" id="instructor_rfid_number_error">
                                     <span></span>
                                 </div>
                         </div>
-                        <div class="form-group pt-3 float-end" id="submit_instructor">
+                        <div class="row my-3">
+                            <div class="col-6 col-md-4 input-field">
+                                <label for="first" class="input-title">First Name</label>
+                                <input type="text" class="form-control form-control-sm invalid-border" placeholder="Ex. Jose" name="instructor_first_name" id="instructor_first_name_input" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" required>
+                                <div class="is-invalid" id="instructor_first_name_error">
+                                    <span></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-4 input-field">
+                                <label for="middle" class="input-title">Middle Name</label>
+                                <input type="text" class="form-control form-control-sm" placeholder="Ex. Protacio" name="instructor_middle_name" id="instructor_middle_name_input" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" required>
+                                <div class="is-invalid" id="instructor_middle_name_error">
+                                    <span></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-4 input-field">
+                                <label for="last" class="input-title">Last Name</label>
+                                <input type="text" class="form-control form-control-sm" placeholder="Ex. Rizal" name="instructor_last_name" id="instructor_last_name_input" minlength="1" maxlength="20" pattern="[a-zA-Z\s]+" required>
+                                <div class="is-invalid" id="instructor_last_name_error">
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group pt-3 float-end" id="submit_instructor" style="visibility:hidden">
                             <button id="createButton" class="btn btn-primary" type="submit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                         </div>
                     </div>
@@ -27,9 +51,7 @@
                 </form>
             </div>
         </div>
-
     </div>
-
 </div>
 
 <script src="{{ asset('js/createInstructor.js') }}"></script>
@@ -37,10 +59,10 @@
     $(function () {
         $('#registerInstForm').submit(function (e) {
             e.preventDefault();
+
             let formData = $(this).serializeArray();
             jQuery.each(formData, function(i, field) {
-                if (field.name == "instructor_rfid_number")
-                    field.name = field.name.replace("instructor_rfid_number", "rfid_number")
+                field.name = field.name.replace("instructor_", "")
             });
 
             $("#registerInstForm").children().find(".is-invalid").children("span").text("");
@@ -58,8 +80,8 @@
                     if(response.status === 422) {
                         let errors = response.responseJSON.errors;
                         Object.keys(errors).forEach(function (key) {
-                            $("#instructor_" + key + "_input").addClass("is-invalid");
-                            $("#instructor_" + key + "_error").children("strong").text(errors[key][0]);
+                            $("#" + key + "_input").addClass("is-invalid");
+                            $("#" + key + "_error").children("strong").text(errors[key][0]);
                         });
                     }
                 }

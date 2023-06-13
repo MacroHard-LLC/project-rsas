@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('css/createUser.css') }}">
+<link rel="stylesheet" href="{{ asset('css/createuser.css') }}">
 
 @extends('master')
 @section('title','View User')
@@ -7,6 +7,14 @@
 @include('users.create')
 @include('users.edit')
 @include('users.delete')
+
+<div class='container m-2'>
+    <div class='row'>
+        <div class='col'>
+            <a href='/home' class='text' role='button'><i class="fa-solid fa-arrow-left"></i> BACK</a>
+        </div>
+    </div>
+</div>
 
 <br>
 <div class="container-fluid d-flex table-title">

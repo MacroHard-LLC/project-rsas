@@ -1,35 +1,50 @@
-window.addEventListener('load', function() {
-    document.getElementById("submit_new_section").style.visibility = "hidden";
+const createSectionModal = document.getElementById('createSectionModal')
+createSectionModal.addEventListener('shown.bs.modal', function() {
+    checkOverallCreateSectionValidity();
     let createSectionForm = document.getElementById('createSectionForm');
 
     ['input','change'].forEach(evt =>
         createSectionForm.querySelectorAll(".form-control, .form-select").forEach(input => {
-            input.addEventListener(evt, () => {
-                $("#" + input.getAttribute("name") + "_error").children("span").text("");
-
-                if (input.getAttribute('id') == 'section_student_id_input' && $('#' + input.getAttribute('id')).val() != '')
-                    document.getElementById('add_student_btn').disabled = false;
-
-                if (input.checkValidity()) {
-                    input.classList.remove('is-invalid');
-                    if (input.getAttribute('id') != 'section_student_id_input')
-                        input.classList.add('is-valid');
-                } else {
-                    input.classList.remove('is-valid');
-                    input.classList.add('is-invalid');
-                    showCreateSectionClientError(input);
-                }
-                checkOverallValidity();
-            })
+            input.addEventListener(evt, createSectionInputListener(input));
         })
     );
 });
 
-function checkOverallValidity(){
+const createSectionInputListener = (input) => {
+    return () => {
+        $("#" + input.getAttribute("name") + "_error").children("span").text("");
+
+        if (input.getAttribute('id') == 'section_student_id_input' && $('#' + input.getAttribute('id')).val() != '')
+            document.getElementById('add_student_btn').disabled = false;
+
+        if (input.checkValidity()) {
+            input.classList.remove('is-invalid');
+            if (input.getAttribute('id') != 'section_student_id_input')
+                input.classList.add('is-valid');
+        } else {
+            input.classList.remove('is-valid');
+            input.classList.add('is-invalid');
+            showCreateSectionClientError(input);
+        }
+
+        checkOverallCreateSectionValidity();
+    };
+};
+
+createSectionModal.addEventListener('hidden.bs.modal', function(){
+    // Remove event listeners
+    const inputElements = createSectionModal.querySelectorAll('.form-control, .form-select');
+    inputElements.forEach(input => {
+        input.removeEventListener('input', createSectionInputListener);
+        input.removeEventListener('change', createSectionInputListener);
+    });
+});
+
+function checkOverallCreateSectionValidity(){
     var form_children = $("#createSectionForm").children();
     var fields = form_children.find('.form-control, .form-select')
     var valid_fields = form_children.find('.form-control.is-valid, .form-select.is-valid')
-    var student_rows = $("#student_list").children();
+    var student_rows = form_children.find($("#student_list").children());
     var is_valid = fields.length - 1 === valid_fields.length && student_rows.length > 0;
     if (is_valid)
         document.getElementById("submit_new_section").style.visibility = "visible";
@@ -70,7 +85,7 @@ function add_student_to_row(){
     document.getElementById("total_students").textContent = tableRows;
 
     document.getElementById('add_student_btn').disabled = true;
-    checkOverallValidity();
+    checkOverallCreateSectionValidity();
 
     // Return false so that the default action of the button is not executed.
     return false;
@@ -89,5 +104,5 @@ $(document).on('click', '[name="delete_button"]', function(){
     var student_id = $(this).closest('tr').find('[name="student_row"]').text();
     document.getElementById(student_id).style.display = "block";
 
-    checkOverallValidity();
+    checkOverallCreateSectionValidity();
 });

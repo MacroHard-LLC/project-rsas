@@ -10,17 +10,39 @@ use App\Models\Schoolyear;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class SectionController extends Controller
 {
-    // Show list of grade levels
-    public function index() {
-        return view('sections.index');
+    // Show list of grade levels according to the selected school year (default is current sy)
+    public function index(Request $request) {
+        $currentSchoolyear = Schoolyear::where('start_date', '<=', Carbon::today())
+            ->where('end_date', '>=', Carbon::today())
+            ->first();
+
+        if (!$currentSchoolyear){
+            $schoolyears = Schoolyear::where('id','!=',$request->input('sy'))->get();
+            if (!$request->input('sy')){
+                $selectedSchoolyear = $schoolyears->first();
+                $schoolyears = Schoolyear::where('id','!=',$selectedSchoolyear->id)->get();
+            } else {
+                $schoolyears = Schoolyear::where('id','!=',$request->input('sy'))->get();
+                $selectedSchoolyear = Schoolyear::where('id',$request->input('sy'))->first();
+            }
+
+        } else {
+            $schoolyears = Schoolyear::where('id','!=',$request->input('sy', $currentSchoolyear->id))->get();
+            $selectedSchoolyear = Schoolyear::where('id',$request->input('sy', $currentSchoolyear->id))->first();
+        }
+
+        $total_schoolyears = Schoolyear::all()->count();
+        $sections = Section::where('schoolyear_id', $selectedSchoolyear->id)->get();
+
+        return view('sections.index', compact('currentSchoolyear','schoolyears','selectedSchoolyear', 'sections', 'total_schoolyears'));
     }
 
     // Show a section
-    public function show($grade_level) {
-        $section = Section::where('grade_level','=',$grade_level)->first();
+    public function show($grade_level, Section $section) {
         $students = Student::where('section_id','=',$section->id)->get();
         $schoolyears = Schoolyear::all();
         $unenrolled_students = User::where('role','=','student')->where('is_enrolled','=',0)->get();

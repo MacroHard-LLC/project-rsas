@@ -57,6 +57,7 @@
                             <div class="col-6 col-md-4 input-field">
                                     <label for="subject_semester_input" class="input-title">Semester</label>
                                     <select name="subject_semester" class="form-select" id="subject_semester_input" required>
+                                        <option value="" disabled selected="selected">Select a Semester</option>
                                         <option value="1">First Semester</option>
                                         <option value="2">Second Semester</option>
                                     </select>
@@ -137,7 +138,7 @@
                                 </div>
                             </div>
 
-                        <div class="form-group float-end">
+                        <div class="form-group float-end" style="visibility:hidden">
                             <button class="btn btn-primary" type="submit" id="submitNewSubject"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                         </div>
                         </div>

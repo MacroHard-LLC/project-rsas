@@ -118,7 +118,7 @@
                             <hr style="margin-bottom:5px;">
                             <i style="font-size:small;">Total Number of Students: <span id="total_students">0</span></i>
 
-                            <div class="form-group pt-5 float-end" id="submit_new_section">
+                            <div class="form-group pt-5 float-end" id="submit_new_section" style="visibility:hidden">
                                 <button class="btn btn-primary create" type="submit" id="sectionButtonSubmit"><i class="fa-solid fa-floppy-disk fa-lg icon-white"></i> Save</button>
                             </div>
                         </div>

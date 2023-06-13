@@ -23,7 +23,7 @@
 
                             <div class="col-md-6 input-field">
                                 <label for="passwordInputU" class="input-title">User Password</label>
-                                <input type="password" class="form-control form-control-sm" placeholder="XXXX" name="password" id="passwordInputU" minlength="1" maxlength="20" aria-describedby="passwordError" required>
+                                <input type="password" class="form-control form-control-sm" placeholder="XXXX" name="password" id="passwordInputU" minlength="1" maxlength="20">
                                 <div class="is-invalid" id="passwordErrorU">
                                     <span></span>
                                 </div>
@@ -53,7 +53,7 @@
                         <div class="form-outline input-field pb-2" id="ifStudentU">
                             {{-- If student (RFID)--}}
                                 <label for="rfid_number" class="input-title">RFID Number</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Enter a N-M digit integer" name="rfid_number" id='rfid_numberInputU' pattern="[0-9]+" aria-describedby="rfid_numberError">
+                                <input type="text" class="form-control form-control-sm" placeholder="Enter a 8-12 digit RFID UID" name="rfid_number" id='rfid_numberInputU' pattern="[0-9]+" minlength="8" maxlength="12" required>
                                 <div class="is-invalid" id="rfid_numberErrorU">
                                     <span></span>
                                 </div>
@@ -107,7 +107,7 @@
 
                         <input type="hidden" name="originalID" id="originalID" value="">
 
-                        <div class="form-group pt-3 float-end" id="submissionU">
+                        <div class="form-group pt-3 float-end" id="submissionU" style="visibility:hidden">
                             <button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk fa-lg icon-white"></i> Save</button>
                         </div>
                     </div>

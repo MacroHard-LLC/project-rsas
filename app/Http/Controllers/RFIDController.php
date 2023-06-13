@@ -35,7 +35,7 @@ class RFIDController extends Controller
 
         // If the RFID tag doesn't belong to any student or instructor, handle the error case
         if (!$student && !$instructor){
-            return response()->json(['message' => 'RFID tag not found'], 404);
+            return response()->json(['message' => 'RFID tag does not belong to any student or instructor'], 404);
         }
 
         // If the RFID tag belongs to an instructor, associate the instructor with the logsheet
@@ -48,33 +48,33 @@ class RFIDController extends Controller
         }
         // If the RFID tag belongs to a student, associate the student with the logsheet
         else {
+            // get all the subjects in the table with the same machine
+            $subjects = Subject_table::where('machine_id', $machine)->get();
+            if ($subjects->count() == 0)
+                return response()->json(['message' => 'Machine is not registered to any subject'], 400);
+
             $logsheet = new Student_logsheet;
             $logsheet->machine_id = $machine;
             $logsheet->rfid_number = $student->rfid_number;
 
-            // getting the thingies from time
-            // $logsheet->time is problematic because I do not know how well it translate
-            // the date since it has time
             $now = Carbon::now();
             $day_of_week = Carbon::parse($now)->format('l');
-            if($day_of_week == 'Monday'){
+            if($day_of_week == 'Monday')
                 $day_of_week = 'MON';
-            }
-            else if($day_of_week == 'Tuesday'){
-                $day_of_week = 'TUE';
-            }
-            else if($day_of_week == 'Wednesday'){
-                $day_of_week = 'WED';
-            }
-            else if($day_of_week == 'Thursday'){
-                $day_of_week = 'THU';
-            }
-            else if($day_of_week == 'Friday'){
-                $day_of_week = 'FRI';
-            }
 
-            // get all the subjects in the table with the same machine
-            $subjects = Subject_table::where('machine_id',$logsheet->machine_id)->get();
+            else if($day_of_week == 'Tuesday')
+                $day_of_week = 'TUE';
+
+            else if($day_of_week == 'Wednesday')
+                $day_of_week = 'WED';
+
+            else if($day_of_week == 'Thursday')
+                $day_of_week = 'THU';
+
+            else if($day_of_week == 'Friday')
+                $day_of_week = 'FRI';
+
+            $hasClass = false;
             foreach($subjects as $subject){
                 // get the day of the subject
                 $current_sched = Schedule_table::where('subject_id',$subject->id)
@@ -84,24 +84,23 @@ class RFIDController extends Controller
                     $sched_startTime = Carbon::createFromFormat('H:i:s',$current_sched->time_start);
                     $sched_endTime = Carbon::createFromFormat('H:i:s',$current_sched->time_end);
 
-                    if($now->before($sched_startTime))
+                    if($now->isBefore($sched_startTime))
                         $newRow = new Present;
-                    else if($now->between($sched_startTime,$sched_endTime))
+                    else if($now->isBetween($sched_startTime,$sched_endTime))
                         $newRow = new Late;
 
                     $newRow->subject_id = $subject->id;
                     $newRow->date = $now;
-                    $newRow->student_id = $student->id;
+                    $newRow->student_id = $student->user_id;
                     $newRow->save();
 
                     $logsheet->save();
-                } else{
-                    // testing only
-                    $logsheet->save();
-                    return response()->json(['message' => 'No scheduled class right now'], 400);
+                    $hasClass = true;
                 }
             };
+            if (!$hasClass)
+                return response()->json(['message' => 'No scheduled class today'], 400);
         }
-        return response()->json(['message' => 'RFID tag tapped successfully']);
+        return response()->json(['message' => 'Attendance logged successfully'], 200);
     }
 }

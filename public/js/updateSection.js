@@ -7,32 +7,44 @@ editSectionModal.addEventListener('show.bs.modal', function() {
         $("#" + input.getAttribute("name") + "_error").children("span").text("");
     });
 
-    document.getElementById("submit_new_section").style.visibility = "visible";
-
     ['input','change'].forEach(evt =>
         updateForm.querySelectorAll(".form-control, .form-select").forEach(input => {
-            input.addEventListener(evt, () => {
-                $("#" + input.getAttribute("name") + "_error").children("span").text("");
-
-                if (input.getAttribute('id') == 'section_student_id_input' && $('#' + input.getAttribute('id')).val() != '')
-                    document.getElementById('add_student_btn').disabled = false;
-
-                if (input.checkValidity()) {
-                    input.classList.remove('is-invalid');
-                    if (input.getAttribute('id') != 'section_student_id_input')
-                        input.classList.add('is-valid');
-                } else {
-                    input.classList.remove('is-valid');
-                    input.classList.add('is-invalid');
-                    showUpdateSectionClientError(input);
-                }
-                checkOverallValidity();
-            })
+            input.addEventListener(evt, updateSectionInputListener(input));
         })
     );
 });
 
-function checkOverallValidity(){
+const updateSectionInputListener = (input) => {
+    return () => {
+        $("#" + input.getAttribute("name") + "_error").children("span").text("");
+
+        if (input.getAttribute('id') == 'section_student_id_input' && $('#' + input.getAttribute('id')).val() != '')
+            document.getElementById('add_student_btn').disabled = false;
+
+        if (input.checkValidity()) {
+            input.classList.remove('is-invalid');
+            if (input.getAttribute('id') != 'section_student_id_input')
+                input.classList.add('is-valid');
+        } else {
+            input.classList.remove('is-valid');
+            input.classList.add('is-invalid');
+            showUpdateSectionClientError(input);
+        }
+
+        checkOverallUpdateSectionValidity();
+    };
+};
+
+editSectionModal.addEventListener('hidden.bs.modal', function(){
+    // Remove event listeners
+    const inputElements = editSectionModal.querySelectorAll('.form-control, .form-select');
+    inputElements.forEach(input => {
+        input.removeEventListener('input', updateSectionInputListener);
+        input.removeEventListener('change', updateSectionInputListener);
+    });
+});
+
+function checkOverallUpdateSectionValidity(){
     var form_children = $("#updateSectionForm").children();
     var invalid_fields = form_children.find('.form-control.is-invalid, .form-select.is-invalid')
     var student_rows = $("#student_list").children();
@@ -76,7 +88,7 @@ function add_student_to_row(){
     document.getElementById("total_students").textContent = tableRows;
 
     document.getElementById('add_student_btn').disabled = true;
-    checkOverallValidity();
+    checkOverallUpdateSectionValidity();
 
     // Return false so that the default action of the button is not executed.
     return false;
@@ -109,5 +121,5 @@ $(document).on('click', '[name="delete_button"]', function(){
         document.getElementById(student_id).style.display = "block";
     }
 
-    checkOverallValidity();
+    checkOverallUpdateSectionValidity();
 });
