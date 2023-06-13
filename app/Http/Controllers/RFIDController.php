@@ -57,26 +57,22 @@ class RFIDController extends Controller
             $logsheet->machine_id = $machine;
             $logsheet->rfid_number = $student->rfid_number;
 
-            // getting the thingies from time
-            // $logsheet->time is problematic because I do not know how well it translate
-            // the date since it has time
             $now = Carbon::now();
             $day_of_week = Carbon::parse($now)->format('l');
-            if($day_of_week == 'Monday'){
+            if($day_of_week == 'Monday')
                 $day_of_week = 'MON';
-            }
-            else if($day_of_week == 'Tuesday'){
+
+            else if($day_of_week == 'Tuesday')
                 $day_of_week = 'TUE';
-            }
-            else if($day_of_week == 'Wednesday'){
+
+            else if($day_of_week == 'Wednesday')
                 $day_of_week = 'WED';
-            }
-            else if($day_of_week == 'Thursday'){
+
+            else if($day_of_week == 'Thursday')
                 $day_of_week = 'THU';
-            }
-            else if($day_of_week == 'Friday'){
+
+            else if($day_of_week == 'Friday')
                 $day_of_week = 'FRI';
-            }
 
             $hasClass = false;
             foreach($subjects as $subject){
