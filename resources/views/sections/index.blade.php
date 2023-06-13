@@ -28,7 +28,7 @@
 </div>
 
 <div class='container text-center mt-5'>
-    @if(count($schoolyears) > 0)
+    @if($total_schoolyears > 0)
         <div class='row mb-4'>
             <div class='col text'>
                 <h1>Select a Grade level</h1>
@@ -55,7 +55,7 @@
                 <h5>No grade levels with sections found.</h5>
             @endif
         </div>
-    @else
+    @elseif ($total_schoolyears == 0 && !$selectedSchoolyear)
         <div class='row justify-content-center'>
             <h5>No school years found.</h5>
         </div>

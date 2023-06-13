@@ -27,6 +27,23 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row my-3">
+                            <div class="col-md-6 input-field">
+                                <label for="start_date_input" class="input-title">Start Date</label>
+                                <input class="date-own form-control" type="date"  name="start_date" id="start_date_input" required>
+                                <div class="is-invalid" id="start_date_error">
+                                    <span></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 input-field">
+                                <label for="end_date_input" class="input-title">End Date</label>
+                                <input class="date-own form-control" type="date" name="end_date" id="end_date_input" required>
+                                <div class="is-invalid" id="end_date_error">
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group pt-3 float-end" id="submit_schoolyear" style="visibility:hidden">
                             <button class="btn btn-primary" type="submit"><i class="fa-solid fa-square-plus icon-white"></i> Create</button>
                         </div>
@@ -43,6 +60,28 @@
 <script src="{{ asset('js/createSchoolyear.js') }}"></script>
 <script>
 $(function () {
+    // Function to set the min and max values of date inputs
+    function setMinMaxDates() {
+        var startYear = parseInt($('#start_year_input').val());
+        var endYear = parseInt($('#end_year_input').val());
+
+        // Set min and max values for start_date input
+        $('#start_date_input').attr('min', startYear + '-01-01');
+        $('#start_date_input').attr('max', startYear + '-12-31');
+
+        // Set min and max values for end_date input
+        $('#end_date_input').attr('min', endYear + '-01-01');
+        $('#end_date_input').attr('max', endYear + '-12-31');
+    }
+
+    // Call setMinMaxDates initially on page load
+    setMinMaxDates();
+
+    // Event listener to update min and max values when start_year or end_year changes
+    $('#start_year_input, #end_year_input').on('input', function () {
+        setMinMaxDates();
+    });
+
     $('#registerSYForm').submit(function (e) {
         e.preventDefault();
         let formData = $(this).serializeArray();
@@ -71,4 +110,8 @@ $(function () {
 
     });
 })
+
+// $(function () {
+
+// });
 </script>

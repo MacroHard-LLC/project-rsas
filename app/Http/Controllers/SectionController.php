@@ -20,15 +20,25 @@ class SectionController extends Controller
             ->where('end_date', '>=', Carbon::today())
             ->first();
 
-        $schoolyears = Schoolyear::where('id','!=',$request->input('sy', $currentSchoolyear->id))->get();
+        if (!$currentSchoolyear){
+            $schoolyears = Schoolyear::where('id','!=',$request->input('sy'))->get();
+            if (!$request->input('sy')){
+                $selectedSchoolyear = $schoolyears->first();
+                $schoolyears = Schoolyear::where('id','!=',$selectedSchoolyear->id)->get();
+            } else {
+                $schoolyears = Schoolyear::where('id','!=',$request->input('sy'))->get();
+                $selectedSchoolyear = Schoolyear::where('id',$request->input('sy'))->first();
+            }
 
-        $selectedSchoolyear = Schoolyear::where('id',$request->input('sy', $currentSchoolyear->id))->first();
-        if (!$selectedSchoolyear && $schoolyears->isNotEmpty())
-            $selectedSchoolyear = $schoolyears->first();
+        } else {
+            $schoolyears = Schoolyear::where('id','!=',$request->input('sy', $currentSchoolyear->id))->get();
+            $selectedSchoolyear = Schoolyear::where('id',$request->input('sy', $currentSchoolyear->id))->first();
+        }
 
+        $total_schoolyears = Schoolyear::all()->count();
         $sections = Section::where('schoolyear_id', $selectedSchoolyear->id)->get();
 
-        return view('sections.index', compact('currentSchoolyear','schoolyears','selectedSchoolyear', 'sections'));
+        return view('sections.index', compact('currentSchoolyear','schoolyears','selectedSchoolyear', 'sections', 'total_schoolyears'));
     }
 
     // Show a section
