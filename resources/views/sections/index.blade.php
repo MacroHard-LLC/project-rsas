@@ -29,36 +29,36 @@
 
 <div class='container text-center mt-5'>
     @if(count($schoolyears) > 0)
-    <div class='row mb-4'>
-        <div class='col text'>
-            <h1>Select a Grade level</h1>
+        <div class='row mb-4'>
+            <div class='col text'>
+                <h1>Select a Grade level</h1>
+            </div>
         </div>
-    </div>
-    <div class='row justify-content-center'>
-        @if(count($sections) > 0)
-        <div class='col-2'>
-            <table class='table table-striped table-hover grade-table'>
-                <tbody>
-                    @foreach ($sections->sortBy('grade_level') as $section)
-                    <tr>
-                        <td>
-                            <a href='/gradelevels/{{ $section->grade_level }}/{{ $section->id }}' role='button'>
-                                <i class="fa-solid fa-circle icon-baby-blue"></i>&emsp;Grade {{ $section->grade_level }}
-                            </a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <div class='row justify-content-center'>
+            @if(count($sections) > 0)
+                <div class='col-2'>
+                    <table class='table table-striped table-hover grade-table'>
+                        <tbody>
+                            @foreach ($sections->sortBy('grade_level') as $section)
+                            <tr>
+                                <td>
+                                    <a href='/gradelevels/{{ $section->grade_level }}/{{ $section->id }}' role='button'>
+                                        <i class="fa-solid fa-circle icon-baby-blue"></i>&emsp;Grade {{ $section->grade_level }}
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <h5>No grade levels with sections found.</h5>
+            @endif
         </div>
-        @else
-        <h5>No grade levels with sections found.</h5>
-        @endif
-    </div>
     @else
-    <div class='row justify-content-center'>
-        <h5>No school years found.</h5>
-    </div>
+        <div class='row justify-content-center'>
+            <h5>No school years found.</h5>
+        </div>
     @endif
 </div>
 
