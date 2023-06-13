@@ -83,7 +83,7 @@ class RFIDController extends Controller
                 $current_sched = Schedule_table::where('subject_id',$subject->id)
                                         ->where('day',$day_of_week)->first();
                 // if the current_sched exists, execute
-                if ($current_sched->count() > 0){
+                if ($current_sched){
                     $sched_startTime = Carbon::createFromFormat('H:i:s',$current_sched->time_start);
                     $sched_endTime = Carbon::createFromFormat('H:i:s',$current_sched->time_end);
 
