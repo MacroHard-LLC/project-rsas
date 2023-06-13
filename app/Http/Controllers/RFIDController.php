@@ -78,6 +78,7 @@ class RFIDController extends Controller
                 $day_of_week = 'FRI';
             }
 
+            $hasClass = false;
             foreach($subjects as $subject){
                 // get the day of the subject
                 $current_sched = Schedule_table::where('subject_id',$subject->id)
@@ -98,10 +99,11 @@ class RFIDController extends Controller
                     $newRow->save();
 
                     $logsheet->save();
-                } else {
-                    return response()->json(['message' => 'No scheduled class today'], 400);
+                    $hasClass = true;
                 }
             };
+            if (!$hasClass)
+                return response()->json(['message' => 'No scheduled class today'], 400);
         }
         return response()->json(['message' => 'Attendance logged successfully'], 200);
     }
